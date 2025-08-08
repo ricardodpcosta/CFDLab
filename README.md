@@ -61,18 +61,17 @@ Contributions are warmly welcome! If you would like to add new test cases, impro
 
 ## License
 
-This project is licensed under the MIT License — see the `LICENSE` file for details.
+This project is licensed under the MIT License — see the `LICENSE.md` file for details.
 
 ---
 
 ## Contact
 
-Ricardo Costa  
+[Ricardo Costa](mailto:rcosta\@dep.uminho.pt)  
 [https://ricardodpcosta.github.io/](https://ricardodpcosta.github.io/)  
-ricardodpcosta@example.com
 
 ---
 
 Thank you for visiting CFD-BenchLab!  
-We hope this repository helps advance the state of the art in numerical validation for CFD.
+We hope this repository helps advance the state-of-the-art in numerical schemes design for CFD.
 
