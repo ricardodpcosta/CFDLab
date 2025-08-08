@@ -36,8 +36,43 @@ CFD-BenchLab/
 │ │ └── README.md # Case description
 │ └── ...
 │
-├── LICENSE
+├── LICENSE.md
 ├── CONTRIBUTING.md
 └── README.md
-
 ```
+
+---
+
+## How to Use
+
+1. Select the test case relevant to your research based on the model category.
+2. Read the provided case description and review the associated documentation.
+3. Use the provided analytical formulas and meshes to run simulations with your code.
+4. Revise the scripts to manipulate the test case and generate the analytical formulas.
+5. Contribute new cases or improvements by following the guidelines in `CONTRIBUTING.md`.
+
+---
+
+## Contribution
+
+Contributions are warmly welcome! If you would like to add new test cases, improve scripts, or fix issues, please see the `CONTRIBUTING.md` file for instructions on how to get involved.
+
+---
+
+## License
+
+This project is licensed under the MIT License — see the `LICENSE` file for details.
+
+---
+
+## Contact
+
+Ricardo Costa  
+[https://ricardodpcosta.github.io/](https://ricardodpcosta.github.io/)  
+ricardodpcosta@example.com
+
+---
+
+Thank you for visiting CFD-BenchLab!  
+We hope this repository helps advance the state of the art in numerical validation for CFD.
+
