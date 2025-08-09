@@ -79,8 +79,18 @@ The **velocity field**, tangential to the boundaries and interface, in polar coo
 
 $$
 \begin{array}{ll}
-\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r\begin{bmatrix}-\sin\left(\theta\right)\\\cos\left(\theta\right)\end{bmatrix},&\quad\textrm{in }\Omega^{\textrm{A}},\\
-\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r\begin{bmatrix}-\sin\left(\theta\right)\\\cos\left(\theta\right)\end{bmatrix},&\quad\textrm{in }\Omega^{\textrm{B}},
+\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r
+\begin{bmatrix}
+-\sin\left(\theta\right)\\
+\cos\left(\theta\right)
+\end{bmatrix},
+&\quad\textrm{in }\Omega^{\textrm{A}},\\
+\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r
+\begin{bmatrix}
+-\sin\left(\theta\right)\\
+\cos\left(\theta\right)
+\end{bmatrix},
+&\quad\textrm{in }\Omega^{\textrm{B}},
 \end{array}
 $$
 
