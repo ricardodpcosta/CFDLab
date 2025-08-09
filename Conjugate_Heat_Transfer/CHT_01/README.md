@@ -12,7 +12,7 @@ It is particularly suitable for solvers that support **multi-material conduction
 ## 2. Domain
 
 The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively, centered at the origin and with radius $r_{\textrm{O}}$ and $r_{\textrm{I}}$, respectively.
-An interface, $\Gamma^{\textrm{AB}}$, with radius $r_{\textrm{M}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner annulus.
+An interface, $\Gamma^{\textrm{AB}}$, with radius $r_{\textrm{M}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions.
 
 <p align="center">
   <img src="images/domain.png" alt="Domain" width="50%">
