@@ -101,6 +101,8 @@ $$
 
 ## 5. Default parameters
 
+The table below summarizes the parameters used in this case and their corresponding default values.
+
 | Symbol         | Description                                                | Default Value |
 |----------------|------------------------------------------------------------|--------------:|
 | $r_O$          | Radius of outer boundary $\Gamma^{\textrm{A}}$             | 1.0           |
