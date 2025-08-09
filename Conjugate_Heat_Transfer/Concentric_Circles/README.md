@@ -5,8 +5,7 @@
 The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively, centered at the origin and with radius $r_{\textrm{O}}$ and $r_{\textrm{I}}$, respectively.
 An interface, $\Gamma^{\textrm{AB}}$, with radius $r_{\textrm{M}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner annulus.
 
- <img style="width:50%; display:block; margin-left:auto; margin-right:auto;" src="{{ 'images/mesh.pdf'}}">
-
+<img style="width:50%" src="images/domain.png">
  
 ## Properties
 
@@ -26,6 +25,8 @@ $$
 $$
 
 where $n^{\textrm{A}},n^{\textrm{B}}\in\mathbb{R}$ are parameters to choose and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are parameters to determine.
+
+<img style="width:40%" src="images/solution.png">
 
 ### Boundary and interface conditions
 
@@ -86,3 +87,6 @@ $$
 > **Note:** the analytical functions can be easily transformed from polar to Cartesian coordinates with $r^{2}=x^{2}+y^{2}$ and $\theta=\arctan\left(y/x\right)$.
 
 ## Meshes
+
+<img style="width:50%" src="images/mesh.png">
+
