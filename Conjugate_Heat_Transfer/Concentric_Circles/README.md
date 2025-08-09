@@ -2,8 +2,12 @@
 
 ## Domain
 
-An annular domain $\Omega$ is considered consisting of an exterior and interior physical boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively, corresponding to circumferences centered at the origin and with radius $r_{\textrm{E}}=1$ and $r_{\textrm{I}}=0.5$, respectively (see Fig.XX(a)). The physical subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$ correspond to the exterior and interior regions separated with the physical interface $\Gamma^{\textrm{C}}$ that corresponds to the circumference centered at the origin and with radius $r_{\textrm{M}}=0.75$.
+The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively, centered at the origin and with radius $r_{\textrm{O}}$ and $r_{\textrm{I}}$, respectively.
+An interface, $\Gamma^{\textrm{AB}}$, with radius $r_{\textrm{M}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner annulus.
 
+ <img style="width:50%; display:block; margin-left:auto; margin-right:auto;" src="{{ 'images/mesh.pdf'}}">
+
+ 
 ## Properties
 
 Constant thermal conductivities, $\kappa^{\textrm{A}}$ and $\kappa^{\textrm{B}}$, are considered in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
@@ -51,7 +55,7 @@ a^{\textrm{A}}=-c\kappa^{\textrm{B}},\\
 a^{\textrm{B}}=-c\kappa^{\textrm{A}},\\
 b^{\textrm{A}}=c\left(\kappa^{\textrm{A}}\ln\left(\dfrac{r_{\textrm{I}}}{r_{\textrm{M}}}\right)+\kappa^{\textrm{B}}\ln\left(r_{\textrm{M}}\right)\right),\\
 b^{\textrm{B}}=c\kappa^{\textrm{A}}\ln\left(r_{\textrm{I}}\right),\\
-c=\left(\kappa^{\textrm{A}}\ln\left(\dfrac{r_{\textrm{I}}}{r_{\textrm{M}}}\right)+\kappa^{\textrm{B}}\ln\left(\dfrac{r_{\textrm{M}}}{r_{\textrm{E}}}\right)\right)^{-1}.
+c=\left(\kappa^{\textrm{A}}\ln\left(\dfrac{r_{\textrm{I}}}{r_{\textrm{M}}}\right)+\kappa^{\textrm{B}}\ln\left(\dfrac{r_{\textrm{M}}}{r_{\textrm{O}}}\right)\right)^{-1}.
 \end{array}
 $$
 
