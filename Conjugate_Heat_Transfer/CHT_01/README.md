@@ -123,14 +123,16 @@ The table below summarizes the adjustable parameters and their corresponding def
 
 ## 7. Files and scripts
 
-| File                  | Description                                   |
-|:----------------------|:----------------------------------------------|
-| `CHT_01_description.md` | This document (case definition)             |
-| `exact_solution.py`   | Python script for $\phi$, $\mathbf{u}$, and $f$ in Cartesian coordinates |
-| `mesh.msh`            | Gmsh mesh file                                |
-| `images/*.png`        | Figures for documentation                     |
+The table below summarizes the provided files and scripts and their corresponding functionality.
 
-## 8. How to Cite
+| File                  | Path                                   | Description                                      |
+|:----------------------|:----------------------------------------------||
+| `CHT_01_description.md` | This document (case definition)             ||
+| `exact_solution.py`   | Python script for $\phi$, $\mathbf{u}$, and $f$ in Cartesian coordinates ||
+| `mesh.msh`            | Gmsh mesh file                                ||
+| `images/*.png`        | Figures for documentation                     ||
+
+## 8. How to cite
 
 If you use this benchmark in your research, please acknowledge the original work in your publications by citing:
 
