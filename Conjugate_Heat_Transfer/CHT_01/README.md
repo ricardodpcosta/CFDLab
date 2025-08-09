@@ -103,8 +103,8 @@ $$
 
 The table below summarizes the adjustable parameters for this case and their corresponding default values.
 
-| Symbol         | Description                                                | Default Value |
-|----------------|------------------------------------------------------------|--------------:|
+| Symbol         | Description                                                | Default value |
+|:---------------|:-----------------------------------------------------------|--------------:|
 | $r_O$          | Radius of outer boundary $\Gamma^{\textrm{A}}$             | 1.0           |
 | $r_M$          | Radius of interface $\Gamma^{\textrm{AB}}$                 | 0.5           |
 | $r_I$          | Radius of inner boundary $\Gamma^{\textrm{B}}$             | 0.2           |
@@ -124,7 +124,7 @@ The table below summarizes the adjustable parameters for this case and their cor
 ## 7. Files and scripts
 
 | File                  | Description                                   |
-|-----------------------|-----------------------------------------------|
+|:----------------------|:----------------------------------------------|
 | `CHT_01_description.md` | This document (case definition)             |
 | `exact_solution.py`   | Python script for $\phi$, $\mathbf{u}$, and $f$ in Cartesian coordinates |
 | `mesh.msh`            | Gmsh mesh file                                |
