@@ -101,7 +101,7 @@ $$
 
 ## 5. Default parameters
 
-The table below summarizes the parameters used in this case and their corresponding default values.
+The table below summarizes the adjustable parameters for this case and their corresponding default values.
 
 | Symbol         | Description                                                | Default Value |
 |----------------|------------------------------------------------------------|--------------:|
