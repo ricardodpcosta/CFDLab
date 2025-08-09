@@ -113,7 +113,7 @@ $$
 | $\omega^A$     | Angular velocity in $\Omega^{\textrm{A}}$                  | 1.0           |
 | $\omega^B$     | Angular velocity in $\Omega^{\textrm{B}}$                  | -1.0          |
 
-## 5. Meshes
+## 6. Meshes
 
 <p align="center">
   <img src="images/mesh.png" alt="Mesh" width="50%">
