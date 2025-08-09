@@ -1,15 +1,15 @@
-# Circular interface with continuity interface conditions (CHT_01)
+# [CHT_01] Circular interface with continuity interface conditions
 
-## Summary
+## 1. Summary
 
 This benchmark represents a **steady-state conjugate heat transfer** problem in a concentric circular domain divided into two regions with different thermal conductivities. The case is based on a **manufactured analytical solution** in polar coordinates, enabling:
 - **Code verification** of conduction and convection numerical schemes.
-- **Validation** of interface treatments (solution continuity and flux conservation).
-- **Testing** of cylindrical structured and unstructured mesh generation and handling.
+- **Numerical assessment** of interface treatments (solution continuity and flux conservation).
+- **Testing** of cylindrical structured and unstructured meshes generation.
 
 It is particularly suitable for solvers that support **multi-material conduction** with optional tangential advection.
 
-## Domain
+## 2. Domain
 
 The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively, centered at the origin and with radius $r_{\textrm{O}}$ and $r_{\textrm{I}}$, respectively.
 An interface, $\Gamma^{\textrm{AB}}$, with radius $r_{\textrm{M}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner annulus.
@@ -18,11 +18,11 @@ An interface, $\Gamma^{\textrm{AB}}$, with radius $r_{\textrm{M}}$, divides the 
   <img src="images/domain.png" alt="Domain" width="50%">
 </p>
  
-## Properties
+## 3. Properties
 
 Constant thermal conductivities, $\kappa^{\textrm{A}}$ and $\kappa^{\textrm{B}}$, are considered in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
 
-## Formulation
+## 4. Formulation
 
 ### Manufactured solution
 
@@ -99,7 +99,7 @@ $$
 
 > **Note:** the analytical functions can be easily transformed from polar to Cartesian coordinates with $r^{2}=x^{2}+y^{2}$ and $\theta=\arctan\left(y/x\right)$.
 
-## Default Parameters
+## 5. Default parameters
 
 | Symbol         | Description                                                | Default Value |
 |----------------|------------------------------------------------------------|--------------:|
@@ -113,13 +113,13 @@ $$
 | $\omega^A$     | Angular velocity in $\Omega^{\textrm{A}}$                  | 1.0           |
 | $\omega^B$     | Angular velocity in $\Omega^{\textrm{B}}$                  | -1.0          |
 
-## Meshes
+## 5. Meshes
 
 <p align="center">
   <img src="images/mesh.png" alt="Mesh" width="50%">
 </p>
 
-## 8. Files & Resources
+## 7. Files and scripts
 
 | File                  | Description                                   |
 |-----------------------|-----------------------------------------------|
@@ -127,4 +127,24 @@ $$
 | `exact_solution.py`   | Python script for $\phi$, $\mathbf{u}$, and $f$ in Cartesian coordinates |
 | `mesh.msh`            | Gmsh mesh file                                |
 | `images/*.png`        | Figures for documentation                     |
+
+## 8. How to Cite
+
+If you use this benchmark in your research, teaching, or software validation, please acknowledge the original work by citing:
+
+> **R. Costa**, J.M. Nóbrega, S. Clain, and G.J. Machado, _Very high-order accurate polygonal mesh finite volume scheme for conjugate heat transfer problems with curved interfaces and imperfect contacts_, **Computer Methods in Applied Mechanics and Engineering**, Vol. 357, 112560, 2019. DOI: [10.1016/j.cma.2019.07.029](https://doi.org/10.1016/j.cma.2019.07.029)
+
+You may use the following BibTeX entry:
+
+```bibtex
+@article{Costa2019,
+  title={Very high-order accurate polygonal mesh finite volume scheme for conjugate heat transfer problems with curved interfaces and imperfect contacts},
+  author={Costa, R. and Nóbrega, J. M. and Clain, S. and Machado, G. J.},
+  journal={Computer Methods in Applied Mechanics and Engineering},
+  volume={357},
+  pages={112560},
+  year={2019},
+  doi={10.1016/j.cma.2019.07.029}
+}
+
 
