@@ -26,7 +26,7 @@ $$
 
 where $n^{\textrm{A}},n^{\textrm{B}}\in\mathbb{R}$ are parameters to choose and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are parameters to determine.
 
-<img style="width:40%" src="images/solution.png">
+<img style="width:45%" src="images/solution.png">
 
 ### Boundary and interface conditions
 
