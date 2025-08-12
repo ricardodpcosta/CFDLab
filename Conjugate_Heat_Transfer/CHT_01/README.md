@@ -111,9 +111,9 @@ $$
 
 ## 5. Parameters
 
-The table below summarises the adjustable case parameters and the recommended values.
+The table below summarises the configurable case parameters and the recommended values for two problem configurations: a low-diffusive ratio ($\kappa^{\textrm{A}}/\kappa^{\textrm{B}}=2$) and a high-diffusive ratio ($\kappa^{\textrm{A}}/\kappa^{\textrm{B}}=100$).
 
-| Symbol                    | Description                                                | Recommended value (low-diffusive ratio) | Recommended value (high-diffusive ratio) |
+| Symbol                    | Description                                                | Value (low-diffusive ratio) | Value (high-diffusive ratio) |
 |:--------------------------|:-----------------------------------------------------------|--------------:|--------------:|
 | $r_{\textrm{A}}$          | Radius of outer boundary $\Gamma^{\textrm{A}}$             | 1.0           | 1.0           |
 | $r_{\textrm{AB}}$         | Radius of interface $\Gamma^{\textrm{AB}}$                 | 0.75          | 0.75          |
