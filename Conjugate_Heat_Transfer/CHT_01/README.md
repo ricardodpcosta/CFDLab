@@ -109,21 +109,21 @@ $$
 
 > **Note:** the analytical functions can be easily transformed from polar to Cartesian coordinates with $r^{2}=x^{2}+y^{2}$ and $\theta=\arctan\left(y/x\right)$.
 
-## 5. Default parameters
+## 5. Parameters
 
-The table below summarizes the adjustable parameters and their corresponding default values.
+The table below summarises the adjustable case parameters and the recommended values.
 
-| Symbol                    | Description                                                | Default value |
-|:--------------------------|:-----------------------------------------------------------|--------------:|
-| $r_{\textrm{A}}$          | Radius of outer boundary $\Gamma^{\textrm{A}}$             | 1.0           |
-| $r_{\textrm{AB}}$         | Radius of interface $\Gamma^{\textrm{AB}}$                 | 0.5           |
-| $r_{\textrm{B}}$          | Radius of inner boundary $\Gamma^{\textrm{B}}$             | 0.2           |
-| $\kappa^{\textrm{A}}$     | Conductivity in outer subdomain $\Omega^{\textrm{A}}$      | 2.0           |
-| $\kappa^{\textrm{B}}$     | Conductivity in inner subdomain $\Omega^{\textrm{B}}$      | 1.0           |
-| $n^{\textrm{A}}$          | Mode number in $\Omega^{\textrm{A}}$                       | 4             |
-| $n^{\textrm{B}}$          | Mode number in $\Omega^{\textrm{B}}$                       | 4             |
-| $\omega^{\textrm{A}}$     | Angular velocity in $\Omega^{\textrm{A}}$                  | 1.0           |
-| $\omega^{\textrm{B}}$     | Angular velocity in $\Omega^{\textrm{B}}$                  | -1.0          |
+| Symbol                    | Description                                                | Recommended value (low-diffusive ratio) | Recommended value (high-diffusive ratio) |
+|:--------------------------|:-----------------------------------------------------------|--------------:|--------------:|
+| $r_{\textrm{A}}$          | Radius of outer boundary $\Gamma^{\textrm{A}}$             | 1.0           | 1.0           |
+| $r_{\textrm{AB}}$         | Radius of interface $\Gamma^{\textrm{AB}}$                 | 0.75          | 0.75          |
+| $r_{\textrm{B}}$          | Radius of inner boundary $\Gamma^{\textrm{B}}$             | 0.5           | 0.5           |
+| $\kappa^{\textrm{A}}$     | Conductivity in outer subdomain $\Omega^{\textrm{A}}$      | 2.0           | 100.0         |
+| $\kappa^{\textrm{B}}$     | Conductivity in inner subdomain $\Omega^{\textrm{B}}$      | 1.0           | 1.0           |
+| $n^{\textrm{A}}$          | Mode number in $\Omega^{\textrm{A}}$                       | 4             | 4             |
+| $n^{\textrm{B}}$          | Mode number in $\Omega^{\textrm{B}}$                       | 4             | 4             |
+| $\omega^{\textrm{A}}$     | Angular velocity in $\Omega^{\textrm{A}}$                  | 1.0           | 1.0           |
+| $\omega^{\textrm{B}}$     | Angular velocity in $\Omega^{\textrm{B}}$                  | -1.0          | -1.0          |
 
 ## 6. Meshes
 
@@ -133,7 +133,7 @@ The table below summarizes the adjustable parameters and their corresponding def
 
 ## 7. Files and scripts
 
-The table below summarizes the provided files and scripts and their corresponding functionality.
+The table below summarises the provided files and scripts and their corresponding functionality.
 
 | File                  | Path                                   | Description                                      |
 |:----------------------|:----------------------------------------------||
