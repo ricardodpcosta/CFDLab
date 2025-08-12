@@ -113,17 +113,17 @@ $$
 
 The table below summarises the configurable parameters and the recommended values for two case configurations: a low-diffusive ratio ($\kappa^{\textrm{A}}/\kappa^{\textrm{B}}=2$) and a high-diffusive ratio ($\kappa^{\textrm{A}}/\kappa^{\textrm{B}}=100$).
 
-| Symbol                    | Description                                                | Value (low-diffusive ratio) | Value (high-diffusive ratio) |
-|:--------------------------|:-----------------------------------------------------------|--------------:|--------------:|
-| $r_{\textrm{A}}$          | Radius of outer boundary $\Gamma^{\textrm{A}}$             | 1.0           | 1.0           |
-| $r_{\textrm{AB}}$         | Radius of interface $\Gamma^{\textrm{AB}}$                 | 0.75          | 0.75          |
-| $r_{\textrm{B}}$          | Radius of inner boundary $\Gamma^{\textrm{B}}$             | 0.5           | 0.5           |
-| $\kappa^{\textrm{A}}$     | Conductivity in outer subdomain $\Omega^{\textrm{A}}$      | 2.0           | 100.0         |
-| $\kappa^{\textrm{B}}$     | Conductivity in inner subdomain $\Omega^{\textrm{B}}$      | 1.0           | 1.0           |
-| $n^{\textrm{A}}$          | Mode number in $\Omega^{\textrm{A}}$                       | 4             | 4             |
-| $n^{\textrm{B}}$          | Mode number in $\Omega^{\textrm{B}}$                       | 4             | 4             |
-| $\omega^{\textrm{A}}$     | Angular velocity in $\Omega^{\textrm{A}}$                  | 1.0           | 1.0           |
-| $\omega^{\textrm{B}}$     | Angular velocity in $\Omega^{\textrm{B}}$                  | -1.0          | -1.0          |
+| Symbol                    | Description                                                | Value (low-diffusive ratio)  | Value (high-diffusive ratio) |
+|:--------------------------|:-----------------------------------------------------------|-----------------------------:|-----------------------------:|
+| $r_{\textrm{A}}$          | Radius of outer boundary $\Gamma^{\textrm{A}}$             | 1.0                          | 1.0                          |
+| $r_{\textrm{AB}}$         | Radius of interface $\Gamma^{\textrm{AB}}$                 | 0.75                         | 0.75                         |
+| $r_{\textrm{B}}$          | Radius of inner boundary $\Gamma^{\textrm{B}}$             | 0.5                          | 0.5                          |
+| $\kappa^{\textrm{A}}$     | Conductivity in outer subdomain $\Omega^{\textrm{A}}$      | 2.0                          | 100.0                        |
+| $\kappa^{\textrm{B}}$     | Conductivity in inner subdomain $\Omega^{\textrm{B}}$      | 1.0                          | 1.0                          |
+| $n^{\textrm{A}}$          | Mode number in $\Omega^{\textrm{A}}$                       | 4                            | 4                            |
+| $n^{\textrm{B}}$          | Mode number in $\Omega^{\textrm{B}}$                       | 4                            | 4                            |
+| $\omega^{\textrm{A}}$     | Angular velocity in $\Omega^{\textrm{A}}$                  | 1.0                          | 1.0                          |
+| $\omega^{\textrm{B}}$     | Angular velocity in $\Omega^{\textrm{B}}$                  | -1.0                         | -1.0                         |
 
 ## 6. Meshes
 
