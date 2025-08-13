@@ -38,7 +38,8 @@ $$
 where $n^{\textrm{A}},n^{\textrm{B}}\in\mathbb{R}$ are parameters to choose and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are parameters to determine.
 
 <p align="center">
-  <img src="images/solution.png" alt="Solution" width="45%">
+  <img src="images/solution.png" alt="Solution1" width="45%">
+  <img src="images/solution.png" alt="Solution2" width="45%">
 </p>
 
 ### Boundary and interface conditions
