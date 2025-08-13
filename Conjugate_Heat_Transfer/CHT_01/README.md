@@ -111,19 +111,19 @@ $$
 
 ## 5. Parameters
 
-The table below summarises the configurable case parameters and the recommended values for two problem configurations: a low-diffusive ratio ($\kappa^{\textrm{A}}/\kappa^{\textrm{B}}=2$) and a high-diffusive ratio ($\kappa^{\textrm{A}}/\kappa^{\textrm{B}}=100$).
+The table below summarises the configurable parameters and the recommended values for two case configurations: a low-diffusive ratio ($\kappa^{\textrm{A}}/\kappa^{\textrm{B}}=2$) and a high-diffusive ratio ($\kappa^{\textrm{A}}/\kappa^{\textrm{B}}=100$).
 
-| Symbol                    | Description                                                | Value (low-diffusive ratio) | Value (high-diffusive ratio) |
-|:--------------------------|:-----------------------------------------------------------|--------------:|--------------:|
-| $r_{\textrm{A}}$          | Radius of outer boundary $\Gamma^{\textrm{A}}$             | 1.0           | 1.0           |
-| $r_{\textrm{AB}}$         | Radius of interface $\Gamma^{\textrm{AB}}$                 | 0.75          | 0.75          |
-| $r_{\textrm{B}}$          | Radius of inner boundary $\Gamma^{\textrm{B}}$             | 0.5           | 0.5           |
-| $\kappa^{\textrm{A}}$     | Conductivity in outer subdomain $\Omega^{\textrm{A}}$      | 2.0           | 100.0         |
-| $\kappa^{\textrm{B}}$     | Conductivity in inner subdomain $\Omega^{\textrm{B}}$      | 1.0           | 1.0           |
-| $n^{\textrm{A}}$          | Mode number in $\Omega^{\textrm{A}}$                       | 4             | 4             |
-| $n^{\textrm{B}}$          | Mode number in $\Omega^{\textrm{B}}$                       | 4             | 4             |
-| $\omega^{\textrm{A}}$     | Angular velocity in $\Omega^{\textrm{A}}$                  | 1.0           | 1.0           |
-| $\omega^{\textrm{B}}$     | Angular velocity in $\Omega^{\textrm{B}}$                  | -1.0          | -1.0          |
+| Symbol                    | Description                                                | Value (low-diffusive ratio)  | Value (high-diffusive ratio) |
+|:--------------------------|:-----------------------------------------------------------|-----------------------------:|-----------------------------:|
+| $r_{\textrm{A}}$          | Radius of outer boundary $\Gamma^{\textrm{A}}$             | 1.0                          | 1.0                          |
+| $r_{\textrm{AB}}$         | Radius of interface $\Gamma^{\textrm{AB}}$                 | 0.75                         | 0.75                         |
+| $r_{\textrm{B}}$          | Radius of inner boundary $\Gamma^{\textrm{B}}$             | 0.5                          | 0.5                          |
+| $\kappa^{\textrm{A}}$     | Conductivity in outer subdomain $\Omega^{\textrm{A}}$      | 2.0                          | 100.0                        |
+| $\kappa^{\textrm{B}}$     | Conductivity in inner subdomain $\Omega^{\textrm{B}}$      | 1.0                          | 1.0                          |
+| $n^{\textrm{A}}$          | Mode number in $\Omega^{\textrm{A}}$                       | 4                            | 4                            |
+| $n^{\textrm{B}}$          | Mode number in $\Omega^{\textrm{B}}$                       | 4                            | 4                            |
+| $\omega^{\textrm{A}}$     | Angular velocity in $\Omega^{\textrm{A}}$                  | 1.0                          | 1.0                          |
+| $\omega^{\textrm{B}}$     | Angular velocity in $\Omega^{\textrm{B}}$                  | -1.0                         | -1.0                         |
 
 ## 6. Meshes
 
@@ -131,16 +131,20 @@ The table below summarises the configurable case parameters and the recommended 
   <img src="images/mesh.png" alt="Mesh" width="50%">
 </p>
 
-## 7. Files and scripts
+## 7. Scripts
 
-The table below summarises the provided files and scripts and their corresponding functionality.
+The table below summarises the functionality and usage of the provided scripts. Check script headers for further information.
 
-| File                  | Path                                   | Description                                      |
-|:----------------------|:----------------------------------------------||
-| `CHT_01_description.md` | This document (case definition)             ||
-| `exact_solution.py`   | Python script for $\phi$, $\mathbf{u}$, and $f$ in Cartesian coordinates ||
-| `mesh.msh`            | Gmsh mesh file                                ||
-| `images/*.png`        | Figures for documentation                     ||
+| File                    | Description                                                                     | Usage                         |
+|:------------------------|:--------------------------------------------------------------------------------|:------------------------------|
+| `generate_code.py`      | Generates code for the symbolic expressions in multiple target languages.       | python generate_code.py       |
+| `generate_mesh.msh`     | Generates a mesh with configurable parameters in MSH format.                    | gmsh generate_meshes.msh      |
+| `convert_meshes.sh`     | Converts meshes in MSH format to OpenFOAM format.                               | bash convert_meshes.sh        |
+
+
+For convenience, the solution parameters are calculated inside the generated functions for the manufactured solutions and source terms.
+
+
 
 ## 8. How to cite
 
