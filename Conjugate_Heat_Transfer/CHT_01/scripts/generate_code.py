@@ -6,9 +6,9 @@ CFD-BenchLab | CHT_01 | Code Generator
 ===============================================================================
 
 Description:
-    Generates code for the analytical solution, coefficients and source terms
-    for the CHT_01 test case in multiple target languages: C++, Fortran, Octave,
-    (Matlab) and Python (NumPy). Outputs one file per expression/language.
+    Generates code for the symbolic expressions in multiple target languages:
+    C/C++, Fortran, Octave/Matlab, and Python.
+    Outputs one file per expression/language.
 
 Author:
     Ricardo Costa (rcosta@dep.uminho.pt)
@@ -20,7 +20,8 @@ Repository:
     https://github.com/ricardodpcosta/CFD-TestSuite
 
 Dependencies:
-    pip install sympy
+    Python (version => 3.9)
+    Sympy (version >= 1.6)
 
 Usage:
     python generate_code.py
@@ -33,23 +34,24 @@ import sympy
 from helpers import *
 
 # ----------------------------------------
-# 1. Define symbolic variables
+# Define symbolic pariables
 # ----------------------------------------
 
-# User-defined parameters
-nA, nB = sympy.symbols("nA nB", real=True)
-kA, kB = sympy.symbols("kA kB", positive=True)
-wA, wB = sympy.symbols("wA wB", real=True)
+# Variable parameters
 rA, rAB, rB = sympy.symbols("rA rAB rB", positive=True)
-
-# Coordinate system variables
-r, theta = sympy.symbols("r theta", real=True, positive=True)
+kA, kB = sympy.symbols("kA kB", positive=True)
+nA, nB = sympy.symbols("nA nB", real=True)
+wA, wB = sympy.symbols("wA wB", real=True)
 
 # Solution parameters
 aA, bA, aB, bB = sympy.symbols("aA bA aB bB", real=True)
 
+# Coordinate system
+r, theta = sympy.symbols("r theta", real=True, positive=True)
+x, y = sympy.symbols("x y", real=True, positive=False)
+
 # ----------------------------------------
-# 2. Define manufactured solutions
+# Define manufactured solutions
 # ----------------------------------------
 
 # Manufactured solutions
@@ -57,7 +59,19 @@ phiA = (aA * sympy.log(r) + bA) * sympy.cos(nA * theta)
 phiB = (aB * sympy.log(r) + bB) * sympy.cos(nB * theta)
 
 # ----------------------------------------
-# 3. Compute solution parameters
+# Define velocity fields
+# ----------------------------------------
+
+# Velocity fields
+uA_r = 0
+uA_theta = wA*r
+uA = [uA_r, uA_theta]
+uB_r = 0
+uB_theta = wB*r
+uB = [uB_r, uB_theta]
+
+# ----------------------------------------
+# Compute solution parameters
 # ----------------------------------------
 
 # Dirichlet boundary conditions
@@ -79,76 +93,113 @@ if not sol:
 sol = sol[0]
 
 # Substitute into manufactured solutions
-phiA = sympy.simplify(phiA.subs(sol))
-phiB = sympy.simplify(phiB.subs(sol))
+# phiA = sympy.simplify(phiA.subs(sol))
+# phiB = sympy.simplify(phiB.subs(sol))
 
 # ----------------------------------------
-# 4. Compute source terms
+# Compute source terms
 # ----------------------------------------
 
-# Laplacian terms
-lap_phiA = (1/r) * sympy.diff(r * sympy.diff(phiA, r), r) + (1/r**2) * sympy.diff(sympy.diff(phiA, theta), theta)
-lap_phiB = (1/r) * sympy.diff(r * sympy.diff(phiB, r), r) + (1/r**2) * sympy.diff(sympy.diff(phiB, theta), theta)
+# Diffusive terms
+diffA = (1/r) * sympy.diff(r * sympy.diff(phiA, r), r) + (1/r**2) * sympy.diff(sympy.diff(phiA, theta), theta)
+diffB = (1/r) * sympy.diff(r * sympy.diff(phiB, r), r) + (1/r**2) * sympy.diff(sympy.diff(phiB, theta), theta)
 
 # Convective terms
-u_theta_A = wA * r
-u_theta_B = wB * r
-conv_A = (u_theta_A / r) * sympy.diff(phiA, theta)
-conv_B = (u_theta_B / r) * sympy.diff(phiB, theta)
+convA = (uA_theta / r) * sympy.diff(phiA, theta)
+convB = (uB_theta / r) * sympy.diff(phiB, theta)
 
 # Source-terms
-fA = sympy.simplify(conv_A - kA * lap_phiA)
-fB = sympy.simplify(conv_B - kB * lap_phiB)
+fA = sympy.simplify(convA - kA * diffA)
+fB = sympy.simplify(convB - kB * diffB)
 
 # ----------------------------------------
-# 5. Write symbolic expressions
+# Write symbolic expressions
 # ----------------------------------------
 
 # Output directory
 outdir = "../symbolic"
 os.makedirs(outdir, exist_ok=True)
 
-# Arguments list for functions
-arg_syms = [(r, "r"), (theta, "theta"), (kA, "kA"), (kB, "kB"),
-            (wA, "wA"), (wB, "wB"), (nA, "nA"), (nB, "nB"),
-            (rA, "rA"), (rAB, "rAB"), (rB, "rB")]
+# Coordinate system conversion
+r = sympy.sqrt(x**2 + y**2)
+theta = sympy.atan2(y,x)
 
-# Symbolic variables to write
-items = {"aA": sol[aA], "bA": sol[bA], "aB": sol[aB], "bB": sol[bB],
-    "phiA": phiA, "phiB": phiB, "fA": fA, "fB": fB}
+# Variable parameters values
+rA = 1.0
+rAB = 0.75
+rB = 0.5
+kA = 2.0
+kB = 1.0
+nA = 4
+nB = 4
+wA = 1.0
+wB = -1.0
+
+# Arguments list
+arg_list = [("x", x), ("y", y)]
+
+# Variables list
+var_list = [("rAB", rAB), ("rB", rB), ("kA", kA), ("kB", kB),
+        ("nA", nA), ("nB", nB), ("wA", wA), ("wB", wB)]
+
+# Parameters list
+parA_list = [("r", r), ("theta", theta), ("aA", sol[aA]), ("bA", sol[bA])]
+parB_list = [("r", r), ("theta", theta), ("aB", sol[aB]), ("bB", sol[bB])]
+
+# Functions list
+func_list = [("phiA", phiA, arg_list, parA_list), ("phiB", phiB, arg_list, parB_list),
+                ("fA", fA, arg_list, parA_list), ("fB", fB, arg_list, parB_list)]
 
 # ----------------------------------------
-# 7. Generate code for coefficients, phiA, phiB, fA, fB
+# Generate code
 # ----------------------------------------
 
-# For each item, produce implementations in each language
-for name, expr in items.items():
-    # C++
+# Generate implementations C/C++
+contents = ["// Auto-generated by generate_code.py"]
+contents.append(write_cpp_variables(var_list))
+for (name, expr, arg_list, par_list) in func_list:
     try:
-        c_code = write_c_function(name, expr, arg_syms)
-        write_file(os.path.join(outdir, f"{name}.cpp"), c_code + "\n")
+        code = write_cpp_function(name, expr, arg_list, par_list)
+        contents.append(code)
     except Exception as e:
-        print("C++ generation failed for", name, ":", e)
+        print("C/C++ generation failed for", name, ":", e)
+contents = "\n\n".join(contents) + "\n"
+write_file(os.path.join(outdir, "cht_01.cpp"), contents)
 
-    # Fortran
+# Generate implementations Fortran
+contents = ["! Auto-generated by generate_code.py"]
+contents.append(write_fortran_variables(var_list))
+for (name, expr, arg_list, par_list) in func_list:
     try:
-        f_code = write_fortran_function(name, expr, arg_syms)
-        write_file(os.path.join(outdir, f"{name}.f90"), f_code + "\n")
+        code = write_fortran_function(name, expr, arg_list, par_list)
+        contents.append(code)
     except Exception as e:
         print("Fortran generation failed for", name, ":", e)
+contents = "\n\n".join(contents) + "\n"
+write_file(os.path.join(outdir, "cht_01.f90"), contents)
 
-    # Octave
+# Generate implementations Octave/Matlab
+contents = ["% Auto-generated by generate_code.py"]
+contents.append(write_octave_variables(var_list))
+for (name, expr, arg_list, par_list) in func_list:
     try:
-        m_code = write_octave_function(name, expr, arg_syms)
-        write_file(os.path.join(outdir, f"{name}.m"), m_code + "\n")
+        code = write_octave_function(name, expr, arg_list, par_list)
+        contents.append(code)
     except Exception as e:
-        print("Octave generation failed for", name, ":", e)
+        print("Octave/Matlab generation failed for", name, ":", e)
+contents = "\n\n".join(contents) + "\n"
+write_file(os.path.join(outdir, "cht_01.m"), contents)
 
-    # Python (NumPy)
+# Generate implementations Python
+contents = ["# Auto-generated by generate_code.py"]
+contents.append(write_python_variables(var_list))
+for (name, expr, arg_list, par_list) in func_list:
     try:
-        py_code = write_python_function(name, expr, arg_syms)
-        write_file(os.path.join(outdir, f"{name}.py"), py_code + "\n")
+        code = write_python_function(name, expr, arg_list, par_list)
+        contents.append(code)
     except Exception as e:
         print("Python generation failed for", name, ":", e)
+contents = "\n\n".join(contents) + "\n"
+write_file(os.path.join(outdir, "cht_01.py"), contents)
 
 print("\nGeneration complete. Files are in:", outdir)
