@@ -147,7 +147,7 @@ The table below summarises the configurable parameters and the recommended value
 | $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain, $\Omega^{\textrm{B}}$     | 1.0                           | 1.0                            |
 | $n^{\textrm{A}}$          | Solution mode number in outer subdomain, $\Omega^{\textrm{A}}$    | 4                             | 4                              |
 | $n^{\textrm{B}}$          | Solution mode number in inner subdomain, $\Omega^{\textrm{B}}$    | 4                             | 4                              |
-| $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain. $\Omega^{\textrm{A}}$        | 1.0                           | 1.0                            |
+| $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$        | 1.0                           | 1.0                            |
 | $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain, $\Omega^{\textrm{B}}$        | -1.0                          | -1.0                           |
 
 ## 6. Meshes
