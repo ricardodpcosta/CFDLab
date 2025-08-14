@@ -6,8 +6,8 @@ CFD-TESTSUITE | CHT_01
 ===============================================================================
 
 Description:
-    Generates code for the symbolic expressions in multiple programming languages:
-    C/C++, Fortran, Octave/Matlab, and Python.
+    Generates code for the symbolic expressions of parameters and functions in
+    multiple programming languages: C/C++, Fortran, Octave/Matlab, and Python.
     Outputs are saved in `codes/`.
 
 Author:
