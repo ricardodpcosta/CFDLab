@@ -129,6 +129,7 @@ $$
 
 The table below summarises the configurable parameters and the recommended values for two case configurations: a low-diffusive ratio ($\kappa^{\textrm{A}}/\kappa^{\textrm{B}}=2$) and a high-diffusive ratio ($\kappa^{\textrm{A}}/\kappa^{\textrm{B}}=100$).
 
+<div align="center">
 | Symbol                    | Description                                                | Value (low-diffusive ratio)  | Value (high-diffusive ratio) |
 |:--------------------------|:-----------------------------------------------------------|-----------------------------:|-----------------------------:|
 | $r_{\textrm{A}}$          | Radius of outer boundary $\Gamma^{\textrm{A}}$             | 1.0                          | 1.0                          |
@@ -140,6 +141,7 @@ The table below summarises the configurable parameters and the recommended value
 | $n^{\textrm{B}}$          | Mode number in $\Omega^{\textrm{B}}$                       | 4                            | 4                            |
 | $\omega^{\textrm{A}}$     | Angular velocity in $\Omega^{\textrm{A}}$                  | 1.0                          | 1.0                          |
 | $\omega^{\textrm{B}}$     | Angular velocity in $\Omega^{\textrm{B}}$                  | -1.0                         | -1.0                         |
+</div>
 
 ## 6. Meshes
 
@@ -151,12 +153,13 @@ The table below summarises the configurable parameters and the recommended value
 
 The table below summarises the functionality and usage of the provided scripts. Check script headers for further information.
 
+<div align="center">
 | File                    | Description                                                                     | Usage                         |
 |:------------------------|:--------------------------------------------------------------------------------|:------------------------------|
 | `generate_code.py`      | Generates code for the symbolic expressions in multiple target languages.       | python generate_code.py       |
 | `generate_mesh.msh`     | Generates a mesh with configurable parameters in MSH format.                    | gmsh generate_meshes.msh      |
 | `convert_meshes.sh`     | Converts meshes in MSH format to OpenFOAM format.                               | bash convert_meshes.sh        |
-
+</div>
 
 For convenience, the solution parameters are calculated inside the generated functions for the manufactured solutions and source terms.
 
