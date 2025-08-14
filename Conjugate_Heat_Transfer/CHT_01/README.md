@@ -9,7 +9,7 @@ This benchmark represents a **steady-state conjugate heat transfer** problem in 
 
 It is particularly suitable for solvers that support **multi-material conduction** with optional tangential advection.
 
-## 2. Domain and notation
+## 2. Domain and meshes
 
 The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively.
 An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions, respectively.
