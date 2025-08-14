@@ -111,11 +111,11 @@ Parameters $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm
 
 $$
 \begin{array}{l}
-a^{\textrm{A}}=-c\alpha^{\textrm{B}},\\
-a^{\textrm{B}}=-c\alpha^{\textrm{A}},\\
-b^{\textrm{A}}=c\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{B}}}{r^{\textrm{AB}}}\right)+\alpha^{\textrm{B}}\ln\left(r^{\textrm{AB}}\right)\right),\\
-b^{\textrm{B}}=c\alpha^{\textrm{A}}\ln\left(r^{\textrm{B}}\right),\\
-c=\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{B}}}{r^{\textrm{AB}}}\right)+\alpha^{\textrm{B}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{A}}}\right)\right)^{-1}.
+a^{\textrm{A}}=c\alpha^{\textrm{B}},\\
+a^{\textrm{B}}=c\alpha^{\textrm{A}},\\
+b^{\textrm{A}}=c\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)-\alpha^{\textrm{B}}\ln\left(r^{\textrm{AB}}\right)\right),\\
+b^{\textrm{B}}=-c\alpha^{\textrm{A}}\ln\left(r^{\textrm{B}}\right),\\
+c=\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)+\alpha^{\textrm{B}}\ln\left(\dfrac{r^{\textrm{A}}}{r^{\textrm{AB}}}\right)\right)^{-1}.
 \end{array}
 $$
 
