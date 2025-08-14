@@ -9,7 +9,11 @@ This benchmark represents a **steady-state conjugate heat transfer** problem in 
 
 It is particularly suitable for solvers that support **multi-material conduction** with optional tangential advection.
 
-## 2. Domain
+## 2. Model problem
+
+
+
+## 3. Domain and notation
 
 The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively, centered at the origin and with radius $r_{\textrm{A}}$ and $r_{\textrm{B}}$, respectively.
 An interface, $\Gamma^{\textrm{AB}}$, with radius $r_{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions.
@@ -25,13 +29,11 @@ An interface, $\Gamma^{\textrm{AB}}$, with radius $r_{\textrm{AB}}$, divides the
   </table>
 </div>
 
-## 3. Properties
+## 4. Material properties
 
 Constant thermal conductivities, $\kappa^{\textrm{A}}$ and $\kappa^{\textrm{B}}$, are considered in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
 
-## 4. Formulation
-
-### Manufactured solution
+## 5. Manufactured solution
 
 The **manufactured solution**, in polar coordinates $\left(r,\theta\right)$, reads
 
@@ -125,7 +127,7 @@ $$
 
 > **Note:** the analytical functions can be easily transformed from polar to Cartesian coordinates with $r^{2}=x^{2}+y^{2}$ and $\theta=\arctan\left(y/x\right)$.
 
-## 5. Parameters
+## 6. Case parameters
 
 The table below summarises the configurable parameters and the recommended values for two case configurations: a low-diffusive ratio ($\kappa^{\textrm{A}}/\kappa^{\textrm{B}}=2$) and a high-diffusive ratio ($\kappa^{\textrm{A}}/\kappa^{\textrm{B}}=100$).
 
