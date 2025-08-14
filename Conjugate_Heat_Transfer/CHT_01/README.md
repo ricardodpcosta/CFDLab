@@ -18,9 +18,11 @@ An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the
   <table>
     <tr>
       <td align="center"><img src="images/domain.png" width="400px"></td>
+      <td align="center"><img src="images/tria_mesh.png" width="400px"></td>
     </tr>
     <tr>
       <td align="center">Domain and notation.</td>
+      <td align="center">Unstructured triangular mesh.</td>
     </tr>
   </table>
 </div>
@@ -89,8 +91,6 @@ where $n^{\textrm{A}},n^{\textrm{B}}\in\mathbb{R}$ are parameters to choose and 
   </table>
 </div>
 
-### Boundary and interface conditions
-
 On the outer and inner boundaries, **periodic and homogeneous Dirichlet boundary conditions** are prescribed, respectively, and, in polar coordinates $\left(r,\theta\right)$, read
 
 $$
@@ -121,8 +121,6 @@ c=\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{B}}}{r^{\textrm{AB}}}\righ
 \end{array}
 $$
 
-### Source term
-
 The **source term**, in polar coordinates $\left(r,\theta\right)$, reads
 
 $$
@@ -150,13 +148,7 @@ The table below summarises the configurable parameters and the recommended value
 | $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$        | 1.0                           | 1.0                            |
 | $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain, $\Omega^{\textrm{B}}$        | -1.0                          | -1.0                           |
 
-## 6. Meshes
-
-<p align="center">
-  <img src="images/mesh.png" alt="Mesh" width="50%">
-</p>
-
-## 7. Scripts
+## 7. Files and scripts
 
 The table below summarises the functionality and usage of the provided scripts. Check script headers for further information.
 
@@ -167,8 +159,6 @@ The table below summarises the functionality and usage of the provided scripts. 
 | `convert_meshes.sh`     | Converts meshes in MSH format to OpenFOAM format.                               | bash convert_meshes.sh        |
 
 For convenience, the solution parameters are calculated inside the generated functions for the manufactured solutions and source terms.
-
-
 
 ## 8. How to cite
 
