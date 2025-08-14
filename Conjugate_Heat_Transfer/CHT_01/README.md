@@ -17,8 +17,8 @@ An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="images/domain.png" width="400px"></td>
-      <td align="center"><img src="images/tria_mesh.png" width="400px"></td>
+      <td align="center"><img src="images/domain.png" width="300px"></td>
+      <td align="center"><img src="images/tria_mesh.png" width="300px"></td>
     </tr>
     <tr>
       <td align="center">Domain and notation.</td>
@@ -81,8 +81,8 @@ where $n^{\textrm{A}},n^{\textrm{B}}\in\mathbb{R}$ are chosen constant parameter
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="images/solution1.png" width="500px"></td>
-      <td align="center"><img src="images/solution2.png" width="500px"></td>
+      <td align="center"><img src="images/solution1.png" width="400px"></td>
+      <td align="center"><img src="images/solution2.png" width="400px"></td>
     </tr>
     <tr>
       <td align="center">Manufactured solution in the low-diffusivity ratio case.</td>
