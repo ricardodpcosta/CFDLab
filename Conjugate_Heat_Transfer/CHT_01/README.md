@@ -63,7 +63,7 @@ $$
 \end{array}
 $$
 
-where $\omega^{\textrm{A}},\omega^{\textrm{B}}\in\mathbb{R}$ are parameters to choose.
+where $\omega^{\textrm{A}},\omega^{\textrm{B}}\in\mathbb{R}$ are chosen constant parameters that control the angular velocity magnitude.
 
 ## 5. Manufactured solution
 
@@ -76,7 +76,7 @@ $$
 \end{array}
 $$
 
-where $n^{\textrm{A}},n^{\textrm{B}}\in\mathbb{R}$ are parameters to choose and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are parameters to determine.
+where $n^{\textrm{A}},n^{\textrm{B}}\in\mathbb{R}$ are chosen constant parameters that control the solution mode number, and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are determined constant parameters to enforce boundary and interface conditions.
 
 <div align="center">
   <table>
