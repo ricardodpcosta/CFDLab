@@ -37,10 +37,48 @@ $$
 
 where $n^{\textrm{A}},n^{\textrm{B}}\in\mathbb{R}$ are parameters to choose and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are parameters to determine.
 
-<p align="center">
-  <img src="images/solution1.png" alt="Solution1" width="45%">
-  <img src="images/solution2.png" alt="Solution2" width="45%">
-</p>
+<p style="margin-bottom:1cm;"></p>
+
+<style>
+
+  * {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+  
+</style>
+
+<div class="row">
+  <div class="column" style="width:50%; text-align:center;">
+    <img style="width:60%; display:block; margin-left:auto; margin-right:auto;" src="{{ 'images/solution1.png' | relative_url }}">
+  </div>
+  <div class="column" style="width:50%; text-align:center;">
+    <img style="width:60%; display:block; margin-left:auto; margin-right:auto;" src="{{ 'images/solution2.png' | relative_url }}">
+  </div>
+</div>
+<div class="row">
+  <div class="column" style="width:50%; text-align:center;">
+    Curved mesh element.
+  </div>
+  <div class="column" style="width:50%; text-align:center;">
+    Linear piecewise mesh element.
+  </div>
+</div>
 
 ### Boundary and interface conditions
 
