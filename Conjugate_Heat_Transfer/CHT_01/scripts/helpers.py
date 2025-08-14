@@ -183,7 +183,7 @@ def write_cpp_scalar_function(name, expr, args_list, pars_list):
     cexpr = cexpr.replace("\\\\\n", "")
     cexpr = re.sub(r" {2,}", " ", cexpr)
     cexpr = cexpr.strip()
-    cexpr = wrap_code_line(f"dobule res = {cexpr};", width=100, indent=" "*12,continuation=" \\")
+    cexpr = wrap_code_line(f"double res = {cexpr};", width=100, indent=" "*12,continuation=" \\")
     cexpr.append(" "*8 + "return res;")
     comp = "\n".join(cexpr)
     code = textwrap.dedent(f"""
@@ -312,7 +312,7 @@ def write_cpp_vector_function(name, expr, args_list, pars_list):
         cexpr = cexpr.replace("\\\\\n", "")
         cexpr = re.sub(r" {2,}", " ", cexpr)
         cexpr = cexpr.strip()
-        cexpr = wrap_code_line(f"res[{i}] = {cexpr}", width=100, indent=" "*4,continuation=" \\")
+        cexpr = wrap_code_line(f"res[{i}] = {cexpr};", width=100, indent=" "*4,continuation=" \\")
         cexpr = "\n".join(cexpr)
         comp_lines.append(cexpr)
     comp_lines[1:] = [" "*8 + line for line in comp_lines[1:]]
@@ -462,7 +462,9 @@ def wrap_code_line(line, width=100, indent="", continuation="\\"):
 def write_cpp_test(name):
     code = textwrap.dedent(f"""
     // Test file\n
-    #include <iostream>
+    // Compile with "gcc test.cpp -o test"
+    // Run with ".\\test"\n
+    #include <stdio.h>
     #include "{name}.h"\n
     int main() {{\n
         // Insert code\n
@@ -475,6 +477,9 @@ def write_cpp_test(name):
 def write_fortran_test(name):
     code = textwrap.dedent(f"""
     ! Test file\n
+    ! Compile with "gfortran -cpp test.f90 -o test"
+    ! Run with ".\\test"\n
+    #include "{name}.f90"\n
     program test\n
         use {name}\n
         ! Insert code\n
@@ -486,6 +491,7 @@ def write_fortran_test(name):
 def write_octave_test(name):
     code = textwrap.dedent(f"""
     % Test file\n
+    % Run with "octave {name}.m"\n
     {name}\n
     % Insert code
     """).lstrip()
@@ -495,6 +501,7 @@ def write_octave_test(name):
 def write_python_test(name):
     code = textwrap.dedent(f"""
     # Test file\n
+    # Run with "python {name}.py"\n
     import {name}\n
     # Insert code
     """).lstrip()

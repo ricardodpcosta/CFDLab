@@ -21,16 +21,16 @@ double wB = -1.0;
 inline void uA(double x, double y, double res[2]) {
     double r = sqrt(pow(x, 2) + pow(y, 2));
     double theta = atan2(y, x);
-    res[0] = -r*wA*sin(theta)
-    res[1] = r*wA*cos(theta)
+    res[0] = -r*wA*sin(theta);
+    res[1] = r*wA*cos(theta);
 }
 
 // Function uB
 inline void uB(double x, double y, double res[2]) {
     double r = sqrt(pow(x, 2) + pow(y, 2));
     double theta = atan2(y, x);
-    res[0] = -r*wB*sin(theta)
-    res[1] = r*wB*cos(theta)
+    res[0] = -r*wB*sin(theta);
+    res[1] = r*wB*cos(theta);
 }
 
 // Function phiA
@@ -39,7 +39,7 @@ inline double phiA(double x, double y) {
     double theta = atan2(y, x);
     double aA = -kB/log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA));
     double bA = log(pow(rAB, kA + kB)*pow(rB, -kA))/log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA));
-    dobule res = (aA*log(r) + bA)*cos(nA*theta);
+    double res = (aA*log(r) + bA)*cos(nA*theta);
     return res;
 }
 
@@ -50,7 +50,7 @@ inline double phiB(double x, double y) {
     double aB = kA*cos(nA*theta)/(log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA))*cos(nB*theta));
     double bB = -log(pow(rB, kA*cos(nA*theta)))/(log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA)) \
         *cos(nB*theta));
-    dobule res = (aB*log(r) + bB)*cos(nB*theta);
+    double res = (aB*log(r) + bB)*cos(nB*theta);
     return res;
 }
 
@@ -60,7 +60,7 @@ inline double fA(double x, double y) {
     double theta = atan2(y, x);
     double aA = -kB/log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA));
     double bA = log(pow(rAB, kA + kB)*pow(rB, -kA))/log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA));
-    dobule res = nA*(aA*log(r) + bA)*(kA*nA*cos(nA*theta) - pow(r, 2)*wA*sin(nA*theta))/pow(r, 2);
+    double res = nA*(aA*log(r) + bA)*(kA*nA*cos(nA*theta) - pow(r, 2)*wA*sin(nA*theta))/pow(r, 2);
     return res;
 }
 
@@ -71,7 +71,7 @@ inline double fB(double x, double y) {
     double aB = kA*cos(nA*theta)/(log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA))*cos(nB*theta));
     double bB = -log(pow(rB, kA*cos(nA*theta)))/(log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA)) \
         *cos(nB*theta));
-    dobule res = nB*(aB*log(r) + bB)*(kB*nB*cos(nB*theta) - pow(r, 2)*wB*sin(nB*theta))/pow(r, 2);
+    double res = nB*(aB*log(r) + bB)*(kB*nB*cos(nB*theta) - pow(r, 2)*wB*sin(nB*theta))/pow(r, 2);
     return res;
 }
 
