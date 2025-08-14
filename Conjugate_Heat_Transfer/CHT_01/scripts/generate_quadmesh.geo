@@ -5,7 +5,7 @@ CFD-TESTSUITE | CHT_01
 ===============================================================================
 
 Description:
-    Generates quadrilateral unstructured meshes in MSH format.
+    Generates quadrilateral structured meshes in MSH format.
 
 Author:
     Ricardo Costa (rcosta@dep.uminho.pt)
