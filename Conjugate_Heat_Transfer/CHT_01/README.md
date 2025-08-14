@@ -11,8 +11,8 @@ It is particularly suitable for solvers that support **multi-material conduction
 
 ## 2. Domain and notation
 
-The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively, centered at the origin and with radius $r_{\textrm{A}}$ and $r_{\textrm{B}}$, respectively.
-An interface, $\Gamma^{\textrm{AB}}$, with radius $r_{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions.
+The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively.
+An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions.
 
 <div align="center">
   <table>
@@ -115,9 +115,9 @@ $$
 \begin{array}{l}
 a^{\textrm{A}}=-c\alpha^{\textrm{B}},\\
 a^{\textrm{B}}=-c\alpha^{\textrm{A}},\\
-b^{\textrm{A}}=c\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r_{\textrm{B}}}{r_{\textrm{AB}}}\right)+\alpha^{\textrm{B}}\ln\left(r_{\textrm{AB}}\right)\right),\\
-b^{\textrm{B}}=c\alpha^{\textrm{A}}\ln\left(r_{\textrm{B}}\right),\\
-c=\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r_{\textrm{B}}}{r_{\textrm{AB}}}\right)+\alpha^{\textrm{B}}\ln\left(\dfrac{r_{\textrm{AB}}}{r_{\textrm{A}}}\right)\right)^{-1}.
+b^{\textrm{A}}=c\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{B}}}{r^{\textrm{AB}}}\right)+\alpha^{\textrm{B}}\ln\left(r^{\textrm{AB}}\right)\right),\\
+b^{\textrm{B}}=c\alpha^{\textrm{A}}\ln\left(r^{\textrm{B}}\right),\\
+c=\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{B}}}{r^{\textrm{AB}}}\right)+\alpha^{\textrm{B}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{A}}}\right)\right)^{-1}.
 \end{array}
 $$
 
@@ -140,9 +140,9 @@ The table below summarises the configurable parameters and the recommended value
 
 | Symbol                    | Description                                                       | Value (low-diffusivity ratio) | Value (high-diffusivity ratio) |
 |:--------------------------|:------------------------------------------------------------------|------------------------------:|-------------------------------:|
-| $r_{\textrm{A}}$          | Radius of outer boundary, $\Gamma^{\textrm{A}}$                   | 1.0                           | 1.0                            |
-| $r_{\textrm{AB}}$         | Radius of interface, $\Gamma^{\textrm{AB}}$                       | 0.75                          | 0.75                           |
-| $r_{\textrm{B}}$          | Radius of inner boundary, $\Gamma^{\textrm{B}}$                   | 0.5                           | 0.5                            |
+| $r^{\textrm{A}}$          | Radius of outer boundary, $\Gamma^{\textrm{A}}$                   | 1.0                           | 1.0                            |
+| $r^{\textrm{AB}}$         | Radius of interface, $\Gamma^{\textrm{AB}}$                       | 0.75                          | 0.75                           |
+| $r^{\textrm{B}}$          | Radius of inner boundary, $\Gamma^{\textrm{B}}$                   | 0.5                           | 0.5                            |
 | $\alpha^{\textrm{A}}$     | Thermal diffusivity in outer subdomain, $\Omega^{\textrm{A}}$     | 2.0                           | 100.0                          |
 | $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain, $\Omega^{\textrm{B}}$     | 1.0                           | 1.0                            |
 | $n^{\textrm{A}}$          | Solution mode number in outer subdomain, $\Omega^{\textrm{A}}$    | 4                             | 4                              |
