@@ -39,7 +39,7 @@ from helpers import *
 
 # Variable parameters
 rA, rAB, rB = sympy.symbols("rA rAB rB", positive=True)
-kA, kB = sympy.symbols("kA kB", positive=True)
+alphaA, alphaB = sympy.symbols("alphaA alphaB", positive=True)
 nA, nB = sympy.symbols("nA nB", real=True)
 wA, wB = sympy.symbols("wA wB", real=True)
 
@@ -88,7 +88,7 @@ eq3 = sympy.Eq(phiA.subs(r, rAB), phiB.subs(r, rAB))
 # Flux conservation at interface
 dphiA_dr = sympy.diff(phiA, r)
 dphiB_dr = sympy.diff(phiB, r)
-eq4 = sympy.Eq(-kA*dphiA_dr.subs(r, rAB) - kB*dphiB_dr.subs(r, rAB),0)
+eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, rAB) - alphaB*dphiB_dr.subs(r, rAB),0)
 
 # Solve for coefficients
 sol = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)
@@ -105,8 +105,8 @@ sol = sol[0]
 # ----------------------------------------
 
 # Diffusive terms
-diffA = -kA*((1/r)*sympy.diff(r*sympy.diff(phiA, r), r) + (1/r**2)*sympy.diff(sympy.diff(phiA, theta), theta))
-diffB = -kB*((1/r)*sympy.diff(r*sympy.diff(phiB, r), r) + (1/r**2)*sympy.diff(sympy.diff(phiB, theta), theta))
+diffA = -alphaA*((1/r)*sympy.diff(r*sympy.diff(phiA, r), r) + (1/r**2)*sympy.diff(sympy.diff(phiA, theta), theta))
+diffB = -alphaB*((1/r)*sympy.diff(r*sympy.diff(phiB, r), r) + (1/r**2)*sympy.diff(sympy.diff(phiB, theta), theta))
 
 # Convective terms
 convA = uA_r*sympy.diff(phiA, r) + (uA_theta/r)*sympy.diff(phiA, theta)
@@ -132,8 +132,8 @@ theta = sympy.atan2(y,x)
 rA = 1.0
 rAB = 0.75
 rB = 0.5
-kA = 2.0
-kB = 1.0
+alphaA = 2.0
+alphaB = 1.0
 nA = 4
 nB = 4
 wA = 1.0
@@ -143,7 +143,7 @@ wB = -1.0
 args_list = [("x", x), ("y", y)]
 
 # Variables list
-vars_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("kA", kA), ("kB", kB),
+vars_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("alphaA", alphaA), ("alphaB", alphaB),
         ("nA", nA), ("nB", nB), ("wA", wA), ("wB", wB)]
 
 # Parameters list
