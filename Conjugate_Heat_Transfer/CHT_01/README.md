@@ -38,13 +38,9 @@ $$
 \end{array}
 $$
 
-where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are the thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are the velocity fields, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are the source-terms in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
+where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are constant thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are the velocity fields, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are the source-terms in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
 
-## 4. Material properties
-
-The **thermal diffusivities** are constant.
-
-The **velocity fields** are tangential to the boundaries and interface and, in polar coordinates $\left(r,\theta\right)$, read
+The **velocity fields** are chosen to be tangential to the boundaries and interface and, in polar coordinates $\left(r,\theta\right)$, read
 
 $$
 \begin{array}{ll}
@@ -65,7 +61,7 @@ $$
 
 where $\omega^{\textrm{A}},\omega^{\textrm{B}}\in\mathbb{R}$ are chosen constant parameters that control the angular velocity magnitude.
 
-## 5. Manufactured solution
+## 4. Manufactured solution
 
 The **manufactured solutions**, in polar coordinates $\left(r,\theta\right)$, read
 
@@ -130,7 +126,7 @@ $$
 \end{array}
 $$
 
-## 6. Case parameters
+## 5. Case parameters
 
 The table below summarises the configurable parameters and the recommended values for two case configurations: a low-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=2$) and a high-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=100$).
 
@@ -146,7 +142,7 @@ The table below summarises the configurable parameters and the recommended value
 | $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$        | 1.0                           | 1.0                            |
 | $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain, $\Omega^{\textrm{B}}$        | -1.0                          | -1.0                           |
 
-## 7. Scripts and files
+## 6. Scripts and files
 
 The table below summarises the functionality and usage of the provided scripts. Check script headers for requirements and dependencies.
 
@@ -157,7 +153,7 @@ The table below summarises the functionality and usage of the provided scripts. 
 | `generate_code.py` | Generates code for the symbolic expressions in multiple programming languages: C/C++, Fortran, Octave/Matlab, and Python. Outputs are saved in `codes/`. | `python generate_code.py` |
 | `helpers.py` | Utility functions for code generation in multiple programming languages: C/C++, Fortran, Octave/Matlab, and Python. Includes code formatting and line-wrapping helpers to keep generated source code within a configurable indent and line width. | |
     
-## 8. How to cite
+## 7. How to cite
 
 If you use this benchmark or any of the provided material, in its original or modified form, in your research, please acknowledge the original work in your publications by citing:
 
