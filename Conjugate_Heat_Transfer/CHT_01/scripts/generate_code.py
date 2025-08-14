@@ -6,9 +6,9 @@ CFD-TESTSUITE | CHT_01
 ===============================================================================
 
 Description:
-    Generates code for the symbolic expressions in multiple target languages:
+    Generates code for the symbolic expressions in multiple programming languages:
     C/C++, Fortran, Octave/Matlab, and Python.
-    Outputs one file per expression/language.
+    Outputs are saved in `codes/`.
 
 Author:
     Ricardo Costa (rcosta@dep.uminho.pt)
@@ -20,7 +20,7 @@ Repository:
     https://github.com/ricardodpcosta/CFD-TestSuite
 
 Dependencies:
-    Python (version => 3.9)
+    Python (version >= 3.9)
     SymPy (version >= 1.6)
 
 Usage:

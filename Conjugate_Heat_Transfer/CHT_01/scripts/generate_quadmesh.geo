@@ -6,6 +6,10 @@ CFD-TESTSUITE | CHT_01
 
 Description:
     Generates quadrilateral structured meshes in MSH format.
+    Mesh refinement can be controlled through the command-line option `-setnumber N <value>`
+    where `<value>` is a numerical argument specifying the desired refinement level
+    (default: `1`).
+    Outputs are saved in `meshes/`.
 
 Author:
     Ricardo Costa (rcosta@dep.uminho.pt)
@@ -17,7 +21,7 @@ Repository:
     https://github.com/ricardodpcosta/CFD-TestSuite
 
 Dependencies:
-    Gmsh (version  = > 4.8.4)
+    Gmsh (version >= 4.8.4)
 
 Usage:
     gmsh -setnumber N 1 generate_quadmesh.geo

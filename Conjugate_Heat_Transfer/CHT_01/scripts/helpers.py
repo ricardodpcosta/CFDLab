@@ -10,8 +10,6 @@ Description:
     C/C++, Fortran, Octave/Matlab, and Python.
     Includes code formatting and line-wrapping helpers to keep generated source
     code within a configurable indent and line width.
-    This module is intended to be imported by the main code generation script
-    (generate_code.py).
 
 Author:
     Ricardo Costa (rcosta@dep.uminho.pt)
