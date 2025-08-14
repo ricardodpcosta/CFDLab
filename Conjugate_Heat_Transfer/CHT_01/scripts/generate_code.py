@@ -40,8 +40,8 @@ from helpers import *
 # constant parameters
 rA, rAB, rB = sympy.symbols("rA rAB rB", positive=True)
 alphaA, alphaB = sympy.symbols("alphaA alphaB", positive=True)
-nA, nB = sympy.symbols("nA nB", real=True)
 wA, wB = sympy.symbols("wA wB", real=True)
+n = sympy.symbols("n", real=True)
 
 # solution parameters
 aA, bA, aB, bB = sympy.symbols("aA bA aB bB", real=True)
@@ -55,15 +55,15 @@ x, y = sympy.symbols("x y", real=True, positive=False)
 #============================================
 
 # manufactured solutions
-phiA = (aA*sympy.log(r) + bA)*sympy.cos(nA*theta)
-phiB = (aB*sympy.log(r) + bB)*sympy.cos(nB*theta)
+phiA = (aA*sympy.log(r) + bA)*sympy.cos(n*theta)
+phiB = (aB*sympy.log(r) + bB)*sympy.cos(n*theta)
 
 #============================================
 # SOLUTION PARAMETERS
 #============================================
 
 # dirichlet boundary conditions
-eq1 = sympy.Eq(phiA.subs(r, rA), sympy.cos(nA*theta))
+eq1 = sympy.Eq(phiA.subs(r, rA), sympy.cos(n*theta))
 eq2 = sympy.Eq(phiB.subs(r, rB), 0)
 
 # solution continuity at interface
@@ -72,7 +72,7 @@ eq3 = sympy.Eq(phiA.subs(r, rAB), phiB.subs(r, rAB))
 # flux conservation at interface
 dphiA_dr = sympy.diff(phiA, r)
 dphiB_dr = sympy.diff(phiB, r)
-eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, rAB) - alphaB*dphiB_dr.subs(r, rAB),0)
+eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, rAB) + alphaB*dphiB_dr.subs(r, rAB),0)
 
 # solve for coefficients
 sol = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)
@@ -134,17 +134,16 @@ rAB = 0.75
 rB = 0.5
 alphaA = 2.0
 alphaB = 1.0
-nA = 4
-nB = 4
 wA = 1.0
 wB = -1.0
+n = 4
 
 # arguments list
 args_list = [("x", x), ("y", y)]
 
 # constants list
 consts_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("alphaA", alphaA), ("alphaB", alphaB),
-        ("nA", nA), ("nB", nB), ("wA", wA), ("wB", wB)]
+                ("wA", wA), ("wB", wB), ("n", n)]
 
 # parameters list
 params_list = [("r", r), ("theta", theta)]

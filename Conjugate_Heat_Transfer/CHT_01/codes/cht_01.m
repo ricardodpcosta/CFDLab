@@ -6,10 +6,9 @@ global rAB = 0.75;
 global rB = 0.5;
 global alphaA = 2.0;
 global alphaB = 1.0;
-global nA = 4;
-global nB = 4;
 global wA = 1.0;
 global wB = -1.0;
+global n = 4;
 
 % Function uA
 function res = uA(x, y)
@@ -18,10 +17,9 @@ function res = uA(x, y)
     global rB;
     global alphaA;
     global alphaB;
-    global nA;
-    global nB;
     global wA;
     global wB;
+    global n;
     r = sqrt(x.^2 + y.^2);
     theta = atan2(y, x);
     res(1) = -r.*wA.*sin(theta);
@@ -35,10 +33,9 @@ function res = uB(x, y)
     global rB;
     global alphaA;
     global alphaB;
-    global nA;
-    global nB;
     global wA;
     global wB;
+    global n;
     r = sqrt(x.^2 + y.^2);
     theta = atan2(y, x);
     res(1) = -r.*wB.*sin(theta);
@@ -52,16 +49,15 @@ function res = phiA(x, y)
     global rB;
     global alphaA;
     global alphaB;
-    global nA;
-    global nB;
     global wA;
     global wB;
+    global n;
     r = sqrt(x.^2 + y.^2);
     theta = atan2(y, x);
-    aA = -alphaB./log(rA.^(-alphaB).*rAB.^(alphaA + alphaB).*rB.^(-alphaA));
-    bA = log(rAB.^(alphaA + alphaB).*rB.^(-alphaA))./log(rA.^(-alphaB).*rAB.^(alphaA + alphaB).*rB.^( ...
+    aA = alphaB./log(rA.^alphaB.*rAB.^(alphaA - alphaB).*rB.^(-alphaA));
+    bA = log(rAB.^(alphaA - alphaB).*rB.^(-alphaA))./log(rA.^alphaB.*rAB.^(alphaA - alphaB).*rB.^( ...
         -alphaA));
-    res = (aA.*log(r) + bA).*cos(nA.*theta);
+    res = (aA.*log(r) + bA).*cos(n.*theta);
 end
 
 % Function phiB
@@ -71,17 +67,14 @@ function res = phiB(x, y)
     global rB;
     global alphaA;
     global alphaB;
-    global nA;
-    global nB;
     global wA;
     global wB;
+    global n;
     r = sqrt(x.^2 + y.^2);
     theta = atan2(y, x);
-    aB = alphaA.*cos(nA.*theta)./(log(rA.^(-alphaB).*rAB.^(alphaA + alphaB).*rB.^(-alphaA)).*cos(nB. ...
-        *theta));
-    bB = -log(rB.^(alphaA.*cos(nA.*theta)))./(log(rA.^(-alphaB).*rAB.^(alphaA + alphaB).*rB.^( ...
-        -alphaA)).*cos(nB.*theta));
-    res = (aB.*log(r) + bB).*cos(nB.*theta);
+    aB = alphaA./log(rA.^alphaB.*rAB.^(alphaA - alphaB).*rB.^(-alphaA));
+    bB = -log(rB.^alphaA)./log(rA.^alphaB.*rAB.^(alphaA - alphaB).*rB.^(-alphaA));
+    res = (aB.*log(r) + bB).*cos(n.*theta);
 end
 
 % Function fA
@@ -91,16 +84,15 @@ function res = fA(x, y)
     global rB;
     global alphaA;
     global alphaB;
-    global nA;
-    global nB;
     global wA;
     global wB;
+    global n;
     r = sqrt(x.^2 + y.^2);
     theta = atan2(y, x);
-    aA = -alphaB./log(rA.^(-alphaB).*rAB.^(alphaA + alphaB).*rB.^(-alphaA));
-    bA = log(rAB.^(alphaA + alphaB).*rB.^(-alphaA))./log(rA.^(-alphaB).*rAB.^(alphaA + alphaB).*rB.^( ...
+    aA = alphaB./log(rA.^alphaB.*rAB.^(alphaA - alphaB).*rB.^(-alphaA));
+    bA = log(rAB.^(alphaA - alphaB).*rB.^(-alphaA))./log(rA.^alphaB.*rAB.^(alphaA - alphaB).*rB.^( ...
         -alphaA));
-    res = nA.*(aA.*log(r) + bA).*(alphaA.*nA.*cos(nA.*theta) - r.^2.*wA.*sin(nA.*theta))./r.^2;
+    res = n.*(aA.*log(r) + bA).*(alphaA.*n.*cos(n.*theta) - r.^2.*wA.*sin(n.*theta))./r.^2;
 end
 
 % Function fB
@@ -110,15 +102,12 @@ function res = fB(x, y)
     global rB;
     global alphaA;
     global alphaB;
-    global nA;
-    global nB;
     global wA;
     global wB;
+    global n;
     r = sqrt(x.^2 + y.^2);
     theta = atan2(y, x);
-    aB = alphaA.*cos(nA.*theta)./(log(rA.^(-alphaB).*rAB.^(alphaA + alphaB).*rB.^(-alphaA)).*cos(nB. ...
-        *theta));
-    bB = -log(rB.^(alphaA.*cos(nA.*theta)))./(log(rA.^(-alphaB).*rAB.^(alphaA + alphaB).*rB.^( ...
-        -alphaA)).*cos(nB.*theta));
-    res = nB.*(aB.*log(r) + bB).*(alphaB.*nB.*cos(nB.*theta) - r.^2.*wB.*sin(nB.*theta))./r.^2;
+    aB = alphaA./log(rA.^alphaB.*rAB.^(alphaA - alphaB).*rB.^(-alphaA));
+    bB = -log(rB.^alphaA)./log(rA.^alphaB.*rAB.^(alphaA - alphaB).*rB.^(-alphaA));
+    res = n.*(aB.*log(r) + bB).*(alphaB.*n.*cos(n.*theta) - r.^2.*wB.*sin(n.*theta))./r.^2;
 end
