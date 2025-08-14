@@ -17,8 +17,8 @@ An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="images/domain.png" width="400px"></td>
-      <td align="center"><img src="images/tria_mesh.png" width="400px"></td>
+      <td align="center"><img src="images/domain.png" width="300px"></td>
+      <td align="center"><img src="images/tria_mesh.png" width="300px"></td>
     </tr>
     <tr>
       <td align="center">Domain and notation.</td>
@@ -63,7 +63,7 @@ $$
 \end{array}
 $$
 
-where $\omega^{\textrm{A}},\omega^{\textrm{B}}\in\mathbb{R}$ are parameters to choose.
+where $\omega^{\textrm{A}},\omega^{\textrm{B}}\in\mathbb{R}$ are chosen constant parameters that control the angular velocity magnitude.
 
 ## 5. Manufactured solution
 
@@ -76,13 +76,13 @@ $$
 \end{array}
 $$
 
-where $n^{\textrm{A}},n^{\textrm{B}}\in\mathbb{R}$ are parameters to choose and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are parameters to determine.
+where $n^{\textrm{A}},n^{\textrm{B}}\in\mathbb{R}$ are chosen constant parameters that control the solution mode number, and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are determined constant parameters to enforce boundary and interface conditions.
 
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="images/solution1.png" width="500px"></td>
-      <td align="center"><img src="images/solution2.png" width="500px"></td>
+      <td align="center"><img src="images/solution1.png" width="400px"></td>
+      <td align="center"><img src="images/solution2.png" width="400px"></td>
     </tr>
     <tr>
       <td align="center">Manufactured solution in the low-diffusivity ratio case.</td>
