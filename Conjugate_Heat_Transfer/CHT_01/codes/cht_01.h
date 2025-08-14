@@ -6,12 +6,12 @@
 
 #include <cmath>
 
-// Global variables
+// Global constants
 double rA = 1.0;
 double rAB = 0.75;
 double rB = 0.5;
-double kA = 2.0;
-double kB = 1.0;
+double alphaA = 2.0;
+double alphaB = 1.0;
 double nA = 4;
 double nB = 4;
 double wA = 1.0;
@@ -37,8 +37,9 @@ inline void uB(double x, double y, double res[2]) {
 inline double phiA(double x, double y) {
     double r = sqrt(pow(x, 2) + pow(y, 2));
     double theta = atan2(y, x);
-    double aA = -kB/log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA));
-    double bA = log(pow(rAB, kA + kB)*pow(rB, -kA))/log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA));
+    double aA = -alphaB/log(pow(rA, -alphaB)*pow(rAB, alphaA + alphaB)*pow(rB, -alphaA));
+    double bA = log(pow(rAB, alphaA + alphaB)*pow(rB, -alphaA))/log(pow(rA, -alphaB)*pow(rAB, alphaA \
+        + alphaB)*pow(rB, -alphaA));
     double res = (aA*log(r) + bA)*cos(nA*theta);
     return res;
 }
@@ -47,9 +48,10 @@ inline double phiA(double x, double y) {
 inline double phiB(double x, double y) {
     double r = sqrt(pow(x, 2) + pow(y, 2));
     double theta = atan2(y, x);
-    double aB = kA*cos(nA*theta)/(log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA))*cos(nB*theta));
-    double bB = -log(pow(rB, kA*cos(nA*theta)))/(log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA)) \
+    double aB = alphaA*cos(nA*theta)/(log(pow(rA, -alphaB)*pow(rAB, alphaA + alphaB)*pow(rB, -alphaA)) \
         *cos(nB*theta));
+    double bB = -log(pow(rB, alphaA*cos(nA*theta)))/(log(pow(rA, -alphaB)*pow(rAB, alphaA + alphaB) \
+        *pow(rB, -alphaA))*cos(nB*theta));
     double res = (aB*log(r) + bB)*cos(nB*theta);
     return res;
 }
@@ -58,9 +60,10 @@ inline double phiB(double x, double y) {
 inline double fA(double x, double y) {
     double r = sqrt(pow(x, 2) + pow(y, 2));
     double theta = atan2(y, x);
-    double aA = -kB/log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA));
-    double bA = log(pow(rAB, kA + kB)*pow(rB, -kA))/log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA));
-    double res = nA*(aA*log(r) + bA)*(kA*nA*cos(nA*theta) - pow(r, 2)*wA*sin(nA*theta))/pow(r, 2);
+    double aA = -alphaB/log(pow(rA, -alphaB)*pow(rAB, alphaA + alphaB)*pow(rB, -alphaA));
+    double bA = log(pow(rAB, alphaA + alphaB)*pow(rB, -alphaA))/log(pow(rA, -alphaB)*pow(rAB, alphaA \
+        + alphaB)*pow(rB, -alphaA));
+    double res = nA*(aA*log(r) + bA)*(alphaA*nA*cos(nA*theta) - pow(r, 2)*wA*sin(nA*theta))/pow(r, 2);
     return res;
 }
 
@@ -68,10 +71,11 @@ inline double fA(double x, double y) {
 inline double fB(double x, double y) {
     double r = sqrt(pow(x, 2) + pow(y, 2));
     double theta = atan2(y, x);
-    double aB = kA*cos(nA*theta)/(log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA))*cos(nB*theta));
-    double bB = -log(pow(rB, kA*cos(nA*theta)))/(log(pow(rA, -kB)*pow(rAB, kA + kB)*pow(rB, -kA)) \
+    double aB = alphaA*cos(nA*theta)/(log(pow(rA, -alphaB)*pow(rAB, alphaA + alphaB)*pow(rB, -alphaA)) \
         *cos(nB*theta));
-    double res = nB*(aB*log(r) + bB)*(kB*nB*cos(nB*theta) - pow(r, 2)*wB*sin(nB*theta))/pow(r, 2);
+    double bB = -log(pow(rB, alphaA*cos(nA*theta)))/(log(pow(rA, -alphaB)*pow(rAB, alphaA + alphaB) \
+        *pow(rB, -alphaA))*cos(nB*theta));
+    double res = nB*(aB*log(r) + bB)*(alphaB*nB*cos(nB*theta) - pow(r, 2)*wB*sin(nB*theta))/pow(r, 2);
     return res;
 }
 

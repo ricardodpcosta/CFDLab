@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 ===============================================================================
-CFD-BenchLab | Helpers
+CFD-TESTSUITE | HELPERS
 ===============================================================================
 
 Description:
@@ -31,12 +31,12 @@ Usage:
 ===============================================================================
 """
 
-# Import modules
+# import modules
 import re
 import textwrap
 import sympy
 
-# Import specific printers
+# import specific printers
 try:
     from sympy.printing.c import ccode
     from sympy.printing.fortran import fcode
@@ -45,19 +45,27 @@ try:
 except Exception:
     raise RuntimeError("Required SymPy printers not available. Ensure sympy >= 1.6 is installed.")
 
-# Write contens to file
+#============================================
+# WRITE FILE
+#============================================
+
+# write contens to file
 def write_file(path, contents):
     with open(path, "w", encoding="utf-8") as fh:
         fh.write(contents)
     print("Wrote", path)
 
-# Write C/C++ variables
-def write_cpp_variables(vars_list):
+#============================================
+# WRITE CONSTANTS
+#============================================
+
+# write C/C++ constants
+def write_cpp_constants(consts_list):
     """
-    Generate C/C++ variables definition from a symbolic expression.
+    Generate C/C++ constants definition from a symbolic expression.
     """
-    decl_lines = ["// Global variables"]
-    for i, (varname, varexpr) in enumerate(vars_list):
+    decl_lines = ["// Global constants"]
+    for i, (varname, varexpr) in enumerate(consts_list):
         cexpr = str(varexpr)
         cexpr = cexpr.strip()
         cexpr = f"double {varname} = {cexpr};"
@@ -69,13 +77,13 @@ def write_cpp_variables(vars_list):
     """).strip()
     return code
 
-# Write Fortran variables
-def write_fortran_variables(vars_list):
+# write Fortran constants
+def write_fortran_constants(consts_list):
     """
-    Generate Fortran variables definition from a symbolic expression.
+    Generate Fortran constants definition from a symbolic expression.
     """
-    decl_lines = ["! Global variables"]
-    for i, (varname, varexpr) in enumerate(vars_list):
+    decl_lines = ["! Global constants"]
+    for i, (varname, varexpr) in enumerate(consts_list):
         fexpr = str(varexpr)
         fexpr = fexpr.strip()
         fexpr = f"real(8), parameter :: {varname} = {fexpr}"
@@ -87,13 +95,13 @@ def write_fortran_variables(vars_list):
     """).strip()
     return code
 
-# Write Octave/Matlab variables
-def write_octave_variables(vars_list):
+# write Octave/Matlab constants
+def write_octave_constants(consts_list):
     """
-    Generate Octave/Matlab variables definition from a symbolic expression.
+    Generate Octave/Matlab constants definition from a symbolic expression.
     """
-    decl_lines = ["% Global variables"]
-    for i, (varname, varexpr) in enumerate(vars_list):
+    decl_lines = ["% Global constants"]
+    for i, (varname, varexpr) in enumerate(consts_list):
         mexpr = str(varexpr)
         mexpr = mexpr.strip()
         mexpr = f"global {varname} = {mexpr};"
@@ -105,13 +113,13 @@ def write_octave_variables(vars_list):
     """).strip()
     return code
 
-# Write Python variables
-def write_python_variables(vars_list):
+# write Python constants
+def write_python_constants(consts_list):
     """
-    Generate Python variables definition from a symbolic expression.
+    Generate Python constants definition from a symbolic expression.
     """
-    decl_lines = ["# Global variables"]
-    for i, (varname, varexpr) in enumerate(vars_list):
+    decl_lines = ["# Global constants"]
+    for i, (varname, varexpr) in enumerate(consts_list):
         pexpr = str(varexpr)
         pexpr = pexpr.strip()
         pexpr = f"{varname} = {pexpr}"
@@ -123,54 +131,62 @@ def write_python_variables(vars_list):
     """).strip()
     return code
 
-# Write C/C++ function
-def write_cpp_function(name, expr, args_list, pars_list):
+#============================================
+# WRITE GENERIC FUNCTIONS
+#============================================
+
+# write C/C++ function
+def write_cpp_function(name, expr, args_list, params_list):
     """
     Generate a C/C++ function definition from a symbolic expression.
     """
     if isinstance(expr, sympy.Matrix):
-        return write_cpp_vector_function(name, expr, args_list, pars_list)
+        return write_cpp_vector_function(name, expr, args_list, params_list)
     else:
-        return write_cpp_scalar_function(name, expr, args_list, pars_list)
+        return write_cpp_scalar_function(name, expr, args_list, params_list)
 
-# Write Fortran function
-def write_fortran_function(name, expr, args_list, pars_list):
+# write Fortran function
+def write_fortran_function(name, expr, args_list, params_list):
     """
     Generate a Fortran function definition from a symbolic expression.
     """
     if isinstance(expr, sympy.Matrix):
-        return write_fortran_vector_function(name, expr, args_list, pars_list)
+        return write_fortran_vector_function(name, expr, args_list, params_list)
     else:
-        return write_fortran_scalar_function(name, expr, args_list, pars_list)
+        return write_fortran_scalar_function(name, expr, args_list, params_list)
 
-# Write Octave/Matlab function
-def write_octave_function(name, expr, args_list, vars_list, pars_list):
+# write Octave/Matlab function
+def write_octave_function(name, expr, args_list, consts_list, params_list):
     """
     Generate a Octave/Matlab function definition from a symbolic expression.
     """
     if isinstance(expr, sympy.Matrix):
-        return write_octave_vector_function(name, expr, args_list, vars_list, pars_list)
+        return write_octave_vector_function(name, expr, args_list, consts_list, params_list)
     else:
-        return write_octave_scalar_function(name, expr, args_list, vars_list, pars_list)
+        return write_octave_scalar_function(name, expr, args_list, consts_list, params_list)
 
-# Write Python function
-def write_python_function(name, expr, args_list, pars_list):
+# write Python function
+def write_python_function(name, expr, args_list, params_list):
     """
     Generate a Python function definition from a symbolic expression.
     """
     if isinstance(expr, sympy.Matrix):
-        return write_python_vector_function(name, expr, args_list, pars_list)
+        return write_python_vector_function(name, expr, args_list, params_list)
     else:
-        return write_python_scalar_function(name, expr, args_list, pars_list)
+        return write_python_scalar_function(name, expr, args_list, params_list)
 
-# Write C/C++ scalar function
-def write_cpp_scalar_function(name, expr, args_list, pars_list):
+#============================================
+# WRITE SCALAR FUNCTIONS
+#============================================
+
+# write C/C++ scalar function
+def write_cpp_scalar_function(name, expr, args_list, params_list):
     """
     Generate a C/C++ function definition from a scalar symbolic expression.
     """
     argnames = ", ".join(f"double {argname}" for (argname, _) in args_list)
     decl_lines = []
-    for i, (parname, parexpr) in enumerate(pars_list):
+    for i, (parname, parexpr) in enumerate(params_list):
         cexpr = ccode(sympy.simplify(sympy.trigsimp(parexpr)), assign_to=None)
         cexpr = cexpr.replace("\\\\\n", "")
         cexpr = re.sub(r" {2,}", " ", cexpr)
@@ -195,16 +211,16 @@ def write_cpp_scalar_function(name, expr, args_list, pars_list):
     """).strip()
     return code
 
-# Write Fortran scalar function
-def write_fortran_scalar_function(name, expr, args_list, pars_list):
+# write Fortran scalar function
+def write_fortran_scalar_function(name, expr, args_list, params_list):
     """
     Generate a Fortran function definition from a scalar symbolic expression.
     """
     argnames = ", ".join(argname for (argname, _) in args_list)
     decl_lines = [f"real(8), intent(in) :: {argname}" for (argname, _) in args_list]
     decl_lines.append("real(8) :: res")
-    decl_lines.extend([f"real(8) :: {parname}" for (parname, _) in pars_list])
-    for i, (parname, parexpr) in enumerate(pars_list):
+    decl_lines.extend([f"real(8) :: {parname}" for (parname, _) in params_list])
+    for i, (parname, parexpr) in enumerate(params_list):
         fexpr = fcode(sympy.simplify(sympy.trigsimp(parexpr)), assign_to=None, source_format="free")
         fexpr = fexpr.replace("&\n", "")
         fexpr = re.sub(r" {2,}", " ", fexpr)
@@ -227,14 +243,14 @@ def write_fortran_scalar_function(name, expr, args_list, pars_list):
     """).strip()
     return code
 
-# Write Matlab scalar function
-def write_octave_scalar_function(name, expr, args_list, vars_list, pars_list):
+# write Octave/Matlab scalar function
+def write_octave_scalar_function(name, expr, args_list, consts_list, params_list):
     """
     Generate an Octave/Matlab function definition from a scalar symbolic expression.
     """
     argnames = ", ".join(argname for (argname, _) in args_list)
-    decl_lines = ["global " + varname + ";" for (varname, _) in vars_list]
-    for i, (parname, parexpr) in enumerate(pars_list):
+    decl_lines = ["global " + varname + ";" for (varname, _) in consts_list]
+    for i, (parname, parexpr) in enumerate(params_list):
         mexpr = octave_code(sympy.simplify(sympy.trigsimp(parexpr)), assign_to=None)
         mexpr = mexpr.replace("...\n", "")
         mexpr = re.sub(r" {2,}", " ", mexpr)
@@ -258,14 +274,14 @@ def write_octave_scalar_function(name, expr, args_list, vars_list, pars_list):
     """).strip()
     return code
 
-# Write Python scalar function
-def write_python_scalar_function(name, expr, args_list, pars_list):
+# write Python scalar function
+def write_python_scalar_function(name, expr, args_list, params_list):
     """
     Generate a Python function definition from a scalar symbolic expression.
     """
     argnames = ", ".join(argname for (argname, _) in args_list)
     decl_lines = []
-    for i, (parname, parexpr) in enumerate(pars_list):
+    for i, (parname, parexpr) in enumerate(params_list):
         pexpr = pycode(sympy.simplify(sympy.trigsimp(parexpr)))
         pexpr = pexpr.replace("\n", "")
         pexpr = re.sub(r" {2,}", " ", pexpr)
@@ -289,15 +305,19 @@ def write_python_scalar_function(name, expr, args_list, pars_list):
     """).strip()
     return code
 
-# Write C/C++ vector function
-def write_cpp_vector_function(name, expr, args_list, pars_list):
+#============================================
+# WRITE VECTOR FUNCTIONS
+#============================================
+
+# write C/C++ vector function
+def write_cpp_vector_function(name, expr, args_list, params_list):
     """
     Generate a C/C++ function definition from a vector symbolic expression.
     """
     argnames = ", ".join(f"double {argname}" for (argname, _) in args_list)
     argnames += ", double res[{}]".format(len(expr))
     decl_lines = []
-    for i, (parname, parexpr) in enumerate(pars_list):
+    for i, (parname, parexpr) in enumerate(params_list):
         cexpr = ccode(sympy.simplify(sympy.trigsimp(parexpr)), assign_to=None)
         cexpr = cexpr.replace("\\\\\n", "")
         cexpr = re.sub(r" {2,}", " ", cexpr)
@@ -326,8 +346,8 @@ def write_cpp_vector_function(name, expr, args_list, pars_list):
     """).strip()
     return code
 
-# Write Fortran vector function
-def write_fortran_vector_function(name, expr, args_list, pars_list):
+# write Fortran vector function
+def write_fortran_vector_function(name, expr, args_list, params_list):
     """
     Generate a Fortran function definition from a vector symbolic expression.
     """
@@ -335,8 +355,8 @@ def write_fortran_vector_function(name, expr, args_list, pars_list):
     argnames += ", res"
     decl_lines = [f"real(8), intent(in) :: {argname}" for (argname, _) in args_list]
     decl_lines.append("real(8), intent(out) :: res({})".format(len(expr)))
-    decl_lines.extend([f"real(8) :: {parname}" for (parname, _) in pars_list])
-    for i, (parname, parexpr) in enumerate(pars_list):
+    decl_lines.extend([f"real(8) :: {parname}" for (parname, _) in params_list])
+    for i, (parname, parexpr) in enumerate(params_list):
         fexpr = fcode(sympy.simplify(sympy.trigsimp(parexpr)), assign_to=None, source_format="free")
         fexpr = fexpr.replace("&\n", "")
         fexpr = re.sub(r" {2,}", " ", fexpr)
@@ -365,14 +385,14 @@ def write_fortran_vector_function(name, expr, args_list, pars_list):
     """).strip()
     return code
 
-# Write Octave/Matlab vector function
-def write_octave_vector_function(name, expr, args_list, vars_list, pars_list):
+# write Octave/Matlab vector function
+def write_octave_vector_function(name, expr, args_list, consts_list, params_list):
     """
     Generate a Octave/Matlab function definition from a vector symbolic expression.
     """
     argnames = ", ".join(argname for (argname, _) in args_list)
-    decl_lines = ["global " + varname + ";" for (varname, _) in vars_list]
-    for i, (parname, parexpr) in enumerate(pars_list):
+    decl_lines = ["global " + varname + ";" for (varname, _) in consts_list]
+    for i, (parname, parexpr) in enumerate(params_list):
         mexpr = octave_code(sympy.simplify(sympy.trigsimp(parexpr)), assign_to=None)
         mexpr = mexpr.replace("...\n", "")
         mexpr = re.sub(r" {2,}", " ", mexpr)
@@ -401,14 +421,14 @@ def write_octave_vector_function(name, expr, args_list, vars_list, pars_list):
     """).strip()
     return code
 
-# Write Python vector function
-def write_python_vector_function(name, expr, args_list, pars_list):
+# write Python vector function
+def write_python_vector_function(name, expr, args_list, params_list):
     """
     Generate a Python function definition from a vector symbolic expression.
     """
     argnames = ", ".join(argname for (argname, _) in args_list)
     decl_lines = []
-    for i, (parname, parexpr) in enumerate(pars_list):
+    for i, (parname, parexpr) in enumerate(params_list):
         pexpr = pycode(sympy.simplify(sympy.trigsimp(parexpr)))
         pexpr = pexpr.replace("\n", "")
         pexpr = re.sub(r" {2,}", " ", pexpr)
@@ -437,7 +457,11 @@ def write_python_vector_function(name, expr, args_list, pars_list):
     """).strip()
     return code
 
-# Wrap code line
+#============================================
+# WRAP CODE LINE
+#============================================
+
+# wrap code line
 def wrap_code_line(line, width=100, indent="", continuation="\\"):
     """
     Wrap a code line to a given width, breaking at operators (+, -, *, /) or spaces.
@@ -458,7 +482,11 @@ def wrap_code_line(line, width=100, indent="", continuation="\\"):
     parts.append(line)
     return parts
 
-# Write C/C++ test file
+#============================================
+# WRITE TEST FILES
+#============================================
+
+# write C/C++ test file
 def write_cpp_test(name):
     code = textwrap.dedent(f"""
     // Test file\n
@@ -473,7 +501,7 @@ def write_cpp_test(name):
     """).lstrip()
     return code
 
-# Write Fortran test file
+# write Fortran test file
 def write_fortran_test(name):
     code = textwrap.dedent(f"""
     ! Test file\n
@@ -487,7 +515,7 @@ def write_fortran_test(name):
     """).lstrip()
     return code
 
-# Write Octave/Matlab test file
+# write Octave/Matlab test file
 def write_octave_test(name):
     code = textwrap.dedent(f"""
     % Test file\n
@@ -497,7 +525,7 @@ def write_octave_test(name):
     """).lstrip()
     return code
 
-# Write Python test file
+# write Python test file
 def write_python_test(name):
     code = textwrap.dedent(f"""
     # Test file\n
@@ -506,3 +534,5 @@ def write_python_test(name):
     # Insert code
     """).lstrip()
     return code
+
+# end of file

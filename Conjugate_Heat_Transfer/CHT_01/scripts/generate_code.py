@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 ===============================================================================
-CFD-BenchLab | CHT_01 | Code Generator
+CFD-TESTSUITE | CHT_01
 ===============================================================================
 
 Description:
@@ -24,45 +24,71 @@ Dependencies:
     SymPy (version >= 1.6)
 
 Usage:
-    python generate_code.py
+    python symbolic_code.py
 ===============================================================================
 """
 
-# Import modules
+# import modules
 import os
 import sympy
 from helpers import *
 
-# ----------------------------------------
-# Define symbolic pariables
-# ----------------------------------------
+#============================================
+# SYMBOLIC VARIABLES
+#============================================
 
-# Variable parameters
+# constant parameters
 rA, rAB, rB = sympy.symbols("rA rAB rB", positive=True)
 alphaA, alphaB = sympy.symbols("alphaA alphaB", positive=True)
 nA, nB = sympy.symbols("nA nB", real=True)
 wA, wB = sympy.symbols("wA wB", real=True)
 
-# Solution parameters
+# solution parameters
 aA, bA, aB, bB = sympy.symbols("aA bA aB bB", real=True)
 
-# Coordinate system
+# coordinate system
 r, theta = sympy.symbols("r theta", real=True, positive=True)
 x, y = sympy.symbols("x y", real=True, positive=False)
 
-# ----------------------------------------
-# Define manufactured solutions
-# ----------------------------------------
+#============================================
+# MANUFACTURED SOLUTIONS
+#============================================
 
-# Manufactured solutions
+# manufactured solutions
 phiA = (aA*sympy.log(r) + bA)*sympy.cos(nA*theta)
 phiB = (aB*sympy.log(r) + bB)*sympy.cos(nB*theta)
 
-# ----------------------------------------
-# Define velocity fields
-# ----------------------------------------
+#============================================
+# SOLUTION PARAMETERS
+#============================================
 
-# Velocity fields
+# dirichlet boundary conditions
+eq1 = sympy.Eq(phiA.subs(r, rA), sympy.cos(nA*theta))
+eq2 = sympy.Eq(phiB.subs(r, rB), 0)
+
+# solution continuity at interface
+eq3 = sympy.Eq(phiA.subs(r, rAB), phiB.subs(r, rAB))
+
+# flux conservation at interface
+dphiA_dr = sympy.diff(phiA, r)
+dphiB_dr = sympy.diff(phiB, r)
+eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, rAB) - alphaB*dphiB_dr.subs(r, rAB),0)
+
+# solve for coefficients
+sol = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)
+if not sol:
+    raise RuntimeError("Could not solve for coefficients symbolically.")
+sol = sol[0]
+
+# substitute into manufactured solutions
+# phiA = sympy.simplify(phiA.subs(sol))
+# phiB = sympy.simplify(phiB.subs(sol))
+
+#============================================
+# VELOCITY FIELDS
+#============================================
+
+# velocity fields
 uA_r = 0
 uA_theta = wA*r
 uB_r = 0
@@ -74,61 +100,35 @@ uA = sympy.Matrix([uA_r*sympy.cos(theta) - uA_theta*sympy.sin(theta),
 uB = sympy.Matrix([uB_r*sympy.cos(theta) - uB_theta*sympy.sin(theta),
                     uB_r*sympy.sin(theta) + uB_theta*sympy.cos(theta)])
 
-# ----------------------------------------
-# Compute solution parameters
-# ----------------------------------------
+#============================================
+# SOURCE-TERMS
+#============================================
 
-# Dirichlet boundary conditions
-eq1 = sympy.Eq(phiA.subs(r, rA), sympy.cos(nA*theta))
-eq2 = sympy.Eq(phiB.subs(r, rB), 0)
-
-# Solution continuity at interface
-eq3 = sympy.Eq(phiA.subs(r, rAB), phiB.subs(r, rAB))
-
-# Flux conservation at interface
-dphiA_dr = sympy.diff(phiA, r)
-dphiB_dr = sympy.diff(phiB, r)
-eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, rAB) - alphaB*dphiB_dr.subs(r, rAB),0)
-
-# Solve for coefficients
-sol = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)
-if not sol:
-    raise RuntimeError("Could not solve for coefficients symbolically.")
-sol = sol[0]
-
-# Substitute into manufactured solutions
-# phiA = sympy.simplify(phiA.subs(sol))
-# phiB = sympy.simplify(phiB.subs(sol))
-
-# ----------------------------------------
-# Compute source terms
-# ----------------------------------------
-
-# Diffusive terms
+# diffusive terms
 diffA = -alphaA*((1/r)*sympy.diff(r*sympy.diff(phiA, r), r) + (1/r**2)*sympy.diff(sympy.diff(phiA, theta), theta))
 diffB = -alphaB*((1/r)*sympy.diff(r*sympy.diff(phiB, r), r) + (1/r**2)*sympy.diff(sympy.diff(phiB, theta), theta))
 
-# Convective terms
+# convective terms
 convA = uA_r*sympy.diff(phiA, r) + (uA_theta/r)*sympy.diff(phiA, theta)
 convB = uB_r*sympy.diff(phiB, r) + (uB_theta/r)*sympy.diff(phiB, theta)
 
-# Source-terms
+# source-terms
 fA = sympy.simplify(convA + diffA)
 fB = sympy.simplify(convB + diffB)
 
-# ----------------------------------------
-# Write symbolic expressions
-# ----------------------------------------
+#============================================
+# OUTPUT
+#============================================
 
-# Output directory
-outdir = "../symbolic"
+# output directory
+outdir = "../codes"
 os.makedirs(outdir, exist_ok=True)
 
-# Coordinate system conversion
+# coordinate system conversion
 r = sympy.sqrt(x**2 + y**2)
 theta = sympy.atan2(y,x)
 
-# Variable parameters values
+# constant parameters values
 rA = 1.0
 rAB = 0.75
 rB = 0.5
@@ -139,34 +139,30 @@ nB = 4
 wA = 1.0
 wB = -1.0
 
-# Arguments list
+# arguments list
 args_list = [("x", x), ("y", y)]
 
-# Variables list
-vars_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("alphaA", alphaA), ("alphaB", alphaB),
+# constants list
+consts_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("alphaA", alphaA), ("alphaB", alphaB),
         ("nA", nA), ("nB", nB), ("wA", wA), ("wB", wB)]
 
-# Parameters list
-pars_list = [("r", r), ("theta", theta)]
-parsA_list = [("r", r), ("theta", theta), ("aA", sol[aA]), ("bA", sol[bA])]
-parsB_list = [("r", r), ("theta", theta), ("aB", sol[aB]), ("bB", sol[bB])]
+# parameters list
+params_list = [("r", r), ("theta", theta)]
+paramsA_list = [("r", r), ("theta", theta), ("aA", sol[aA]), ("bA", sol[bA])]
+paramsB_list = [("r", r), ("theta", theta), ("aB", sol[aB]), ("bB", sol[bB])]
 
-# Functions list
-funcs_list = [("uA", uA, args_list, pars_list),("uB", uB, args_list, pars_list),
-                ("phiA", phiA, args_list, parsA_list), ("phiB", phiB, args_list, parsB_list),
-                ("fA", fA, args_list, parsA_list), ("fB", fB, args_list, parsB_list)]
+# functions list
+funcs_list = [("uA", uA, args_list, params_list),("uB", uB, args_list, params_list),
+                ("phiA", phiA, args_list, paramsA_list), ("phiB", phiB, args_list, paramsB_list),
+                ("fA", fA, args_list, paramsA_list), ("fB", fB, args_list, paramsB_list)]
 
-# ----------------------------------------
-# Generate code
-# ----------------------------------------
-
-# Generate implementations in C/C++
+# generate implementations in C/C++
 contents = ["// Auto-generated by generate_code.py", "#ifndef CHT_01_H",
             "#define CHT_01_H", "#include <cmath>"]
-contents.append(write_cpp_variables(vars_list))
-for (name, expr, args_list, pars_list) in funcs_list:
+contents.append(write_cpp_constants(consts_list))
+for (name, expr, args_list, params_list) in funcs_list:
     try:
-        code = write_cpp_function(name, expr, args_list, pars_list)
+        code = write_cpp_function(name, expr, args_list, params_list)
         contents.append(code)
     except Exception as e:
         print("C/C++ generation failed for", name, ":", e)
@@ -174,17 +170,17 @@ contents.append("#endif")
 contents = "\n\n".join(contents) + "\n"
 write_file(os.path.join(outdir, "cht_01.h"), contents)
 
-# Write test file in C/C++
+# write test file in C/C++
 contents = write_cpp_test("cht_01")
 write_file(os.path.join(outdir, "test.cpp"), contents)
 
-# Generate implementations in Fortran
+# generate implementations in Fortran
 contents = ["! Auto-generated by generate_code.py", "module cht_01", "implicit none"]
-contents.append(write_fortran_variables(vars_list))
+contents.append(write_fortran_constants(consts_list))
 contents.append("contains")
-for (name, expr, args_list, pars_list) in funcs_list:
+for (name, expr, args_list, params_list) in funcs_list:
     try:
-        code = write_fortran_function(name, expr, args_list, pars_list)
+        code = write_fortran_function(name, expr, args_list, params_list)
         contents.append(code)
     except Exception as e:
         print("Fortran generation failed for", name, ":", e)
@@ -192,40 +188,42 @@ contents.append("end module cht_01")
 contents = "\n\n".join(contents) + "\n"
 write_file(os.path.join(outdir, "cht_01.f90"), contents)
 
-# Write test file in Fortran
+# write test file in Fortran
 contents = write_fortran_test("cht_01")
 write_file(os.path.join(outdir, "test.f90"), contents)
 
-# Generate implementations in Octave/Matlab
+# generate implementations in Octave/Matlab
 contents = ["% Auto-generated by generate_code.py"]
-contents.append(write_octave_variables(vars_list))
-for (name, expr, args_list, pars_list) in funcs_list:
+contents.append(write_octave_constants(consts_list))
+for (name, expr, args_list, params_list) in funcs_list:
     try:
-        code = write_octave_function(name, expr, args_list, vars_list, pars_list)
+        code = write_octave_function(name, expr, args_list, consts_list, params_list)
         contents.append(code)
     except Exception as e:
         print("Octave/Matlab generation failed for", name, ":", e)
 contents = "\n\n".join(contents) + "\n"
 write_file(os.path.join(outdir, "cht_01.m"), contents)
 
-# Write test file in Octave/Matlab
+# write test file in Octave/Matlab
 contents = write_octave_test("cht_01")
 write_file(os.path.join(outdir, "test.m"), contents)
 
-# Generate implementations in Python
+# generate implementations in Python
 contents = ["# Auto-generated by generate_code.py", "import math"]
-contents.append(write_python_variables(vars_list))
-for (name, expr, args_list, pars_list) in funcs_list:
+contents.append(write_python_constants(consts_list))
+for (name, expr, args_list, params_list) in funcs_list:
     try:
-        code = write_python_function(name, expr, args_list, pars_list)
+        code = write_python_function(name, expr, args_list, params_list)
         contents.append(code)
     except Exception as e:
         print("Python generation failed for", name, ":", e)
 contents = "\n\n".join(contents) + "\n"
 write_file(os.path.join(outdir, "cht_01.py"), contents)
 
-# Write test file in Python
+# write test file in Python
 contents = write_python_test("cht_01")
 write_file(os.path.join(outdir, "test.py"), contents)
 
 print("\nGeneration complete. Files are in:", outdir)
+
+# end of file
