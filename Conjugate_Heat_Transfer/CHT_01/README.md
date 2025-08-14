@@ -27,7 +27,7 @@ An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the
   </table>
 </div>
 
-Structured quadrilateral and unstructured triangular meshes with matching nodes on the interface are provided to discretise both subdomains.
+Structured quadrilateral and unstructured triangular meshes with matching nodes on the interface are provided to discretise both subdomains. A local mesh refinement to accommodate the different boundary/interface curvatures is considered.
 
 ## 3. Model problem
 
