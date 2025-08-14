@@ -119,7 +119,7 @@ c=\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{B}}}{r^{\textrm{AB}}}\righ
 \end{array}
 $$
 
-The **source term**, in polar coordinates $\left(r,\theta\right)$, reads
+The **source-terms**, in polar coordinates $\left(r,\theta\right)$, read
 
 $$
 \begin{array}{ll}
