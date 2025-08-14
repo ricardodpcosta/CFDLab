@@ -14,10 +14,17 @@ It is particularly suitable for solvers that support **multi-material conduction
 The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively, centered at the origin and with radius $r_{\textrm{A}}$ and $r_{\textrm{B}}$, respectively.
 An interface, $\Gamma^{\textrm{AB}}$, with radius $r_{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions.
 
-<p align="center">
-  <img src="images/domain.png" alt="Domain" width="50%">
-</p>
- 
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="images/domain.png" width="500px"></td>
+    </tr>
+    <tr>
+      <td align="center">Domain and notation..</td>
+    </tr>
+  </table>
+</div>
+
 ## 3. Properties
 
 Constant thermal conductivities, $\kappa^{\textrm{A}}$ and $\kappa^{\textrm{B}}$, are considered in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
@@ -37,18 +44,17 @@ $$
 
 where $n^{\textrm{A}},n^{\textrm{B}}\in\mathbb{R}$ are parameters to choose and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are parameters to determine.
 
-<div style="display:flex; justify-content:center; align-items:flex-start; gap:20px; flex-wrap:wrap; text-align:center;">
-
-  <div style="flex:1 1 300px;">
-    <img src="images/solution1.png" style="width:45%; height:auto; display:block; margin:0 auto;">
-    <div style="margin-top:8px;">Curved mesh element.</div>
-  </div>
-
-  <div style="flex:1 1 300px;">
-    <img src="images/solution2.png" style="width:45%; height:auto; display:block; margin:0 auto;">
-    <div style="margin-top:8px;">Linear piecewise mesh element.</div>
-  </div>
-
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="images/solution1.png" width="500px"></td>
+      <td align="center"><img src="images/solution2.png" width="500px"></td>
+    </tr>
+    <tr>
+      <td align="center">Manufactured solution in the low-diffusive ratio case.</td>
+      <td align="center">Manufactured solution in the high-diffusive ratio case.</td>
+    </tr>
+  </table>
 </div>
 
 ### Boundary and interface conditions
