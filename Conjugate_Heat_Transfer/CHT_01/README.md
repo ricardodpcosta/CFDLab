@@ -9,10 +9,10 @@ This benchmark represents a **steady-state conjugate heat transfer** problem in 
 
 It is particularly suitable for solvers that support **multi-material conduction** with optional tangential advection.
 
-## 2. Domain and notation
+## 2. Domain and meshes
 
 The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively.
-An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions.
+An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions, respectively.
 
 <div align="center">
   <table>
@@ -27,9 +27,11 @@ An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the
   </table>
 </div>
 
+Structured quadrilateral and unstructured triangular meshes with matching nodes on the interface are provided to discretise both subdomains.
+
 ## 3. Model problem
 
-The **steady-state conjugate heat transfer problem** reads: seek temperature distributions $\phi^{\textrm{A}}$ and $\phi^{\textrm{B}}$ such that
+The **steady-state conjugate heat transfer problem** reads: seek temperature distribution functions $\phi^{\textrm{A}}$ and $\phi^{\textrm{B}}$ such that
 
 $$
 \begin{array}{l}
@@ -38,13 +40,9 @@ $$
 \end{array}
 $$
 
-where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are the thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are the velocity fields, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are the source-terms in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
+where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are constant thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are velocity field functions, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are source-term functions in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
 
-## 4. Material properties
-
-The **thermal diffusivities** are constant.
-
-The **velocity fields** are tangential to the boundaries and interface and, in polar coordinates $\left(r,\theta\right)$, read
+The **velocity fields** are chosen to be tangential to the boundaries and interface and, in polar coordinates $\left(r,\theta\right)$, read
 
 $$
 \begin{array}{ll}
@@ -65,7 +63,7 @@ $$
 
 where $\omega^{\textrm{A}},\omega^{\textrm{B}}\in\mathbb{R}$ are chosen constant parameters that control the angular velocity magnitude.
 
-## 5. Manufactured solution
+## 4. Manufactured solution
 
 The **manufactured solutions**, in polar coordinates $\left(r,\theta\right)$, read
 
@@ -130,9 +128,7 @@ $$
 \end{array}
 $$
 
-> **Note:** the analytical functions can be easily transformed from polar to Cartesian coordinates with $r^{2}=x^{2}+y^{2}$ and $\theta=\arctan\left(y/x\right)$.
-
-## 6. Case parameters
+## 5. Case parameters
 
 The table below summarises the configurable parameters and the recommended values for two case configurations: a low-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=2$) and a high-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=100$).
 
@@ -148,21 +144,20 @@ The table below summarises the configurable parameters and the recommended value
 | $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$        | 1.0                           | 1.0                            |
 | $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain, $\Omega^{\textrm{B}}$        | -1.0                          | -1.0                           |
 
-## 7. Files and scripts
+## 6. Scripts and files
 
-The table below summarises the functionality and usage of the provided scripts. Check script headers for further information.
+The table below summarises the functionality and usage of the provided scripts. Check script headers for requirements and dependencies.
 
-| File                    | Description                                                                     | Usage                         |
-|:------------------------|:--------------------------------------------------------------------------------|:------------------------------|
-| `generate_code.py`      | Generates code for the symbolic expressions in multiple target languages.       | python generate_code.py       |
-| `generate_mesh.msh`     | Generates a mesh with configurable parameters in MSH format.                    | gmsh generate_meshes.msh      |
-| `convert_meshes.sh`     | Converts meshes in MSH format to OpenFOAM format.                               | bash convert_meshes.sh        |
+| File                        | Description                                                                     | Usage (command-line)          |
+|:----------------------------|:--------------------------------------------------------------------------------|:------------------------------|
+| `generate_quadmesh.msh` | Generates quadrilateral structured meshes in MSH format. Mesh refinement can be controlled through the command-line option `-setnumber N <value>` where `<value>` is a numerical argument specifying the desired refinement level (default: `1`). Outputs are saved in `meshes/`. | `gmsh -setnumber N 1 generate_quadmesh.msh` |
+| `generate_triamesh.msh` | Generates triangular unstructured meshes in MSH format. Mesh refinement can be controlled through the command-line option `-setnumber N <value>` where `<value>` is a numerical argument specifying the desired refinement level (default: `1`). Outputs are saved in `meshes/`. | `gmsh -setnumber N 1 generate_triamesh.msh` |
+| `generate_code.py` | Generates code for the symbolic expressions of parameters and functions in multiple programming languages: C/C++, Fortran, Octave/Matlab, and Python. Outputs are saved in `codes/`. | `python generate_code.py` |
+| `helpers.py` | Utility functions for code generation in multiple programming languages: C/C++, Fortran, Octave/Matlab, and Python. Includes code formatting and line-wrapping helpers to keep generated source code within a configurable indent and line width. | |
+    
+## 7. How to cite
 
-For convenience, the solution parameters are calculated inside the generated functions for the manufactured solutions and source terms.
-
-## 8. How to cite
-
-If you use this benchmark in your research, please acknowledge the original work in your publications by citing:
+If you use this benchmark or any of the provided material, in its original or modified form, in your research, please acknowledge the original work in your publications by citing:
 
 > **R. Costa**, J.M. Nóbrega, S. Clain, and G.J. Machado, _Very high-order accurate polygonal mesh finite volume scheme for conjugate heat transfer problems with curved interfaces and imperfect contacts_, **Computer Methods in Applied Mechanics and Engineering**, Vol. 357, 112560, 2019. DOI: [10.1016/j.cma.2019.07.029](https://doi.org/10.1016/j.cma.2019.07.029).
 
@@ -178,5 +173,3 @@ You may use the following BibTeX entry:
   year={2019},
   doi={10.1016/j.cma.2019.07.029}
 }
-
-
