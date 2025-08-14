@@ -17,7 +17,7 @@ An interface, $\Gamma^{\textrm{AB}}$, with radius $r_{\textrm{AB}}$, divides the
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="images/domain.png" width="500px"></td>
+      <td align="center"><img src="images/domain.png" width="400px"></td>
     </tr>
     <tr>
       <td align="center">Domain and notation..</td>
