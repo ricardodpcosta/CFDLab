@@ -69,12 +69,12 @@ The **manufactured solutions**, in polar coordinates $\left(r,\theta\right)$, re
 
 $$
 \begin{array}{l}
-&\phi^{\textrm{A}}\left(r,\theta\right)=\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right)\cos\left(n^{\textrm{A}}\theta\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&\phi^{\textrm{B}}\left(r,\theta\right)=\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right)\cos\left(n^{\textrm{B}}\theta\right),&\quad\textrm{in }\Omega^{\textrm{B}},
+&\phi^{\textrm{A}}\left(r,\theta\right)=\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right)\cos\left(n\theta\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
+&\phi^{\textrm{B}}\left(r,\theta\right)=\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right)\cos\left(n\theta\right),&\quad\textrm{in }\Omega^{\textrm{B}},
 \end{array}
 $$
 
-where $n^{\textrm{A}},n^{\textrm{B}}\in\mathbb{R}$ are chosen constant parameters that control the solution mode number, and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are determined constant parameters to enforce boundary and interface conditions.
+where $n\in\mathbb{R}$ is a chosen constant parameter that control the solution mode number, and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are determined constant parameters to enforce boundary and interface conditions.
 
 <div align="center">
   <table>
@@ -139,10 +139,9 @@ The table below summarises the configurable parameters and the recommended value
 | $r^{\textrm{B}}$          | Radius of inner boundary, $\Gamma^{\textrm{B}}$                   | 0.5                           | 0.5                            |
 | $\alpha^{\textrm{A}}$     | Thermal diffusivity in outer subdomain, $\Omega^{\textrm{A}}$     | 2.0                           | 100.0                          |
 | $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain, $\Omega^{\textrm{B}}$     | 1.0                           | 1.0                            |
-| $n^{\textrm{A}}$          | Solution mode number in outer subdomain, $\Omega^{\textrm{A}}$    | 4                             | 4                              |
-| $n^{\textrm{B}}$          | Solution mode number in inner subdomain, $\Omega^{\textrm{B}}$    | 4                             | 4                              |
 | $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$        | 1.0                           | 1.0                            |
 | $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain, $\Omega^{\textrm{B}}$        | -1.0                          | -1.0                           |
+| $n$                       | Solution mode number                                              | 4                             | 4                              |
 
 ## 6. Scripts and files
 
