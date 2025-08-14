@@ -148,21 +148,20 @@ The table below summarises the configurable parameters and the recommended value
 | $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$        | 1.0                           | 1.0                            |
 | $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain, $\Omega^{\textrm{B}}$        | -1.0                          | -1.0                           |
 
-## 7. Files and scripts
+## 7. Scripts and files
 
-The table below summarises the functionality and usage of the provided scripts. Check script headers for further information.
+The table below summarises the functionality and usage of the provided scripts. Check script headers for requirements and dependencies.
 
-| File                    | Description                                                                     | Usage                         |
-|:------------------------|:--------------------------------------------------------------------------------|:------------------------------|
-| `generate_code.py`      | Generates code for the symbolic expressions in multiple target languages.       | python generate_code.py       |
-| `generate_mesh.msh`     | Generates a mesh with configurable parameters in MSH format.                    | gmsh generate_meshes.msh      |
-| `convert_meshes.sh`     | Converts meshes in MSH format to OpenFOAM format.                               | bash convert_meshes.sh        |
-
-For convenience, the solution parameters are calculated inside the generated functions for the manufactured solutions and source terms.
-
+| File                        | Description                                                                     | Usage (command-line)          |
+|:----------------------------|:--------------------------------------------------------------------------------|:------------------------------|
+| `generate_quadmesh.msh` | Generates quadrilateral structured meshes in MSH format. Mesh refinement can be controlled through the command-line option `-setnumber N <value>` where `<value>` is a numerical argument specifying the desired refinement level (default: `1`). Outputs are saved in `meshes/`. | `gmsh -setnumber N 1 generate_quadmesh.msh` |
+| `generate_triamesh.msh` | Generates triangular unstructured meshes in MSH format. Mesh refinement can be controlled through the command-line option `-setnumber N <value>` where `<value>` is a numerical argument specifying the desired refinement level (default: `1`). Outputs are saved in `meshes/`. | `gmsh -setnumber N 1 generate_triamesh.msh` |
+| `generate_code.py` | Generates code for the symbolic expressions in multiple programming languages: C/C++, Fortran, Octave/Matlab, and Python. Outputs are saved in `codes/`. | `python generate_code.py` |
+| `helpers.py` | Utility functions for code generation in multiple programming languages: C/C++, Fortran, Octave/Matlab, and Python. Includes code formatting and line-wrapping helpers to keep generated source code within a configurable indent and line width. | |
+    
 ## 8. How to cite
 
-If you use this benchmark in your research, please acknowledge the original work in your publications by citing:
+If you use this benchmark or any of the provided material, in its original or modified form, in your research, please acknowledge the original work in your publications by citing:
 
 > **R. Costa**, J.M. Nóbrega, S. Clain, and G.J. Machado, _Very high-order accurate polygonal mesh finite volume scheme for conjugate heat transfer problems with curved interfaces and imperfect contacts_, **Computer Methods in Applied Mechanics and Engineering**, Vol. 357, 112560, 2019. DOI: [10.1016/j.cma.2019.07.029](https://doi.org/10.1016/j.cma.2019.07.029).
 
@@ -178,5 +177,3 @@ You may use the following BibTeX entry:
   year={2019},
   doi={10.1016/j.cma.2019.07.029}
 }
-
-
