@@ -37,47 +37,18 @@ $$
 
 where $n^{\textrm{A}},n^{\textrm{B}}\in\mathbb{R}$ are parameters to choose and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are parameters to determine.
 
-<p style="margin-bottom:1cm;"></p>
+<div style="display:flex; justify-content:center; align-items:flex-start; gap:20px; flex-wrap:wrap; text-align:center;">
 
-<style>
-
-  * {
-  box-sizing: border-box;
-}
-
-.column {
-  float: left;
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-  
-</style>
-
-<div class="row">
-  <div class="column" style="width:50%; text-align:center;">
-    <img style="width:60%; display:block; margin-left:auto; margin-right:auto;" src="{{ 'images/solution1.png' | relative_url }}">
+  <div style="flex:1 1 300px;">
+    <img src="images/solution1.png" style="width:45%; height:auto; display:block; margin:0 auto;">
+    <div style="margin-top:8px;">Curved mesh element.</div>
   </div>
-  <div class="column" style="width:50%; text-align:center;">
-    <img style="width:60%; display:block; margin-left:auto; margin-right:auto;" src="{{ 'images/solution2.png' | relative_url }}">
+
+  <div style="flex:1 1 300px;">
+    <img src="images/solution2.png" style="width:45%; height:auto; display:block; margin:0 auto;">
+    <div style="margin-top:8px;">Linear piecewise mesh element.</div>
   </div>
-</div>
-<div class="row">
-  <div class="column" style="width:50%; text-align:center;">
-    Curved mesh element.
-  </div>
-  <div class="column" style="width:50%; text-align:center;">
-    Linear piecewise mesh element.
-  </div>
+
 </div>
 
 ### Boundary and interface conditions
