@@ -38,7 +38,7 @@ $$
 \end{array}
 $$
 
-where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are constant thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are velocity field functions, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are source-term functions in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
+  where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are constant thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are velocity field functions, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are source-term functions in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
 
 The **velocity fields** are chosen to be purely rotational, such that no mass transfer occurs through the boundaries and interface, and, in polar coordinates $\left(r,\theta\right)$, read
 
