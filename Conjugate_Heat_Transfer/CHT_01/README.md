@@ -96,7 +96,7 @@ $$
 \end{array}
 $$
 
-which are obtained after substituting the manufactured solutions into the governing equation.
+which are obtained after substituting the manufactured solutions into the governing equations.
 
 The **boundary conditions** correspond to the **periodic solution** on the outer boundary and the **homogeneous solution** on the inner boundary, that is
 
