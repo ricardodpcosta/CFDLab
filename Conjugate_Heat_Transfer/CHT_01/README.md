@@ -156,7 +156,7 @@ The table below summarises the functionality and usage of the supplied scripts. 
     
 ## 7. How to cite
 
-If you use this benchmark or any of the supplied material, in its original or modified form, in your research, please acknowledge the original work in your publications by citing:
+If you have used any test case or supplied material from this repository — in its original or modified form — in your research, please acknowledge the original work when publishing your results:
 
 > **R. Costa**, J.M. Nóbrega, S. Clain, and G.J. Machado, _Very high-order accurate polygonal mesh finite volume scheme for conjugate heat transfer problems with curved interfaces and imperfect contacts_, **Computer Methods in Applied Mechanics and Engineering**, Vol. 357, 112560, 2019. DOI: [10.1016/j.cma.2019.07.029](https://doi.org/10.1016/j.cma.2019.07.029).
 
@@ -172,3 +172,4 @@ For that, you may use the following BibTeX entry:
   year={2019},
   doi={10.1016/j.cma.2019.07.029}
 }
+```
