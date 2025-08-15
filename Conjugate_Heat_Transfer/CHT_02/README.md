@@ -122,11 +122,13 @@ $$
 Parameters $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ in the analytical solutions are determined such that boundary and interface conditions are simultaneously satisfied, and read
 
 $$
-a^{\textrm{A}}=c\alpha^{\textrm{B}},\qquad
-a^{\textrm{B}}=c\alpha^{\textrm{A}},\qquad
-b^{\textrm{A}}=c\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)-\alpha^{\textrm{B}}\ln\left(r^{\textrm{AB}}\right)\right),\qquad
-b^{\textrm{B}}=-c\alpha^{\textrm{A}}\ln\left(r^{\textrm{B}}\right),\qquad
-c=\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)+\alpha^{\textrm{B}}\ln\left(\dfrac{r^{\textrm{A}}}{r^{\textrm{AB}}}\right)\right)^{-1}.
+a^{\textrm{A}}=c\alpha^{\textrm{B}}hr^{\textrm{AB}},\qquad
+a^{\textrm{B}}=c\alpha^{\textrm{A}}hr^{\textrm{AB}},\qquad
+b^{\textrm{A}}=c\left(\alpha^{\textrm{A}}\alpha^{\textrm{B}}+\alpha^{\textrm{A}}hr^{\textrm{AB}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)-\alpha^{\textrm{B}}hr^{\textrm{AB}}\ln\left(r^{\textrm{AB}}\right)\right),\qquad
+b^{\textrm{B}}=-c\alpha^{\textrm{A}}hr^{\textrm{AB}}\ln\left(r^{\textrm{B}}\right),
+$$
+$$
+c=\left(\alpha^{\textrm{A}}\alpha^{\textrm{B}}+\alpha^{\textrm{A}}hr^{\textrm{AB}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)+\alpha^{\textrm{B}}hr^{\textrm{AB}}\ln\left(\dfrac{r^{\textrm{A}}}{r^{\textrm{AB}}}\right)\right)^{-1}.
 $$
 
 ## 5. Case parameters
