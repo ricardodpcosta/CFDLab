@@ -1,14 +1,14 @@
 # CFD-BenchLab
 
-**A curated collection of benchmarking test cases with analytical solutions for the design, testing, comparison, and verification of numerical schemes.**
+___A curated collection of benchmarking test cases with analytical solutions for the design, testing, and verification of numerical codes.___
 
 ---
 
 ## Overview
 
-CFD-BenchLab is a repository dedicated to providing rigorous test cases for verification and benchmarking of numerical schemes in computational fluid dynamics (CFD). Each case includes analytical solutions, source terms, boundary conditions, and meshes. Scripts and tools are also provided when necessary to facilitate the reproducibility of results and the manipulation of the test cases.
+CFD-BenchLab is a repository dedicated to providing rigorous, well-documented test cases for verification and benchmarking of numerical schemes in computational fluid dynamics (CFD). Each case includes analytical solutions, source terms, boundary conditions, and meshes. Scripts and tools are also supplied to facilitate the reproducibility and the manipulation of the test cases.
 
-This open laboratory aims to be a valuable resource for researchers, engineers, and students developing, testing, and comparing numerical schemes for fluid flow simulations.
+_This open laboratory aims to be a valuable resource for researchers, engineers, and students developing, testing, and verifying numerical codes for heat transfer and fluid flow simulations._
 
 ---
 
@@ -18,7 +18,7 @@ This open laboratory aims to be a valuable resource for researchers, engineers, 
 - Enable quantitative verification through convergence and stability analysis.
 - Provide an organised environment for comparative testing and benchmarking.
 - Promote reproducibility and transparency in numerical schemes design.
-- Offer educational material for teaching and training in numerical methods.
+- Support education and training in numerical methods for fluid flow and heat transfer.
 
 ---
 
@@ -27,17 +27,18 @@ This open laboratory aims to be a valuable resource for researchers, engineers, 
 ```
 CFD-BenchLab/
 │
-├── category/
-│ ├── case/
-│ │ ├── codes/
-│ │ ├── meshes/ 
-│ │ ├── scripts/
-│ │ └── README.md
+├── category/           # Model categories (e.g., conjugate heat transfer, incompressible flows, etc.)
+│ ├── case/             # Specific benchmark case
+│ │ ├── codes/          # Generated code in multiple programming languages
+│ │ ├── meshes/         # Pre-generated meshes for the case
+│ │ ├── scripts/        # Utilities for mesh generation, code generation, etc.
+│ │ └── README.md       # Case description
 │ └── ...
 │
 ├── LICENSE.md
 ├── CONTRIBUTING.md
 └── README.md
+
 ```
 
 ---
@@ -54,7 +55,8 @@ CFD-BenchLab/
 
 ## Contribution
 
-Contributions are warmly welcome! If you would like to add new test cases, improve scripts, or fix issues, please see the `CONTRIBUTING.md` file for instructions on how to get involved.
+Contributions are warmly welcome! Whether by adding new benchmark cases, improving scripts, enhancing documentation, or fixing issues.
+Please refer to the CONTRIBUTING.md file for detailed guidelines on how to get involved.
 
 ---
 
@@ -66,11 +68,11 @@ This project is licensed under the MIT License — see the `LICENSE.md` file for
 
 ## Contact
 
-[Ricardo Costa](mailto:rcosta\@dep.uminho.pt)  
-[https://ricardodpcosta.github.io/](https://ricardodpcosta.github.io/)  
+📧 [Ricardo Costa](mailto:rcosta\@dep.uminho.pt)  
+🌐 [https://ricardodpcosta.github.io/](https://ricardodpcosta.github.io/)  
 
 ---
 
-Thank you for visiting CFD-BenchLab!  
-We hope this repository helps advance the state-of-the-art in numerical schemes design for CFD.
+## Acknowledgement
 
+We thank all contributors and users who help improve and expand CFD-TestSuite. Your feedback and participation are essential to making this a valuable resource for the CFD community.
