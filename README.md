@@ -14,11 +14,11 @@ _This open laboratory aims to be a valuable resource for researchers, engineers,
 
 ## Objectives
 
-- Collect benchmarking cases with known or manufactured analytical solutions.
-- Enable quantitative verification through convergence and stability analysis.
-- Provide an organised environment for comparative testing and benchmarking.
-- Promote reproducibility and transparency in numerical schemes design.
-- Support education and training in numerical methods for fluid flow and heat transfer.
+- **Collect** benchmarking cases with known or manufactured analytical solutions.
+- **Enable** quantitative verification through convergence and stability analysis.
+- **Provide** an organised framework for comparative testing and benchmarking.
+- **Promote** reproducibility and transparency in numerical schemes design.
+- **Support** education and training in numerical methods for fluid flow and heat transfer.
 
 ---
 
