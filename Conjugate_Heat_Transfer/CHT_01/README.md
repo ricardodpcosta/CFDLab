@@ -9,8 +9,8 @@ This benchmark represents a **steady-state two-dimensional conjugate heat transf
 
 ## 2. Domain and meshes
 
-The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively.
-An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions, respectively.
+The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively.
+An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions.
 
 <div align="center">
   <table>
@@ -25,7 +25,7 @@ An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the
   </table>
 </div>
 
-**Structured quadrilateral** and **unstructured triangular meshes** with matching nodes on the interface are provided to discretise both subdomains. A smooth variation of the local mesh characteristic size is implemented to accurately resolve the increasing curvature of boundaries/interface toward the domain centre.
+**Structured quadrilateral** and **unstructured triangular meshes** with matching nodes on the interface are supplied to discretise both subdomains. A smooth variation of the local mesh characteristic size is implemented to accurately resolve the increasing curvature of the boundaries/interface toward the domain centre.
 
 ## 3. Model problem
 
@@ -38,9 +38,37 @@ $$
 \end{array}
 $$
 
-  where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are constant thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are velocity field functions, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are source-term functions in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
+where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are given constant thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are given velocity field functions, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are source-term functions in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
 
-The **velocity fields** are chosen to be purely rotational, such that no mass transfer occurs through the boundaries and interface, and, in polar coordinates $\left(r,\theta\right)$, read
+## 4. Manufactured solution
+
+> For conciseness and readability, all functions are written in polar coordinates $\left(r,\theta\right)$, but the provided codes generated from the symbolic expressions are implemented in Cartesian coordinates for direct use in numerical solvers.
+
+The **manufactured solutions** read
+
+$$
+\begin{array}{l}
+&\phi^{\textrm{A}}\left(r,\theta\right)=\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right)\cos\left(n\theta\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
+&\phi^{\textrm{B}}\left(r,\theta\right)=\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right)\cos\left(n\theta\right),&\quad\textrm{in }\Omega^{\textrm{B}},
+\end{array}
+$$
+
+where $n$ is a given constant parameter to control the solutions mode number (angular complexity), and $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ are constant parameters to enforce boundary and interface conditions.
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="images/solution1.png" width="400px"></td>
+      <td align="center"><img src="images/solution2.png" width="400px"></td>
+    </tr>
+    <tr>
+      <td align="center">Manufactured solution in the low-diffusivity ratio case.</td>
+      <td align="center">Manufactured solution in the high-diffusivity ratio case.</td>
+    </tr>
+  </table>
+</div>
+
+The **velocity fields** are purely rotational, such that no mass transfer occurs through the boundaries and interface, and read
 
 $$
 \begin{array}{ll}
@@ -59,35 +87,9 @@ $$
 \end{array}
 $$
 
-where $\omega^{\textrm{A}},\omega^{\textrm{B}}\in\mathbb{R}$ are given constant parameters to control the angular velocity.
+where $\omega^{\textrm{A}}$ and $\omega^{\textrm{B}}$ are given constant parameters to control the angular velocity.
 
-## 4. Manufactured solution
-
-The **manufactured solutions**, in polar coordinates $\left(r,\theta\right)$, read
-
-$$
-\begin{array}{l}
-&\phi^{\textrm{A}}\left(r,\theta\right)=\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right)\cos\left(n\theta\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&\phi^{\textrm{B}}\left(r,\theta\right)=\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right)\cos\left(n\theta\right),&\quad\textrm{in }\Omega^{\textrm{B}},
-\end{array}
-$$
-
-where $n\in\mathbb{R}$ is a given constant parameter to control the solutions mode number (angular complexity), and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are constant parameters to enforce boundary and interface conditions.
-
-<div align="center">
-  <table>
-    <tr>
-      <td align="center"><img src="images/solution1.png" width="400px"></td>
-      <td align="center"><img src="images/solution2.png" width="400px"></td>
-    </tr>
-    <tr>
-      <td align="center">Manufactured solution in the low-diffusivity ratio case.</td>
-      <td align="center">Manufactured solution in the high-diffusivity ratio case.</td>
-    </tr>
-  </table>
-</div>
-
-The **source-terms**, in polar coordinates $\left(r,\theta\right)$, read
+The **source-terms** read
 
 $$
 \begin{array}{ll}
@@ -96,7 +98,7 @@ $$
 \end{array}
 $$
 
-which are obtained after substituting the manufactured solutions into the governing equations.
+which are obtained after substituting the manufactured solutions into the governing equations in polar coordinates.
 
 The **boundary conditions** correspond to the **periodic solution** on the outer boundary and the **homogeneous solution** on the inner boundary, that is
 
@@ -116,21 +118,19 @@ $$
 \end{array}
 $$
 
-Parameters $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ in the analytical solution are determined such that boundary and interface conditions are simultaneously satisfied, and read
+Parameters $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ in the analytical solutions are determined such that boundary and interface conditions are simultaneously satisfied, and read
 
 $$
-\begin{array}{l}
-a^{\textrm{A}}=c\alpha^{\textrm{B}},\\
-a^{\textrm{B}}=c\alpha^{\textrm{A}},\\
-b^{\textrm{A}}=c\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)-\alpha^{\textrm{B}}\ln\left(r^{\textrm{AB}}\right)\right),\\
-b^{\textrm{B}}=-c\alpha^{\textrm{A}}\ln\left(r^{\textrm{B}}\right),\\
+a^{\textrm{A}}=c\alpha^{\textrm{B}},\qquad
+a^{\textrm{B}}=c\alpha^{\textrm{A}},\qquad
+b^{\textrm{A}}=c\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)-\alpha^{\textrm{B}}\ln\left(r^{\textrm{AB}}\right)\right),\qquad
+b^{\textrm{B}}=-c\alpha^{\textrm{A}}\ln\left(r^{\textrm{B}}\right),\qquad
 c=\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)+\alpha^{\textrm{B}}\ln\left(\dfrac{r^{\textrm{A}}}{r^{\textrm{AB}}}\right)\right)^{-1}.
-\end{array}
 $$
 
 ## 5. Case parameters
 
-The table below summarises the configurable parameters and the recommended values for two case configurations: a low-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=2$) and a high-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=100$).
+The table below summarises the given constant parameters and the recommended values for two case configurations: a low-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=2$) and a high-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=100$).
 
 | Symbol                    | Description                                                       | Value (low-diffusivity ratio) | Value (high-diffusivity ratio) | Units              |
 |:--------------------------|:------------------------------------------------------------------|------------------------------:|-------------------------------:|:-------------------|
