@@ -27,13 +27,12 @@ This open laboratory aims to be a valuable resource for researchers, engineers, 
 ```
 CFD-BenchLab/
 │
-├── category/ # Model category
-│ ├── case/ # Test case
-│ │ ├── analytical/ # Analytical formulas
-│ │ ├── scripts/ # Scripts and tools
-│ │ ├── meshes/ # Mesh files
-│ │ ├── docs/ # Relevant documentation
-│ │ └── README.md # Case description
+├── category/
+│ ├── case/
+│ │ ├── codes/
+│ │ ├── meshes/ 
+│ │ ├── scripts/
+│ │ └── README.md
 │ └── ...
 │
 ├── LICENSE.md
