@@ -59,7 +59,7 @@ $$
 \end{array}
 $$
 
-where $\omega^{\textrm{A}},\omega^{\textrm{B}}\in\mathbb{R}$ are given constant parameters to control the angular velocity magnitude.
+where $\omega^{\textrm{A}},\omega^{\textrm{B}}\in\mathbb{R}$ are given constant parameters to control the angular velocity.
 
 ## 4. Manufactured solution
 
