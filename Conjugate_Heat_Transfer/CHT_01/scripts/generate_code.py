@@ -38,8 +38,8 @@ from helpers import *
 #============================================
 
 # constant parameters
-rA, rAB, rB = sympy.symbols("rA rAB rB", positive=True)
-alphaA, alphaB = sympy.symbols("alphaA alphaB", positive=True)
+rA, rAB, rB = sympy.symbols("rA rAB rB", real=True)
+alphaA, alphaB = sympy.symbols("alphaA alphaB", real=True)
 wA, wB = sympy.symbols("wA wB", real=True)
 n = sympy.symbols("n", real=True)
 
@@ -47,8 +47,8 @@ n = sympy.symbols("n", real=True)
 aA, bA, aB, bB = sympy.symbols("aA bA aB bB", real=True)
 
 # coordinate system
-r, theta = sympy.symbols("r theta", real=True, positive=True)
-x, y = sympy.symbols("x y", real=True, positive=False)
+r, theta = sympy.symbols("r theta", real=True)
+x, y = sympy.symbols("x y", real=True)
 
 #============================================
 # MANUFACTURED SOLUTIONS
