@@ -2,12 +2,10 @@
 
 ## 1. Summary
 
-This benchmark represents a **steady-state two-dimensional conjugate heat transfer** problem in a concentric circular domain divided into two regions with different thermal conductivities. The case is based on a **manufactured analytical solution** in polar coordinates, enabling:
-- **Code verification** of conduction and convection numerical schemes.
+This benchmark represents a **steady-state two-dimensional conjugate heat transfer** problem in a concentric circular domain divided into two regions with different thermal diffusivities. It is particularly suitable for solvers that support **multi-material conduction** with optional rotational convection. The case is based on **manufactured analytical solutions** in polar coordinates, enabling:
+- **Code verification** of diffusion and convection numerical schemes.
 - **Numerical assessment** of interface treatments (solution continuity and flux conservation).
-- **Testing** of cylindrical structured and unstructured meshes generation.
-
-It is particularly suitable for solvers that support **multi-material conduction** with optional tangential advection.
+- **Convergence analysis** on structured and unstructured meshes.
 
 ## 2. Domain and meshes
 
@@ -100,7 +98,7 @@ $$
 
 which are obtained after substituting the manufactured solutions into the governing equation.
 
-The **boundary conditions** correspond to a periodic Dirichlet boundary condition on the outer boundary and an homogeneous Dirichlet boundary condition on the inner boundary, that is
+The **boundary conditions** correspond to the **periodic solution** on the outer boundary and the **homogeneous solution** on the inner boundary, that is
 
 $$
 \begin{array}{l}
@@ -109,7 +107,7 @@ $$
 \end{array}
 $$
 
-The **interface conditions** correspond to the solution continuity and the conservation of conductive fluxes on the interface, that is
+The **interface conditions** correspond to the **solution continuity** and the **conservation of conductive fluxes** on the interface, that is
 
 $$
 \begin{array}{l}
@@ -134,16 +132,16 @@ $$
 
 The table below summarises the configurable parameters and the recommended values for two case configurations: a low-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=2$) and a high-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=100$).
 
-| Symbol                    | Description                                                       | Value (low-diffusivity ratio) | Value (high-diffusivity ratio) |
-|:--------------------------|:------------------------------------------------------------------|------------------------------:|-------------------------------:|
-| $r^{\textrm{A}}$          | Radius of outer boundary, $\Gamma^{\textrm{A}}$                   | 1.0                           | 1.0                            |
-| $r^{\textrm{AB}}$         | Radius of interface, $\Gamma^{\textrm{AB}}$                       | 0.75                          | 0.75                           |
-| $r^{\textrm{B}}$          | Radius of inner boundary, $\Gamma^{\textrm{B}}$                   | 0.5                           | 0.5                            |
-| $\alpha^{\textrm{A}}$     | Thermal diffusivity in outer subdomain, $\Omega^{\textrm{A}}$     | 2.0                           | 100.0                          |
-| $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain, $\Omega^{\textrm{B}}$     | 1.0                           | 1.0                            |
-| $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$        | 1.0                           | 1.0                            |
-| $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain, $\Omega^{\textrm{B}}$        | -1.0                          | -1.0                           |
-| $n$                       | Solution mode number                                              | 4                             | 4                              |
+| Symbol                    | Description                                                       | Value (low-diffusivity ratio) | Value (high-diffusivity ratio) | Units    |
+|:--------------------------|:------------------------------------------------------------------|------------------------------:|-------------------------------:|:---------:
+| $r^{\textrm{A}}$          | Radius of outer boundary, $\Gamma^{\textrm{A}}$                   | 1.0                           | 1.0                            | m        |
+| $r^{\textrm{AB}}$         | Radius of interface, $\Gamma^{\textrm{AB}}$                       | 0.75                          | 0.75                           | m        |
+| $r^{\textrm{B}}$          | Radius of inner boundary, $\Gamma^{\textrm{B}}$                   | 0.5                           | 0.5                            | m        |
+| $\alpha^{\textrm{A}}$     | Thermal diffusivity in outer subdomain, $\Omega^{\textrm{A}}$     | 2.0                           | 100.0                          | m^2/s    |
+| $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain, $\Omega^{\textrm{B}}$     | 1.0                           | 1.0                            | m^2/s    |
+| $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$        | 1.0                           | 1.0                            | rad/s    |
+| $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain, $\Omega^{\textrm{B}}$        | -1.0                          | -1.0                           | rad/s    |
+| $n$                       | Solution mode number                                              | 4                             | 4                              |          |
 
 ## 6. Scripts and files
 
