@@ -75,4 +75,6 @@ This project is licensed under the MIT License — see the `LICENSE.md` file for
 
 ## Acknowledgement
 
-We thank all contributors and users who help improve and expand CFD-TestSuite. Your feedback and participation are essential to making this a valuable resource for the CFD community.
+If you have used any test case or supplied material from this repository — in its original or modified form — in your research, please acknowledge the original work referenced in the case description when publishing your results. Your acknowledgement not only gives credit to the authors but also motivates us to continue improving and expanding this resource.
+
+Lastly, we thank all contributors and users who helped improve and expand CFD-TestSuite. Your feedback, suggestions, and participation are essential in making it a valuable resource for the CFD community.
