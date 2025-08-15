@@ -16,7 +16,7 @@ An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the
   <table>
     <tr>
       <td align="center"><img src="images/domain.png" width="300px"></td>
-      <td align="center"><img src="images/tria_mesh.png" width="300px"></td>
+      <td align="center"><img src="images/triamesh.png" width="300px"></td>
     </tr>
     <tr>
       <td align="center">Domain and notation.</td>
@@ -58,8 +58,8 @@ where $n$ is a given constant parameter to control the solutions mode number (an
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="images/solution1.png" width="400px"></td>
-      <td align="center"><img src="images/solution2.png" width="400px"></td>
+      <td align="center"><img src="images/solution_1.png" width="400px"></td>
+      <td align="center"><img src="images/solution_2.png" width="400px"></td>
     </tr>
     <tr>
       <td align="center">Manufactured solution in the low-diffusivity ratio case.</td>
