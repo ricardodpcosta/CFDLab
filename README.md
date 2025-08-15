@@ -62,7 +62,7 @@ Please refer to the CONTRIBUTING.md file for detailed guidelines on how to get i
 
 ## License
 
-This project is licensed under the MIT License — see the `LICENSE.md` file for details.
+This project is licensed under the MIT License with Author Credit and Citation Requirement — see the `LICENSE.md` file for details.
 
 ---
 
