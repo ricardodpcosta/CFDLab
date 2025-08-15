@@ -1,4 +1,4 @@
-# CFD-BenchLab
+# CFD-TestSuite
 
 ___A curated collection of benchmarking test cases with analytical solutions for the design, testing, and verification of numerical codes.___
 
