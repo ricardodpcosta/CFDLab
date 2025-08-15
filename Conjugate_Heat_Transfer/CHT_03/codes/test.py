@@ -1,7 +1,7 @@
 # Test file
 
-# Run with "python cht_01.py"
+# Run with "python cht_03.py"
 
-import cht_01
+import cht_03
 
 # Insert code

@@ -1,7 +1,7 @@
 % Test file
 
-% Run with "octave cht_01.m"
+% Run with "octave cht_03.m"
 
-cht_01
+cht_03
 
 % Insert code
