@@ -1,4 +1,4 @@
-# [CHT_01] Circular interface with the jump condition
+# [CHT_03] Circular interface with the jump condition
 
 ## 1. Summary
 
@@ -11,6 +11,7 @@ This benchmark represents a **steady-state two-dimensional conjugate heat transf
 
 The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively.
 An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions.
+Vector functions $\boldsymbol{n}^{\textrm{A}}$ and $\boldsymbol{n}^{\textrm{B}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively. On the interface, $\Gamma^{\textrm{AB}}$, vector function $\boldsymbol{n}^{\textrm{AB}}$ is the unit normal vector from subdomain $\Omega^{\textrm{A}}$ to $\Omega^{\textrm{B}}$.
 
 <div align="center">
   <table>
@@ -106,17 +107,17 @@ The **boundary conditions** correspond to the **periodic solution** on the outer
 
 $$
 \begin{array}{l}
-&\phi^{\textrm{A}}\left(r,\theta\right)=\cos\left(n^{\textrm{A}}\theta\right),&\quad\textrm{on }\Gamma^{\textrm{A}},\\
-&\phi^{\textrm{B}}\left(r,\theta\right)=0,&\quad\textrm{on }\Gamma^{\textrm{B}}.
+&\phi^{\textrm{A}}=\cos\left(n\theta\right),&\quad\textrm{on }\Gamma^{\textrm{A}},\\
+&\phi^{\textrm{B}}=0,&\quad\textrm{on }\Gamma^{\textrm{B}}.
 \end{array}
 $$
 
-The **interface conditions** correspond to the **solution continuity** and the **conservation of conductive fluxes** on the interface, that is
+The **interface conditions** correspond to the **solution jump** and the **conservation of diffusive fluxes** on the interface, that is
 
 $$
 \begin{array}{l}
-&\phi^{\textrm{A}}\left(r,\theta\right)=\phi^{\textrm{B}}\left(r,\theta\right),&\quad\textrm{on }\Gamma^{\textrm{AB}},\\
-&-\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\left(r,\theta\right)\cdot\boldsymbol{n}^{\textrm{A}}\left(r,\theta\right)-\alpha^{\textrm{B}}\nabla\phi^{\textrm{B}}\left(r,\theta\right)\cdot\boldsymbol{n}^{\textrm{B}}\left(r,\theta\right)=0,&\quad\textrm{on }\Gamma^{\textrm{AB}}.
+&-\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\cdot\boldsymbol{n}^{\textrm{AB}}=h\left(\phi^{\textrm{A}}-\phi^{\textrm{B}}\right),&\quad\textrm{on }\Gamma^{\textrm{AB}},\\
+&-\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\cdot\boldsymbol{n}^{\textrm{AB}}=-\alpha^{\textrm{B}}\nabla\phi^{\textrm{B}}\cdot\boldsymbol{n}^{\textrm{AB}},&\quad\textrm{on }\Gamma^{\textrm{AB}}.
 \end{array}
 $$
 
@@ -158,11 +159,11 @@ The table below summarises the functionality and usage of the supplied scripts. 
     
 ## 7. How to cite
 
-If you use this benchmark or any of the supplied material, in its original or modified form, in your research, please acknowledge the original work in your publications by citing:
+If you have used this test case or supplied material — in its original or modified form — in your research, please acknowledge the original work when publishing your results:
 
 > **R. Costa**, J.M. Nóbrega, S. Clain, and G.J. Machado, _Very high-order accurate polygonal mesh finite volume scheme for conjugate heat transfer problems with curved interfaces and imperfect contacts_, **Computer Methods in Applied Mechanics and Engineering**, Vol. 357, 112560, 2019. DOI: [10.1016/j.cma.2019.07.029](https://doi.org/10.1016/j.cma.2019.07.029).
 
-For that, you may use the following BibTeX entry:
+For your convenience, you may use the following BibTeX entry:
 
 ```bibtex
 @article{Costa2019,
@@ -174,3 +175,4 @@ For that, you may use the following BibTeX entry:
   year={2019},
   doi={10.1016/j.cma.2019.07.029}
 }
+```
