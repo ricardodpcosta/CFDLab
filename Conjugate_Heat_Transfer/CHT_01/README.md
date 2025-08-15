@@ -1,8 +1,8 @@
-# [CHT_01] Circular interface with continuity interface conditions
+# [CHT_01] Circular interface with the continuity condition
 
 ## 1. Summary
 
-This benchmark represents a **steady-state conjugate heat transfer** problem in a concentric circular domain divided into two regions with different thermal conductivities. The case is based on a **manufactured analytical solution** in polar coordinates, enabling:
+This benchmark represents a **steady-state two-dimensional conjugate heat transfer** problem in a concentric circular domain divided into two regions with different thermal conductivities. The case is based on a **manufactured analytical solution** in polar coordinates, enabling:
 - **Code verification** of conduction and convection numerical schemes.
 - **Numerical assessment** of interface treatments (solution continuity and flux conservation).
 - **Testing** of cylindrical structured and unstructured meshes generation.
@@ -27,7 +27,7 @@ An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the
   </table>
 </div>
 
-Structured quadrilateral and unstructured triangular meshes with matching nodes on the interface are provided to discretise both subdomains. A local mesh refinement to accommodate the different boundary/interface curvatures is considered.
+**Structured quadrilateral** and **unstructured triangular meshes** with matching nodes on the interface are provided to discretise both subdomains. A smooth variation of the local mesh characteristic size is implemented to accurately resolve the increasing curvature of boundaries/interface toward the domain centre.
 
 ## 3. Model problem
 
@@ -42,7 +42,7 @@ $$
 
 where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are constant thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are velocity field functions, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are source-term functions in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
 
-The **velocity fields** are chosen to be tangential to the boundaries and interface and, in polar coordinates $\left(r,\theta\right)$, read
+The **velocity fields** are chosen to be purely rotational, such that no mass transfer occurs through the boundaries and interface, and, in polar coordinates $\left(r,\theta\right)$, read
 
 $$
 \begin{array}{ll}
@@ -61,7 +61,7 @@ $$
 \end{array}
 $$
 
-where $\omega^{\textrm{A}},\omega^{\textrm{B}}\in\mathbb{R}$ are chosen constant parameters that control the angular velocity magnitude.
+where $\omega^{\textrm{A}},\omega^{\textrm{B}}\in\mathbb{R}$ are given constant parameters to control the angular velocity magnitude.
 
 ## 4. Manufactured solution
 
@@ -74,7 +74,7 @@ $$
 \end{array}
 $$
 
-where $n\in\mathbb{R}$ is a chosen constant parameter that control the solution mode number, and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are determined constant parameters to enforce boundary and interface conditions.
+where $n\in\mathbb{R}$ is a given constant parameter to control the solutions mode number (angular complexity), and $a^{\textrm{A}},a^{\textrm{B}},b^{\textrm{A}},b^{\textrm{B}}\in\mathbb{R}$ are constant parameters to enforce boundary and interface conditions.
 
 <div align="center">
   <table>
@@ -89,7 +89,18 @@ where $n\in\mathbb{R}$ is a chosen constant parameter that control the solution 
   </table>
 </div>
 
-On the outer and inner boundaries, **periodic and homogeneous Dirichlet boundary conditions** are prescribed, respectively, and, in polar coordinates $\left(r,\theta\right)$, read
+The **source-terms**, in polar coordinates $\left(r,\theta\right)$, read
+
+$$
+\begin{array}{ll}
+&f^{\textrm{A}}\left(r,\theta\right)=\dfrac{n\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right)\left(\alpha^{\textrm{A}}n\cos\left(n\theta\right)-r^{2}\omega^{\textrm{A}}\sin\left(n\theta\right)\right)}{r^{2}}&\quad\textrm{in }\Omega^{\textrm{A}},\\
+&f^{\textrm{B}}\left(r,\theta\right)=\dfrac{n\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right)\left(\alpha^{\textrm{B}}n\cos\left(n\theta\right)-r^{2}\omega^{\textrm{B}}\sin\left(n\theta\right)\right)}{r^{2}}&\quad\textrm{in }\Omega^{\textrm{B}},\\
+\end{array}
+$$
+
+which are obtained after substituting the manufactured solutions into the governing equation.
+
+The **boundary conditions** correspond to a periodic Dirichlet boundary condition on the outer boundary and an homogeneous Dirichlet boundary condition on the inner boundary, that is
 
 $$
 \begin{array}{l}
@@ -98,7 +109,7 @@ $$
 \end{array}
 $$
 
-On the interface, the **solution continuity and the conservation of conductive fluxes** are prescribed, that is
+The **interface conditions** correspond to the solution continuity and the conservation of conductive fluxes on the interface, that is
 
 $$
 \begin{array}{l}
@@ -119,15 +130,6 @@ c=\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\righ
 \end{array}
 $$
 
-The **source-terms**, in polar coordinates $\left(r,\theta\right)$, read
-
-$$
-\begin{array}{ll}
-&f^{\textrm{A}}\left(r,\theta\right)=\dfrac{n\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right)\left(\alpha^{\textrm{A}}n\cos\left(n\theta\right)-r^{2}\omega^{\textrm{A}}\sin\left(n\theta\right)\right)}{r^{2}}&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&f^{\textrm{B}}\left(r,\theta\right)=\dfrac{n\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right)\left(\alpha^{\textrm{B}}n\cos\left(n\theta\right)-r^{2}\omega^{\textrm{B}}\sin\left(n\theta\right)\right)}{r^{2}}&\quad\textrm{in }\Omega^{\textrm{B}}.\\
-\end{array}
-$$
-
 ## 5. Case parameters
 
 The table below summarises the configurable parameters and the recommended values for two case configurations: a low-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=2$) and a high-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=100$).
@@ -145,7 +147,7 @@ The table below summarises the configurable parameters and the recommended value
 
 ## 6. Scripts and files
 
-The table below summarises the functionality and usage of the provided scripts. Check script headers for requirements and dependencies.
+The table below summarises the functionality and usage of the supplied scripts. Check script headers for requirements and dependencies.
 
 | File                        | Description                                                                     | Usage (command-line)          |
 |:----------------------------|:--------------------------------------------------------------------------------|:------------------------------|
@@ -156,11 +158,11 @@ The table below summarises the functionality and usage of the provided scripts. 
     
 ## 7. How to cite
 
-If you use this benchmark or any of the provided material, in its original or modified form, in your research, please acknowledge the original work in your publications by citing:
+If you use this benchmark or any of the supplied material, in its original or modified form, in your research, please acknowledge the original work in your publications by citing:
 
 > **R. Costa**, J.M. Nóbrega, S. Clain, and G.J. Machado, _Very high-order accurate polygonal mesh finite volume scheme for conjugate heat transfer problems with curved interfaces and imperfect contacts_, **Computer Methods in Applied Mechanics and Engineering**, Vol. 357, 112560, 2019. DOI: [10.1016/j.cma.2019.07.029](https://doi.org/10.1016/j.cma.2019.07.029).
 
-You may use the following BibTeX entry:
+For that, you may use the following BibTeX entry:
 
 ```bibtex
 @article{Costa2019,
