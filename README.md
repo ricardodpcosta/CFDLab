@@ -31,7 +31,7 @@ CFD-BenchLab/
 │ ├── case/             # Specific benchmark case
 │ │ ├── codes/          # Generated code in multiple programming languages
 │ │ ├── meshes/         # Pre-generated meshes for the case
-│ │ ├── scripts/        # Utilities for mesh generation, code generation, etc.
+│ │ ├── scripts/        # Utilities for code generation, mesh generation, etc.
 │ │ └── README.md       # Case description
 │ └── ...
 │
