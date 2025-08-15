@@ -41,6 +41,7 @@ from helpers import *
 rA, rAB, rB = sympy.symbols("rA rAB rB", positive=True)
 alphaA, alphaB = sympy.symbols("alphaA alphaB", positive=True)
 wA, wB = sympy.symbols("wA wB", real=True)
+h = sympy.symbols("h", real=True)
 n = sympy.symbols("n", real=True)
 
 # solution parameters
@@ -66,13 +67,13 @@ phiB = (aB*sympy.log(r) + bB)*sympy.cos(n*theta)
 eq1 = sympy.Eq(phiA.subs(r, rA), sympy.cos(n*theta))
 eq2 = sympy.Eq(phiB.subs(r, rB), 0)
 
-# solution continuity at interface
-eq3 = sympy.Eq(phiA.subs(r, rAB), phiB.subs(r, rAB))
+# solution jump at interface
+dphiA_dr = sympy.diff(phiA, r)
+eq3 = sympy.Eq(alphaA*dphiA_dr.subs(r, rAB),h*(phiA.subs(r, rAB)-phiB.subs(r, rAB)))
 
 # flux conservation at interface
-dphiA_dr = sympy.diff(phiA, r)
 dphiB_dr = sympy.diff(phiB, r)
-eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, rAB) + alphaB*dphiB_dr.subs(r, rAB),0)
+eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, rAB), -alphaB*dphiB_dr.subs(r, rAB))
 
 # solve for coefficients
 sol = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)
@@ -136,6 +137,7 @@ alphaA = 2.0
 alphaB = 1.0
 wA = 1.0
 wB = -1.0
+h = 1.0
 n = 4
 
 # arguments list
@@ -143,7 +145,7 @@ args_list = [("x", x), ("y", y)]
 
 # constants list
 consts_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("alphaA", alphaA), ("alphaB", alphaB),
-                ("wA", wA), ("wB", wB), ("n", n)]
+                ("wA", wA), ("wB", wB), ("h", h), ("n", n)]
 
 # parameters list
 params_list = [("r", r), ("theta", theta)]

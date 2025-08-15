@@ -72,7 +72,7 @@ eq3 = sympy.Eq(phiA.subs(r, rAB), phiB.subs(r, rAB))
 # flux conservation at interface
 dphiA_dr = sympy.diff(phiA, r)
 dphiB_dr = sympy.diff(phiB, r)
-eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, rAB) + alphaB*dphiB_dr.subs(r, rAB),0)
+eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, rAB), -alphaB*dphiB_dr.subs(r, rAB))
 
 # solve for coefficients
 sol = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)
