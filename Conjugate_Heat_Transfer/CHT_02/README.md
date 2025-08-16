@@ -37,7 +37,6 @@ T^{\textrm{AB}}\left(\theta\right)\\
 \dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}=-r^{\textrm{AB}}\beta_{1}\beta_{2}\sin\left(\beta_{2}\theta\right).
 $$
 
-
 <div align="center">
   <table>
     <tr>
@@ -74,8 +73,8 @@ The **manufactured solutions** read
 
 $$
 \begin{array}{l}
-&\phi^{\textrm{A}}\left(r,\theta\right)=\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right)\cos\left(n\theta\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&\phi^{\textrm{B}}\left(r,\theta\right)=\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right)\cos\left(n\theta\right),&\quad\textrm{in }\Omega^{\textrm{B}},
+&\phi^{\textrm{A}}\left(r,\theta\right)=\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
+&\phi^{\textrm{B}}\left(r,\theta\right)=\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right),&\quad\textrm{in }\Omega^{\textrm{B}},
 \end{array}
 $$
 
