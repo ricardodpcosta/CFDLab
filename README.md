@@ -1,6 +1,6 @@
 # CFD-TestSuite
 
-___A curated collection of benchmarking test cases with analytical solutions for the design, testing, and verification of numerical codes.___
+___A curated collection of benchmarking test cases with analytical solutions for the design, testing, and verification of numerical codes in computational fluid dynamics and thermodynamics.___
 
 ---
 
