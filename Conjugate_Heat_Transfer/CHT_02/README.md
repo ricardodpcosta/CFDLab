@@ -1,4 +1,4 @@
-# [CHT_01] Circular interface with continuity interface conditions
+# [CHT_01] Rose-shaped interface with continuity interface conditions
 
 ## 1. Summary
 
