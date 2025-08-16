@@ -31,11 +31,9 @@ T^{\textrm{AB}}\left(\theta\right)\\
 \cos\left(\theta\right) & \sin\left(\theta\right)\\
 \sin\left(\theta\right) & -\cos\left(\theta\right)
 \end{bmatrix},
-$$
-
-where
-
-$$
+\qquad
+\text{with}
+\qquad
 \dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}=-r^{\textrm{AB}}\beta_{1}\beta_{2}\sin\left(\beta_{2}\theta\right).
 $$
 
