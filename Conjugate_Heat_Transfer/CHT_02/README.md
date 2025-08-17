@@ -107,11 +107,11 @@ $$
 
 which are obtained after substituting the manufactured solutions into the governing equations in polar coordinates.
 
-The **boundary conditions** correspond to the **periodic solution** on the outer boundary and the **homogeneous solution** on the inner boundary, that is
+The **boundary conditions** correspond to the **constant solution** on the outer boundary and the **homogeneous solution** on the inner boundary, that is
 
 $$
 \begin{array}{l}
-&\phi^{\textrm{A}}=\cos\left(n\theta\right),&\quad\textrm{on }\Gamma^{\textrm{A}},\\
+&\phi^{\textrm{A}}=1,&\quad\textrm{on }\Gamma^{\textrm{A}},\\
 &\phi^{\textrm{B}}=0,&\quad\textrm{on }\Gamma^{\textrm{B}}.
 \end{array}
 $$
