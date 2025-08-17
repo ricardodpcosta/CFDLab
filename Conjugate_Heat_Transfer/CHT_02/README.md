@@ -11,7 +11,7 @@ This benchmark represents a **steady-state two-dimensional conjugate heat transf
 
 ## 2. Domain and meshes
 
-The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively. An interface, $\Gamma^{\textrm{AB}}$, with variable radius $R^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions. The interface radius corresponds to a periodic perturbation (diffeomorphic transformation) applied to a circumference centred at the origin with radius $r^{\textrm{AB}}$, given as
+The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively. An interface, $\Gamma^{\textrm{AB}}$, with variable radius $R^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions. The interface radius corresponds to a periodic perturbation (diffeomorphic transformation) applied to a circumference centred at the origin with radius $r^{\textrm{AB}}$, and reads
 
 $$
 R^{\textrm{AB}}\left(\theta\right)=r^{\textrm{AB}}\left(1+\beta_{1}\cos\left(\beta_{2}\theta\right)\right),
@@ -19,7 +19,7 @@ $$
 
 where $\beta_{1}$ and $\beta_{2}$ are given constant parameters to control the perturbation magnitude and periodicity, respectively.
 
-Vector functions $\boldsymbol{n}^{\textrm{A}}$ and $\boldsymbol{n}^{\textrm{B}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively. On the interface, $\Gamma^{\textrm{AB}}$, vector function $\boldsymbol{n}^{\textrm{AB}}$ corresponds to the unit normal vector from subdomain $\Omega^{\textrm{A}}$ to $\Omega^{\textrm{B}}$, given as
+Vector functions $\boldsymbol{n}^{\textrm{A}}$ and $\boldsymbol{n}^{\textrm{B}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively. On the interface, $\Gamma^{\textrm{AB}}$, vector function $\boldsymbol{n}^{\textrm{AB}}$ corresponds to the unit normal vector from subdomain $\Omega^{\textrm{A}}$ to $\Omega^{\textrm{B}}$, and reads
 
 $$
 \boldsymbol{n}^{\textrm{AB}}\left(\theta\right)=\left(\sqrt{\left(R^{\textrm{AB}}\left(\theta\right)\right)^{2}+\left(\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}}\right)^{-1}\left(-R^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{r}}+\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{\theta}}\right).
@@ -66,7 +66,7 @@ $$
 \end{array}
 $$
 
-where $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ are constant parameters to enforce boundary and interface conditions and $D\left(\theta\right)$ is a mapping function to a domain with a circular interface, given as
+where $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ are constant parameters to enforce boundary and interface conditions and $D\left(\theta\right)$ is a mapping function to a domain with a circular interface, and read
 
 $$
 D\left(r,\theta\right)=d_{1}\left(\theta\right)+d_{2}\left(\theta\right)r+d_{3}\left(\theta\right)r^{2},
