@@ -7,7 +7,7 @@ This benchmark represents a **steady-state two-dimensional conjugate heat transf
 - **Numerical assessment** of interface treatments (solution continuity and flux conservation).
 - **Convergence analysis** on structured and unstructured meshes.
 
-> For conciseness and readability, all functions are written in polar coordinates $\left(r,\theta\right)$, but the provided codes generated from the symbolic expressions are implemented in Cartesian coordinates for direct use in numerical solvers.
+> For conciseness and readability, all functions are written in polar coordinates $\left(r,\theta\right)$ and all vectors are represented in the unit polar base $\lbrace\hat{\boldsymbol{r}},\hat{\boldsymbol{\theta}}\rbrace$, but the provided codes generated from the symbolic expressions are implemented in Cartesian coordinates for direct use in numerical solvers.
 
 ## 2. Domain and meshes
 
@@ -24,12 +24,8 @@ Vector functions $\boldsymbol{n}^{\textrm{A}}$ and $\boldsymbol{n}^{\textrm{B}}$
 $$
 \boldsymbol{n}^{\textrm{AB}}\left(\theta\right)=\dfrac{1}{\sqrt{\left(T^{\textrm{AB}}\left(\theta\right)\right)^{2}+\left(\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}}}
 \begin{bmatrix}
-T^{\textrm{AB}}\left(\theta\right)\\
-\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}
-\end{bmatrix}
-\begin{bmatrix}
-\cos\left(\theta\right) & \sin\left(\theta\right)\\
-\sin\left(\theta\right) & -\cos\left(\theta\right)
+\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}\\
+T^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{\theta}}
 \end{bmatrix},
 \qquad
 \text{with}
