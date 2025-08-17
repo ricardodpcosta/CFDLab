@@ -7,6 +7,8 @@ This benchmark represents a **steady-state two-dimensional conjugate heat transf
 - **Numerical assessment** of interface treatments (solution continuity and flux conservation).
 - **Convergence analysis** on structured and unstructured meshes.
 
+> For conciseness and readability, all functions are expressed in polar coordinates $\left(r,\theta\right)$, and vectors are represented in the unit polar basis $\lbrace\hat{\boldsymbol{r}},\hat{\boldsymbol{\theta}}\rbrace$. However, the codes generated from the symbolic expressions are implemented in Cartesian coordinates, ensuring direct applicability in numerical solvers.
+
 ## 2. Domain and meshes
 
 The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively. An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions. Vector functions $\boldsymbol{n}^{\textrm{A}}$ and $\boldsymbol{n}^{\textrm{B}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively. On the interface, $\Gamma^{\textrm{AB}}$, vector function $\boldsymbol{n}^{\textrm{AB}}$ corresponds to the unit normal vector from subdomain $\Omega^{\textrm{A}}$ to $\Omega^{\textrm{B}}$.
@@ -43,8 +45,6 @@ where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are given constant thermal
 
 ## 4. Manufactured solution
 
-> For conciseness and readability, all functions are written in polar coordinates $\left(r,\theta\right)$, but the provided codes generated from the symbolic expressions are implemented in Cartesian coordinates for direct use in numerical solvers.
-
 The **manufactured solutions** read
 
 $$
@@ -73,17 +73,9 @@ The **velocity fields** are purely rotational, such that no mass transfer occurs
 
 $$
 \begin{array}{ll}
-\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r
-\begin{bmatrix}
--\sin\left(\theta\right)\\
-\cos\left(\theta\right)
-\end{bmatrix},
+\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r\hat{\boldsymbol{r}},
 &\quad\textrm{in }\Omega^{\textrm{A}},\\
-\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r
-\begin{bmatrix}
--\sin\left(\theta\right)\\
-\cos\left(\theta\right)
-\end{bmatrix},
+\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r\hat{\boldsymbol{r}},
 &\quad\textrm{in }\Omega^{\textrm{B}},
 \end{array}
 $$

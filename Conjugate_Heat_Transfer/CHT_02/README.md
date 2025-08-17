@@ -7,7 +7,7 @@ This benchmark represents a **steady-state two-dimensional conjugate heat transf
 - **Numerical assessment** of interface treatments (solution continuity and flux conservation).
 - **Convergence analysis** on structured and unstructured meshes.
 
-> For conciseness and readability, all functions are written in polar coordinates $\left(r,\theta\right)$ and all vectors are represented in the unit polar base $\lbrace\hat{\boldsymbol{r}},\hat{\boldsymbol{\theta}}\rbrace$, but the provided codes generated from the symbolic expressions are implemented in Cartesian coordinates for direct use in numerical solvers.
+> For conciseness and readability, all functions are expressed in polar coordinates $\left(r,\theta\right)$, and vectors are represented in the unit polar basis $\lbrace\hat{\boldsymbol{r}},\hat{\boldsymbol{\theta}}\rbrace$. However, the codes generated from the symbolic expressions are implemented in Cartesian coordinates, ensuring direct applicability in numerical solvers.
 
 ## 2. Domain and meshes
 
