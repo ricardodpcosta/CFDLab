@@ -107,16 +107,7 @@ $$
 
 where $\omega^{\textrm{A}}$ and $\omega^{\textrm{B}}$ are given constant parameters to control the angular velocity.
 
-The **source-terms** read
-
-$$
-\begin{array}{ll}
-&f^{\textrm{A}}\left(r,\theta\right)=\dfrac{n\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right)\left(\alpha^{\textrm{A}}n\cos\left(n\theta\right)-r^{2}\omega^{\textrm{A}}\sin\left(n\theta\right)\right)}{r^{2}}&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&f^{\textrm{B}}\left(r,\theta\right)=\dfrac{n\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right)\left(\alpha^{\textrm{B}}n\cos\left(n\theta\right)-r^{2}\omega^{\textrm{B}}\sin\left(n\theta\right)\right)}{r^{2}}&\quad\textrm{in }\Omega^{\textrm{B}},\\
-\end{array}
-$$
-
-which are obtained after substituting the manufactured solutions into the governing equations in polar coordinates.
+The **source-terms** are obtained by substituting the manufactured solutions into the governing equations in polar coordinates. Due to the mapping function in the manufactured solutions, the obtained expressions are complex and are omitted for conciseness.
 
 The **boundary conditions** correspond to the **constant solution** on the outer boundary and the **homogeneous solution** on the inner boundary, that is
 
