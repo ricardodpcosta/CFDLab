@@ -55,7 +55,7 @@ r, theta = sympy.symbols("r theta", real=True)
 x, y = sympy.symbols("x y", real=True)
 
 #============================================
-# DOMAIN MAPPING
+# DOMAIN GEOMETRY
 #============================================
 
 # interface parametrisation
@@ -63,6 +63,13 @@ T = rAB*(1 + beta1*sympy.cos(beta2*theta))
 
 # domain mapping
 D = gamma1 + gamma2*r + gamma3*r**2
+
+# interface normal vector
+dT_dtheta = sympy.diff(T, theta)
+nAB = 1/sympy.sqrt(T**2 + dT_dtheta**2) \
+        *sympy.Matrix([[sympy.cos(theta), sympy.sin(theta)], \
+                        [sympy.sin(theta), -sympy.cos(theta)]]) \
+        *sympy.Matrix([T, dT_dtheta])
 
 #============================================
 # DOMAIN PARAMETERS
@@ -83,40 +90,46 @@ if not sol:
     raise RuntimeError("Could not solve for coefficients symbolically.")
 sol = sol[0]
 
-sympy.pprint(sol)
-
 # substitute into domain mapping
-# D = sympy.simplify(D.subs(sol))
+D = sympy.simplify(D.subs(sol))
 
 #============================================
 # MANUFACTURED SOLUTIONS
 #============================================
 
 # manufactured solutions
-phiA = (aA*sympy.log(D) + bA)
-phiB = (aB*sympy.log(D) + bB)
+phiA = (aA*sympy.log(D) + bA)*sympy.cos(n*theta)
+phiB = (aB*sympy.log(D) + bB)*sympy.cos(n*theta)
 
 #============================================
 # SOLUTION PARAMETERS
 #============================================
 
 # dirichlet boundary conditions
-eq1 = sympy.Eq(phiA.subs(r, rA), 1)
-eq2 = sympy.Eq(phiB.subs(r, rB), 0)
+eq1 = sympy.Eq(phiA.subs(D, rA), 1)
+eq2 = sympy.Eq(phiB.subs(D, rB), 0)
 
 # solution continuity at interface
-eq3 = sympy.Eq(phiA.subs(r, rAB), phiB.subs(r, rAB))
+eq3 = sympy.Eq(phiA.subs(r, T), phiB.subs(r, T))
 
 # flux conservation at interface
 dphiA_dr = sympy.diff(phiA, r)
 dphiB_dr = sympy.diff(phiB, r)
-eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, rAB), -alphaB*dphiB_dr.subs(r, rAB))
+eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, T), -alphaB*dphiB_dr.subs(r, T))
 
 # solve for coefficients
 sol = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)
 if not sol:
     raise RuntimeError("Could not solve for coefficients symbolically.")
 sol = sol[0]
+
+aA=sol[aA]
+
+sympy.pprint(sympy.simplify(aA))
+
+
+sympy.pprint(phiA)
+sympy.pprint(sympy.simplify(phiA))
 
 # substitute into manufactured solutions
 # phiA = sympy.simplify(phiA.subs(sol))
@@ -127,9 +140,9 @@ sol = sol[0]
 #============================================
 
 # velocity fields
-uA_r = 0
+uA_r = wA*r*(r-rA)*dT_dtheta/(T-rA)
 uA_theta = wA*r
-uB_r = 0
+uB_r = wB*r*(r-rB)*dT_dtheta/(T-rB)
 uB_theta = wB*r
 
 # Cartesian unit basis
@@ -174,7 +187,6 @@ alphaA = 2.0
 alphaB = 1.0
 wA = 1.0
 wB = -1.0
-h = 1.0
 n = 4
 
 # arguments list
@@ -182,7 +194,7 @@ args_list = [("x", x), ("y", y)]
 
 # constants list
 consts_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("alphaA", alphaA), ("alphaB", alphaB),
-                ("wA", wA), ("wB", wB), ("h", h), ("n", n)]
+                ("wA", wA), ("wB", wB), ("n", n)]
 
 # parameters list
 params_list = [("r", r), ("theta", theta)]

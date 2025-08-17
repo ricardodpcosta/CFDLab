@@ -186,7 +186,7 @@ def write_cpp_scalar_function(name, expr, args_list, params_list):
     decl_lines = []
     for i, (parname, parexpr) in enumerate(params_list):
         cexpr = ccode(sympy.simplify(sympy.trigsimp(parexpr)), assign_to=None)
-        cexpr = cexpr.replace("\\\\\n", "")
+        cexpr = cexpr.replace("\\\n", "")
         cexpr = re.sub(r" {2,}", " ", cexpr)
         cexpr = cexpr.strip()
         cexpr = wrap_code_line(f"double {parname} = {cexpr};", width=100, indent=" "*4,continuation=" \\")
@@ -194,7 +194,7 @@ def write_cpp_scalar_function(name, expr, args_list, params_list):
     decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
     decl = "\n".join(decl_lines)
     cexpr = ccode(sympy.simplify(sympy.trigsimp(expr)), assign_to=None)
-    cexpr = cexpr.replace("\\\\\n", "")
+    cexpr = cexpr.replace("\\\n", "")
     cexpr = re.sub(r" {2,}", " ", cexpr)
     cexpr = cexpr.strip()
     cexpr = wrap_code_line(f"double res = {cexpr};", width=100, indent=" "*12,continuation=" \\")
@@ -284,7 +284,7 @@ def write_python_scalar_function(name, expr, args_list, params_list):
         pexpr = pexpr.replace("\n", "")
         pexpr = re.sub(r" {2,}", " ", pexpr)
         pexpr = pexpr.strip()
-        pexpr = wrap_code_line(f"{parname} = {pexpr}", width=100, indent=" "*4,continuation="")
+        pexpr = wrap_code_line(f"{parname} = {pexpr}", width=100, indent=" "*4,continuation=" \\")
         decl_lines.extend(pexpr)
     decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
     decl = "\n".join(decl_lines)
@@ -292,7 +292,7 @@ def write_python_scalar_function(name, expr, args_list, params_list):
     pexpr = pexpr.replace("\n", "")
     pexpr = re.sub(r" {2,}", " ", pexpr)
     pexpr = pexpr.strip()
-    pexpr = wrap_code_line(f"res = {pexpr}", width=100, indent=" "*12,continuation="")
+    pexpr = wrap_code_line(f"res = {pexpr}", width=100, indent=" "*12,continuation=" \\")
     pexpr.append(" "*8 + "return res")
     comp = "\n".join(pexpr)
     code = textwrap.dedent(f"""
@@ -317,7 +317,7 @@ def write_cpp_vector_function(name, expr, args_list, params_list):
     decl_lines = []
     for i, (parname, parexpr) in enumerate(params_list):
         cexpr = ccode(sympy.simplify(sympy.trigsimp(parexpr)), assign_to=None)
-        cexpr = cexpr.replace("\\\\\n", "")
+        cexpr = cexpr.replace("\\\n", "")
         cexpr = re.sub(r" {2,}", " ", cexpr)
         cexpr = cexpr.strip()
         cexpr = wrap_code_line(f"double {parname} = {cexpr};", width=100, indent=" "*4,continuation=" \\")
@@ -327,12 +327,11 @@ def write_cpp_vector_function(name, expr, args_list, params_list):
     comp_lines = []
     for i, compexpr in enumerate(expr):
         cexpr = ccode(sympy.simplify(sympy.trigsimp(compexpr)), assign_to=None)
-        cexpr = cexpr.replace("\\\\\n", "")
+        cexpr = cexpr.replace("\\\n", "")
         cexpr = re.sub(r" {2,}", " ", cexpr)
         cexpr = cexpr.strip()
         cexpr = wrap_code_line(f"res[{i}] = {cexpr};", width=100, indent=" "*4,continuation=" \\")
-        cexpr = "\n".join(cexpr)
-        comp_lines.append(cexpr)
+        comp_lines.extend(cexpr)
     comp_lines[1:] = [" "*8 + line for line in comp_lines[1:]]
     comp = "\n".join(comp_lines)
     code = textwrap.dedent(f"""
@@ -370,8 +369,7 @@ def write_fortran_vector_function(name, expr, args_list, params_list):
         fexpr = re.sub(r" {2,}", " ", fexpr)
         fexpr = fexpr.strip()
         fexpr = wrap_code_line(f"res({i+1}) = {fexpr}", width=100, indent=" "*4,continuation=" &")
-        fexpr = "\n".join(fexpr)
-        comp_lines.append(fexpr)
+        comp_lines.extend(fexpr)
     comp_lines[1:] = [" "*8 + line for line in comp_lines[1:]]
     comp = "\n".join(comp_lines)
     code = textwrap.dedent(f"""
@@ -399,15 +397,14 @@ def write_octave_vector_function(name, expr, args_list, consts_list, params_list
         decl_lines.extend(mexpr)
     decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
     decl = "\n".join(decl_lines)
-    comp_lines = []
+    comp_lines = [f"res = zeros({len(expr)},1);"]
     for i, compexpr in enumerate(expr):
         mexpr = octave_code(sympy.simplify(sympy.trigsimp(compexpr)), assign_to=None)
         mexpr = mexpr.replace("...\n", "")
         mexpr = re.sub(r" {2,}", " ", mexpr)
         mexpr = mexpr.strip()
         mexpr = wrap_code_line(f"res({i+1}) = {mexpr};", width=100, indent=" "*4,continuation=" ...")
-        mexpr = "\n".join(mexpr)
-        comp_lines.append(mexpr)
+        comp_lines.extend(mexpr)
     comp_lines[1:] = [" "*8 + line for line in comp_lines[1:]]
     comp = "\n".join(comp_lines)
     code = textwrap.dedent(f"""
@@ -431,7 +428,7 @@ def write_python_vector_function(name, expr, args_list, params_list):
         pexpr = pexpr.replace("\n", "")
         pexpr = re.sub(r" {2,}", " ", pexpr)
         pexpr = pexpr.strip()
-        pexpr = wrap_code_line(f"{parname} = {pexpr}", width=100, indent=" "*4,continuation="")
+        pexpr = wrap_code_line(f"{parname} = {pexpr}", width=100, indent=" "*4,continuation=" \\")
         decl_lines.extend(pexpr)
     decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
     decl = "\n".join(decl_lines)
@@ -441,9 +438,8 @@ def write_python_vector_function(name, expr, args_list, params_list):
         pexpr = pexpr.replace("\n", "")
         pexpr = re.sub(r" {2,}", " ", pexpr)
         pexpr = pexpr.strip()
-        pexpr = wrap_code_line(f"res[{i}] = {pexpr}", width=100, indent=" "*4,continuation="")
-        pexpr = "\n".join(pexpr)
-        comp_lines.append(pexpr)
+        pexpr = wrap_code_line(f"res[{i}] = {pexpr}", width=100, indent=" "*4,continuation=" \\")
+        comp_lines.extend(pexpr)
     comp_lines.append("return res")
     comp_lines[1:] = [" "*8 + line for line in comp_lines[1:]]
     comp = "\n".join(comp_lines)

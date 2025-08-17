@@ -10,7 +10,6 @@ alphaA = 2.0
 alphaB = 1.0
 wA = 1.0
 wB = -1.0
-h = 1.0
 n = 4
 
 # Function uA
@@ -18,8 +17,10 @@ def uA(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
     res = [0.0]*2
-    res[0] = -r*wA*math.sin(theta)
-    res[1] = r*wA*math.cos(theta)
+    res[0] = r*wA*(-beta1*beta2*rAB*(r - rA)*math.sin(beta2*theta)*math.cos(theta) - (beta1*rAB \
+        *math.cos(beta2*theta) - rA + rAB)*math.sin(theta))/(beta1*rAB*math.cos(beta2*theta) - rA + rAB)
+    res[1] = r*wA*(-beta1*beta2*rAB*(r - rA)*math.sin(theta)*math.sin(beta2*theta) + (beta1*rAB \
+        *math.cos(beta2*theta) - rA + rAB)*math.cos(theta))/(beta1*rAB*math.cos(beta2*theta) - rA + rAB)
     return res
 
 # Function uB
@@ -27,22 +28,33 @@ def uB(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
     res = [0.0]*2
-    res[0] = -r*wB*math.sin(theta)
-    res[1] = r*wB*math.cos(theta)
+    res[0] = r*wB*(-beta1*beta2*rAB*(r - rB)*math.sin(beta2*theta)*math.cos(theta) - (beta1*rAB \
+        *math.cos(beta2*theta) + rAB - rB)*math.sin(theta))/(beta1*rAB*math.cos(beta2*theta) + rAB - rB)
+    res[1] = r*wB*(-beta1*beta2*rAB*(r - rB)*math.sin(theta)*math.sin(beta2*theta) + (beta1*rAB \
+        *math.cos(beta2*theta) + rAB - rB)*math.cos(theta))/(beta1*rAB*math.cos(beta2*theta) + rAB - rB)
     return res
 
 # Function phiA
 def phiA(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
-    aA = alphaB/(alphaA*math.log(gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaA*math.log(gamma1 + gamma2
-        *rB + gamma3*rB**2) + alphaB*math.log(gamma1 + gamma2*rA + gamma3*rA**2) - alphaB
-        *math.log(gamma1 + gamma2*rAB + gamma3*rAB**2))
-    bA = (alphaA*math.log(gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaA*math.log(gamma1 + gamma2*rB
-        + gamma3*rB**2) - alphaB*math.log(gamma1 + gamma2*rAB + gamma3*rAB**2))/(alphaA
-        *math.log(gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaA*math.log(gamma1 + gamma2*rB + gamma3*rB
-        **2) + alphaB*math.log(gamma1 + gamma2*rA + gamma3*rA**2) - alphaB*math.log(gamma1 + gamma2
-        *rAB + gamma3*rAB**2))
+    aA = alphaB/(-alphaA*math.log(gamma1 + gamma2*rB + gamma3*rB**2) + alphaA*math.log(beta1**2*gamma3 \
+        *rAB**2*math.cos(beta2*theta)**2 + beta1*gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB* \
+        *2*math.cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB**2) + alphaB*math.log(gamma1 \
+        + gamma2*rA + gamma3*rA**2) - alphaB*math.log(beta1**2*gamma3*rAB**2*math.cos(beta2*theta)**2 \
+        + beta1*gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB**2*math.cos(beta2*theta) \
+        + gamma1 + gamma2*rAB + gamma3*rAB**2))
+    bA = (alphaA*math.log(gamma1 + gamma2*rB + gamma3*rB**2) - alphaA*math.log(beta1**2*gamma3*rAB**2 \
+        *math.cos(beta2*theta)**2 + beta1*gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB**2 \
+        *math.cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB**2) + alphaB*math.log(beta1**2*gamma3 \
+        *rAB**2*math.cos(beta2*theta)**2 + beta1*gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB* \
+        *2*math.cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB**2))/(alphaA*math.log(gamma1 \
+        + gamma2*rB + gamma3*rB**2) - alphaA*math.log(beta1**2*gamma3*rAB**2*math.cos(beta2*theta)**2 \
+        + beta1*gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB**2*math.cos(beta2*theta) \
+        + gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaB*math.log(gamma1 + gamma2*rA + gamma3*rA**2) \
+        + alphaB*math.log(beta1**2*gamma3*rAB**2*math.cos(beta2*theta)**2 + beta1*gamma2*rAB \
+        *math.cos(beta2*theta) + 2*beta1*gamma3*rAB**2*math.cos(beta2*theta) + gamma1 + gamma2*rAB \
+        + gamma3*rAB**2))
     res = aA*math.log(gamma1 + gamma2*r + gamma3*r**2) + bA
     return res
 
@@ -50,12 +62,18 @@ def phiA(x, y):
 def phiB(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
-    aB = alphaA/(alphaA*math.log(gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaA*math.log(gamma1 + gamma2
-        *rB + gamma3*rB**2) + alphaB*math.log(gamma1 + gamma2*rA + gamma3*rA**2) - alphaB
-        *math.log(gamma1 + gamma2*rAB + gamma3*rAB**2))
-    bB = -alphaA*math.log(gamma1 + gamma2*rB + gamma3*rB**2)/(alphaA*math.log(gamma1 + gamma2*rAB
-        + gamma3*rAB**2) - alphaA*math.log(gamma1 + gamma2*rB + gamma3*rB**2) + alphaB*math.log(gamma1
-        + gamma2*rA + gamma3*rA**2) - alphaB*math.log(gamma1 + gamma2*rAB + gamma3*rAB**2))
+    aB = alphaA/(-alphaA*math.log(gamma1 + gamma2*rB + gamma3*rB**2) + alphaA*math.log(beta1**2*gamma3 \
+        *rAB**2*math.cos(beta2*theta)**2 + beta1*gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB* \
+        *2*math.cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB**2) + alphaB*math.log(gamma1 \
+        + gamma2*rA + gamma3*rA**2) - alphaB*math.log(beta1**2*gamma3*rAB**2*math.cos(beta2*theta)**2 \
+        + beta1*gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB**2*math.cos(beta2*theta) \
+        + gamma1 + gamma2*rAB + gamma3*rAB**2))
+    bB = alphaA*math.log(gamma1 + gamma2*rB + gamma3*rB**2)/(alphaA*math.log(gamma1 + gamma2*rB \
+        + gamma3*rB**2) - alphaA*math.log(beta1**2*gamma3*rAB**2*math.cos(beta2*theta)**2 + beta1 \
+        *gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB**2*math.cos(beta2*theta) + gamma1 \
+        + gamma2*rAB + gamma3*rAB**2) - alphaB*math.log(gamma1 + gamma2*rA + gamma3*rA**2) + alphaB \
+        *math.log(beta1**2*gamma3*rAB**2*math.cos(beta2*theta)**2 + beta1*gamma2*rAB*math.cos(beta2 \
+        *theta) + 2*beta1*gamma3*rAB**2*math.cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB**2))
     res = aB*math.log(gamma1 + gamma2*r + gamma3*r**2) + bB
     return res
 
@@ -63,28 +81,48 @@ def phiB(x, y):
 def fA(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
-    aA = alphaB/(alphaA*math.log(gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaA*math.log(gamma1 + gamma2
-        *rB + gamma3*rB**2) + alphaB*math.log(gamma1 + gamma2*rA + gamma3*rA**2) - alphaB
-        *math.log(gamma1 + gamma2*rAB + gamma3*rAB**2))
-    bA = (alphaA*math.log(gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaA*math.log(gamma1 + gamma2*rB
-        + gamma3*rB**2) - alphaB*math.log(gamma1 + gamma2*rAB + gamma3*rAB**2))/(alphaA
-        *math.log(gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaA*math.log(gamma1 + gamma2*rB + gamma3*rB
-        **2) + alphaB*math.log(gamma1 + gamma2*rA + gamma3*rA**2) - alphaB*math.log(gamma1 + gamma2
-        *rAB + gamma3*rAB**2))
-    res = aA*alphaA*(r*(gamma2 + 2*gamma3*r)**2 - (gamma2 + 4*gamma3*r)*(gamma1 + gamma2*r + gamma3*r*
-        *2))/(r*(gamma1 + gamma2*r + gamma3*r**2)**2)
+    aA = alphaB/(-alphaA*math.log(gamma1 + gamma2*rB + gamma3*rB**2) + alphaA*math.log(beta1**2*gamma3 \
+        *rAB**2*math.cos(beta2*theta)**2 + beta1*gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB* \
+        *2*math.cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB**2) + alphaB*math.log(gamma1 \
+        + gamma2*rA + gamma3*rA**2) - alphaB*math.log(beta1**2*gamma3*rAB**2*math.cos(beta2*theta)**2 \
+        + beta1*gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB**2*math.cos(beta2*theta) \
+        + gamma1 + gamma2*rAB + gamma3*rAB**2))
+    bA = (alphaA*math.log(gamma1 + gamma2*rB + gamma3*rB**2) - alphaA*math.log(beta1**2*gamma3*rAB**2 \
+        *math.cos(beta2*theta)**2 + beta1*gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB**2 \
+        *math.cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB**2) + alphaB*math.log(beta1**2*gamma3 \
+        *rAB**2*math.cos(beta2*theta)**2 + beta1*gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB* \
+        *2*math.cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB**2))/(alphaA*math.log(gamma1 \
+        + gamma2*rB + gamma3*rB**2) - alphaA*math.log(beta1**2*gamma3*rAB**2*math.cos(beta2*theta)**2 \
+        + beta1*gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB**2*math.cos(beta2*theta) \
+        + gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaB*math.log(gamma1 + gamma2*rA + gamma3*rA**2) \
+        + alphaB*math.log(beta1**2*gamma3*rAB**2*math.cos(beta2*theta)**2 + beta1*gamma2*rAB \
+        *math.cos(beta2*theta) + 2*beta1*gamma3*rAB**2*math.cos(beta2*theta) + gamma1 + gamma2*rAB \
+        + gamma3*rAB**2))
+    res = aA*(alphaA*(rA - rAB*(beta1*math.cos(beta2*theta) + 1))*(r*(gamma2 + 2*gamma3*r)**2 \
+        - (gamma2 + 4*gamma3*r)*(gamma1 + gamma2*r + gamma3*r**2)) + beta1*beta2*r**2*rAB*wA \
+        *(gamma2 + 2*gamma3*r)*(r - rA)*(gamma1 + gamma2*r + gamma3*r**2)*math.sin(beta2 \
+        *theta))/(r*(rA - rAB*(beta1*math.cos(beta2*theta) + 1))*(gamma1 + gamma2*r + gamma3*r* \
+        *2)**2)
     return res
 
 # Function fB
 def fB(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
-    aB = alphaA/(alphaA*math.log(gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaA*math.log(gamma1 + gamma2
-        *rB + gamma3*rB**2) + alphaB*math.log(gamma1 + gamma2*rA + gamma3*rA**2) - alphaB
-        *math.log(gamma1 + gamma2*rAB + gamma3*rAB**2))
-    bB = -alphaA*math.log(gamma1 + gamma2*rB + gamma3*rB**2)/(alphaA*math.log(gamma1 + gamma2*rAB
-        + gamma3*rAB**2) - alphaA*math.log(gamma1 + gamma2*rB + gamma3*rB**2) + alphaB*math.log(gamma1
-        + gamma2*rA + gamma3*rA**2) - alphaB*math.log(gamma1 + gamma2*rAB + gamma3*rAB**2))
-    res = aB*alphaB*(r*(gamma2 + 2*gamma3*r)**2 - (gamma2 + 4*gamma3*r)*(gamma1 + gamma2*r + gamma3*r*
-        *2))/(r*(gamma1 + gamma2*r + gamma3*r**2)**2)
+    aB = alphaA/(-alphaA*math.log(gamma1 + gamma2*rB + gamma3*rB**2) + alphaA*math.log(beta1**2*gamma3 \
+        *rAB**2*math.cos(beta2*theta)**2 + beta1*gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB* \
+        *2*math.cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB**2) + alphaB*math.log(gamma1 \
+        + gamma2*rA + gamma3*rA**2) - alphaB*math.log(beta1**2*gamma3*rAB**2*math.cos(beta2*theta)**2 \
+        + beta1*gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB**2*math.cos(beta2*theta) \
+        + gamma1 + gamma2*rAB + gamma3*rAB**2))
+    bB = alphaA*math.log(gamma1 + gamma2*rB + gamma3*rB**2)/(alphaA*math.log(gamma1 + gamma2*rB \
+        + gamma3*rB**2) - alphaA*math.log(beta1**2*gamma3*rAB**2*math.cos(beta2*theta)**2 + beta1 \
+        *gamma2*rAB*math.cos(beta2*theta) + 2*beta1*gamma3*rAB**2*math.cos(beta2*theta) + gamma1 \
+        + gamma2*rAB + gamma3*rAB**2) - alphaB*math.log(gamma1 + gamma2*rA + gamma3*rA**2) + alphaB \
+        *math.log(beta1**2*gamma3*rAB**2*math.cos(beta2*theta)**2 + beta1*gamma2*rAB*math.cos(beta2 \
+        *theta) + 2*beta1*gamma3*rAB**2*math.cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB**2))
+    res = aB*(alphaB*(r*(gamma2 + 2*gamma3*r)**2 - (gamma2 + 4*gamma3*r)*(gamma1 + gamma2*r + gamma3*r* \
+        *2))*(beta1*rAB*math.cos(beta2*theta) + rAB - rB) - beta1*beta2*r**2*rAB*wB*(gamma2 + 2 \
+        *gamma3*r)*(r - rB)*(gamma1 + gamma2*r + gamma3*r**2)*math.sin(beta2*theta))/(r \
+        *(gamma1 + gamma2*r + gamma3*r**2)**2*(beta1*rAB*math.cos(beta2*theta) + rAB - rB))
     return res

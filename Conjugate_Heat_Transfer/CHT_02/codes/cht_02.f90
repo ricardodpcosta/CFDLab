@@ -12,7 +12,6 @@ real(8), parameter :: alphaA = 2.0
 real(8), parameter :: alphaB = 1.0
 real(8), parameter :: wA = 1.0
 real(8), parameter :: wB = -1.0
-real(8), parameter :: h = 1.0
 real(8), parameter :: n = 4
 
 contains
@@ -26,8 +25,10 @@ subroutine uA(x, y, res)
     real(8) :: theta
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    res(1) = -r*wA*sin(theta)
-    res(2) = r*wA*cos(theta)
+    res(1) = r*wA*(-beta1*beta2*rAB*(r - rA)*sin(beta2*theta)*cos(theta) - (beta1*rAB *cos(beta2 &
+        *theta) - rA + rAB)*sin(theta))/(beta1*rAB*cos(beta2* theta) - rA + rAB)
+    res(2) = r*wA*(-beta1*beta2*rAB*(r - rA)*sin(theta)*sin(beta2*theta) + (beta1*rAB *cos(beta2 &
+        *theta) - rA + rAB)*cos(theta))/(beta1*rAB*cos(beta2* theta) - rA + rAB)
 end subroutine uA
 
 ! Subroutine uB
@@ -39,8 +40,10 @@ subroutine uB(x, y, res)
     real(8) :: theta
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    res(1) = -r*wB*sin(theta)
-    res(2) = r*wB*cos(theta)
+    res(1) = r*wB*(-beta1*beta2*rAB*(r - rB)*sin(beta2*theta)*cos(theta) - (beta1*rAB *cos(beta2 &
+        *theta) + rAB - rB)*sin(theta))/(beta1*rAB*cos(beta2* theta) + rAB - rB)
+    res(2) = r*wB*(-beta1*beta2*rAB*(r - rB)*sin(theta)*sin(beta2*theta) + (beta1*rAB *cos(beta2 &
+        *theta) + rAB - rB)*cos(theta))/(beta1*rAB*cos(beta2* theta) + rAB - rB)
 end subroutine uB
 
 ! Function phiA
@@ -54,13 +57,21 @@ function phiA(x, y) result(res)
     real(8) :: bA
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    aA = alphaB/(alphaA*log(gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaA*log( gamma1 + gamma2*rB &
-        + gamma3*rB**2) + alphaB*log(gamma1 + gamma2* rA + gamma3*rA**2) - alphaB*log(gamma1 + gamma2 &
-        *rAB + gamma3*rAB **2))
-    bA = (alphaA*log(gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaA*log(gamma1 + gamma2*rB + gamma3*rB* &
-        *2) - alphaB*log(gamma1 + gamma2*rAB + gamma3*rAB**2))/(alphaA*log(gamma1 + gamma2*rAB + gamma3 &
-        *rAB**2) - alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2) + alphaB*log( gamma1 + gamma2*rA &
-        + gamma3*rA**2) - alphaB*log(gamma1 + gamma2* rAB + gamma3*rAB**2))
+    aA = alphaB/(-alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2) + alphaA*log( beta1**2*gamma3*rAB**2 &
+        *cos(beta2*theta)**2 + beta1*gamma2*rAB*cos (beta2*theta) + 2.0d0*beta1*gamma3*rAB**2*cos(beta2 &
+        *theta) + gamma1 + gamma2*rAB + gamma3*rAB**2) + alphaB*log(gamma1 + gamma2 *rA + gamma3*rA* &
+        *2) - alphaB*log(beta1**2*gamma3*rAB**2*cos(beta2 *theta)**2 + beta1*gamma2*rAB*cos(beta2 &
+        *theta) + 2.0d0*beta1* gamma3*rAB**2*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB **2))
+    bA = (alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2) - alphaA*log(beta1**2* gamma3*rAB**2*cos(beta2 &
+        *theta)**2 + beta1*gamma2*rAB*cos(beta2* theta) + 2.0d0*beta1*gamma3*rAB**2*cos(beta2*theta) &
+        + gamma1 + gamma2*rAB + gamma3*rAB**2) + alphaB*log(beta1**2*gamma3*rAB**2* cos(beta2*theta)* &
+        *2 + beta1*gamma2*rAB*cos(beta2*theta) + 2.0d0* beta1*gamma3*rAB**2*cos(beta2*theta) + gamma1 &
+        + gamma2*rAB + gamma3*rAB**2))/(alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2) - alphaA &
+        *log(beta1**2*gamma3*rAB**2*cos(beta2*theta)**2 + beta1* gamma2*rAB*cos(beta2*theta) + 2.0d0 &
+        *beta1*gamma3*rAB**2*cos(beta2 *theta) + gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaB &
+        *log( gamma1 + gamma2*rA + gamma3*rA**2) + alphaB*log(beta1**2*gamma3* rAB**2*cos(beta2*theta)* &
+        *2 + beta1*gamma2*rAB*cos(beta2*theta) + 2.0d0*beta1*gamma3*rAB**2*cos(beta2*theta) + gamma1 &
+        + gamma2*rAB + gamma3*rAB**2))
     res = aA*log(gamma1 + gamma2*r + gamma3*r**2) + bA
 end function phiA
 
@@ -75,12 +86,17 @@ function phiB(x, y) result(res)
     real(8) :: bB
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    aB = alphaA/(alphaA*log(gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaA*log( gamma1 + gamma2*rB &
-        + gamma3*rB**2) + alphaB*log(gamma1 + gamma2* rA + gamma3*rA**2) - alphaB*log(gamma1 + gamma2 &
-        *rAB + gamma3*rAB **2))
-    bB = -alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2)/(alphaA*log(gamma1 + gamma2*rAB + gamma3*rAB* &
-        *2) - alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2) + alphaB*log(gamma1 + gamma2*rA + gamma3*rA &
-        **2) - alphaB*log(gamma1 + gamma2*rAB + gamma3*rAB**2))
+    aB = alphaA/(-alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2) + alphaA*log( beta1**2*gamma3*rAB**2 &
+        *cos(beta2*theta)**2 + beta1*gamma2*rAB*cos (beta2*theta) + 2.0d0*beta1*gamma3*rAB**2*cos(beta2 &
+        *theta) + gamma1 + gamma2*rAB + gamma3*rAB**2) + alphaB*log(gamma1 + gamma2 *rA + gamma3*rA* &
+        *2) - alphaB*log(beta1**2*gamma3*rAB**2*cos(beta2 *theta)**2 + beta1*gamma2*rAB*cos(beta2 &
+        *theta) + 2.0d0*beta1* gamma3*rAB**2*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB **2))
+    bB = alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2)/(alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2) &
+        - alphaA*log(beta1**2*gamma3*rAB**2*cos (beta2*theta)**2 + beta1*gamma2*rAB*cos(beta2*theta) &
+        + 2.0d0* beta1*gamma3*rAB**2*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaB &
+        *log(gamma1 + gamma2*rA + gamma3*rA**2) + alphaB*log(beta1**2*gamma3*rAB**2*cos(beta2*theta)* &
+        *2 + beta1* gamma2*rAB*cos(beta2*theta) + 2.0d0*beta1*gamma3*rAB**2*cos(beta2 *theta) + gamma1 &
+        + gamma2*rAB + gamma3*rAB**2))
     res = aB*log(gamma1 + gamma2*r + gamma3*r**2) + bB
 end function phiB
 
@@ -95,15 +111,25 @@ function fA(x, y) result(res)
     real(8) :: bA
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    aA = alphaB/(alphaA*log(gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaA*log( gamma1 + gamma2*rB &
-        + gamma3*rB**2) + alphaB*log(gamma1 + gamma2* rA + gamma3*rA**2) - alphaB*log(gamma1 + gamma2 &
-        *rAB + gamma3*rAB **2))
-    bA = (alphaA*log(gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaA*log(gamma1 + gamma2*rB + gamma3*rB* &
-        *2) - alphaB*log(gamma1 + gamma2*rAB + gamma3*rAB**2))/(alphaA*log(gamma1 + gamma2*rAB + gamma3 &
-        *rAB**2) - alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2) + alphaB*log( gamma1 + gamma2*rA &
-        + gamma3*rA**2) - alphaB*log(gamma1 + gamma2* rAB + gamma3*rAB**2))
-    res = aA*alphaA*(r*(gamma2 + 2*gamma3*r)**2 - (gamma2 + 4*gamma3*r)*(gamma1 + gamma2*r + gamma3*r* &
-        *2))/(r*(gamma1 + gamma2*r + gamma3*r**2)**2)
+    aA = alphaB/(-alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2) + alphaA*log( beta1**2*gamma3*rAB**2 &
+        *cos(beta2*theta)**2 + beta1*gamma2*rAB*cos (beta2*theta) + 2.0d0*beta1*gamma3*rAB**2*cos(beta2 &
+        *theta) + gamma1 + gamma2*rAB + gamma3*rAB**2) + alphaB*log(gamma1 + gamma2 *rA + gamma3*rA* &
+        *2) - alphaB*log(beta1**2*gamma3*rAB**2*cos(beta2 *theta)**2 + beta1*gamma2*rAB*cos(beta2 &
+        *theta) + 2.0d0*beta1* gamma3*rAB**2*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB **2))
+    bA = (alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2) - alphaA*log(beta1**2* gamma3*rAB**2*cos(beta2 &
+        *theta)**2 + beta1*gamma2*rAB*cos(beta2* theta) + 2.0d0*beta1*gamma3*rAB**2*cos(beta2*theta) &
+        + gamma1 + gamma2*rAB + gamma3*rAB**2) + alphaB*log(beta1**2*gamma3*rAB**2* cos(beta2*theta)* &
+        *2 + beta1*gamma2*rAB*cos(beta2*theta) + 2.0d0* beta1*gamma3*rAB**2*cos(beta2*theta) + gamma1 &
+        + gamma2*rAB + gamma3*rAB**2))/(alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2) - alphaA &
+        *log(beta1**2*gamma3*rAB**2*cos(beta2*theta)**2 + beta1* gamma2*rAB*cos(beta2*theta) + 2.0d0 &
+        *beta1*gamma3*rAB**2*cos(beta2 *theta) + gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaB &
+        *log( gamma1 + gamma2*rA + gamma3*rA**2) + alphaB*log(beta1**2*gamma3* rAB**2*cos(beta2*theta)* &
+        *2 + beta1*gamma2*rAB*cos(beta2*theta) + 2.0d0*beta1*gamma3*rAB**2*cos(beta2*theta) + gamma1 &
+        + gamma2*rAB + gamma3*rAB**2))
+    res = aA*(alphaA*(rA - rAB*(beta1*cos(beta2*theta) + 1))*(r*(gamma2 + 2*gamma3 *r)**2 - (gamma2 + 4 &
+        *gamma3*r)*(gamma1 + gamma2*r + gamma3*r**2 )) + beta1*beta2*r**2*rAB*wA*(gamma2 + 2 &
+        *gamma3*r)*(r - rA)*( gamma1 + gamma2*r + gamma3*r**2)*sin(beta2*theta))/(r*(rA - rAB &
+        *( beta1*cos(beta2*theta) + 1))*(gamma1 + gamma2*r + gamma3*r**2)**2 )
 end function fA
 
 ! Function fB
@@ -117,14 +143,21 @@ function fB(x, y) result(res)
     real(8) :: bB
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    aB = alphaA/(alphaA*log(gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaA*log( gamma1 + gamma2*rB &
-        + gamma3*rB**2) + alphaB*log(gamma1 + gamma2* rA + gamma3*rA**2) - alphaB*log(gamma1 + gamma2 &
-        *rAB + gamma3*rAB **2))
-    bB = -alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2)/(alphaA*log(gamma1 + gamma2*rAB + gamma3*rAB* &
-        *2) - alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2) + alphaB*log(gamma1 + gamma2*rA + gamma3*rA &
-        **2) - alphaB*log(gamma1 + gamma2*rAB + gamma3*rAB**2))
-    res = aB*alphaB*(r*(gamma2 + 2*gamma3*r)**2 - (gamma2 + 4*gamma3*r)*(gamma1 + gamma2*r + gamma3*r* &
-        *2))/(r*(gamma1 + gamma2*r + gamma3*r**2)**2)
+    aB = alphaA/(-alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2) + alphaA*log( beta1**2*gamma3*rAB**2 &
+        *cos(beta2*theta)**2 + beta1*gamma2*rAB*cos (beta2*theta) + 2.0d0*beta1*gamma3*rAB**2*cos(beta2 &
+        *theta) + gamma1 + gamma2*rAB + gamma3*rAB**2) + alphaB*log(gamma1 + gamma2 *rA + gamma3*rA* &
+        *2) - alphaB*log(beta1**2*gamma3*rAB**2*cos(beta2 *theta)**2 + beta1*gamma2*rAB*cos(beta2 &
+        *theta) + 2.0d0*beta1* gamma3*rAB**2*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB **2))
+    bB = alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2)/(alphaA*log(gamma1 + gamma2*rB + gamma3*rB**2) &
+        - alphaA*log(beta1**2*gamma3*rAB**2*cos (beta2*theta)**2 + beta1*gamma2*rAB*cos(beta2*theta) &
+        + 2.0d0* beta1*gamma3*rAB**2*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*rAB**2) - alphaB &
+        *log(gamma1 + gamma2*rA + gamma3*rA**2) + alphaB*log(beta1**2*gamma3*rAB**2*cos(beta2*theta)* &
+        *2 + beta1* gamma2*rAB*cos(beta2*theta) + 2.0d0*beta1*gamma3*rAB**2*cos(beta2 *theta) + gamma1 &
+        + gamma2*rAB + gamma3*rAB**2))
+    res = aB*(alphaB*(r*(gamma2 + 2*gamma3*r)**2 - (gamma2 + 4*gamma3*r)*(gamma1 + gamma2*r + gamma3*r* &
+        *2))*(beta1*rAB*cos(beta2*theta) + rAB - rB) - beta1*beta2*r**2*rAB*wB*(gamma2 + 2 &
+        *gamma3*r)*(r - rB)*(gamma1 + gamma2*r + gamma3*r**2)*sin(beta2*theta))/(r*(gamma1 &
+        + gamma2*r + gamma3*r**2)**2*(beta1*rAB*cos(beta2*theta) + rAB - rB))
 end function fB
 
 end module cht_02
