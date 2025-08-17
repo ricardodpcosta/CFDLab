@@ -66,13 +66,13 @@ $$
 \end{array}
 $$
 
-where $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ are constant parameters to enforce boundary and interface conditions and $D\left(\theta\right)$ is a mapping function to a domain with a circular interface, and read
+where $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ are constant parameters to enforce boundary and interface conditions and $D\left(\theta\right)$ is a mapping function that reads
 
 $$
 D\left(r,\theta\right)=d_{1}\left(\theta\right)+d_{2}\left(\theta\right)r+d_{3}\left(\theta\right)r^{2},
 $$
 
-where $d_{1}$, $d_{2}$, and $d_{3}$ are constant parameters to enforce that $D\left(r^{\textrm{A}},\theta\right)=r^{\textrm{A}}$, $D\left(r^{\textrm{B}},\theta\right)=r^{\textrm{B}}$, and $D\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)=r^{\textrm{AB}}$, and read
+where $d_{1}$, $d_{2}$, and $d_{3}$ are constant parameters to enforce that the rose-shaped interface is mapped into a circular interface, while the circular boundaries are preserved, that is, $D\left(r^{\textrm{A}},\theta\right)=r^{\textrm{A}}$, $D\left(r^{\textrm{B}},\theta\right)=r^{\textrm{B}}$, and $D\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)=r^{\textrm{AB}}$, and read
 
 $$
 d_{1}\left(\theta\right)=-cr^{\textrm{A}}r^{\textrm{B}}\beta_{1}\cos\left(\beta_{2}\theta\right),\qquad
@@ -82,6 +82,8 @@ $$
 $$
 c=\left(r^{\textrm{AB}}\left(1+\beta_{1}\cos\left(\beta_{2}\theta\right)\right)-r^{\textrm{A}}\right)^{-1}\left(r^{\textrm{AB}}\left(1+\beta_{1}\cos\left(\beta_{2}\theta\right)\right)-r^{\textrm{B}}\right)^{-1}.
 $$
+
+The mapping function enables mapping the manufactured solution from a complex domain to a simpler domain, facilitating solution continuity and conservation of diffusive fluxes on the interface.
 
 <div align="center">
   <table>
