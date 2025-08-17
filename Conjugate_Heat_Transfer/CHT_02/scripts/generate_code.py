@@ -59,17 +59,17 @@ x, y = sympy.symbols("x y", real=True)
 #============================================
 
 # interface parametrisation
-T = rAB*(1 + beta1*sympy.cos(beta2*theta))
+RAB = rAB*(1 + beta1*sympy.cos(beta2*theta))
 
 # domain mapping
 D = gamma1 + gamma2*r + gamma3*r**2
 
 # interface normal vector
-dT_dtheta = sympy.diff(T, theta)
-nAB = 1/sympy.sqrt(T**2 + dT_dtheta**2) \
+dRAB_dtheta = sympy.diff(RAB, theta)
+nAB = 1/sympy.sqrt(RAB**2 + dRAB_dtheta**2) \
         *sympy.Matrix([[sympy.cos(theta), sympy.sin(theta)], \
                         [sympy.sin(theta), -sympy.cos(theta)]]) \
-        *sympy.Matrix([T, dT_dtheta])
+        *sympy.Matrix([RAB, dRAB_dtheta])
 
 #============================================
 # DOMAIN PARAMETERS
@@ -82,7 +82,7 @@ eq1 = sympy.Eq(D.subs(r, rA), rA)
 eq2 = sympy.Eq(D.subs(r, rB), rB)
 
 # interface
-eq3 = sympy.Eq(D.subs(r, T), rAB)
+eq3 = sympy.Eq(D.subs(r, RAB), rAB)
 
 # solve for coefficients
 sol = sympy.solve([eq1, eq2, eq3], (gamma1, gamma2, gamma3), dict=True)
@@ -110,12 +110,12 @@ eq1 = sympy.Eq(phiA.subs(D, rA), 1)
 eq2 = sympy.Eq(phiB.subs(D, rB), 0)
 
 # solution continuity at interface
-eq3 = sympy.Eq(phiA.subs(r, T), phiB.subs(r, T))
+eq3 = sympy.Eq(phiA.subs(r, RAB), phiB.subs(r, RAB))
 
 # flux conservation at interface
 dphiA_dr = sympy.diff(phiA, r)
 dphiB_dr = sympy.diff(phiB, r)
-eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, T), -alphaB*dphiB_dr.subs(r, T))
+eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, RAB), -alphaB*dphiB_dr.subs(r, RAB))
 
 # solve for coefficients
 sol = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)
@@ -140,9 +140,9 @@ sympy.pprint(sympy.simplify(phiA))
 #============================================
 
 # velocity fields
-uA_r = wA*r*(r-rA)*dT_dtheta/(T-rA)
+uA_r = wA*r*(r-rA)*dRAB_dtheta/(RAB-rA)
 uA_theta = wA*r
-uB_r = wB*r*(r-rB)*dT_dtheta/(T-rB)
+uB_r = wB*r*(r-rB)*dRAB_dtheta/(RAB-rB)
 uB_theta = wB*r
 
 # Cartesian unit basis

@@ -11,10 +11,10 @@ This benchmark represents a **steady-state two-dimensional conjugate heat transf
 
 ## 2. Domain and meshes
 
-The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively. An interface, $\Gamma^{\textrm{AB}}$, with variable radius $T^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions. The interface radius corresponds to a periodic perturbation (diffeomorphic transformation) applied to a circumference centred at the origin with radius $r^{\textrm{AB}}$, given as
+The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively. An interface, $\Gamma^{\textrm{AB}}$, with variable radius $R^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions. The interface radius corresponds to a periodic perturbation (diffeomorphic transformation) applied to a circumference centred at the origin with radius $r^{\textrm{AB}}$, given as
 
 $$
-T^{\textrm{AB}}\left(\theta\right)=r^{\textrm{AB}}\left(1+\beta_{1}\cos\left(\beta_{2}\theta\right)\right),
+R^{\textrm{AB}}\left(\theta\right)=r^{\textrm{AB}}\left(1+\beta_{1}\cos\left(\beta_{2}\theta\right)\right),
 $$
 
 where $\beta_{1}$ and $\beta_{2}$ are given constant parameters to control the perturbation magnitude and periodicity.
@@ -22,11 +22,11 @@ where $\beta_{1}$ and $\beta_{2}$ are given constant parameters to control the p
 Vector functions $\boldsymbol{n}^{\textrm{A}}$ and $\boldsymbol{n}^{\textrm{B}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively. On the interface, $\Gamma^{\textrm{AB}}$, vector function $\boldsymbol{n}^{\textrm{AB}}$ corresponds to the unit normal vector from subdomain $\Omega^{\textrm{A}}$ to $\Omega^{\textrm{B}}$, given as
 
 $$
-\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)=\left(\sqrt{\left(\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(T^{\textrm{AB}}\left(\theta\right)\right)^{2}}\right)^{-1}\left(\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+T^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{\theta}}\right)
+\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)=\left(\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{AB}}\left(\theta\right)\right)^{2}}\right)^{-1}\left(\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+R^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{\theta}}\right)
 \qquad
 \text{with}
 \qquad
-\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}=-r^{\textrm{AB}}\beta_{1}\beta_{2}\sin\left(\beta_{2}\theta\right).
+\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}=-r^{\textrm{AB}}\beta_{1}\beta_{2}\sin\left(\beta_{2}\theta\right).
 $$
 
 <div align="center">
@@ -89,8 +89,8 @@ The **velocity fields** are purely rotational, such that no mass transfer occurs
 
 $$
 \begin{array}{ll}
-&\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r\left(\left(\dfrac{r-r^{\textrm{A}}}{T^{\textrm{AB}}\left(\theta\right)-r^{\textrm{A}}}\right)\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+\hat{\boldsymbol{\theta}}\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r\left(\left(\dfrac{r-r^{\textrm{B}}}{T^{\textrm{AB}}\left(\theta\right)-r^{\textrm{B}}}\right)\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+\hat{\boldsymbol{\theta}}\right),&\quad\textrm{in }\Omega^{\textrm{B}},\\
+&\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r\left(\left(\dfrac{r-r^{\textrm{A}}}{R^{\textrm{AB}}\left(\theta\right)-r^{\textrm{A}}}\right)\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+\hat{\boldsymbol{\theta}}\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
+&\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r\left(\left(\dfrac{r-r^{\textrm{B}}}{R^{\textrm{AB}}\left(\theta\right)-r^{\textrm{B}}}\right)\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+\hat{\boldsymbol{\theta}}\right),&\quad\textrm{in }\Omega^{\textrm{B}},\\
 \end{array}
 $$
 
