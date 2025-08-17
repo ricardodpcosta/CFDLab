@@ -97,16 +97,16 @@ D = sympy.simplify(D.subs(sol1))
 #============================================
 
 # manufactured solutions
-phiA = (aA*sympy.log(D) + bA)*sympy.cos(n*theta)
-phiB = (aB*sympy.log(D) + bB)*sympy.cos(n*theta)
+phiA = aA*sympy.log(D) + bA
+phiB = aB*sympy.log(D) + bB
 
 #============================================
 # SOLUTION PARAMETERS
 #============================================
 
 # dirichlet boundary conditions
-eq1 = sympy.Eq(phiA.subs(D, rA), 1)
-eq2 = sympy.Eq(phiB.subs(D, rB), 0)
+eq1 = sympy.Eq(phiA.subs(r, rA), 1)
+eq2 = sympy.Eq(phiB.subs(r, rB), 0)
 
 # solution continuity at interface
 eq3 = sympy.Eq(phiA.subs(r, RAB), phiB.subs(r, RAB))
@@ -121,14 +121,6 @@ sol2 = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)
 if not sol2:
     raise RuntimeError("Could not solve for coefficients symbolically.")
 sol2 = sol2[0]
-
-aA=sol[aA]
-
-sympy.pprint(sympy.simplify(aA))
-
-
-sympy.pprint(phiA)
-sympy.pprint(sympy.simplify(phiA))
 
 # substitute into manufactured solutions
 # phiA = sympy.simplify(phiA.subs(sol2))
@@ -145,18 +137,22 @@ uB_r = wB*r*(r-rB)*dRAB_dtheta/(RAB-rB)
 uB_theta = wB*r
 
 # Cartesian unit basis
-uA = sympy.Matrix([uA_r*sympy.cos(theta) - uA_theta*sympy.sin(theta),
-                    uA_r*sympy.sin(theta) + uA_theta*sympy.cos(theta)])
-uB = sympy.Matrix([uB_r*sympy.cos(theta) - uB_theta*sympy.sin(theta),
-                    uB_r*sympy.sin(theta) + uB_theta*sympy.cos(theta)])
+uA = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
+                    [sympy.sin(theta), sympy.cos(theta)]]) \
+                    *sympy.Matrix([uA_r, uA_theta])
+uB = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
+                    [sympy.sin(theta), sympy.cos(theta)]]) \
+                    *sympy.Matrix([uB_r, uB_theta])
 
 #============================================
 # SOURCE-TERMS
 #============================================
 
 # diffusive terms
-diffA = -alphaA*((1/r)*sympy.diff(r*sympy.diff(phiA, r), r) + (1/r**2)*sympy.diff(sympy.diff(phiA, theta), theta))
-diffB = -alphaB*((1/r)*sympy.diff(r*sympy.diff(phiB, r), r) + (1/r**2)*sympy.diff(sympy.diff(phiB, theta), theta))
+diffA = -alphaA*((1/r)*sympy.diff(r*sympy.diff(phiA, r), r) \
+            + (1/r**2)*sympy.diff(sympy.diff(phiA, theta), theta))
+diffB = -alphaB*((1/r)*sympy.diff(r*sympy.diff(phiB, r), r) \
+            + (1/r**2)*sympy.diff(sympy.diff(phiB, theta), theta))
 
 # convective terms
 convA = uA_r*sympy.diff(phiA, r) + (uA_theta/r)*sympy.diff(phiA, theta)
@@ -182,11 +178,12 @@ theta = sympy.atan2(y,x)
 rA = 1.0
 rAB = 0.75
 rB = 0.5
+beta1 = 0.04
+beta2 = 8.0
 alphaA = 2.0
 alphaB = 1.0
 wA = 1.0
 wB = -1.0
-n = 4
 
 # arguments list
 args_list = [("x", x), ("y", y)]
@@ -197,10 +194,8 @@ consts_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("beta1", beta1), ("beta2",
 
 # parameters list
 params_list = [("r", r), ("theta", theta)]
-paramsA_list = [("r", r), ("theta", theta), ("d1", sol1[d1]), ("d2", sol2[d2]), ("d2", sol1[d3]),
-                    ("aA", sol2[aA]), ("bA", sol2[bA])]
-paramsB_list = [("r", r), ("theta", theta), ("d1", sol1[d1]), ("d2", sol2[d2]), ("d2", sol1[d3]),
-                    ("aB", sol2[aB]), ("bB", sol2[bB])]
+paramsA_list = [("r", r), ("theta", theta), ("aA", sol2[aA]), ("bA", sol2[bA])]
+paramsB_list = [("r", r), ("theta", theta), ("aB", sol2[aB]), ("bB", sol2[bB])]
 
 # functions list
 funcs_list = [("uA", uA, args_list, params_list),("uB", uB, args_list, params_list),
@@ -275,6 +270,6 @@ write_file(os.path.join(outdir, "cht_02.py"), contents)
 contents = write_python_test("cht_02")
 write_file(os.path.join(outdir, "test.py"), contents)
 
-print("\nGeneration complete. Files are in:", outdir)
+print("\nGeneration complete.")
 
 # end of file

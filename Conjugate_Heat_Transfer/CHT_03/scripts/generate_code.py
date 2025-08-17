@@ -96,18 +96,22 @@ uB_r = 0
 uB_theta = wB*r
 
 # Cartesian unit basis
-uA = sympy.Matrix([uA_r*sympy.cos(theta) - uA_theta*sympy.sin(theta),
-                    uA_r*sympy.sin(theta) + uA_theta*sympy.cos(theta)])
-uB = sympy.Matrix([uB_r*sympy.cos(theta) - uB_theta*sympy.sin(theta),
-                    uB_r*sympy.sin(theta) + uB_theta*sympy.cos(theta)])
+uA = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
+                    [sympy.sin(theta), sympy.cos(theta)]]) \
+                    *sympy.Matrix([uA_r, uA_theta])
+uB = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
+                    [sympy.sin(theta), sympy.cos(theta)]]) \
+                    *sympy.Matrix([uB_r, uB_theta])
 
 #============================================
 # SOURCE-TERMS
 #============================================
 
 # diffusive terms
-diffA = -alphaA*((1/r)*sympy.diff(r*sympy.diff(phiA, r), r) + (1/r**2)*sympy.diff(sympy.diff(phiA, theta), theta))
-diffB = -alphaB*((1/r)*sympy.diff(r*sympy.diff(phiB, r), r) + (1/r**2)*sympy.diff(sympy.diff(phiB, theta), theta))
+diffA = -alphaA*((1/r)*sympy.diff(r*sympy.diff(phiA, r), r) \
+            + (1/r**2)*sympy.diff(sympy.diff(phiA, theta), theta))
+diffB = -alphaB*((1/r)*sympy.diff(r*sympy.diff(phiB, r), r) \
+            + (1/r**2)*sympy.diff(sympy.diff(phiB, theta), theta))
 
 # convective terms
 convA = uA_r*sympy.diff(phiA, r) + (uA_theta/r)*sympy.diff(phiA, theta)
@@ -138,7 +142,7 @@ alphaB = 1.0
 wA = 1.0
 wB = -1.0
 h = 1.0
-n = 4
+n = 4.0
 
 # arguments list
 args_list = [("x", x), ("y", y)]
@@ -225,6 +229,6 @@ write_file(os.path.join(outdir, "cht_03.py"), contents)
 contents = write_python_test("cht_03")
 write_file(os.path.join(outdir, "test.py"), contents)
 
-print("\nGeneration complete. Files are in:", outdir)
+print("\nGeneration complete.")
 
 # end of file
