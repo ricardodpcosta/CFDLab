@@ -22,7 +22,7 @@ where $\beta_{1}$ and $\beta_{2}$ are given constant parameters to control the p
 Vector functions $\boldsymbol{n}^{\textrm{A}}$ and $\boldsymbol{n}^{\textrm{B}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively. On the interface, $\Gamma^{\textrm{AB}}$, vector function $\boldsymbol{n}^{\textrm{AB}}$ corresponds to the unit normal vector from subdomain $\Omega^{\textrm{A}}$ to $\Omega^{\textrm{B}}$, given as
 
 $$
-\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)=\left(\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{AB}}\left(\theta\right)\right)^{2}}\right)^{-1}\left(\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+R^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{\theta}}\right).
+\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)=\left(\sqrt{\left(R^{\textrm{AB}}\left(\theta\right)\right)^{2}+\left(\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}}\right)^{-1}\left(-R^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{r}}+\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{\theta}}\right).
 $$
 
 <div align="center">
@@ -69,18 +69,18 @@ $$
 where $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ are constant parameters to enforce boundary and interface conditions and $D\left(\theta\right)$ is a mapping function to a domain with a circular interface, given as
 
 $$
-D\left(r,\theta\right)=d_{1}\left(\theta\right)+d_{2}\left(\theta\right)r+d_{3}\left(\theta\right)r^{2}
+D\left(r,\theta\right)=d_{1}\left(\theta\right)+d_{2}\left(\theta\right)r+d_{3}\left(\theta\right)r^{2},
 $$
 
 where $d_{1}$, $d_{2}$, and $d_{3}$ are constant parameters to enforce that $D\left(r^{\textrm{A}},\theta\right)=r^{\textrm{A}}$, $D\left(r^{\textrm{B}},\theta\right)=r^{\textrm{B}}$, and $D\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)=r^{\textrm{AB}}$, and read
 
 $$
 d_{1}\left(\theta\right)=-cr^{\textrm{A}}r^{\textrm{B}}\beta_{1}\cos\left(\beta_{2}\theta\right),\qquad
-d_{2}\left(\theta\right)=1+c\left(r^{\textrm{A}}+r^{\textrm{B}}\right)\beta_{1}\cos\left(\beta_{2}\theta\right),\qquad
+d_{2}\left(\theta\right)=1+c\left(r^{\textrm{A}}+r^{\textrm{B}}\right)r^{\textrm{AB}}\beta_{1}\cos\left(\beta_{2}\theta\right),\qquad
 d_{3}\left(\theta\right)=-c\beta_{1}\cos\left(\beta_{2}\theta\right),
 $$
 $$
-c=\left(r^{\textrm{AB}}-r^{\textrm{A}}+\beta_{1}\cos\left(\beta_{2}\theta\right)\right)^{-1}\left(r^{\textrm{AB}}-r^{\textrm{B}}+\beta_{1}\cos\left(\beta_{2}\theta\right)\right)^{-1}.
+c=\left(r^{\textrm{AB}}\left(1+\beta_{1}\cos\left(\beta_{2}\theta\right)\right)-r^{\textrm{A}}\right)^{-1}\left(r^{\textrm{AB}}\left(1+\beta_{1}\cos\left(\beta_{2}\theta\right)\right)-r^{\textrm{B}}\right)^{-1}.
 $$
 
 <div align="center">
