@@ -14,7 +14,7 @@ This benchmark represents a **steady-state two-dimensional conjugate heat transf
 The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively. An interface, $\Gamma^{\textrm{AB}}$, with variable radius $T^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions. The interface radius corresponds to a periodic perturbation (diffeomorphic transformation) applied to a circumference centred at the origin with radius $r^{\textrm{AB}}$, given as
 
 $$
-T^{\textrm{AB}}\left(\theta\right)=r^{\textrm{AB}}\left[1+\beta_{1}\cos\left(\beta_{2}\theta\right)\right],
+T^{\textrm{AB}}\left(\theta\right)=r^{\textrm{AB}}\left(1+\beta_{1}\cos\left(\beta_{2}\theta\right)\right),
 $$
 
 where $\beta_{1}$ and $\beta_{2}$ are given constant parameters to control the perturbation magnitude and periodicity.
@@ -65,8 +65,8 @@ The **manufactured solutions** read
 
 $$
 \begin{array}{l}
-&\phi^{\textrm{A}}\left(r,\theta\right)=\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&\phi^{\textrm{B}}\left(r,\theta\right)=\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right),&\quad\textrm{in }\Omega^{\textrm{B}},
+&\phi^{\textrm{A}}\left(r,\theta\right)=a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}},&\quad\textrm{in }\Omega^{\textrm{A}},\\
+&\phi^{\textrm{B}}\left(r,\theta\right)=a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}},&\quad\textrm{in }\Omega^{\textrm{B}},
 \end{array}
 $$
 
