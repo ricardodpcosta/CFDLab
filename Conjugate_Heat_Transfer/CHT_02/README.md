@@ -22,11 +22,7 @@ where $\beta_{1}$ and $\beta_{2}$ are given constant parameters to control the p
 Vector functions $\boldsymbol{n}^{\textrm{A}}$ and $\boldsymbol{n}^{\textrm{B}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively. On the interface, $\Gamma^{\textrm{AB}}$, vector function $\boldsymbol{n}^{\textrm{AB}}$ corresponds to the unit normal vector from subdomain $\Omega^{\textrm{A}}$ to $\Omega^{\textrm{B}}$, given as
 
 $$
-\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)=\left(\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{AB}}\left(\theta\right)\right)^{2}}\right)^{-1}\left(\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+R^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{\theta}}\right)
-\qquad
-\text{with}
-\qquad
-\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}=-r^{\textrm{AB}}\beta_{1}\beta_{2}\sin\left(\beta_{2}\theta\right).
+\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)=\left(\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{AB}}\left(\theta\right)\right)^{2}}\right)^{-1}\left(\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+R^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{\theta}}\right).
 $$
 
 <div align="center">
