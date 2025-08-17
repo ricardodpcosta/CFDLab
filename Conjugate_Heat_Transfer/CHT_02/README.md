@@ -14,7 +14,7 @@ This benchmark represents a **steady-state two-dimensional conjugate heat transf
 The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively. An interface, $\Gamma^{\textrm{AB}}$, with variable radius $T^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions. The interface radius corresponds to a periodic perturbation (diffeomorphic transformation) applied to a circumference centred at the origin with radius $r^{\textrm{AB}}$, given as
 
 $$
-T^{\textrm{AB}}\left(\theta\right)=r^{\textrm{AB}}\left[1+\beta_{1}\cos\left(\beta_{2}\theta\right)\right],
+T^{\textrm{AB}}\left(\theta\right)=r^{\textrm{AB}}\left(1+\beta_{1}\cos\left(\beta_{2}\theta\right)\right),
 $$
 
 where $\beta_{1}$ and $\beta_{2}$ are given constant parameters to control the perturbation magnitude and periodicity.
@@ -22,11 +22,7 @@ where $\beta_{1}$ and $\beta_{2}$ are given constant parameters to control the p
 Vector functions $\boldsymbol{n}^{\textrm{A}}$ and $\boldsymbol{n}^{\textrm{B}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively. On the interface, $\Gamma^{\textrm{AB}}$, vector function $\boldsymbol{n}^{\textrm{AB}}$ corresponds to the unit normal vector from subdomain $\Omega^{\textrm{A}}$ to $\Omega^{\textrm{B}}$, given as
 
 $$
-\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)=\dfrac{1}{\sqrt{\left(T^{\textrm{AB}}\left(\theta\right)\right)^{2}+\left(\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}}}
-\begin{bmatrix}
-\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}\\
-T^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{\theta}}
-\end{bmatrix},
+\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)=\left(\sqrt{\left(\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(T^{\textrm{AB}}\left(\theta\right)\right)^{2}}\right)^{-1}\left(\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+T^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{\theta}}\right)
 \qquad
 \text{with}
 \qquad
@@ -69,8 +65,8 @@ The **manufactured solutions** read
 
 $$
 \begin{array}{l}
-&\phi^{\textrm{A}}\left(r,\theta\right)=\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&\phi^{\textrm{B}}\left(r,\theta\right)=\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right),&\quad\textrm{in }\Omega^{\textrm{B}},
+&\phi^{\textrm{A}}\left(r,\theta\right)=a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}},&\quad\textrm{in }\Omega^{\textrm{A}},\\
+&\phi^{\textrm{B}}\left(r,\theta\right)=a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}},&\quad\textrm{in }\Omega^{\textrm{B}},
 \end{array}
 $$
 
@@ -93,18 +89,8 @@ The **velocity fields** are purely rotational, such that no mass transfer occurs
 
 $$
 \begin{array}{ll}
-\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r
-\begin{bmatrix}
--\sin\left(\theta\right)\\
-\cos\left(\theta\right)
-\end{bmatrix},
-&\quad\textrm{in }\Omega^{\textrm{A}},\\
-\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r
-\begin{bmatrix}
--\sin\left(\theta\right)\\
-\cos\left(\theta\right)
-\end{bmatrix},
-&\quad\textrm{in }\Omega^{\textrm{B}},
+&\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r\left(\left(\dfrac{r-r^{\textrm{A}}}{T^{\textrm{AB}}\left(\theta\right)-r^{\textrm{A}}}\right)\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+\hat{\boldsymbol{\theta}}\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
+&\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r\left(\left(\dfrac{r-r^{\textrm{B}}}{T^{\textrm{AB}}\left(\theta\right)-r^{\textrm{B}}}\right)\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+\hat{\boldsymbol{\theta}}\right),&\quad\textrm{in }\Omega^{\textrm{B}},\\
 \end{array}
 $$
 
@@ -121,11 +107,11 @@ $$
 
 which are obtained after substituting the manufactured solutions into the governing equations in polar coordinates.
 
-The **boundary conditions** correspond to the **periodic solution** on the outer boundary and the **homogeneous solution** on the inner boundary, that is
+The **boundary conditions** correspond to the **constant solution** on the outer boundary and the **homogeneous solution** on the inner boundary, that is
 
 $$
 \begin{array}{l}
-&\phi^{\textrm{A}}=\cos\left(n\theta\right),&\quad\textrm{on }\Gamma^{\textrm{A}},\\
+&\phi^{\textrm{A}}=1,&\quad\textrm{on }\Gamma^{\textrm{A}},\\
 &\phi^{\textrm{B}}=0,&\quad\textrm{on }\Gamma^{\textrm{B}}.
 \end{array}
 $$
