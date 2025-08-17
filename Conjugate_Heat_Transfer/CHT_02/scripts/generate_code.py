@@ -42,10 +42,9 @@ rA, rAB, rB = sympy.symbols("rA rAB rB", real=True)
 beta1, beta2 = sympy.symbols("beta1 beta2", real=True)
 alphaA, alphaB = sympy.symbols("alphaA alphaB", real=True)
 wA, wB = sympy.symbols("wA wB", real=True)
-n = sympy.symbols("n", real=True)
 
 # domain parameters
-gamma1, gamma2, gamma3 = sympy.symbols("gamma1 gamma2 gamma3", real=True)
+d1, d2, d3 = sympy.symbols("d1 d2 d3", real=True)
 
 # solution parameters
 aA, bA, aB, bB = sympy.symbols("aA bA aB bB", real=True)
@@ -62,14 +61,14 @@ x, y = sympy.symbols("x y", real=True)
 RAB = rAB*(1 + beta1*sympy.cos(beta2*theta))
 
 # domain mapping
-D = gamma1 + gamma2*r + gamma3*r**2
+D = d1 + d2*r + d3*r**2
 
 # interface normal vector
 dRAB_dtheta = sympy.diff(RAB, theta)
-nAB = 1/sympy.sqrt(RAB**2 + dRAB_dtheta**2) \
-        *sympy.Matrix([[sympy.cos(theta), sympy.sin(theta)], \
-                        [sympy.sin(theta), -sympy.cos(theta)]]) \
-        *sympy.Matrix([RAB, dRAB_dtheta])
+nAB = 1/sympy.sqrt(dRAB_dtheta**2 + RAB**2) \
+        *sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
+                        [sympy.sin(theta), sympy.cos(theta)]]) \
+        *sympy.Matrix([-RAB, dRAB_dtheta])
 
 #============================================
 # DOMAIN PARAMETERS
@@ -85,13 +84,13 @@ eq2 = sympy.Eq(D.subs(r, rB), rB)
 eq3 = sympy.Eq(D.subs(r, RAB), rAB)
 
 # solve for coefficients
-sol = sympy.solve([eq1, eq2, eq3], (gamma1, gamma2, gamma3), dict=True)
-if not sol:
+sol1 = sympy.solve([eq1, eq2, eq3], (d1, d2, d3), dict=True)
+if not sol1:
     raise RuntimeError("Could not solve for coefficients symbolically.")
-sol = sol[0]
+sol1 = sol1[0]
 
 # substitute into domain mapping
-D = sympy.simplify(D.subs(sol))
+D = sympy.simplify(D.subs(sol1))
 
 #============================================
 # MANUFACTURED SOLUTIONS
@@ -118,10 +117,10 @@ dphiB_dr = sympy.diff(phiB, r)
 eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, RAB), -alphaB*dphiB_dr.subs(r, RAB))
 
 # solve for coefficients
-sol = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)
-if not sol:
+sol2 = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)
+if not sol2:
     raise RuntimeError("Could not solve for coefficients symbolically.")
-sol = sol[0]
+sol2 = sol2[0]
 
 aA=sol[aA]
 
@@ -132,8 +131,8 @@ sympy.pprint(phiA)
 sympy.pprint(sympy.simplify(phiA))
 
 # substitute into manufactured solutions
-# phiA = sympy.simplify(phiA.subs(sol))
-# phiB = sympy.simplify(phiB.subs(sol))
+# phiA = sympy.simplify(phiA.subs(sol2))
+# phiB = sympy.simplify(phiB.subs(sol2))
 
 #============================================
 # VELOCITY FIELDS
@@ -193,13 +192,15 @@ n = 4
 args_list = [("x", x), ("y", y)]
 
 # constants list
-consts_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("alphaA", alphaA), ("alphaB", alphaB),
-                ("wA", wA), ("wB", wB), ("n", n)]
+consts_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("beta1", beta1), ("beta2", beta2),
+                ("alphaA", alphaA), ("alphaB", alphaB), ("wA", wA), ("wB", wB)]
 
 # parameters list
 params_list = [("r", r), ("theta", theta)]
-paramsA_list = [("r", r), ("theta", theta), ("aA", sol[aA]), ("bA", sol[bA])]
-paramsB_list = [("r", r), ("theta", theta), ("aB", sol[aB]), ("bB", sol[bB])]
+paramsA_list = [("r", r), ("theta", theta), ("d1", sol1[d1]), ("d2", sol2[d2]), ("d2", sol1[d3]),
+                    ("aA", sol2[aA]), ("bA", sol2[bA])]
+paramsB_list = [("r", r), ("theta", theta), ("d1", sol1[d1]), ("d2", sol2[d2]), ("d2", sol1[d3]),
+                    ("aB", sol2[aB]), ("bB", sol2[bB])]
 
 # functions list
 funcs_list = [("uA", uA, args_list, params_list),("uB", uB, args_list, params_list),

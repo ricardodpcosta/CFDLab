@@ -73,10 +73,8 @@ The **velocity fields** are purely rotational, such that no mass transfer occurs
 
 $$
 \begin{array}{ll}
-&\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r\hspace{1pt}\hat{\boldsymbol{\theta}},
-&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r\hspace{1pt}\hat{\boldsymbol{\theta}},
-&\quad\textrm{in }\Omega^{\textrm{B}},
+&\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r\hspace{1pt}\hat{\boldsymbol{\theta}},&\quad\textrm{in }\Omega^{\textrm{A}},\\
+&\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r\hspace{1pt}\hat{\boldsymbol{\theta}},&\quad\textrm{in }\Omega^{\textrm{B}},
 \end{array}
 $$
 
@@ -86,8 +84,8 @@ The **source-terms** read
 
 $$
 \begin{array}{ll}
-&f^{\textrm{A}}\left(r,\theta\right)=\dfrac{n\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right)\left(\alpha^{\textrm{A}}n\cos\left(n\theta\right)-r^{2}\omega^{\textrm{A}}\sin\left(n\theta\right)\right)}{r^{2}}&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&f^{\textrm{B}}\left(r,\theta\right)=\dfrac{n\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right)\left(\alpha^{\textrm{B}}n\cos\left(n\theta\right)-r^{2}\omega^{\textrm{B}}\sin\left(n\theta\right)\right)}{r^{2}}&\quad\textrm{in }\Omega^{\textrm{B}},\\
+&f^{\textrm{A}}\left(r,\theta\right)=\dfrac{n\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right)\left(\alpha^{\textrm{A}}n\cos\left(n\theta\right)-r^{2}\omega^{\textrm{A}}\sin\left(n\theta\right)\right)}{r^{2}},&\quad\textrm{in }\Omega^{\textrm{A}},\\
+&f^{\textrm{B}}\left(r,\theta\right)=\dfrac{n\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right)\left(\alpha^{\textrm{B}}n\cos\left(n\theta\right)-r^{2}\omega^{\textrm{B}}\sin\left(n\theta\right)\right)}{r^{2}},&\quad\textrm{in }\Omega^{\textrm{B}},\\
 \end{array}
 $$
 
