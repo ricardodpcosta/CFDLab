@@ -61,12 +61,18 @@ The **manufactured solutions** read
 
 $$
 \begin{array}{l}
-&\phi^{\textrm{A}}\left(r,\theta\right)=a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}},&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&\phi^{\textrm{B}}\left(r,\theta\right)=a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}},&\quad\textrm{in }\Omega^{\textrm{B}},
+&\phi^{\textrm{A}}\left(r,\theta\right)=a^{\textrm{A}}\ln\left(D\left(r,\theta\right)\right)+b^{\textrm{A}},&\quad\textrm{in }\Omega^{\textrm{A}},\\
+&\phi^{\textrm{B}}\left(r,\theta\right)=a^{\textrm{B}}\ln\left(D\left(r,\theta\right)\right)+b^{\textrm{B}},&\quad\textrm{in }\Omega^{\textrm{B}},
 \end{array}
 $$
 
-where $n$ is a given constant parameter to control the solutions mode number (angular complexity), and $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ are constant parameters to enforce boundary and interface conditions.
+where $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ are constant parameters to enforce boundary and interface conditions and $D\left(\theta\right)$ is a mapping function to a domain with a circular interface.
+
+$$
+D\left(r,\theta\right)=d_{1}+d_{2}r+d_{3}r^{2}
+$$
+
+
 
 <div align="center">
   <table>
@@ -81,7 +87,7 @@ where $n$ is a given constant parameter to control the solutions mode number (an
   </table>
 </div>
 
-The **velocity fields** are purely rotational, such that no mass transfer occurs through the boundaries and interface, and read
+The **velocity fields** are tangential to the boundaries and interface, such that no mass transfer occurs through the boundaries and interface, and read
 
 $$
 \begin{array}{ll}
@@ -140,11 +146,12 @@ The table below summarises the given constant parameters and the recommended val
 | $r^{\textrm{A}}$          | Radius of outer boundary, $\Gamma^{\textrm{A}}$                   | 1.0                           | 1.0                            | m                  |
 | $r^{\textrm{AB}}$         | Radius of interface, $\Gamma^{\textrm{AB}}$                       | 0.75                          | 0.75                           | m                  |
 | $r^{\textrm{B}}$          | Radius of inner boundary, $\Gamma^{\textrm{B}}$                   | 0.5                           | 0.5                            | m                  |
+| $\beta_{1}$               | Magnitude of interface perturbation, $\Gamma^{\textrm{AB}}$       | 0.04                          | 0.04                           |                    |
+| $\beta_{2}$               | Periodicity of interface perturbation, $\Gamma^{\textrm{AB}}$     | 8.0                           | 8.0                            |                    |
 | $\alpha^{\textrm{A}}$     | Thermal diffusivity in outer subdomain, $\Omega^{\textrm{A}}$     | 2.0                           | 100.0                          | m<sup>2</sup>/s    |
 | $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain, $\Omega^{\textrm{B}}$     | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
 | $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$        | 1.0                           | 1.0                            | rad/s              |
 | $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain, $\Omega^{\textrm{B}}$        | -1.0                          | -1.0                           | rad/s              |
-| $n$                       | Solution mode number                                              | 4                             | 4                              |                    |
 
 ## 6. Scripts and files
 
