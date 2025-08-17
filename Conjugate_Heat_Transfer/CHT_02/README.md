@@ -22,11 +22,7 @@ where $\beta_{1}$ and $\beta_{2}$ are given constant parameters to control the p
 Vector functions $\boldsymbol{n}^{\textrm{A}}$ and $\boldsymbol{n}^{\textrm{B}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively. On the interface, $\Gamma^{\textrm{AB}}$, vector function $\boldsymbol{n}^{\textrm{AB}}$ corresponds to the unit normal vector from subdomain $\Omega^{\textrm{A}}$ to $\Omega^{\textrm{B}}$, given as
 
 $$
-\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)=\dfrac{1}{\sqrt{\left(T^{\textrm{AB}}\left(\theta\right)\right)^{2}+\left(\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}}}
-\begin{bmatrix}
-\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}\\
-T^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{\theta}}
-\end{bmatrix},
+\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)=\left(\sqrt{\left(\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(T^{\textrm{AB}}\left(\theta\right)\right)^{2}}\right)^{-1}\left(\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+T^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{\theta}}\right)
 \qquad
 \text{with}
 \qquad
@@ -93,18 +89,8 @@ The **velocity fields** are purely rotational, such that no mass transfer occurs
 
 $$
 \begin{array}{ll}
-\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r
-\begin{bmatrix}
--\sin\left(\theta\right)\\
-\cos\left(\theta\right)
-\end{bmatrix},
-&\quad\textrm{in }\Omega^{\textrm{A}},\\
-\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r
-\begin{bmatrix}
--\sin\left(\theta\right)\\
-\cos\left(\theta\right)
-\end{bmatrix},
-&\quad\textrm{in }\Omega^{\textrm{B}},
+&\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r\left(\left(\dfrac{r-r^{\textrm{A}}}{T^{\textrm{AB}}\left(\theta\right)-r^{\textrm{A}}}\right)\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+\hat{\boldsymbol{\theta}}\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
+&\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r\left(\left(\dfrac{r-r^{\textrm{B}}}{T^{\textrm{AB}}\left(\theta\right)-r^{\textrm{B}}}\right)\dfrac{\textrm{d}T^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+\hat{\boldsymbol{\theta}}\right),&\quad\textrm{in }\Omega^{\textrm{B}},\\
 \end{array}
 $$
 
