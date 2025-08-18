@@ -25,16 +25,14 @@ def nAB(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
     res = [0.0]*2
-    res[0] = betaAB_1*betaAB_2*rAB*math.sin(theta)*math.sin(betaAB_2*theta)/math.sqrt(betaAB_1**2 \
-        *betaAB_2**2*rAB**2*math.sin(betaAB_2*theta)**2 + rAB**2*(betaAB_1*math.cos(betaAB_2*theta) \
-        + 1)**2) - rAB*(betaAB_1*math.cos(betaAB_2*theta) + 1)*math.cos(theta)/math.sqrt(betaAB_1**2 \
-        *betaAB_2**2*rAB**2*math.sin(betaAB_2*theta)**2 + rAB**2*(betaAB_1*math.cos(betaAB_2*theta) \
-        + 1)**2)
-    res[1] = -betaAB_1*betaAB_2*rAB*math.sin(betaAB_2*theta)*math.cos(theta)/math.sqrt(betaAB_1**2 \
-        *betaAB_2**2*rAB**2*math.sin(betaAB_2*theta)**2 + rAB**2*(betaAB_1*math.cos(betaAB_2*theta) \
-        + 1)**2) - rAB*(betaAB_1*math.cos(betaAB_2*theta) + 1)*math.sin(theta)/math.sqrt(betaAB_1**2 \
-        *betaAB_2**2*rAB**2*math.sin(betaAB_2*theta)**2 + rAB**2*(betaAB_1*math.cos(betaAB_2*theta) \
-        + 1)**2)
+    res[0] = (betaAB_1*betaAB_2*math.sin(theta)*math.sin(betaAB_2*theta) - betaAB_1*math.cos(theta) \
+        *math.cos(betaAB_2*theta) - math.cos(theta))/math.sqrt(betaAB_1**2*betaAB_2**2 \
+        *math.sin(betaAB_2*theta)**2 + betaAB_1**2*math.cos(betaAB_2*theta)**2 + 2*betaAB_1 \
+        *math.cos(betaAB_2*theta) + 1)
+    res[1] = -(betaAB_1*betaAB_2*math.sin(betaAB_2*theta)*math.cos(theta) + betaAB_1*math.sin(theta) \
+        *math.cos(betaAB_2*theta) + math.sin(theta))/math.sqrt(betaAB_1**2*betaAB_2**2 \
+        *math.sin(betaAB_2*theta)**2 + betaAB_1**2*math.cos(betaAB_2*theta)**2 + 2*betaAB_1 \
+        *math.cos(betaAB_2*theta) + 1)
     return res
 
 # Function uA

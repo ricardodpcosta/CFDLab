@@ -29,16 +29,12 @@ inline double RAB(double x, double y) {
 inline void nAB(double x, double y, double res[2]) {
     double r = sqrt(pow(x, 2) + pow(y, 2));
     double theta = atan2(y, x);
-    res[0] = betaAB_1*betaAB_2*rAB*sin(theta)*sin(betaAB_2*theta)/sqrt(pow(betaAB_1, 2) \
-        *pow(betaAB_2, 2)*pow(rAB, 2)*pow(sin(betaAB_2*theta), 2) + pow(rAB, 2)*pow(betaAB_1 \
-        *cos(betaAB_2*theta) + 1, 2)) - rAB*(betaAB_1*cos(betaAB_2*theta) + 1)*cos(theta) \
-        /sqrt(pow(betaAB_1, 2)*pow(betaAB_2, 2)*pow(rAB, 2)*pow(sin(betaAB_2*theta), 2) + pow(rAB, 2) \
-        *pow(betaAB_1*cos(betaAB_2*theta) + 1, 2));
-    res[1] = -betaAB_1*betaAB_2*rAB*sin(betaAB_2*theta)*cos(theta)/sqrt(pow(betaAB_1, 2) \
-        *pow(betaAB_2, 2)*pow(rAB, 2)*pow(sin(betaAB_2*theta), 2) + pow(rAB, 2)*pow(betaAB_1 \
-        *cos(betaAB_2*theta) + 1, 2)) - rAB*(betaAB_1*cos(betaAB_2*theta) + 1)*sin(theta) \
-        /sqrt(pow(betaAB_1, 2)*pow(betaAB_2, 2)*pow(rAB, 2)*pow(sin(betaAB_2*theta), 2) + pow(rAB, 2) \
-        *pow(betaAB_1*cos(betaAB_2*theta) + 1, 2));
+    res[0] = (betaAB_1*betaAB_2*sin(theta)*sin(betaAB_2*theta) - betaAB_1*cos(theta)*cos(betaAB_2 \
+        *theta) - cos(theta))/sqrt(pow(betaAB_1, 2)*pow(betaAB_2, 2)*pow(sin(betaAB_2*theta), 2) \
+        + pow(betaAB_1, 2)*pow(cos(betaAB_2*theta), 2) + 2*betaAB_1*cos(betaAB_2*theta) + 1);
+    res[1] = -(betaAB_1*betaAB_2*sin(betaAB_2*theta)*cos(theta) + betaAB_1*sin(theta)*cos(betaAB_2 \
+        *theta) + sin(theta))/sqrt(pow(betaAB_1, 2)*pow(betaAB_2, 2)*pow(sin(betaAB_2*theta), 2) \
+        + pow(betaAB_1, 2)*pow(cos(betaAB_2*theta), 2) + 2*betaAB_1*cos(betaAB_2*theta) + 1);
 }
 
 // Function uA

@@ -68,6 +68,10 @@ nAB = 1/sympy.sqrt(dRAB_dtheta**2 + RAB**2) \
                         [sympy.sin(theta), sympy.cos(theta)]]) \
         *sympy.Matrix([-RAB, dRAB_dtheta])
 
+# simplify expressions
+nAB[0] = nAB[0].factor()
+nAB[1] = nAB[1].factor()
+
 #============================================
 # DOMAIN PARAMETERS
 #============================================
@@ -87,7 +91,7 @@ if not sol1:
     raise RuntimeError("Could not solve for coefficients symbolically.")
 sol1 = sol1[0]
 
-# simplify expression
+# simplify expressions
 sol1[d1] = sol1[d1].factor()
 sol1[d2] = sol1[d2].factor()
 sol1[d3] = sol1[d3].factor()

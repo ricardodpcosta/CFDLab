@@ -38,14 +38,12 @@ subroutine nAB(x, y, res)
     real(8) :: theta
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    res(1) = betaAB_1*betaAB_2*rAB*sin(theta)*sin(betaAB_2*theta)/sqrt(betaAB_1**2* betaAB_2**2*rAB**2 &
-        *sin(betaAB_2*theta)**2 + rAB**2*(betaAB_1*cos( betaAB_2*theta) + 1)**2) - rAB*(betaAB_1 &
-        *cos(betaAB_2*theta) + 1) *cos(theta)/sqrt(betaAB_1**2*betaAB_2**2*rAB**2*sin(betaAB_2* theta)* &
-        *2 + rAB**2*(betaAB_1*cos(betaAB_2*theta) + 1)**2)
-    res(2) = -betaAB_1*betaAB_2*rAB*sin(betaAB_2*theta)*cos(theta)/sqrt(betaAB_1**2* betaAB_2**2*rAB**2 &
-        *sin(betaAB_2*theta)**2 + rAB**2*(betaAB_1*cos( betaAB_2*theta) + 1)**2) - rAB*(betaAB_1 &
-        *cos(betaAB_2*theta) + 1) *sin(theta)/sqrt(betaAB_1**2*betaAB_2**2*rAB**2*sin(betaAB_2* theta)* &
-        *2 + rAB**2*(betaAB_1*cos(betaAB_2*theta) + 1)**2)
+    res(1) = (betaAB_1*betaAB_2*sin(theta)*sin(betaAB_2*theta) - betaAB_1*cos(theta)* cos(betaAB_2 &
+        *theta) - cos(theta))/sqrt(betaAB_1**2*betaAB_2**2* sin(betaAB_2*theta)**2 + betaAB_1**2 &
+        *cos(betaAB_2*theta)**2 + 2* betaAB_1*cos(betaAB_2*theta) + 1)
+    res(2) = -(betaAB_1*betaAB_2*sin(betaAB_2*theta)*cos(theta) + betaAB_1*sin(theta) *cos(betaAB_2 &
+        *theta) + sin(theta))/sqrt(betaAB_1**2*betaAB_2**2* sin(betaAB_2*theta)**2 + betaAB_1**2 &
+        *cos(betaAB_2*theta)**2 + 2* betaAB_1*cos(betaAB_2*theta) + 1)
 end subroutine nAB
 
 ! Subroutine uA
