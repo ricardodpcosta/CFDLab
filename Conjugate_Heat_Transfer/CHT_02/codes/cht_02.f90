@@ -8,8 +8,8 @@ implicit none
 real(8), parameter :: rA = 1.0
 real(8), parameter :: rAB = 0.75
 real(8), parameter :: rB = 0.5
-real(8), parameter :: beta1 = 0.04
-real(8), parameter :: beta2 = 8.0
+real(8), parameter :: betaAB_1 = 0.04
+real(8), parameter :: betaAB_2 = 8.0
 real(8), parameter :: alphaA = 2.0
 real(8), parameter :: alphaB = 1.0
 real(8), parameter :: wA = 1.0
@@ -26,7 +26,7 @@ function RAB(x, y) result(res)
     real(8) :: theta
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    res = rAB*(beta1*cos(beta2*theta) + 1)
+    res = rAB*(betaAB_1*cos(betaAB_2*theta) + 1)
 end function RAB
 
 ! Subroutine nAB
@@ -38,14 +38,14 @@ subroutine nAB(x, y, res)
     real(8) :: theta
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    res(1) = beta1*beta2*rAB*sin(theta)*sin(beta2*theta)/sqrt(beta1**2*beta2**2*rAB** 2*sin(beta2 &
-        *theta)**2 + rAB**2*(beta1*cos(beta2*theta) + 1)**2) - rAB*(beta1*cos(beta2*theta) + 1) &
-        *cos(theta)/sqrt(beta1**2*beta2** 2*rAB**2*sin(beta2*theta)**2 + rAB**2*(beta1*cos(beta2 &
-        *theta) + 1 )**2)
-    res(2) = -beta1*beta2*rAB*sin(beta2*theta)*cos(theta)/sqrt(beta1**2*beta2**2*rAB **2*sin(beta2 &
-        *theta)**2 + rAB**2*(beta1*cos(beta2*theta) + 1)**2 ) - rAB*(beta1*cos(beta2*theta) + 1) &
-        *sin(theta)/sqrt(beta1**2* beta2**2*rAB**2*sin(beta2*theta)**2 + rAB**2*(beta1*cos(beta2 &
-        * theta) + 1)**2)
+    res(1) = betaAB_1*betaAB_2*rAB*sin(theta)*sin(betaAB_2*theta)/sqrt(betaAB_1**2* betaAB_2**2*rAB**2 &
+        *sin(betaAB_2*theta)**2 + rAB**2*(betaAB_1*cos( betaAB_2*theta) + 1)**2) - rAB*(betaAB_1 &
+        *cos(betaAB_2*theta) + 1) *cos(theta)/sqrt(betaAB_1**2*betaAB_2**2*rAB**2*sin(betaAB_2* theta)* &
+        *2 + rAB**2*(betaAB_1*cos(betaAB_2*theta) + 1)**2)
+    res(2) = -betaAB_1*betaAB_2*rAB*sin(betaAB_2*theta)*cos(theta)/sqrt(betaAB_1**2* betaAB_2**2*rAB**2 &
+        *sin(betaAB_2*theta)**2 + rAB**2*(betaAB_1*cos( betaAB_2*theta) + 1)**2) - rAB*(betaAB_1 &
+        *cos(betaAB_2*theta) + 1) *sin(theta)/sqrt(betaAB_1**2*betaAB_2**2*rAB**2*sin(betaAB_2* theta)* &
+        *2 + rAB**2*(betaAB_1*cos(betaAB_2*theta) + 1)**2)
 end subroutine nAB
 
 ! Subroutine uA
@@ -57,10 +57,10 @@ subroutine uA(x, y, res)
     real(8) :: theta
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    res(1) = -beta1*beta2*r*rAB*wA*(r - rA)*sin(beta2*theta)*cos(theta)/(beta1*rAB* cos(beta2*theta) &
-        - rA + rAB) - r*wA*sin(theta)
-    res(2) = -beta1*beta2*r*rAB*wA*(r - rA)*sin(theta)*sin(beta2*theta)/(beta1*rAB* cos(beta2*theta) &
-        - rA + rAB) + r*wA*cos(theta)
+    res(1) = -betaAB_1*betaAB_2*r*rAB*wA*(r - rA)*sin(betaAB_2*theta)*cos(theta)/( betaAB_1*rAB &
+        *cos(betaAB_2*theta) - rA + rAB) - r*wA*sin(theta)
+    res(2) = -betaAB_1*betaAB_2*r*rAB*wA*(r - rA)*sin(theta)*sin(betaAB_2*theta)/( betaAB_1*rAB &
+        *cos(betaAB_2*theta) - rA + rAB) + r*wA*cos(theta)
 end subroutine uA
 
 ! Subroutine uB
@@ -72,10 +72,10 @@ subroutine uB(x, y, res)
     real(8) :: theta
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    res(1) = -beta1*beta2*r*rAB*wB*(r - rB)*sin(beta2*theta)*cos(theta)/(beta1*rAB* cos(beta2*theta) &
-        + rAB - rB) - r*wB*sin(theta)
-    res(2) = -beta1*beta2*r*rAB*wB*(r - rB)*sin(theta)*sin(beta2*theta)/(beta1*rAB* cos(beta2*theta) &
-        + rAB - rB) + r*wB*cos(theta)
+    res(1) = -betaAB_1*betaAB_2*r*rAB*wB*(r - rB)*sin(betaAB_2*theta)*cos(theta)/( betaAB_1*rAB &
+        *cos(betaAB_2*theta) + rAB - rB) - r*wB*sin(theta)
+    res(2) = -betaAB_1*betaAB_2*r*rAB*wB*(r - rB)*sin(theta)*sin(betaAB_2*theta)/( betaAB_1*rAB &
+        *cos(betaAB_2*theta) + rAB - rB) + r*wB*cos(theta)
 end subroutine uB
 
 ! Function phiA
@@ -92,10 +92,10 @@ function phiA(x, y) result(res)
     aA = alphaB/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log( rAB))
     bA = (alphaA*log(rAB) - alphaA*log(rB) - alphaB*log(rAB))/(alphaA*log(rAB) - alphaA*log(rB) &
         + alphaB*log(rA) - alphaB*log(rAB))
-    res = aA*log(-(-beta1**2*r*rAB**2*cos(beta2*theta)**2 + beta1*r**2*rAB*cos( beta2*theta) - 2.0d0 &
-        *beta1*r*rAB**2*cos(beta2*theta) + beta1*rA* rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA &
-        *rB - r*rAB**2 + r*rAB* rB)/((beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1*rAB &
-        *cos(beta2 *theta) + rAB - rB))) + bA
+    res = aA*log(-(-betaAB_1**2*r*rAB**2*cos(betaAB_2*theta)**2 + betaAB_1*r**2* rAB*cos(betaAB_2 &
+        *theta) - 2.0d0*betaAB_1*r*rAB**2*cos(betaAB_2* theta) + betaAB_1*rA*rAB*rB &
+        *cos(betaAB_2*theta) + r*rA*rAB - r*rA *rB - r*rAB**2 + r*rAB*rB)/((betaAB_1*rAB &
+        *cos(betaAB_2*theta) - rA + rAB)*(betaAB_1*rAB*cos(betaAB_2*theta) + rAB - rB))) + bA
 end function phiA
 
 ! Function phiB
@@ -111,10 +111,10 @@ function phiB(x, y) result(res)
     theta = atan2(y, x)
     aB = alphaA/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log( rAB))
     bB = -alphaA*log(rB)/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log(rAB))
-    res = aB*log(-(-beta1**2*r*rAB**2*cos(beta2*theta)**2 + beta1*r**2*rAB*cos( beta2*theta) - 2.0d0 &
-        *beta1*r*rAB**2*cos(beta2*theta) + beta1*rA* rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA &
-        *rB - r*rAB**2 + r*rAB* rB)/((beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1*rAB &
-        *cos(beta2 *theta) + rAB - rB))) + bB
+    res = aB*log(-(-betaAB_1**2*r*rAB**2*cos(betaAB_2*theta)**2 + betaAB_1*r**2* rAB*cos(betaAB_2 &
+        *theta) - 2.0d0*betaAB_1*r*rAB**2*cos(betaAB_2* theta) + betaAB_1*rA*rAB*rB &
+        *cos(betaAB_2*theta) + r*rA*rAB - r*rA *rB - r*rAB**2 + r*rAB*rB)/((betaAB_1*rAB &
+        *cos(betaAB_2*theta) - rA + rAB)*(betaAB_1*rAB*cos(betaAB_2*theta) + rAB - rB))) + bB
 end function phiB
 
 ! Function fA
@@ -131,109 +131,124 @@ function fA(x, y) result(res)
     aA = alphaB/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log( rAB))
     bA = (alphaA*log(rAB) - alphaA*log(rB) - alphaB*log(rAB))/(alphaA*log(rAB) - alphaA*log(rB) &
         + alphaB*log(rA) - alphaB*log(rAB))
-    res = -aA*beta1*beta2*rAB*wA*(r - rA)*(-beta1**3*r*rAB**3*cos(beta2*theta)**3 + 2*beta1**2*r**2*rAB &
-        **2*cos(beta2*theta)**2 - 3*beta1**2*r*rAB** 3*cos(beta2*theta)**2 + beta1**2*r*rAB**2 &
-        *rB*cos(beta2*theta)**2 - beta1**2*r*rAB**2*cos(beta2*theta)**2 + beta1**2*rAB**2*rB &
-        *cos( beta2*theta)**2 + 2*beta1*r**2*rAB**2*cos(beta2*theta) - 2*beta1* r**2*rAB*rB &
-        *cos(beta2*theta) + beta1*r*rA*rAB**2*cos(beta2*theta ) - beta1*r*rA*rAB*rB*cos(beta2 &
-        *theta) - 3*beta1*r*rAB**3*cos( beta2*theta) + 3*beta1*r*rAB**2*rB*cos(beta2*theta) + r &
-        *rA*rAB**2 - 2*r*rA*rAB*rB - r*rA*rAB + r*rA*rB**2 + r*rA*rB - r*rAB**3 + 2* r*rAB**2 &
-        *rB + r*rAB**2 - r*rAB*rB**2 - r*rAB*rB + rA*rAB*rB - rA* rB**2 - rAB**2*rB + rAB*rB* &
-        *2)*sin(beta2*theta)/((beta1*rAB*cos( beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2 &
-        *theta) + rAB - rB)* (-beta1**2*r*rAB**2*cos(beta2*theta)**2 + beta1*r**2*rAB &
-        *cos( beta2*theta) - 2*beta1*r*rAB**2*cos(beta2*theta) + beta1*rA*rAB* rB*cos(beta2 &
-        *theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)) - alphaA*((2*aA*beta1*r*rAB &
-        *cos(beta2*theta)/(-beta1**2*r*rAB**2* cos(beta2*theta)**2 + beta1*r**2*rAB*cos(beta2 &
-        *theta) - 2*beta1*r *rAB**2*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r* rA &
-        *rAB - r*rA*rB - r*rAB**2 + r*rAB*rB) + aA*r*(-beta1**2*rAB**2* cos(beta2*theta)**2 + 2 &
-        *beta1*r*rAB*cos(beta2*theta) - 2*beta1* rAB**2*cos(beta2*theta) + rA*rAB - rA*rB - rAB &
-        **2 + rAB*rB)*( beta1**2*rAB**2*cos(beta2*theta)**2 - 2*beta1*r*rAB*cos(beta2* theta) &
-        + 2*beta1*rAB**2*cos(beta2*theta) - rA*rAB + rA*rB + rAB** 2 - rAB*rB)/(-beta1**2*r*rAB &
-        **2*cos(beta2*theta)**2 + beta1*r**2* rAB*cos(beta2*theta) - 2*beta1*r*rAB**2*cos(beta2 &
-        *theta) + beta1* rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r* rAB &
-        *rB)**2 + aA*(-beta1**2*rAB**2*cos(beta2*theta)**2 + 2*beta1*r *rAB*cos(beta2*theta) &
-        - 2*beta1*rAB**2*cos(beta2*theta) + rA*rAB - rA*rB - rAB**2 + rAB*rB)/(-beta1**2*r*rAB* &
-        *2*cos(beta2*theta)** 2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB**2*cos(beta2 &
-        * theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB &
-        *rB))/r + (aA*beta1*beta2*rAB*(beta1*rAB*cos( beta2*theta) - rA + rAB)*(-beta1*beta2 &
-        *rAB*(-beta1**2*r*rAB**2* cos(beta2*theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2 &
-        *beta1*r *rAB**2*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r* rA*rAB - r*rA &
-        *rB - r*rAB**2 + r*rAB*rB)*sin(beta2*theta)/((beta1* rAB*cos(beta2*theta) - rA + rAB) &
-        *(beta1*rAB*cos(beta2*theta) + rAB - rB)**2) - beta1*beta2*rAB*(-beta1**2*r*rAB**2 &
-        *cos(beta2* theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB**2* cos(beta2 &
-        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB) &
-        *sin(beta2*theta)/((beta1*rAB*cos( beta2*theta) - rA + rAB)**2*(beta1*rAB*cos(beta2 &
-        *theta) + rAB - rB)) - (2*beta1**2*beta2*r*rAB**2*sin(beta2*theta)*cos(beta2* theta) &
-        - beta1*beta2*r**2*rAB*sin(beta2*theta) + 2*beta1*beta2*r* rAB**2*sin(beta2*theta) &
-        - beta1*beta2*rA*rAB*rB*sin(beta2*theta)) /((beta1*rAB*cos(beta2*theta) - rA + rAB) &
-        *(beta1*rAB*cos(beta2* theta) + rAB - rB)))*sin(beta2*theta)/(-beta1**2*r*rAB**2 &
-        *cos( beta2*theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB **2*cos(beta2 &
-        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA* rAB - r*rA*rB - r*rAB**2 + r*rAB &
-        *rB) + aA*beta1*beta2*rAB*(beta1* rAB*cos(beta2*theta) + rAB - rB)*(-beta1*beta2*rAB*( &
-        -beta1**2*r* rAB**2*cos(beta2*theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2* beta1*r &
-        *rAB**2*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta ) + r*rA*rAB - r*rA*rB - r &
-        *rAB**2 + r*rAB*rB)*sin(beta2*theta)/(( beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1 &
-        *rAB*cos(beta2*theta ) + rAB - rB)**2) - beta1*beta2*rAB*(-beta1**2*r*rAB**2*cos(beta2 &
-        *theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB**2* cos(beta2*theta) &
-        + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB) &
-        *sin(beta2*theta)/((beta1*rAB*cos( beta2*theta) - rA + rAB)**2*(beta1*rAB*cos(beta2 &
-        *theta) + rAB - rB)) - (2*beta1**2*beta2*r*rAB**2*sin(beta2*theta)*cos(beta2* theta) &
-        - beta1*beta2*r**2*rAB*sin(beta2*theta) + 2*beta1*beta2*r* rAB**2*sin(beta2*theta) &
-        - beta1*beta2*rA*rAB*rB*sin(beta2*theta)) /((beta1*rAB*cos(beta2*theta) - rA + rAB) &
-        *(beta1*rAB*cos(beta2* theta) + rAB - rB)))*sin(beta2*theta)/(-beta1**2*r*rAB**2 &
-        *cos( beta2*theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB **2*cos(beta2 &
-        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA* rAB - r*rA*rB - r*rAB**2 + r*rAB &
-        *rB) - aA*(beta1*rAB*cos(beta2* theta) - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB &
-        - rB)*( -beta1*beta2*rAB*(-beta1**2*r*rAB**2*cos(beta2*theta)**2 + beta1* r**2*rAB &
-        *cos(beta2*theta) - 2*beta1*r*rAB**2*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2 &
-        *theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)*sin(beta2*theta)/((beta1*rAB &
-        *cos(beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB - rB)**2) - beta1*beta2 &
-        * rAB*(-beta1**2*r*rAB**2*cos(beta2*theta)**2 + beta1*r**2*rAB*cos( beta2*theta) - 2 &
-        *beta1*r*rAB**2*cos(beta2*theta) + beta1*rA*rAB* rB*cos(beta2*theta) + r*rA*rAB - r*rA &
-        *rB - r*rAB**2 + r*rAB*rB)* sin(beta2*theta)/((beta1*rAB*cos(beta2*theta) - rA + rAB)* &
-        *2*( beta1*rAB*cos(beta2*theta) + rAB - rB)) - (2*beta1**2*beta2*r*rAB **2*sin(beta2 &
-        *theta)*cos(beta2*theta) - beta1*beta2*r**2*rAB*sin( beta2*theta) + 2*beta1*beta2*r*rAB &
-        **2*sin(beta2*theta) - beta1* beta2*rA*rAB*rB*sin(beta2*theta))/((beta1*rAB*cos(beta2 &
-        *theta) - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB - rB)))*(-2*beta1**2* beta2*r*rAB &
-        **2*sin(beta2*theta)*cos(beta2*theta) + beta1*beta2*r **2*rAB*sin(beta2*theta) - 2 &
-        *beta1*beta2*r*rAB**2*sin(beta2*theta ) + beta1*beta2*rA*rAB*rB*sin(beta2*theta))/( &
-        -beta1**2*r*rAB**2* cos(beta2*theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r &
-        *rAB**2*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r* rA*rAB - r*rA*rB - r &
-        *rAB**2 + r*rAB*rB)**2 - aA*(beta1*rAB*cos( beta2*theta) - rA + rAB)*(beta1*rAB &
-        *cos(beta2*theta) + rAB - rB)* (-2*beta1**2*beta2**2*rAB**2*(-beta1**2*r*rAB**2 &
-        *cos(beta2*theta) **2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB**2*cos( beta2 &
-        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA *rB - r*rAB**2 + r*rAB*rB) &
-        *sin(beta2*theta)**2/((beta1*rAB*cos( beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2 &
-        *theta) + rAB - rB) **3) - 2*beta1**2*beta2**2*rAB**2*(-beta1**2*r*rAB**2*cos(beta2 &
-        * theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB**2* cos(beta2*theta) &
-        + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB) &
-        *sin(beta2*theta)**2/((beta1*rAB* cos(beta2*theta) - rA + rAB)**2*(beta1*rAB*cos(beta2 &
-        *theta) + rAB - rB)**2) - 2*beta1**2*beta2**2*rAB**2*(-beta1**2*r*rAB**2*cos( beta2 &
-        *theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB **2*cos(beta2*theta) &
-        + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA* rAB - r*rA*rB - r*rAB**2 + r*rAB*rB) &
-        *sin(beta2*theta)**2/((beta1* rAB*cos(beta2*theta) - rA + rAB)**3*(beta1*rAB*cos(beta2 &
-        *theta) + rAB - rB)) - beta1*beta2**2*rAB*(-beta1**2*r*rAB**2*cos(beta2* theta)**2 &
-        + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB**2* cos(beta2*theta) + beta1*rA*rAB &
-        *rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)*cos(beta2*theta) &
-        /((beta1*rAB*cos( beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB - rB) * &
-        *2) - beta1*beta2**2*rAB*(-beta1**2*r*rAB**2*cos(beta2*theta)**2 + beta1*r**2*rAB &
-        *cos(beta2*theta) - 2*beta1*r*rAB**2*cos(beta2* theta) + beta1*rA*rAB*rB*cos(beta2 &
-        *theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)*cos(beta2*theta)/((beta1*rAB &
-        *cos(beta2*theta ) - rA + rAB)**2*(beta1*rAB*cos(beta2*theta) + rAB - rB)) - 2* beta1 &
-        *beta2*rAB*(2*beta1**2*beta2*r*rAB**2*sin(beta2*theta)*cos( beta2*theta) - beta1*beta2 &
-        *r**2*rAB*sin(beta2*theta) + 2*beta1* beta2*r*rAB**2*sin(beta2*theta) - beta1*beta2*rA &
-        *rAB*rB*sin(beta2 *theta))*sin(beta2*theta)/((beta1*rAB*cos(beta2*theta) - rA + rAB ) &
-        *(beta1*rAB*cos(beta2*theta) + rAB - rB)**2) - 2*beta1*beta2*rAB *(2*beta1**2*beta2*r &
-        *rAB**2*sin(beta2*theta)*cos(beta2*theta) - beta1*beta2*r**2*rAB*sin(beta2*theta) + 2 &
-        *beta1*beta2*r*rAB**2* sin(beta2*theta) - beta1*beta2*rA*rAB*rB*sin(beta2*theta)) &
-        *sin( beta2*theta)/((beta1*rAB*cos(beta2*theta) - rA + rAB)**2*(beta1* rAB*cos(beta2 &
-        *theta) + rAB - rB)) - (-2*beta1**2*beta2**2*r*rAB** 2*sin(beta2*theta)**2 + 2*beta1**2 &
-        *beta2**2*r*rAB**2*cos(beta2* theta)**2 - beta1*beta2**2*r**2*rAB*cos(beta2*theta) + 2 &
-        *beta1* beta2**2*r*rAB**2*cos(beta2*theta) - beta1*beta2**2*rA*rAB*rB*cos (beta2 &
-        *theta))/((beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1* rAB*cos(beta2*theta) + rAB &
-        - rB)))/(-beta1**2*r*rAB**2*cos(beta2* theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2 &
-        *beta1*r*rAB**2* cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA &
-        *rB - r*rAB**2 + r*rAB*rB))/r**2)
+    res = -aA*betaAB_1*betaAB_2*rAB*wA*(r - rA)*(-betaAB_1**3*r*rAB**3*cos( betaAB_2*theta)**3 + 2 &
+        *betaAB_1**2*r**2*rAB**2*cos(betaAB_2*theta )**2 - 3*betaAB_1**2*r*rAB**3*cos(betaAB_2 &
+        *theta)**2 + betaAB_1** 2*r*rAB**2*rB*cos(betaAB_2*theta)**2 - betaAB_1**2*r*rAB**2 &
+        *cos( betaAB_2*theta)**2 + betaAB_1**2*rAB**2*rB*cos(betaAB_2*theta)**2 + 2*betaAB_1*r* &
+        *2*rAB**2*cos(betaAB_2*theta) - 2*betaAB_1*r**2* rAB*rB*cos(betaAB_2*theta) + betaAB_1 &
+        *r*rA*rAB**2*cos(betaAB_2* theta) - betaAB_1*r*rA*rAB*rB*cos(betaAB_2*theta) - 3 &
+        *betaAB_1*r* rAB**3*cos(betaAB_2*theta) + 3*betaAB_1*r*rAB**2*rB*cos(betaAB_2* theta) &
+        + r*rA*rAB**2 - 2*r*rA*rAB*rB - r*rA*rAB + r*rA*rB**2 + r* rA*rB - r*rAB**3 + 2*r*rAB* &
+        *2*rB + r*rAB**2 - r*rAB*rB**2 - r*rAB *rB + rA*rAB*rB - rA*rB**2 - rAB**2*rB + rAB*rB* &
+        *2)*sin(betaAB_2* theta)/((betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB)*(betaAB_1* rAB &
+        *cos(betaAB_2*theta) + rAB - rB)*(-betaAB_1**2*r*rAB**2*cos( betaAB_2*theta)**2 &
+        + betaAB_1*r**2*rAB*cos(betaAB_2*theta) - 2* betaAB_1*r*rAB**2*cos(betaAB_2*theta) &
+        + betaAB_1*rA*rAB*rB*cos( betaAB_2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)) &
+        - alphaA*((2*aA*betaAB_1*r*rAB*cos(betaAB_2*theta)/(-betaAB_1**2*r* rAB**2*cos(betaAB_2 &
+        *theta)**2 + betaAB_1*r**2*rAB*cos(betaAB_2* theta) - 2*betaAB_1*r*rAB**2*cos(betaAB_2 &
+        *theta) + betaAB_1*rA* rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r &
+        * rAB*rB) + aA*r*(-betaAB_1**2*rAB**2*cos(betaAB_2*theta)**2 + 2* betaAB_1*r*rAB &
+        *cos(betaAB_2*theta) - 2*betaAB_1*rAB**2*cos( betaAB_2*theta) + rA*rAB - rA*rB - rAB* &
+        *2 + rAB*rB)*(betaAB_1**2* rAB**2*cos(betaAB_2*theta)**2 - 2*betaAB_1*r*rAB &
+        *cos(betaAB_2* theta) + 2*betaAB_1*rAB**2*cos(betaAB_2*theta) - rA*rAB + rA*rB + rAB* &
+        *2 - rAB*rB)/(-betaAB_1**2*r*rAB**2*cos(betaAB_2*theta)**2 + betaAB_1*r**2*rAB &
+        *cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2*cos( betaAB_2*theta) + betaAB_1*rA*rAB*rB &
+        *cos(betaAB_2*theta) + r*rA* rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)**2 + aA*(-betaAB_1**2 &
+        *rAB**2 *cos(betaAB_2*theta)**2 + 2*betaAB_1*r*rAB*cos(betaAB_2*theta) - 2*betaAB_1*rAB &
+        **2*cos(betaAB_2*theta) + rA*rAB - rA*rB - rAB**2 + rAB*rB)/(-betaAB_1**2*r*rAB**2 &
+        *cos(betaAB_2*theta)**2 + betaAB_1* r**2*rAB*cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2 &
+        *cos(betaAB_2* theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA *rB &
+        - r*rAB**2 + r*rAB*rB))/r + (aA*betaAB_1*betaAB_2*rAB*( betaAB_1*rAB*cos(betaAB_2 &
+        *theta) - rA + rAB)*(-betaAB_1*betaAB_2* rAB*(-betaAB_1**2*r*rAB**2*cos(betaAB_2*theta) &
+        **2 + betaAB_1*r**2 *rAB*cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2*cos(betaAB_2 &
+        *theta ) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r &
+        *rAB*rB)*sin(betaAB_2*theta)/((betaAB_1*rAB*cos( betaAB_2*theta) - rA + rAB)*(betaAB_1 &
+        *rAB*cos(betaAB_2*theta) + rAB - rB)**2) - betaAB_1*betaAB_2*rAB*(-betaAB_1**2*r*rAB**2 &
+        *cos( betaAB_2*theta)**2 + betaAB_1*r**2*rAB*cos(betaAB_2*theta) - 2* betaAB_1*r*rAB**2 &
+        *cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos( betaAB_2*theta) + r*rA*rAB - r*rA*rB - r &
+        *rAB**2 + r*rAB*rB)*sin( betaAB_2*theta)/((betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB) &
+        **2 *(betaAB_1*rAB*cos(betaAB_2*theta) + rAB - rB)) - (2*betaAB_1**2* betaAB_2*r*rAB**2 &
+        *sin(betaAB_2*theta)*cos(betaAB_2*theta) - betaAB_1*betaAB_2*r**2*rAB*sin(betaAB_2 &
+        *theta) + 2*betaAB_1* betaAB_2*r*rAB**2*sin(betaAB_2*theta) - betaAB_1*betaAB_2*rA*rAB &
+        * rB*sin(betaAB_2*theta))/((betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB)*(betaAB_1*rAB &
+        *cos(betaAB_2*theta) + rAB - rB)))*sin(betaAB_2 *theta)/(-betaAB_1**2*r*rAB**2 &
+        *cos(betaAB_2*theta)**2 + betaAB_1* r**2*rAB*cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2 &
+        *cos(betaAB_2* theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA *rB &
+        - r*rAB**2 + r*rAB*rB) + aA*betaAB_1*betaAB_2*rAB*(betaAB_1* rAB*cos(betaAB_2*theta) &
+        + rAB - rB)*(-betaAB_1*betaAB_2*rAB*( -betaAB_1**2*r*rAB**2*cos(betaAB_2*theta)**2 &
+        + betaAB_1*r**2*rAB* cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2*cos(betaAB_2*theta) &
+        + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r* rAB**2 + r*rAB*rB) &
+        *sin(betaAB_2*theta)/((betaAB_1*rAB*cos( betaAB_2*theta) - rA + rAB)*(betaAB_1*rAB &
+        *cos(betaAB_2*theta) + rAB - rB)**2) - betaAB_1*betaAB_2*rAB*(-betaAB_1**2*r*rAB**2 &
+        *cos( betaAB_2*theta)**2 + betaAB_1*r**2*rAB*cos(betaAB_2*theta) - 2* betaAB_1*r*rAB**2 &
+        *cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos( betaAB_2*theta) + r*rA*rAB - r*rA*rB - r &
+        *rAB**2 + r*rAB*rB)*sin( betaAB_2*theta)/((betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB) &
+        **2 *(betaAB_1*rAB*cos(betaAB_2*theta) + rAB - rB)) - (2*betaAB_1**2* betaAB_2*r*rAB**2 &
+        *sin(betaAB_2*theta)*cos(betaAB_2*theta) - betaAB_1*betaAB_2*r**2*rAB*sin(betaAB_2 &
+        *theta) + 2*betaAB_1* betaAB_2*r*rAB**2*sin(betaAB_2*theta) - betaAB_1*betaAB_2*rA*rAB &
+        * rB*sin(betaAB_2*theta))/((betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB)*(betaAB_1*rAB &
+        *cos(betaAB_2*theta) + rAB - rB)))*sin(betaAB_2 *theta)/(-betaAB_1**2*r*rAB**2 &
+        *cos(betaAB_2*theta)**2 + betaAB_1* r**2*rAB*cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2 &
+        *cos(betaAB_2* theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA *rB &
+        - r*rAB**2 + r*rAB*rB) - aA*(betaAB_1*rAB*cos(betaAB_2*theta ) - rA + rAB)*(betaAB_1 &
+        *rAB*cos(betaAB_2*theta) + rAB - rB)*( -betaAB_1*betaAB_2*rAB*(-betaAB_1**2*r*rAB**2 &
+        *cos(betaAB_2*theta) **2 + betaAB_1*r**2*rAB*cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2 &
+        *cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r *rA*rAB - r*rA*rB - r &
+        *rAB**2 + r*rAB*rB)*sin(betaAB_2*theta)/(( betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB) &
+        *(betaAB_1*rAB*cos( betaAB_2*theta) + rAB - rB)**2) - betaAB_1*betaAB_2*rAB*( -betaAB_1 &
+        **2*r*rAB**2*cos(betaAB_2*theta)**2 + betaAB_1*r**2*rAB* cos(betaAB_2*theta) - 2 &
+        *betaAB_1*r*rAB**2*cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA &
+        *rAB - r*rA*rB - r* rAB**2 + r*rAB*rB)*sin(betaAB_2*theta)/((betaAB_1*rAB*cos( betaAB_2 &
+        *theta) - rA + rAB)**2*(betaAB_1*rAB*cos(betaAB_2*theta) + rAB - rB)) - (2*betaAB_1**2 &
+        *betaAB_2*r*rAB**2*sin(betaAB_2* theta)*cos(betaAB_2*theta) - betaAB_1*betaAB_2*r**2 &
+        *rAB*sin( betaAB_2*theta) + 2*betaAB_1*betaAB_2*r*rAB**2*sin(betaAB_2*theta ) &
+        - betaAB_1*betaAB_2*rA*rAB*rB*sin(betaAB_2*theta))/((betaAB_1* rAB*cos(betaAB_2*theta) &
+        - rA + rAB)*(betaAB_1*rAB*cos(betaAB_2* theta) + rAB - rB)))*(-2*betaAB_1**2*betaAB_2*r &
+        *rAB**2*sin( betaAB_2*theta)*cos(betaAB_2*theta) + betaAB_1*betaAB_2*r**2*rAB &
+        * sin(betaAB_2*theta) - 2*betaAB_1*betaAB_2*r*rAB**2*sin(betaAB_2* theta) + betaAB_1 &
+        *betaAB_2*rA*rAB*rB*sin(betaAB_2*theta))/( -betaAB_1**2*r*rAB**2*cos(betaAB_2*theta)* &
+        *2 + betaAB_1*r**2*rAB* cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2*cos(betaAB_2*theta) &
+        + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r* rAB**2 + r*rAB*rB)* &
+        *2 - aA*(betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB)*(betaAB_1*rAB*cos(betaAB_2 &
+        *theta) + rAB - rB)*(-2*betaAB_1 **2*betaAB_2**2*rAB**2*(-betaAB_1**2*r*rAB**2 &
+        *cos(betaAB_2*theta) **2 + betaAB_1*r**2*rAB*cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2 &
+        *cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r *rA*rAB - r*rA*rB - r &
+        *rAB**2 + r*rAB*rB)*sin(betaAB_2*theta)**2/ ((betaAB_1*rAB*cos(betaAB_2*theta) - rA &
+        + rAB)*(betaAB_1*rAB*cos( betaAB_2*theta) + rAB - rB)**3) - 2*betaAB_1**2*betaAB_2**2 &
+        *rAB** 2*(-betaAB_1**2*r*rAB**2*cos(betaAB_2*theta)**2 + betaAB_1*r**2* rAB &
+        *cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2*cos(betaAB_2*theta ) + betaAB_1*rA*rAB*rB &
+        *cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)*sin(betaAB_2*theta)**2 &
+        /((betaAB_1*rAB*cos( betaAB_2*theta) - rA + rAB)**2*(betaAB_1*rAB*cos(betaAB_2*theta) &
+        + rAB - rB)**2) - 2*betaAB_1**2*betaAB_2**2*rAB**2*(-betaAB_1**2* r*rAB**2*cos(betaAB_2 &
+        *theta)**2 + betaAB_1*r**2*rAB*cos(betaAB_2* theta) - 2*betaAB_1*r*rAB**2*cos(betaAB_2 &
+        *theta) + betaAB_1*rA* rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r &
+        * rAB*rB)*sin(betaAB_2*theta)**2/((betaAB_1*rAB*cos(betaAB_2*theta ) - rA + rAB)**3 &
+        *(betaAB_1*rAB*cos(betaAB_2*theta) + rAB - rB)) - betaAB_1*betaAB_2**2*rAB*(-betaAB_1* &
+        *2*r*rAB**2*cos(betaAB_2* theta)**2 + betaAB_1*r**2*rAB*cos(betaAB_2*theta) - 2 &
+        *betaAB_1*r* rAB**2*cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2* theta) + r &
+        *rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)*cos(betaAB_2* theta)/((betaAB_1*rAB &
+        *cos(betaAB_2*theta) - rA + rAB)*(betaAB_1* rAB*cos(betaAB_2*theta) + rAB - rB)**2) &
+        - betaAB_1*betaAB_2**2* rAB*(-betaAB_1**2*r*rAB**2*cos(betaAB_2*theta)**2 + betaAB_1*r* &
+        *2 *rAB*cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2*cos(betaAB_2*theta ) + betaAB_1*rA &
+        *rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)*cos(betaAB_2 &
+        *theta)/((betaAB_1*rAB*cos( betaAB_2*theta) - rA + rAB)**2*(betaAB_1*rAB*cos(betaAB_2 &
+        *theta) + rAB - rB)) - 2*betaAB_1*betaAB_2*rAB*(2*betaAB_1**2*betaAB_2*r* rAB**2 &
+        *sin(betaAB_2*theta)*cos(betaAB_2*theta) - betaAB_1* betaAB_2*r**2*rAB*sin(betaAB_2 &
+        *theta) + 2*betaAB_1*betaAB_2*r*rAB **2*sin(betaAB_2*theta) - betaAB_1*betaAB_2*rA*rAB &
+        *rB*sin( betaAB_2*theta))*sin(betaAB_2*theta)/((betaAB_1*rAB*cos(betaAB_2* theta) - rA &
+        + rAB)*(betaAB_1*rAB*cos(betaAB_2*theta) + rAB - rB) **2) - 2*betaAB_1*betaAB_2*rAB*(2 &
+        *betaAB_1**2*betaAB_2*r*rAB**2* sin(betaAB_2*theta)*cos(betaAB_2*theta) - betaAB_1 &
+        *betaAB_2*r**2* rAB*sin(betaAB_2*theta) + 2*betaAB_1*betaAB_2*r*rAB**2*sin( betaAB_2 &
+        *theta) - betaAB_1*betaAB_2*rA*rAB*rB*sin(betaAB_2*theta ))*sin(betaAB_2*theta) &
+        /((betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB)**2*(betaAB_1*rAB*cos(betaAB_2*theta) &
+        + rAB - rB)) - (-2* betaAB_1**2*betaAB_2**2*r*rAB**2*sin(betaAB_2*theta)**2 + 2 &
+        * betaAB_1**2*betaAB_2**2*r*rAB**2*cos(betaAB_2*theta)**2 - betaAB_1*betaAB_2**2*r**2 &
+        *rAB*cos(betaAB_2*theta) + 2*betaAB_1* betaAB_2**2*r*rAB**2*cos(betaAB_2*theta) &
+        - betaAB_1*betaAB_2**2* rA*rAB*rB*cos(betaAB_2*theta))/((betaAB_1*rAB*cos(betaAB_2 &
+        *theta ) - rA + rAB)*(betaAB_1*rAB*cos(betaAB_2*theta) + rAB - rB)))/( -betaAB_1**2*r &
+        *rAB**2*cos(betaAB_2*theta)**2 + betaAB_1*r**2*rAB* cos(betaAB_2*theta) - 2*betaAB_1*r &
+        *rAB**2*cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA &
+        *rB - r* rAB**2 + r*rAB*rB))/r**2)
 end function fA
 
 ! Function fB
@@ -249,109 +264,124 @@ function fB(x, y) result(res)
     theta = atan2(y, x)
     aB = alphaA/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log( rAB))
     bB = -alphaA*log(rB)/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log(rAB))
-    res = -aB*beta1*beta2*rAB*wB*(r - rB)*(-beta1**3*r*rAB**3*cos(beta2*theta)**3 + 2*beta1**2*r**2*rAB &
-        **2*cos(beta2*theta)**2 + beta1**2*r*rA*rAB **2*cos(beta2*theta)**2 - 3*beta1**2*r*rAB* &
-        *3*cos(beta2*theta)**2 - beta1**2*r*rAB**2*cos(beta2*theta)**2 + beta1**2*rA*rAB**2 &
-        *cos( beta2*theta)**2 - 2*beta1*r**2*rA*rAB*cos(beta2*theta) + 2*beta1* r**2*rAB**2 &
-        *cos(beta2*theta) + 3*beta1*r*rA*rAB**2*cos(beta2* theta) - beta1*r*rA*rAB*rB*cos(beta2 &
-        *theta) - 3*beta1*r*rAB**3* cos(beta2*theta) + beta1*r*rAB**2*rB*cos(beta2*theta) - r &
-        *rA**2* rAB + r*rA**2*rB + 2*r*rA*rAB**2 - 2*r*rA*rAB*rB - r*rA*rAB + r* rA*rB - r*rAB* &
-        *3 + r*rAB**2*rB + r*rAB**2 - r*rAB*rB + rA**2*rAB - rA**2*rB - rA*rAB**2 + rA*rAB*rB) &
-        *sin(beta2*theta)/((beta1*rAB* cos(beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2 &
-        *theta) + rAB - rB)*(-beta1**2*r*rAB**2*cos(beta2*theta)**2 + beta1*r**2*rAB*cos( beta2 &
-        *theta) - 2*beta1*r*rAB**2*cos(beta2*theta) + beta1*rA*rAB* rB*cos(beta2*theta) + r*rA &
-        *rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)) - alphaB*((2*aB*beta1*r*rAB*cos(beta2*theta)/( &
-        -beta1**2*r*rAB**2* cos(beta2*theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r &
-        *rAB**2*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r* rA*rAB - r*rA*rB - r &
-        *rAB**2 + r*rAB*rB) + aB*r*(-beta1**2*rAB**2* cos(beta2*theta)**2 + 2*beta1*r*rAB &
-        *cos(beta2*theta) - 2*beta1* rAB**2*cos(beta2*theta) + rA*rAB - rA*rB - rAB**2 + rAB &
-        *rB)*( beta1**2*rAB**2*cos(beta2*theta)**2 - 2*beta1*r*rAB*cos(beta2* theta) + 2*beta1 &
-        *rAB**2*cos(beta2*theta) - rA*rAB + rA*rB + rAB** 2 - rAB*rB)/(-beta1**2*r*rAB**2 &
-        *cos(beta2*theta)**2 + beta1*r**2* rAB*cos(beta2*theta) - 2*beta1*r*rAB**2*cos(beta2 &
-        *theta) + beta1* rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r* rAB &
-        *rB)**2 + aB*(-beta1**2*rAB**2*cos(beta2*theta)**2 + 2*beta1*r *rAB*cos(beta2*theta) &
-        - 2*beta1*rAB**2*cos(beta2*theta) + rA*rAB - rA*rB - rAB**2 + rAB*rB)/(-beta1**2*r*rAB* &
-        *2*cos(beta2*theta)** 2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB**2*cos(beta2 &
-        * theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB &
-        *rB))/r + (aB*beta1*beta2*rAB*(beta1*rAB*cos( beta2*theta) - rA + rAB)*(-beta1*beta2 &
-        *rAB*(-beta1**2*r*rAB**2* cos(beta2*theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2 &
-        *beta1*r *rAB**2*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r* rA*rAB - r*rA &
-        *rB - r*rAB**2 + r*rAB*rB)*sin(beta2*theta)/((beta1* rAB*cos(beta2*theta) - rA + rAB) &
-        *(beta1*rAB*cos(beta2*theta) + rAB - rB)**2) - beta1*beta2*rAB*(-beta1**2*r*rAB**2 &
-        *cos(beta2* theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB**2* cos(beta2 &
-        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB) &
-        *sin(beta2*theta)/((beta1*rAB*cos( beta2*theta) - rA + rAB)**2*(beta1*rAB*cos(beta2 &
-        *theta) + rAB - rB)) - (2*beta1**2*beta2*r*rAB**2*sin(beta2*theta)*cos(beta2* theta) &
-        - beta1*beta2*r**2*rAB*sin(beta2*theta) + 2*beta1*beta2*r* rAB**2*sin(beta2*theta) &
-        - beta1*beta2*rA*rAB*rB*sin(beta2*theta)) /((beta1*rAB*cos(beta2*theta) - rA + rAB) &
-        *(beta1*rAB*cos(beta2* theta) + rAB - rB)))*sin(beta2*theta)/(-beta1**2*r*rAB**2 &
-        *cos( beta2*theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB **2*cos(beta2 &
-        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA* rAB - r*rA*rB - r*rAB**2 + r*rAB &
-        *rB) + aB*beta1*beta2*rAB*(beta1* rAB*cos(beta2*theta) + rAB - rB)*(-beta1*beta2*rAB*( &
-        -beta1**2*r* rAB**2*cos(beta2*theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2* beta1*r &
-        *rAB**2*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta ) + r*rA*rAB - r*rA*rB - r &
-        *rAB**2 + r*rAB*rB)*sin(beta2*theta)/(( beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1 &
-        *rAB*cos(beta2*theta ) + rAB - rB)**2) - beta1*beta2*rAB*(-beta1**2*r*rAB**2*cos(beta2 &
-        *theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB**2* cos(beta2*theta) &
-        + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB) &
-        *sin(beta2*theta)/((beta1*rAB*cos( beta2*theta) - rA + rAB)**2*(beta1*rAB*cos(beta2 &
-        *theta) + rAB - rB)) - (2*beta1**2*beta2*r*rAB**2*sin(beta2*theta)*cos(beta2* theta) &
-        - beta1*beta2*r**2*rAB*sin(beta2*theta) + 2*beta1*beta2*r* rAB**2*sin(beta2*theta) &
-        - beta1*beta2*rA*rAB*rB*sin(beta2*theta)) /((beta1*rAB*cos(beta2*theta) - rA + rAB) &
-        *(beta1*rAB*cos(beta2* theta) + rAB - rB)))*sin(beta2*theta)/(-beta1**2*r*rAB**2 &
-        *cos( beta2*theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB **2*cos(beta2 &
-        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA* rAB - r*rA*rB - r*rAB**2 + r*rAB &
-        *rB) - aB*(beta1*rAB*cos(beta2* theta) - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB &
-        - rB)*( -beta1*beta2*rAB*(-beta1**2*r*rAB**2*cos(beta2*theta)**2 + beta1* r**2*rAB &
-        *cos(beta2*theta) - 2*beta1*r*rAB**2*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2 &
-        *theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)*sin(beta2*theta)/((beta1*rAB &
-        *cos(beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB - rB)**2) - beta1*beta2 &
-        * rAB*(-beta1**2*r*rAB**2*cos(beta2*theta)**2 + beta1*r**2*rAB*cos( beta2*theta) - 2 &
-        *beta1*r*rAB**2*cos(beta2*theta) + beta1*rA*rAB* rB*cos(beta2*theta) + r*rA*rAB - r*rA &
-        *rB - r*rAB**2 + r*rAB*rB)* sin(beta2*theta)/((beta1*rAB*cos(beta2*theta) - rA + rAB)* &
-        *2*( beta1*rAB*cos(beta2*theta) + rAB - rB)) - (2*beta1**2*beta2*r*rAB **2*sin(beta2 &
-        *theta)*cos(beta2*theta) - beta1*beta2*r**2*rAB*sin( beta2*theta) + 2*beta1*beta2*r*rAB &
-        **2*sin(beta2*theta) - beta1* beta2*rA*rAB*rB*sin(beta2*theta))/((beta1*rAB*cos(beta2 &
-        *theta) - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB - rB)))*(-2*beta1**2* beta2*r*rAB &
-        **2*sin(beta2*theta)*cos(beta2*theta) + beta1*beta2*r **2*rAB*sin(beta2*theta) - 2 &
-        *beta1*beta2*r*rAB**2*sin(beta2*theta ) + beta1*beta2*rA*rAB*rB*sin(beta2*theta))/( &
-        -beta1**2*r*rAB**2* cos(beta2*theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r &
-        *rAB**2*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r* rA*rAB - r*rA*rB - r &
-        *rAB**2 + r*rAB*rB)**2 - aB*(beta1*rAB*cos( beta2*theta) - rA + rAB)*(beta1*rAB &
-        *cos(beta2*theta) + rAB - rB)* (-2*beta1**2*beta2**2*rAB**2*(-beta1**2*r*rAB**2 &
-        *cos(beta2*theta) **2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB**2*cos( beta2 &
-        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA *rB - r*rAB**2 + r*rAB*rB) &
-        *sin(beta2*theta)**2/((beta1*rAB*cos( beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2 &
-        *theta) + rAB - rB) **3) - 2*beta1**2*beta2**2*rAB**2*(-beta1**2*r*rAB**2*cos(beta2 &
-        * theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB**2* cos(beta2*theta) &
-        + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB) &
-        *sin(beta2*theta)**2/((beta1*rAB* cos(beta2*theta) - rA + rAB)**2*(beta1*rAB*cos(beta2 &
-        *theta) + rAB - rB)**2) - 2*beta1**2*beta2**2*rAB**2*(-beta1**2*r*rAB**2*cos( beta2 &
-        *theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB **2*cos(beta2*theta) &
-        + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA* rAB - r*rA*rB - r*rAB**2 + r*rAB*rB) &
-        *sin(beta2*theta)**2/((beta1* rAB*cos(beta2*theta) - rA + rAB)**3*(beta1*rAB*cos(beta2 &
-        *theta) + rAB - rB)) - beta1*beta2**2*rAB*(-beta1**2*r*rAB**2*cos(beta2* theta)**2 &
-        + beta1*r**2*rAB*cos(beta2*theta) - 2*beta1*r*rAB**2* cos(beta2*theta) + beta1*rA*rAB &
-        *rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)*cos(beta2*theta) &
-        /((beta1*rAB*cos( beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB - rB) * &
-        *2) - beta1*beta2**2*rAB*(-beta1**2*r*rAB**2*cos(beta2*theta)**2 + beta1*r**2*rAB &
-        *cos(beta2*theta) - 2*beta1*r*rAB**2*cos(beta2* theta) + beta1*rA*rAB*rB*cos(beta2 &
-        *theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)*cos(beta2*theta)/((beta1*rAB &
-        *cos(beta2*theta ) - rA + rAB)**2*(beta1*rAB*cos(beta2*theta) + rAB - rB)) - 2* beta1 &
-        *beta2*rAB*(2*beta1**2*beta2*r*rAB**2*sin(beta2*theta)*cos( beta2*theta) - beta1*beta2 &
-        *r**2*rAB*sin(beta2*theta) + 2*beta1* beta2*r*rAB**2*sin(beta2*theta) - beta1*beta2*rA &
-        *rAB*rB*sin(beta2 *theta))*sin(beta2*theta)/((beta1*rAB*cos(beta2*theta) - rA + rAB ) &
-        *(beta1*rAB*cos(beta2*theta) + rAB - rB)**2) - 2*beta1*beta2*rAB *(2*beta1**2*beta2*r &
-        *rAB**2*sin(beta2*theta)*cos(beta2*theta) - beta1*beta2*r**2*rAB*sin(beta2*theta) + 2 &
-        *beta1*beta2*r*rAB**2* sin(beta2*theta) - beta1*beta2*rA*rAB*rB*sin(beta2*theta)) &
-        *sin( beta2*theta)/((beta1*rAB*cos(beta2*theta) - rA + rAB)**2*(beta1* rAB*cos(beta2 &
-        *theta) + rAB - rB)) - (-2*beta1**2*beta2**2*r*rAB** 2*sin(beta2*theta)**2 + 2*beta1**2 &
-        *beta2**2*r*rAB**2*cos(beta2* theta)**2 - beta1*beta2**2*r**2*rAB*cos(beta2*theta) + 2 &
-        *beta1* beta2**2*r*rAB**2*cos(beta2*theta) - beta1*beta2**2*rA*rAB*rB*cos (beta2 &
-        *theta))/((beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1* rAB*cos(beta2*theta) + rAB &
-        - rB)))/(-beta1**2*r*rAB**2*cos(beta2* theta)**2 + beta1*r**2*rAB*cos(beta2*theta) - 2 &
-        *beta1*r*rAB**2* cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA &
-        *rB - r*rAB**2 + r*rAB*rB))/r**2)
+    res = -aB*betaAB_1*betaAB_2*rAB*wB*(r - rB)*(-betaAB_1**3*r*rAB**3*cos( betaAB_2*theta)**3 + 2 &
+        *betaAB_1**2*r**2*rAB**2*cos(betaAB_2*theta )**2 + betaAB_1**2*r*rA*rAB**2*cos(betaAB_2 &
+        *theta)**2 - 3* betaAB_1**2*r*rAB**3*cos(betaAB_2*theta)**2 - betaAB_1**2*r*rAB** 2 &
+        *cos(betaAB_2*theta)**2 + betaAB_1**2*rA*rAB**2*cos(betaAB_2* theta)**2 - 2*betaAB_1*r* &
+        *2*rA*rAB*cos(betaAB_2*theta) + 2* betaAB_1*r**2*rAB**2*cos(betaAB_2*theta) + 3 &
+        *betaAB_1*r*rA*rAB**2 *cos(betaAB_2*theta) - betaAB_1*r*rA*rAB*rB*cos(betaAB_2*theta) &
+        - 3*betaAB_1*r*rAB**3*cos(betaAB_2*theta) + betaAB_1*r*rAB**2*rB* cos(betaAB_2*theta) &
+        - r*rA**2*rAB + r*rA**2*rB + 2*r*rA*rAB**2 - 2*r*rA*rAB*rB - r*rA*rAB + r*rA*rB - r*rAB &
+        **3 + r*rAB**2*rB + r* rAB**2 - r*rAB*rB + rA**2*rAB - rA**2*rB - rA*rAB**2 + rA*rAB &
+        *rB) *sin(betaAB_2*theta)/((betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB)*(betaAB_1*rAB &
+        *cos(betaAB_2*theta) + rAB - rB)*(-betaAB_1**2* r*rAB**2*cos(betaAB_2*theta)**2 &
+        + betaAB_1*r**2*rAB*cos(betaAB_2* theta) - 2*betaAB_1*r*rAB**2*cos(betaAB_2*theta) &
+        + betaAB_1*rA* rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r* rAB &
+        *rB)) - alphaB*((2*aB*betaAB_1*r*rAB*cos(betaAB_2*theta)/( -betaAB_1**2*r*rAB**2 &
+        *cos(betaAB_2*theta)**2 + betaAB_1*r**2*rAB* cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2 &
+        *cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r &
+        * rAB**2 + r*rAB*rB) + aB*r*(-betaAB_1**2*rAB**2*cos(betaAB_2*theta )**2 + 2*betaAB_1*r &
+        *rAB*cos(betaAB_2*theta) - 2*betaAB_1*rAB**2* cos(betaAB_2*theta) + rA*rAB - rA*rB &
+        - rAB**2 + rAB*rB)*(betaAB_1 **2*rAB**2*cos(betaAB_2*theta)**2 - 2*betaAB_1*r*rAB &
+        *cos(betaAB_2 *theta) + 2*betaAB_1*rAB**2*cos(betaAB_2*theta) - rA*rAB + rA*rB + rAB* &
+        *2 - rAB*rB)/(-betaAB_1**2*r*rAB**2*cos(betaAB_2*theta)**2 + betaAB_1*r**2*rAB &
+        *cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2*cos (betaAB_2*theta) + betaAB_1*rA*rAB*rB &
+        *cos(betaAB_2*theta) + r*rA* rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)**2 + aB*(-betaAB_1**2 &
+        *rAB**2 *cos(betaAB_2*theta)**2 + 2*betaAB_1*r*rAB*cos(betaAB_2*theta) - 2*betaAB_1*rAB &
+        **2*cos(betaAB_2*theta) + rA*rAB - rA*rB - rAB**2 + rAB*rB)/(-betaAB_1**2*r*rAB**2 &
+        *cos(betaAB_2*theta)**2 + betaAB_1* r**2*rAB*cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2 &
+        *cos(betaAB_2* theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA *rB &
+        - r*rAB**2 + r*rAB*rB))/r + (aB*betaAB_1*betaAB_2*rAB*( betaAB_1*rAB*cos(betaAB_2 &
+        *theta) - rA + rAB)*(-betaAB_1*betaAB_2* rAB*(-betaAB_1**2*r*rAB**2*cos(betaAB_2*theta) &
+        **2 + betaAB_1*r**2 *rAB*cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2*cos(betaAB_2 &
+        *theta ) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r &
+        *rAB*rB)*sin(betaAB_2*theta)/((betaAB_1*rAB*cos( betaAB_2*theta) - rA + rAB)*(betaAB_1 &
+        *rAB*cos(betaAB_2*theta) + rAB - rB)**2) - betaAB_1*betaAB_2*rAB*(-betaAB_1**2*r*rAB**2 &
+        *cos( betaAB_2*theta)**2 + betaAB_1*r**2*rAB*cos(betaAB_2*theta) - 2* betaAB_1*r*rAB**2 &
+        *cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos( betaAB_2*theta) + r*rA*rAB - r*rA*rB - r &
+        *rAB**2 + r*rAB*rB)*sin( betaAB_2*theta)/((betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB) &
+        **2 *(betaAB_1*rAB*cos(betaAB_2*theta) + rAB - rB)) - (2*betaAB_1**2* betaAB_2*r*rAB**2 &
+        *sin(betaAB_2*theta)*cos(betaAB_2*theta) - betaAB_1*betaAB_2*r**2*rAB*sin(betaAB_2 &
+        *theta) + 2*betaAB_1* betaAB_2*r*rAB**2*sin(betaAB_2*theta) - betaAB_1*betaAB_2*rA*rAB &
+        * rB*sin(betaAB_2*theta))/((betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB)*(betaAB_1*rAB &
+        *cos(betaAB_2*theta) + rAB - rB)))*sin(betaAB_2 *theta)/(-betaAB_1**2*r*rAB**2 &
+        *cos(betaAB_2*theta)**2 + betaAB_1* r**2*rAB*cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2 &
+        *cos(betaAB_2* theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA *rB &
+        - r*rAB**2 + r*rAB*rB) + aB*betaAB_1*betaAB_2*rAB*(betaAB_1* rAB*cos(betaAB_2*theta) &
+        + rAB - rB)*(-betaAB_1*betaAB_2*rAB*( -betaAB_1**2*r*rAB**2*cos(betaAB_2*theta)**2 &
+        + betaAB_1*r**2*rAB* cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2*cos(betaAB_2*theta) &
+        + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r* rAB**2 + r*rAB*rB) &
+        *sin(betaAB_2*theta)/((betaAB_1*rAB*cos( betaAB_2*theta) - rA + rAB)*(betaAB_1*rAB &
+        *cos(betaAB_2*theta) + rAB - rB)**2) - betaAB_1*betaAB_2*rAB*(-betaAB_1**2*r*rAB**2 &
+        *cos( betaAB_2*theta)**2 + betaAB_1*r**2*rAB*cos(betaAB_2*theta) - 2* betaAB_1*r*rAB**2 &
+        *cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos( betaAB_2*theta) + r*rA*rAB - r*rA*rB - r &
+        *rAB**2 + r*rAB*rB)*sin( betaAB_2*theta)/((betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB) &
+        **2 *(betaAB_1*rAB*cos(betaAB_2*theta) + rAB - rB)) - (2*betaAB_1**2* betaAB_2*r*rAB**2 &
+        *sin(betaAB_2*theta)*cos(betaAB_2*theta) - betaAB_1*betaAB_2*r**2*rAB*sin(betaAB_2 &
+        *theta) + 2*betaAB_1* betaAB_2*r*rAB**2*sin(betaAB_2*theta) - betaAB_1*betaAB_2*rA*rAB &
+        * rB*sin(betaAB_2*theta))/((betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB)*(betaAB_1*rAB &
+        *cos(betaAB_2*theta) + rAB - rB)))*sin(betaAB_2 *theta)/(-betaAB_1**2*r*rAB**2 &
+        *cos(betaAB_2*theta)**2 + betaAB_1* r**2*rAB*cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2 &
+        *cos(betaAB_2* theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA *rB &
+        - r*rAB**2 + r*rAB*rB) - aB*(betaAB_1*rAB*cos(betaAB_2*theta ) - rA + rAB)*(betaAB_1 &
+        *rAB*cos(betaAB_2*theta) + rAB - rB)*( -betaAB_1*betaAB_2*rAB*(-betaAB_1**2*r*rAB**2 &
+        *cos(betaAB_2*theta) **2 + betaAB_1*r**2*rAB*cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2 &
+        *cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r *rA*rAB - r*rA*rB - r &
+        *rAB**2 + r*rAB*rB)*sin(betaAB_2*theta)/(( betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB) &
+        *(betaAB_1*rAB*cos( betaAB_2*theta) + rAB - rB)**2) - betaAB_1*betaAB_2*rAB*( -betaAB_1 &
+        **2*r*rAB**2*cos(betaAB_2*theta)**2 + betaAB_1*r**2*rAB* cos(betaAB_2*theta) - 2 &
+        *betaAB_1*r*rAB**2*cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA &
+        *rAB - r*rA*rB - r* rAB**2 + r*rAB*rB)*sin(betaAB_2*theta)/((betaAB_1*rAB*cos( betaAB_2 &
+        *theta) - rA + rAB)**2*(betaAB_1*rAB*cos(betaAB_2*theta) + rAB - rB)) - (2*betaAB_1**2 &
+        *betaAB_2*r*rAB**2*sin(betaAB_2* theta)*cos(betaAB_2*theta) - betaAB_1*betaAB_2*r**2 &
+        *rAB*sin( betaAB_2*theta) + 2*betaAB_1*betaAB_2*r*rAB**2*sin(betaAB_2*theta ) &
+        - betaAB_1*betaAB_2*rA*rAB*rB*sin(betaAB_2*theta))/((betaAB_1* rAB*cos(betaAB_2*theta) &
+        - rA + rAB)*(betaAB_1*rAB*cos(betaAB_2* theta) + rAB - rB)))*(-2*betaAB_1**2*betaAB_2*r &
+        *rAB**2*sin( betaAB_2*theta)*cos(betaAB_2*theta) + betaAB_1*betaAB_2*r**2*rAB &
+        * sin(betaAB_2*theta) - 2*betaAB_1*betaAB_2*r*rAB**2*sin(betaAB_2* theta) + betaAB_1 &
+        *betaAB_2*rA*rAB*rB*sin(betaAB_2*theta))/( -betaAB_1**2*r*rAB**2*cos(betaAB_2*theta)* &
+        *2 + betaAB_1*r**2*rAB* cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2*cos(betaAB_2*theta) &
+        + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r* rAB**2 + r*rAB*rB)* &
+        *2 - aB*(betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB)*(betaAB_1*rAB*cos(betaAB_2 &
+        *theta) + rAB - rB)*(-2*betaAB_1 **2*betaAB_2**2*rAB**2*(-betaAB_1**2*r*rAB**2 &
+        *cos(betaAB_2*theta) **2 + betaAB_1*r**2*rAB*cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2 &
+        *cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r *rA*rAB - r*rA*rB - r &
+        *rAB**2 + r*rAB*rB)*sin(betaAB_2*theta)**2/ ((betaAB_1*rAB*cos(betaAB_2*theta) - rA &
+        + rAB)*(betaAB_1*rAB*cos( betaAB_2*theta) + rAB - rB)**3) - 2*betaAB_1**2*betaAB_2**2 &
+        *rAB** 2*(-betaAB_1**2*r*rAB**2*cos(betaAB_2*theta)**2 + betaAB_1*r**2* rAB &
+        *cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2*cos(betaAB_2*theta ) + betaAB_1*rA*rAB*rB &
+        *cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)*sin(betaAB_2*theta)**2 &
+        /((betaAB_1*rAB*cos( betaAB_2*theta) - rA + rAB)**2*(betaAB_1*rAB*cos(betaAB_2*theta) &
+        + rAB - rB)**2) - 2*betaAB_1**2*betaAB_2**2*rAB**2*(-betaAB_1**2* r*rAB**2*cos(betaAB_2 &
+        *theta)**2 + betaAB_1*r**2*rAB*cos(betaAB_2* theta) - 2*betaAB_1*r*rAB**2*cos(betaAB_2 &
+        *theta) + betaAB_1*rA* rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r &
+        * rAB*rB)*sin(betaAB_2*theta)**2/((betaAB_1*rAB*cos(betaAB_2*theta ) - rA + rAB)**3 &
+        *(betaAB_1*rAB*cos(betaAB_2*theta) + rAB - rB)) - betaAB_1*betaAB_2**2*rAB*(-betaAB_1* &
+        *2*r*rAB**2*cos(betaAB_2* theta)**2 + betaAB_1*r**2*rAB*cos(betaAB_2*theta) - 2 &
+        *betaAB_1*r* rAB**2*cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2* theta) + r &
+        *rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)*cos(betaAB_2* theta)/((betaAB_1*rAB &
+        *cos(betaAB_2*theta) - rA + rAB)*(betaAB_1* rAB*cos(betaAB_2*theta) + rAB - rB)**2) &
+        - betaAB_1*betaAB_2**2* rAB*(-betaAB_1**2*r*rAB**2*cos(betaAB_2*theta)**2 + betaAB_1*r* &
+        *2 *rAB*cos(betaAB_2*theta) - 2*betaAB_1*r*rAB**2*cos(betaAB_2*theta ) + betaAB_1*rA &
+        *rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA*rB - r*rAB**2 + r*rAB*rB)*cos(betaAB_2 &
+        *theta)/((betaAB_1*rAB*cos( betaAB_2*theta) - rA + rAB)**2*(betaAB_1*rAB*cos(betaAB_2 &
+        *theta) + rAB - rB)) - 2*betaAB_1*betaAB_2*rAB*(2*betaAB_1**2*betaAB_2*r* rAB**2 &
+        *sin(betaAB_2*theta)*cos(betaAB_2*theta) - betaAB_1* betaAB_2*r**2*rAB*sin(betaAB_2 &
+        *theta) + 2*betaAB_1*betaAB_2*r*rAB **2*sin(betaAB_2*theta) - betaAB_1*betaAB_2*rA*rAB &
+        *rB*sin( betaAB_2*theta))*sin(betaAB_2*theta)/((betaAB_1*rAB*cos(betaAB_2* theta) - rA &
+        + rAB)*(betaAB_1*rAB*cos(betaAB_2*theta) + rAB - rB) **2) - 2*betaAB_1*betaAB_2*rAB*(2 &
+        *betaAB_1**2*betaAB_2*r*rAB**2* sin(betaAB_2*theta)*cos(betaAB_2*theta) - betaAB_1 &
+        *betaAB_2*r**2* rAB*sin(betaAB_2*theta) + 2*betaAB_1*betaAB_2*r*rAB**2*sin( betaAB_2 &
+        *theta) - betaAB_1*betaAB_2*rA*rAB*rB*sin(betaAB_2*theta ))*sin(betaAB_2*theta) &
+        /((betaAB_1*rAB*cos(betaAB_2*theta) - rA + rAB)**2*(betaAB_1*rAB*cos(betaAB_2*theta) &
+        + rAB - rB)) - (-2* betaAB_1**2*betaAB_2**2*r*rAB**2*sin(betaAB_2*theta)**2 + 2 &
+        * betaAB_1**2*betaAB_2**2*r*rAB**2*cos(betaAB_2*theta)**2 - betaAB_1*betaAB_2**2*r**2 &
+        *rAB*cos(betaAB_2*theta) + 2*betaAB_1* betaAB_2**2*r*rAB**2*cos(betaAB_2*theta) &
+        - betaAB_1*betaAB_2**2* rA*rAB*rB*cos(betaAB_2*theta))/((betaAB_1*rAB*cos(betaAB_2 &
+        *theta ) - rA + rAB)*(betaAB_1*rAB*cos(betaAB_2*theta) + rAB - rB)))/( -betaAB_1**2*r &
+        *rAB**2*cos(betaAB_2*theta)**2 + betaAB_1*r**2*rAB* cos(betaAB_2*theta) - 2*betaAB_1*r &
+        *rAB**2*cos(betaAB_2*theta) + betaAB_1*rA*rAB*rB*cos(betaAB_2*theta) + r*rA*rAB - r*rA &
+        *rB - r* rAB**2 + r*rAB*rB))/r**2)
 end function fB
 
 end module cht_02

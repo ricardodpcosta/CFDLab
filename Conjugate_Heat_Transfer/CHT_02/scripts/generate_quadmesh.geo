@@ -21,12 +21,16 @@ Repository:
     https://github.com/ricardodpcosta/CFD-TestSuite
 
 Dependencies:
-    Gmsh (version >= 4.8.4)
+    Gmsh (version > =  4.8.4)
 
 Usage:
     gmsh -setnumber N 1 generate_quadmesh.geo
 ===============================================================================
 */
+
+//============================================
+// PARAMETERS
+//============================================
 
 // refinement level
 If (!Exists(N))
@@ -37,18 +41,24 @@ EndIf
 cx = 0.0;
 cy = 0.0;
 
-// outer boundary radius
+// outer boundary
 rA = 1.0;
+betaA_1 = 0.0;
+betaA_2 = 8.0;
 
-// interface radius
+// interface
 rAB = 0.75;
+betaAB_1 = 0.04;
+betaAB_2 = 8.0;
 
-// inner boundary radius
+// inner boundary
 rB = 0.5;
+betaB_1 = 0.0;
+betaB_2 = 8.0;
 
 // refinement controls
-lc1 = 0.06/(1.38^(N-1));
-lc2 = 0.2/(1.38^(N-1));
+np = Round(55*(1.38^(N-1)));
+lc = 1.0/Round(6*(1.4^(N-1)));
 
 // output controls
 outdir = "../meshes";
@@ -59,112 +69,151 @@ name = "quadmesh";
 //============================================
 
 // outer boundary
-Point(1) = {cx-rA, cy, 0.0};
-Point(2) = {cx, cy+rA, 0.0};
-Point(3) = {cx+rA, cy, 0.0};
-Point(4) = {cx, cy-rA, 0.0};
-Point(5) = {cx, cy, 0.0};
+For i In {0:np-1}
+      t = i*2.0*Pi/np;
+      r = rA*(1.0+betaA_1*Cos(betaA_2*t));
+      x = r*Cos(t);
+      y = r*Sin(t);
+      Point(i+1) = {cx+x, cy+y, 0.0, lc};
+      // If(i==  0)
+      //       p1x = cx+x;
+      //       p1y = cy+y;
+      // EndIf
+      // If(i==  1)
+      //       p2x = cx+x;
+      //       p2y = cy+y;
+      //       Printf("%23.16f", (p2y-p1y)/(p2x-p1x));
+      // EndIf
+EndFor
 
 // interface
-Point(6) = {cx-rAB, cy, 0.0};
-Point(7) = {cx, cy+rAB, 0.0};
-Point(8) = {cx+rAB, cy, 0.0};
-Point(9) = {cx, cy-rAB, 0.0};
-Point(10) = {cx, cy, 0.0};
+For i In {0:np-1}
+      t = i*2.0*Pi/np;
+      r = rAB*(1.0+betaAB_1*Cos(betaAB_2*t));
+      x = r*Cos(t);
+      y = r*Sin(t);
+      Point(i+np+1) = {cx+x, cy+y, 0.0, lc};
+      // If(i==  0)
+      //       p1x = cx+x;
+      //       p1y = cy+y;
+      // EndIf
+      // If(i==  1)
+      //       p2x = cx+x;
+      //       p2y = cy+y;
+      //       Printf("%23.16f", (p2y-p1y)/(p2x-p1x));
+      // EndIf
+EndFor
 
 // inner boundary
-Point(11) = {cx-rB, cy, 0.0};
-Point(12) = {cx, cy+rB, 0.0};
-Point(13) = {cx+rB, cy, 0.0};
-Point(14) = {cx, cy-rB, 0.0};
-Point(15) = {cx, cy, 0.0};
+For i In {0:np-1}
+      t = i*2.0*Pi/np;
+      r = rB*(1.0+betaB_1*Cos(betaB_2*t));
+      x = r*Cos(t);
+      y = r*Sin(t);
+      Point(i+2*np+1) = {cx+x, cy+y, 0.0, lc};
+      // If(i==  0)
+      //       p1x = cx+x;
+      //       p1y = cy+y;
+      // EndIf
+      // If(i==  1)
+      //       p2x = cx+x;
+      //       p2y = cy+y;
+      //       Printf("%23.16f", (p2y-p1y)/(p2x-p1x));
+      // EndIf
+EndFor
 
 //============================================
 // LINES
 //============================================
 
 // outer boundary
-Circle(1) = {1, 5, 2};
-Circle(2) = {2, 5, 3};
-Circle(3) = {3, 5, 4};
-Circle(4) = {4, 5, 1};
+For i In {1:np-1}
+      Line(i) = {i, i+1};
+      // Printf("%10g %9g %9g", 2, i, i+1);
+EndFor
+Line(np) = {np, 1};
+// Printf("%10g %9g %9g", 2, np, 1);
 
 // interface
-Circle(5) = {6, 10, 7};
-Circle(6) = {7, 10, 8};
-Circle(7) = {8, 10, 9};
-Circle(8) = {9, 10, 6};
+For i In {1:np-1}
+      Line(i+np) = {i+np, i+np+1};
+      // Printf("%10g %9g %9g", 2, i+np, i+np+1);
+EndFor
+Line(2*np) = {2*np, np+1};
+// Printf("%10g %9g %9g", 2, 2*np, np+1);
 
 // inner boundary
-Circle(9) = {11, 15, 12};
-Circle(10) = {12, 15, 13};
-Circle(11) = {13, 15, 14};
-Circle(12) = {14, 15, 11};
+For i In {1:np-1}
+      Line(i+2*np) = {i+2*np, i+2*np+1};
+      // Printf("%10g %9g %9g", 2, i+2*np, i+2*np+1);
+EndFor
+Line(3*np) = {3*np, 2*np+1};
+// Printf("%10g %9g %9g", 2, 3*np, 2*np+1);
 
 // outer subdomain
-Line(13) = {1, 6};
-Line(14) = {2, 7};
-Line(15) = {3, 8};
-Line(16) = {4, 9};
+For i In {1:np}
+      Line(i+3*np) = {i, i+np};
+EndFor
 
 // inner subdomain
-Line(17) = {6, 11};
-Line(18) = {7, 12};
-Line(19) = {8, 13};
-Line(20) = {9, 14};
+For i In {1:np}
+      Line(i+4*np) = {i+np, i+2*np};
+EndFor
 
 //============================================
 // LINE LOOPS
 //============================================
 
 // outer subdomain
-Line Loop(1) = {1, 14, -5, -13};
-Line Loop(2) = {2, 15, -6, -14};
-Line Loop(3) = {3, 16, -7, -15};
-Line Loop(4) = {4, 13, -8, -16};
+For i In {1:np-1}
+      Line Loop(i) = {i, i+3*np+1, -(i+np), -(i+3*np)};
+EndFor
+Line Loop(np) = {np, 3*np+1, -2*np, -4*np};
 
 // inner subdomain
-Line Loop(5) = {5, 18, -9, -17};
-Line Loop(6) = {6, 19, -10, -18};
-Line Loop(7) = {7, 20, -11, -19};
-Line Loop(8) = {8, 17, -12, -20};
+For i In {1:np-1}
+      Line Loop(i+np) = {i+np, i+4*np+1, -(i+2*np), -(i+4*np)};
+EndFor
+Line Loop(2*np) = {2*np, 4*np+1, -3*np, -5*np};
 
 //============================================
 // SURFACES
 //============================================
 
 // outer subdomain
-Plane Surface(1) = {1};
-Plane Surface(2) = {2};
-Plane Surface(3) = {3};
-Plane Surface(4) = {4};
+For i In {1:np-1}
+      Plane Surface(i) = {i};
+EndFor
+Plane Surface(np) = {np};
 
 // inner subdomain
-Plane Surface(5) = {5};
-Plane Surface(6) = {6};
-Plane Surface(7) = {7};
-Plane Surface(8) = {8};
+For i In {1:np-1}
+      Plane Surface(i+np) = {i+np};
+EndFor
+Plane Surface(2*np) = {2*np};
 
 //============================================
 // TRANSFINITES
 //============================================
 
 // outer subdomain
-Transfinite Line{1:12} = Round(1.0/lc1);
-Transfinite Surface{1} = {1, 2, 6, 7};
-Transfinite Surface{2} = {2, 3, 7, 8};
-Transfinite Surface{3} = {3, 4, 8, 9};
-Transfinite Surface{4} = {1, 4, 6, 9};
+Transfinite Line{1:2*np} = lc;
+Transfinite Line{3*np+1:4*np} = Round(1.0/lc);
+For i In {1:np-1}
+      Transfinite Surface{i} = {i, i+1, i+np, i+np+1};
+EndFor
+Transfinite Surface{np} = {np, 1, np+1, 2*np};
 
 // inner subdomain
-Transfinite Line{13:20} = Round(1.0/lc2);
-Transfinite Surface{5} = {6, 7, 11, 12};
-Transfinite Surface{6} = {7, 8, 12, 13};
-Transfinite Surface{7} = {8, 9, 13, 14};
-Transfinite Surface{8} = {6, 9, 11, 14};
+Transfinite Line{1:2*np} = lc;
+Transfinite Line{4*np+1:5*np} = Round(1.0/lc);
+For i In {1:np-1}
+      Transfinite Surface{i+np} = {i+np, i+np+1, i+2*np, i+2*np+1};
+EndFor
+Transfinite Surface{2*np} = {2*np, 1+np, 2*np+1, 3*np};
 
 // quadrilateral mesh
-Recombine Surface{1:8};
+Recombine Surface{1:2*np};
 Mesh.Smoothing = 0;
 
 //============================================
@@ -172,24 +221,24 @@ Mesh.Smoothing = 0;
 //============================================
 
 // outer boundary
-Physical Point(1) = {1:5};
-Physical Line(1) = {1:4};
+Physical Point(1) = {1:np};
+Physical Line(1) = {1:np};
 
 // interface
-Physical Point(2) = {6:10};
-Physical Line(2) = {5:8};
+Physical Point(2) = {1+np:2*np};
+Physical Line(2) = {1+np:2*np};
 
 // inner boundary
-Physical Point(3) = {11:15};
-Physical Line(3) = {9:12};
+Physical Point(3) = {1+2*np:3*np};
+Physical Line(3) = {1+2*np:3*np};
 
 // outer subdomain
-Physical Line(100) = {13:16};
-Physical Surface(100) = {1:4};
+Physical Line(100) = {3*np+1:4*np};
+Physical Surface(100) = {1:np};
 
 // inner subdomain
-Physical Line(200) = {17:20};
-Physical Surface(200) = {5:8};
+Physical Line(200) = {4*np+1:5*np};
+Physical Surface(200) = {np:2*np};
 
 //============================================
 // MESH OPTIONS
@@ -209,6 +258,6 @@ Mesh.MshFileVersion = 2.0;
 Mesh 2;
 
 // write mesh
-Save Sprintf(StrCat(outdir,"/",name,"_%g.msh"), N);
+Save Sprintf(StrCat(outdir, "/", name, "_%g.msh"), N);
 
 // end of file

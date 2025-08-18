@@ -39,7 +39,7 @@ from helpers import *
 
 # constants
 rA, rAB, rB = sympy.symbols("rA rAB rB", real=True, positive=True)
-beta1, beta2 = sympy.symbols("beta1 beta2", real=True)
+betaAB_1, betaAB_2 = sympy.symbols("betaAB_1 betaAB_2", real=True)
 alphaA, alphaB = sympy.symbols("alphaA alphaB", real=True, positive=True)
 wA, wB = sympy.symbols("wA wB", real=True)
 
@@ -56,7 +56,7 @@ x, y = sympy.symbols("x y", real=True)
 #============================================
 
 # interface radius
-RAB = rAB*(1 + beta1*sympy.cos(beta2*theta))
+RAB = rAB*(1 + betaAB_1*sympy.cos(betaAB_2*theta))
 
 # domain mapping
 D = d1 + d2*r + d3*r**2
@@ -118,6 +118,8 @@ eq2 = sympy.Eq(phiB.subs(r, rB), 0)
 eq3 = sympy.Eq(phiA.subs(r, RAB), phiB.subs(r, RAB))
 
 # flux conservation at interface
+# it is not necessary to account for the normal vector
+# since the tangential derivative along the interface vanishes
 dphiA_dr = sympy.diff(phiA, r)
 dphiB_dr = sympy.diff(phiB, r)
 eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, RAB), -alphaB*dphiB_dr.subs(r, RAB))
@@ -212,8 +214,8 @@ theta = sympy.atan2(y,x)
 rA = 1.0
 rAB = 0.75
 rB = 0.5
-beta1 = 0.04
-beta2 = 8.0
+betaAB_1 = 0.04
+betaAB_2 = 8.0
 alphaA = 2.0
 alphaB = 1.0
 wA = 1.0
@@ -223,7 +225,7 @@ wB = -1.0
 args_list = [("x", x), ("y", y)]
 
 # constants list
-consts_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("beta1", beta1), ("beta2", beta2),
+consts_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("betaAB_1", betaAB_1), ("betaAB_2", betaAB_2),
                 ("alphaA", alphaA), ("alphaB", alphaB), ("wA", wA), ("wB", wB)]
 
 # parameters list

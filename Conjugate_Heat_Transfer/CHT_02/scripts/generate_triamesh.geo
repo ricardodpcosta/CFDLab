@@ -21,7 +21,7 @@ Repository:
     https://github.com/ricardodpcosta/CFD-TestSuite
 
 Dependencies:
-    Gmsh (version >= 4.8.4)
+    Gmsh (version > =  4.8.4)
 
 Usage:
     gmsh -setnumber N 1 generate_triamesh.geo
@@ -41,19 +41,28 @@ EndIf
 cx = 0.0;
 cy = 0.0;
 
-// outer boundary radius
+// outer boundary
 rA = 1.0;
+betaA_1 = 0.0;
+betaA_2 = 8.0;
 
-// interface radius
+// interface
 rAB = 0.75;
+betaAB_1 = 0.04;
+betaAB_2 = 8.0;
 
-// inner boundary radius
+// inner boundary
 rB = 0.5;
+betaB_1 = 0.0;
+betaB_2 = 8.0;
 
 // refinement controls
-lc1 = (0.1*rA)/(1.38^(N-1));
-lc2 = (0.1*rAB)/(1.38^(N-1));
-lc3 = (0.1*rB)/(1.38^(N-1));
+np1 = Round(55*(1.4^(N-1)));
+np2 = Round(70*(1.4^(N-1)));
+np3 = Round(55*(1.4^(N-1)));
+lc1 = 1.0;
+lc2 = 1.0;
+lc3 = 1.0;
 
 // output controls
 outdir = "../meshes";
@@ -64,60 +73,108 @@ name = "triamesh";
 //============================================
 
 // outer boundary
-Point(1) = {cx-rA, cy, 0.0, lc1};
-Point(2) = {cx, cy+rA, 0.0, lc1};
-Point(3) = {cx+rA, cy, 0.0, lc1};
-Point(4) = {cx, cy-rA, 0.0, lc1};
-Point(5) = {cx, cy, 0.0, lc1};
+For i In {0:np1-1}
+      t = i*2.0*Pi/np1;
+      r = rA*(1.0+betaA_1*Cos(betaA_2*t));
+      x = r*Cos(t);
+      y = r*Sin(t);
+      Point(i+1) = {cx+x, cy+y, 0.0, lc1};
+      // If(i == 0)
+      //       p1x = cx+x;
+      //       p1y = cy+y;
+      // EndIf
+      // If(i == 1)
+      //       p2x = cx+x;
+      //       p2y = cy+y;
+      //       Printf("%23.16f", (p2y-p1y)/(p2x-p1x));
+      // EndIf
+EndFor
 
 // interface
-Point(6) = {cx-rAB, cy, 0.0, lc2};
-Point(7) = {cx, cy+rAB, 0.0, lc2};
-Point(8) = {cx+rAB, cy, 0.0, lc2};
-Point(9) = {cx, cy-rAB, 0.0, lc2};
-Point(10) = {cx, cy, 0.0, lc2};
+For i In {0:np2-1}
+      t = i*2.0*Pi/np2;
+      r = rAB*(1.0+betaAB_1*Cos(betaAB_2*t));
+      x = r*Cos(t);
+      y = r*Sin(t);
+      Point(i+np1+1) = {cx+x, cy+y, 0.0, lc2};
+      // If(i == 0)
+      //       p1x = cx+x;
+      //       p1y = cy+y;
+      // EndIf
+      // If(i == 1)
+      //       p2x = cx+x;
+      //       p2y = cy+y;
+      //       Printf("%23.16f", (p2y-p1y)/(p2x-p1x));
+      // EndIf
+EndFor
 
 // inner boundary
-Point(11) = {cx-rB, cy, 0.0, lc3};
-Point(12) = {cx, cy+rB, 0.0, lc3};
-Point(13) = {cx+rB, cy, 0.0, lc3};
-Point(14) = {cx, cy-rB, 0.0, lc3};
-Point(15) = {cx, cy, 0.0, lc3};
+For i In {0:np3-1}
+      t = i*2.0*Pi/np3;
+      r = rB*(1.0+betaB_1*Cos(betaB_2*t));
+      x = r*Cos(t);
+      y = r*Sin(t);
+      Point(i+np1+np2+1) = {cx+x, cy+y, 0.0, lc3};
+      // If(i == 0)
+      //       p1x = cx+x;
+      //       p1y = cy+y;
+      // EndIf
+      // If(i == 1)
+      //       p2x = cx+x;
+      //       p2y = cy+y;
+      //       Printf("%23.16f", (p2y-p1y)/(p2x-p1x));
+      // EndIf
+EndFor
 
 //============================================
 // LINES
 //============================================
 
 // outer boundary
-Circle(1) = {1, 5, 2};
-Circle(2) = {2, 5, 3};
-Circle(3) = {3, 5, 4};
-Circle(4) = {4, 5, 1};
+For i In {1:np1-1}
+      Line(i) = {i, i+1};
+      // Printf("%10g %9g %9g", 2, i, i+1);
+EndFor
+Line(np1) = {np1, 1};
+// Printf("%10g %9g %9g", 2, np1, 1);
 
 // interface
-Circle(5) = {6, 10, 7};
-Circle(6) = {7, 10, 8};
-Circle(7) = {8, 10, 9};
-Circle(8) = {9, 10, 6};
+For i In {1:np2-1}
+      Line(i+np1) = {i+np1, i+np1+1};
+      // Printf("%10g %9g %9g", 2, i+np1, i+np1+1);
+EndFor
+Line(np1+np2) = {np1+np2, np1+1};
+// Printf("%10g %9g %9g", 2, np1+np2, np1+1);
 
 // inner boundary
-Circle(9) = {11, 15, 12};
-Circle(10) = {12, 15, 13};
-Circle(11) = {13, 15, 14};
-Circle(12) = {14, 15, 11};
+For i In {1:np3-1}
+      Line(i+np1+np2) = {i+np1+np2, i+np1+np2+1};
+      // Printf("%10g %9g %9g", 2, i+np1+np2, i+np1+np2+1);
+EndFor
+Line(np1+np2+np3) = {np1+np2+np3, np1+np2+1};
+// Printf("%10g %9g %9g", 2, np1+np2+np3, np1+np2+1);
 
 //============================================
 // LINE LOOPS
 //============================================
 
 // outer boundary
-Line Loop(1) = {1:4};
+Line Loop(1) = {1:np1};
+// For i In {1:np1}
+//       Printf("%10g", i);
+// EndFor
 
 // interface
-Line Loop(2) = {5:8};
+Line Loop(2) = {np1+1:np1+np2};
+// For i In {np1+1:np1+np2}
+//       Printf("%10g", i);
+// EndFor
 
 // inner boundary
-Line Loop(3) = {9:12};
+Line Loop(3) = {np1+np2+1:np1+np2+np3};
+// For i In {np1+1:np1+np2+np3}
+//       Printf("%10g", i);
+// EndFor
 
 //============================================
 // SURFACES
@@ -134,22 +191,22 @@ Plane Surface(2) = {2, 3};
 //============================================
 
 // outer boundary
-Physical Point(1) = {1:5};
-Physical Line(1) = {1:4};
+Physical Point(1) = {1:np1};
+Physical Line(1) = {1:np1};
 
 // interface
-Physical Point(2) = {6:10};
-Physical Line(2) = {5:8};
+Physical Point(2) = {1+np1:np1+np2};
+Physical Line(2) = {1+np1:np1+np2};
 
 // inner boundary
-Physical Point(3) = {11:15};
-Physical Line(3) = {9:12};
+Physical Point(3) = {1+np1+np2:np1+np2+np3};
+Physical Line(3) = {1+np1+np2:np1+np2+np3};
 
 // outer subdomain
-Physical Surface(100) = {1:4};
+Physical Surface(100) = {1};
 
 // inner subdomain
-Physical Surface(200) = {5:8};
+Physical Surface(200) = {2};
 
 //============================================
 // MESH OPTIONS
@@ -169,6 +226,6 @@ Mesh.MshFileVersion = 2.0;
 Mesh 2;
 
 // write mesh
-Save Sprintf(StrCat(outdir,"/",name,"_%g.msh"), N);
+Save Sprintf(StrCat(outdir, "/", name, "_%g.msh"), N);
 
 // end of file

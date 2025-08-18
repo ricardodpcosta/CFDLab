@@ -41,13 +41,13 @@ EndIf
 cx = 0.0;
 cy = 0.0;
 
-// outer boundary radius
+// outer boundary
 rA = 1.0;
 
-// interface radius
+// interface
 rAB = 0.75;
 
-// inner boundary radius
+// inner boundary 
 rB = 0.5;
 
 // refinement controls
