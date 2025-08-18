@@ -22,10 +22,8 @@ where $\beta_{1}^{\textrm{AB}}$ and $\beta_{2}^{\textrm{AB}}$ are given constant
 Vector functions $\boldsymbol{n}^{\textrm{A}}$ and $\boldsymbol{n}^{\textrm{B}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively. On the interface, $\Gamma^{\textrm{AB}}$, vector function $\boldsymbol{n}^{\textrm{AB}}$ corresponds to the unit normal vector from subdomain $\Omega^{\textrm{A}}$ to $\Omega^{\textrm{B}}$, and reads
 
 $$
-\begin{array}{ll}
-&\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)&=\left(\sqrt{\left(R^{\textrm{AB}}\left(\theta\right)\right)^{2}+\left(\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}}\right)^{-1}\left(-R^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{r}}+\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{\theta}}\right)\\
-&&=-\dfrac{\left(1+\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right)\right)\hat{\boldsymbol{r}}+\beta_{1}^{\textrm{AB}}\beta_{2}^{\textrm{AB}}\sin\left(\beta_{2}^{\textrm{AB}}\theta\right)\hat{\boldsymbol{\theta}}}{\sqrt{\left(\beta_{1}^{\textrm{AB}}\right)^{2}\left(\beta_{2}^{\textrm{AB}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{AB}}\theta\right)+\left(\beta_{1}^{\textrm{AB}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{AB}}\theta\right)+2\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right)+1}}.
-\end{array}
+\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)=\dfrac{\-R^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{r}}+\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{\theta}}}{\sqrt{\left(R^{\textrm{AB}}\left(\theta\right)\right)^{2}+\left(\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}}}\\
+=-\dfrac{\left(1+\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right)\right)\hat{\boldsymbol{r}}+\beta_{1}^{\textrm{AB}}\beta_{2}^{\textrm{AB}}\sin\left(\beta_{2}^{\textrm{AB}}\theta\right)\hat{\boldsymbol{\theta}}}{\sqrt{\left(\beta_{1}^{\textrm{AB}}\right)^{2}\left(\beta_{2}^{\textrm{AB}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{AB}}\theta\right)+\left(\beta_{1}^{\textrm{AB}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{AB}}\theta\right)+2\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right)+1}}.
 $$
 
 <div align="center">
@@ -72,7 +70,7 @@ $$
 where $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ are constant parameters to enforce boundary and interface conditions and $D\left(\theta\right)$ is a mapping function that reads
 
 $$
-D\left(r,\theta\right)=d_{1}\left(\theta\right)+d_{2}\left(\theta\right)r+d_{3}\left(\theta\right)r^{2},
+D\left(r,\theta\right)=d_{1}\left(\theta\right)+d_{2}\left(\theta\right)r+d_{3}\left(\theta\right)r^{2},\quad\textrm{in }\Omega,\\
 $$
 
 where $d_{1}$, $d_{2}$, and $d_{3}$ are constant parameters to enforce that the rose-shaped interface is mapped into a circular interface, while the circular boundaries are preserved, that is, $D\left(r^{\textrm{A}},\theta\right)=r^{\textrm{A}}$, $D\left(r^{\textrm{B}},\theta\right)=r^{\textrm{B}}$, and $D\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)=r^{\textrm{AB}}$, and read
@@ -105,8 +103,14 @@ The **velocity fields** are tangential to the boundaries and interface, such tha
 
 $$
 \begin{array}{ll}
-&\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r\left(\left(\dfrac{r-r^{\textrm{A}}}{R^{\textrm{AB}}\left(\theta\right)-r^{\textrm{A}}}\right)\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+\hat{\boldsymbol{\theta}}\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r\left(\left(\dfrac{r-r^{\textrm{B}}}{R^{\textrm{AB}}\left(\theta\right)-r^{\textrm{B}}}\right)\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+\hat{\boldsymbol{\theta}}\right),&\quad\textrm{in }\Omega^{\textrm{B}},\\
+&\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r\left(\left(\dfrac{r-r^{\textrm{A}}}{R^{\textrm{AB}}\left(\theta\right)-r^{\textrm{A}}}\right)\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+\hat{\boldsymbol{\theta}}\right)
+=\omega^{\textrm{A}}r\left(\left(-\dfrac{\left(r-r^{\textrm{A}}\right)r^{\textrm{AB}}\beta_{1}^{\textrm{AB}}\beta_{2}^{\textrm{AB}}\sin\left(\beta_{2}^{\textrm{AB}}\theta\right)}{r^{\textrm{AB}}\left(1+\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right)\right)-r^{\textrm{A}}}\right)\hspace{1pt}\hat{\boldsymbol{r}}+\hat{\boldsymbol{\theta}}\right),&\quad\textrm{in }\Omega^{\textrm{A}},
+\end{array}
+$$
+$$
+\begin{array}{ll}
+&\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r\left(\left(\dfrac{r-r^{\textrm{B}}}{R^{\textrm{AB}}\left(\theta\right)-r^{\textrm{B}}}\right)\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{r}}+\hat{\boldsymbol{\theta}}\right)
+=\omega^{\textrm{B}}r\left(\left(-\dfrac{\left(r-r^{\textrm{B}}\right)r^{\textrm{AB}}\beta_{1}^{\textrm{AB}}\beta_{2}^{\textrm{AB}}\sin\left(\beta_{2}^{\textrm{AB}}\theta\right)}{r^{\textrm{AB}}\left(1+\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right)\right)-r^{\textrm{B}}}\right)\hspace{1pt}\hat{\boldsymbol{r}}+\hat{\boldsymbol{\theta}}\right),&\quad\textrm{in }\Omega^{\textrm{B}},
 \end{array}
 $$
 
