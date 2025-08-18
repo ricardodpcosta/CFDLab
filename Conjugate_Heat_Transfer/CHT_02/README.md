@@ -22,7 +22,10 @@ where $\beta_{1}^{\textrm{AB}}$ and $\beta_{2}^{\textrm{AB}}$ are given constant
 Vector functions $\boldsymbol{n}^{\textrm{A}}$ and $\boldsymbol{n}^{\textrm{B}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively. On the interface, $\Gamma^{\textrm{AB}}$, vector function $\boldsymbol{n}^{\textrm{AB}}$ corresponds to the unit normal vector from subdomain $\Omega^{\textrm{A}}$ to $\Omega^{\textrm{B}}$, and reads
 
 $$
-\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)=\left(\sqrt{\left(R^{\textrm{AB}}\left(\theta\right)\right)^{2}+\left(\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}}\right)^{-1}\left(-R^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{r}}+\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{\theta}}\right).
+\begin{array}{ll}
+&\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)&=\left(\sqrt{\left(R^{\textrm{AB}}\left(\theta\right)\right)^{2}+\left(\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}}\right)^{-1}\left(-R^{\textrm{AB}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{r}}+\dfrac{\textrm{d}R^{\textrm{AB}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{\theta}}\right)\\
+&&=-\dfrac{\left(1+\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right)\right)\hat{\boldsymbol{r}}+\beta_{1}^{\textrm{AB}}\beta_{2}^{\textrm{AB}}\sin\left(\beta_{2}^{\textrm{AB}}\theta\right)\hat{\boldsymbol{\theta}}}{\sqrt{\left(\beta_{1}^{\textrm{AB}}\right)^{2}\left(\beta_{2}^{\textrm{AB}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{AB}}\theta\right)+\left(\beta_{1}^{\textrm{AB}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{AB}}\theta\right)+2\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right)+1}}.
+\end{array}
 $$
 
 <div align="center">
