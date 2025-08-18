@@ -14,10 +14,10 @@ This benchmark represents a **steady-state two-dimensional conjugate heat transf
 The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively. An interface, $\Gamma^{\textrm{AB}}$, with variable radius $R^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions. The interface radius corresponds to a periodic perturbation (diffeomorphic transformation) applied to a circumference centred at the origin with radius $r^{\textrm{AB}}$, and reads
 
 $$
-R^{\textrm{AB}}\left(\theta\right)=r^{\textrm{AB}}\left(1+\beta^{\textrm{AB}}_{1}\cos\left(\beta^{\textrm{AB}}_{2}\theta\right)\right),
+R^{\textrm{AB}}\left(\theta\right)=r^{\textrm{AB}}\left(1+\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right)\right),
 $$
 
-where $\beta^{\textrm{AB}}_{1}$ and $\beta^{\textrm{AB}}_{2}$ are given constant parameters to control the perturbation magnitude and periodicity, respectively.
+where $\beta_{1}^{\textrm{AB}}$ and $\beta_{2}^{\textrm{AB}}$ are given constant parameters to control the perturbation magnitude and periodicity, respectively.
 
 Vector functions $\boldsymbol{n}^{\textrm{A}}$ and $\boldsymbol{n}^{\textrm{B}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively. On the interface, $\Gamma^{\textrm{AB}}$, vector function $\boldsymbol{n}^{\textrm{AB}}$ corresponds to the unit normal vector from subdomain $\Omega^{\textrm{A}}$ to $\Omega^{\textrm{B}}$, and reads
 
@@ -75,12 +75,12 @@ $$
 where $d_{1}$, $d_{2}$, and $d_{3}$ are constant parameters to enforce that the rose-shaped interface is mapped into a circular interface, while the circular boundaries are preserved, that is, $D\left(r^{\textrm{A}},\theta\right)=r^{\textrm{A}}$, $D\left(r^{\textrm{B}},\theta\right)=r^{\textrm{B}}$, and $D\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)=r^{\textrm{AB}}$, and read
 
 $$
-d_{1}\left(\theta\right)=-cr^{\textrm{A}}r^{\textrm{AB}}r^{\textrm{B}}\beta^{\textrm{AB}}_{1}\cos\left(\beta^{\textrm{AB}}_{2}\theta\right),\qquad
-d_{2}\left(\theta\right)=1+c\left(r^{\textrm{A}}+r^{\textrm{B}}\right)r^{\textrm{AB}}\beta^{\textrm{AB}}_{1}\cos\left(\beta^{\textrm{AB}}_{2}\theta\right),\qquad
-d_{3}\left(\theta\right)=-cr^{\textrm{AB}}\beta^{\textrm{AB}}_{1}\cos\left(\beta^{\textrm{AB}}_{2}\theta\right),
+d_{1}\left(\theta\right)=-cr^{\textrm{A}}r^{\textrm{AB}}r^{\textrm{B}}\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right),\qquad
+d_{2}\left(\theta\right)=1+c\left(r^{\textrm{A}}+r^{\textrm{B}}\right)r^{\textrm{AB}}\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right),\qquad
+d_{3}\left(\theta\right)=-cr^{\textrm{AB}}\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right),
 $$
 $$
-c=\left(r^{\textrm{AB}}\left(1+\beta^{\textrm{AB}}_{1}\cos\left(\beta^{\textrm{AB}}_{2}\theta\right)\right)-r^{\textrm{A}}\right)^{-1}\left(r^{\textrm{AB}}\left(1+\beta^{\textrm{AB}}_{1}\cos\left(\beta^{\textrm{AB}}_{2}\theta\right)\right)-r^{\textrm{B}}\right)^{-1}.
+c=\left(r^{\textrm{AB}}\left(1+\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right)\right)-r^{\textrm{A}}\right)^{-1}\left(r^{\textrm{AB}}\left(1+\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right)\right)-r^{\textrm{B}}\right)^{-1}.
 $$
 
 The mapping function enables mapping the manufactured solution from a complex domain to a simpler domain, facilitating solution continuity and conservation of diffusive fluxes on the interface.
@@ -148,8 +148,8 @@ The table below summarises the given constant parameters and the recommended val
 | $r^{\textrm{A}}$          | Radius of outer boundary, $\Gamma^{\textrm{A}}$                   | 1.0                           | 1.0                            | m                  |
 | $r^{\textrm{AB}}$         | Radius of interface, $\Gamma^{\textrm{AB}}$                       | 0.75                          | 0.75                           | m                  |
 | $r^{\textrm{B}}$          | Radius of inner boundary, $\Gamma^{\textrm{B}}$                   | 0.5                           | 0.5                            | m                  |
-| $\beta^{\textrm{AB}}_{1}$               | Magnitude of interface perturbation, $\Gamma^{\textrm{AB}}$       | 0.04                          | 0.04                           |                    |
-| $\beta^{\textrm{AB}}_{2}$               | Periodicity of interface perturbation, $\Gamma^{\textrm{AB}}$     | 8.0                           | 8.0                            |                    |
+| $\beta_{1}^{\textrm{AB}}$               | Magnitude of interface perturbation, $\Gamma^{\textrm{AB}}$       | 0.04                          | 0.04                           |                    |
+| $\beta_{2}^{\textrm{AB}}$               | Periodicity of interface perturbation, $\Gamma^{\textrm{AB}}$     | 8.0                           | 8.0                            |                    |
 | $\alpha^{\textrm{A}}$     | Thermal diffusivity in outer subdomain, $\Omega^{\textrm{A}}$     | 2.0                           | 100.0                          | m<sup>2</sup>/s    |
 | $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain, $\Omega^{\textrm{B}}$     | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
 | $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$        | 1.0                           | 1.0                            | rad/s              |
