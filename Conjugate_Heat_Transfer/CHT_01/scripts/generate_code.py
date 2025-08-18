@@ -37,13 +37,13 @@ from helpers import *
 # SYMBOLIC VARIABLES
 #============================================
 
-# constant parameters
-rA, rAB, rB = sympy.symbols("rA rAB rB", real=True)
-alphaA, alphaB = sympy.symbols("alphaA alphaB", real=True)
+# constants
+rA, rAB, rB = sympy.symbols("rA rAB rB", real=True, positive=True)
+alphaA, alphaB = sympy.symbols("alphaA alphaB", real=True, positive=True)
 wA, wB = sympy.symbols("wA wB", real=True)
 n = sympy.symbols("n", real=True)
 
-# solution parameters
+# parameters
 aA, bA, aB, bB = sympy.symbols("aA bA aB bB", real=True)
 
 # coordinate system
@@ -74,15 +74,25 @@ dphiA_dr = sympy.diff(phiA, r)
 dphiB_dr = sympy.diff(phiB, r)
 eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, rAB), -alphaB*dphiB_dr.subs(r, rAB))
 
-# solve for coefficients
+# solve for parameters
 sol = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)
 if not sol:
-    raise RuntimeError("Could not solve for coefficients symbolically.")
+    raise RuntimeError("Could not solve for parameters symbolically.")
 sol = sol[0]
 
+# simplify expressions
+sol[aA] = sol[aA].factor()
+sol[bA] = sol[bA].factor()
+sol[aB] = sol[aB].factor()
+sol[bB] = sol[bB].factor()
+
 # substitute into manufactured solutions
-# phiA = sympy.simplify(phiA.subs(sol))
-# phiB = sympy.simplify(phiB.subs(sol))
+# phiA = phiA.subs(sol)
+# phiB = phiB.subs(sol)
+
+# simplify expressions
+# phiA = phiA.factor()
+# phiB = phiB.factor()
 
 #============================================
 # VELOCITY FIELDS
@@ -93,6 +103,12 @@ uA_r = 0
 uA_theta = wA*r
 uB_r = 0
 uB_theta = wB*r
+
+# simplify expressions
+# uA_r = uA_r.factor()
+# uA_theta = uA_theta.factor()
+# uB_r = uB_r.factor()
+# uB_theta = uB_theta.factor()
 
 # Cartesian unit basis
 uA = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
@@ -112,13 +128,25 @@ diffA = -alphaA*((1/r)*sympy.diff(r*sympy.diff(phiA, r), r) \
 diffB = -alphaB*((1/r)*sympy.diff(r*sympy.diff(phiB, r), r) \
             + (1/r**2)*sympy.diff(sympy.diff(phiB, theta), theta))
 
+# simplify expressions
+diffA = diffA.factor()
+diffB = diffB.factor()
+
 # convective terms
 convA = uA_r*sympy.diff(phiA, r) + (uA_theta/r)*sympy.diff(phiA, theta)
 convB = uB_r*sympy.diff(phiB, r) + (uB_theta/r)*sympy.diff(phiB, theta)
 
+# simplify expressions
+convA = convA.factor()
+convB = convB.factor()
+
 # source-terms
 fA = sympy.simplify(convA + diffA)
 fB = sympy.simplify(convB + diffB)
+
+# simplify expressions
+fA = fA.factor()
+fB = fB.factor()
 
 #============================================
 # OUTPUT

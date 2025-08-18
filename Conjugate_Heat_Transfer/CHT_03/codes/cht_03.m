@@ -9,7 +9,7 @@ global alphaB = 1.0;
 global wA = 1.0;
 global wB = -1.0;
 global h = 1.0;
-global n = 4;
+global n = 4.0;
 
 % Function uA
 function res = uA(x, y)
@@ -24,6 +24,7 @@ function res = uA(x, y)
     global n;
     r = sqrt(x.^2 + y.^2);
     theta = atan2(y, x);
+    res = zeros(2,1);
     res(1) = -r.*wA.*sin(theta);
     res(2) = r.*wA.*cos(theta);
 end
@@ -41,6 +42,7 @@ function res = uB(x, y)
     global n;
     r = sqrt(x.^2 + y.^2);
     theta = atan2(y, x);
+    res = zeros(2,1);
     res(1) = -r.*wB.*sin(theta);
     res(2) = r.*wB.*cos(theta);
 end
@@ -58,10 +60,11 @@ function res = phiA(x, y)
     global n;
     r = sqrt(x.^2 + y.^2);
     theta = atan2(y, x);
-    aA = alphaB.*h.*rAB./(alphaA.*alphaB + log(rA.^(alphaB.*h.*rAB).*rAB.^(h.*rAB.*(alphaA - alphaB)). ...
-        *rB.^(-alphaA.*h.*rAB)));
-    bA = (alphaA.*alphaB + log(rAB.^(h.*rAB.*(alphaA - alphaB)).*rB.^(-alphaA.*h.*rAB)))./(alphaA. ...
-        *alphaB + log(rA.^(alphaB.*h.*rAB).*rAB.^(h.*rAB.*(alphaA - alphaB)).*rB.^(-alphaA.*h.*rAB)));
+    aA = alphaB.*h.*rAB./(alphaA.*alphaB + alphaA.*h.*rAB.*log(rAB) - alphaA.*h.*rAB.*log(rB) + alphaB. ...
+        *h.*rAB.*log(rA) - alphaB.*h.*rAB.*log(rAB));
+    bA = (alphaA.*alphaB + alphaA.*h.*rAB.*log(rAB) - alphaA.*h.*rAB.*log(rB) - alphaB.*h.*rAB. ...
+        *log(rAB))./(alphaA.*alphaB + alphaA.*h.*rAB.*log(rAB) - alphaA.*h.*rAB.*log(rB) + alphaB.*h. ...
+        *rAB.*log(rA) - alphaB.*h.*rAB.*log(rAB));
     res = (aA.*log(r) + bA).*cos(n.*theta);
 end
 
@@ -78,10 +81,10 @@ function res = phiB(x, y)
     global n;
     r = sqrt(x.^2 + y.^2);
     theta = atan2(y, x);
-    aB = alphaA.*h.*rAB./(alphaA.*alphaB + log(rA.^(alphaB.*h.*rAB).*rAB.^(h.*rAB.*(alphaA - alphaB)). ...
-        *rB.^(-alphaA.*h.*rAB)));
-    bB = -log(rB.^(alphaA.*h.*rAB))./(alphaA.*alphaB + log(rA.^(alphaB.*h.*rAB).*rAB.^(h.*rAB.*(alphaA ...
-        - alphaB)).*rB.^(-alphaA.*h.*rAB)));
+    aB = alphaA.*h.*rAB./(alphaA.*alphaB + alphaA.*h.*rAB.*log(rAB) - alphaA.*h.*rAB.*log(rB) + alphaB. ...
+        *h.*rAB.*log(rA) - alphaB.*h.*rAB.*log(rAB));
+    bB = -alphaA.*h.*rAB.*log(rB)./(alphaA.*alphaB + alphaA.*h.*rAB.*log(rAB) - alphaA.*h.*rAB. ...
+        *log(rB) + alphaB.*h.*rAB.*log(rA) - alphaB.*h.*rAB.*log(rAB));
     res = (aB.*log(r) + bB).*cos(n.*theta);
 end
 
@@ -98,11 +101,12 @@ function res = fA(x, y)
     global n;
     r = sqrt(x.^2 + y.^2);
     theta = atan2(y, x);
-    aA = alphaB.*h.*rAB./(alphaA.*alphaB + log(rA.^(alphaB.*h.*rAB).*rAB.^(h.*rAB.*(alphaA - alphaB)). ...
-        *rB.^(-alphaA.*h.*rAB)));
-    bA = (alphaA.*alphaB + log(rAB.^(h.*rAB.*(alphaA - alphaB)).*rB.^(-alphaA.*h.*rAB)))./(alphaA. ...
-        *alphaB + log(rA.^(alphaB.*h.*rAB).*rAB.^(h.*rAB.*(alphaA - alphaB)).*rB.^(-alphaA.*h.*rAB)));
-    res = n.*(aA.*log(r) + bA).*(alphaA.*n.*cos(n.*theta) - r.^2.*wA.*sin(n.*theta))./r.^2;
+    aA = alphaB.*h.*rAB./(alphaA.*alphaB + alphaA.*h.*rAB.*log(rAB) - alphaA.*h.*rAB.*log(rB) + alphaB. ...
+        *h.*rAB.*log(rA) - alphaB.*h.*rAB.*log(rAB));
+    bA = (alphaA.*alphaB + alphaA.*h.*rAB.*log(rAB) - alphaA.*h.*rAB.*log(rB) - alphaB.*h.*rAB. ...
+        *log(rAB))./(alphaA.*alphaB + alphaA.*h.*rAB.*log(rAB) - alphaA.*h.*rAB.*log(rB) + alphaB.*h. ...
+        *rAB.*log(rA) - alphaB.*h.*rAB.*log(rAB));
+    res = -n.*(aA.*log(r) + bA).*(-alphaA.*n.*cos(n.*theta) + r.^2.*wA.*sin(n.*theta))./r.^2;
 end
 
 % Function fB
@@ -118,9 +122,9 @@ function res = fB(x, y)
     global n;
     r = sqrt(x.^2 + y.^2);
     theta = atan2(y, x);
-    aB = alphaA.*h.*rAB./(alphaA.*alphaB + log(rA.^(alphaB.*h.*rAB).*rAB.^(h.*rAB.*(alphaA - alphaB)). ...
-        *rB.^(-alphaA.*h.*rAB)));
-    bB = -log(rB.^(alphaA.*h.*rAB))./(alphaA.*alphaB + log(rA.^(alphaB.*h.*rAB).*rAB.^(h.*rAB.*(alphaA ...
-        - alphaB)).*rB.^(-alphaA.*h.*rAB)));
-    res = n.*(aB.*log(r) + bB).*(alphaB.*n.*cos(n.*theta) - r.^2.*wB.*sin(n.*theta))./r.^2;
+    aB = alphaA.*h.*rAB./(alphaA.*alphaB + alphaA.*h.*rAB.*log(rAB) - alphaA.*h.*rAB.*log(rB) + alphaB. ...
+        *h.*rAB.*log(rA) - alphaB.*h.*rAB.*log(rAB));
+    bB = -alphaA.*h.*rAB.*log(rB)./(alphaA.*alphaB + alphaA.*h.*rAB.*log(rAB) - alphaA.*h.*rAB. ...
+        *log(rB) + alphaB.*h.*rAB.*log(rA) - alphaB.*h.*rAB.*log(rAB));
+    res = -n.*(aB.*log(r) + bB).*(-alphaB.*n.*cos(n.*theta) + r.^2.*wB.*sin(n.*theta))./r.^2;
 end

@@ -11,7 +11,7 @@ alphaB = 1.0
 wA = 1.0
 wB = -1.0
 h = 1.0
-n = 4
+n = 4.0
 
 # Function uA
 def uA(x, y):
@@ -35,10 +35,11 @@ def uB(x, y):
 def phiA(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
-    aA = alphaB*h*rAB/(alphaA*alphaB + math.log(rA**(alphaB*h*rAB)*rAB**(h*rAB*(alphaA - alphaB))*rB**(
-        -alphaA*h*rAB)))
-    bA = (alphaA*alphaB + math.log(rAB**(h*rAB*(alphaA - alphaB))*rB**(-alphaA*h*rAB)))/(alphaA*alphaB
-        + math.log(rA**(alphaB*h*rAB)*rAB**(h*rAB*(alphaA - alphaB))*rB**(-alphaA*h*rAB)))
+    aA = alphaB*h*rAB/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) + alphaB \
+        *h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
+    bA = (alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) - alphaB*h*rAB \
+        *math.log(rAB))/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) \
+        + alphaB*h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
     res = (aA*math.log(r) + bA)*math.cos(n*theta)
     return res
 
@@ -46,10 +47,10 @@ def phiA(x, y):
 def phiB(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
-    aB = alphaA*h*rAB/(alphaA*alphaB + math.log(rA**(alphaB*h*rAB)*rAB**(h*rAB*(alphaA - alphaB))*rB**(
-        -alphaA*h*rAB)))
-    bB = -math.log(rB**(alphaA*h*rAB))/(alphaA*alphaB + math.log(rA**(alphaB*h*rAB)*rAB**(h*rAB
-        *(alphaA - alphaB))*rB**(-alphaA*h*rAB)))
+    aB = alphaA*h*rAB/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) + alphaB \
+        *h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
+    bB = -alphaA*h*rAB*math.log(rB)/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB \
+        *math.log(rB) + alphaB*h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
     res = (aB*math.log(r) + bB)*math.cos(n*theta)
     return res
 
@@ -57,20 +58,21 @@ def phiB(x, y):
 def fA(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
-    aA = alphaB*h*rAB/(alphaA*alphaB + math.log(rA**(alphaB*h*rAB)*rAB**(h*rAB*(alphaA - alphaB))*rB**(
-        -alphaA*h*rAB)))
-    bA = (alphaA*alphaB + math.log(rAB**(h*rAB*(alphaA - alphaB))*rB**(-alphaA*h*rAB)))/(alphaA*alphaB
-        + math.log(rA**(alphaB*h*rAB)*rAB**(h*rAB*(alphaA - alphaB))*rB**(-alphaA*h*rAB)))
-    res = n*(aA*math.log(r) + bA)*(alphaA*n*math.cos(n*theta) - r**2*wA*math.sin(n*theta))/r**2
+    aA = alphaB*h*rAB/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) + alphaB \
+        *h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
+    bA = (alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) - alphaB*h*rAB \
+        *math.log(rAB))/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) \
+        + alphaB*h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
+    res = -n*(aA*math.log(r) + bA)*(-alphaA*n*math.cos(n*theta) + r**2*wA*math.sin(n*theta))/r**2
     return res
 
 # Function fB
 def fB(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
-    aB = alphaA*h*rAB/(alphaA*alphaB + math.log(rA**(alphaB*h*rAB)*rAB**(h*rAB*(alphaA - alphaB))*rB**(
-        -alphaA*h*rAB)))
-    bB = -math.log(rB**(alphaA*h*rAB))/(alphaA*alphaB + math.log(rA**(alphaB*h*rAB)*rAB**(h*rAB
-        *(alphaA - alphaB))*rB**(-alphaA*h*rAB)))
-    res = n*(aB*math.log(r) + bB)*(alphaB*n*math.cos(n*theta) - r**2*wB*math.sin(n*theta))/r**2
+    aB = alphaA*h*rAB/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) + alphaB \
+        *h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
+    bB = -alphaA*h*rAB*math.log(rB)/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB \
+        *math.log(rB) + alphaB*h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
+    res = -n*(aB*math.log(r) + bB)*(-alphaB*n*math.cos(n*theta) + r**2*wB*math.sin(n*theta))/r**2
     return res

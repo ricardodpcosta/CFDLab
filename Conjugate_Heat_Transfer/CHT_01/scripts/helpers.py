@@ -185,7 +185,7 @@ def write_cpp_scalar_function(name, expr, args_list, params_list):
     argnames = ", ".join(f"double {argname}" for (argname, _) in args_list)
     decl_lines = []
     for i, (parname, parexpr) in enumerate(params_list):
-        cexpr = ccode(sympy.simplify(sympy.trigsimp(parexpr)), assign_to=None)
+        cexpr = ccode(parexpr, assign_to=None)
         cexpr = cexpr.replace("\\\n", "")
         cexpr = re.sub(r" {2,}", " ", cexpr)
         cexpr = cexpr.strip()
@@ -193,7 +193,7 @@ def write_cpp_scalar_function(name, expr, args_list, params_list):
         decl_lines.extend(cexpr)
     decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
     decl = "\n".join(decl_lines)
-    cexpr = ccode(sympy.simplify(sympy.trigsimp(expr)), assign_to=None)
+    cexpr = ccode(expr, assign_to=None)
     cexpr = cexpr.replace("\\\n", "")
     cexpr = re.sub(r" {2,}", " ", cexpr)
     cexpr = cexpr.strip()
@@ -219,7 +219,7 @@ def write_fortran_scalar_function(name, expr, args_list, params_list):
     decl_lines.append("real(8) :: res")
     decl_lines.extend([f"real(8) :: {parname}" for (parname, _) in params_list])
     for i, (parname, parexpr) in enumerate(params_list):
-        fexpr = fcode(sympy.simplify(sympy.trigsimp(parexpr)), assign_to=None, source_format="free")
+        fexpr = fcode(parexpr, assign_to=None, source_format="free")
         fexpr = fexpr.replace("&\n", "")
         fexpr = re.sub(r" {2,}", " ", fexpr)
         fexpr = fexpr.strip()
@@ -227,7 +227,7 @@ def write_fortran_scalar_function(name, expr, args_list, params_list):
         decl_lines.extend(fexpr)
     decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
     decl = "\n".join(decl_lines)
-    fexpr = fcode(sympy.simplify(sympy.trigsimp(expr)), assign_to=None, source_format="free")
+    fexpr = fcode(expr, assign_to=None, source_format="free")
     fexpr = fexpr.replace("&\n", "")
     fexpr = re.sub(r" {2,}", " ", fexpr)
     fexpr = fexpr.strip()
@@ -249,7 +249,7 @@ def write_octave_scalar_function(name, expr, args_list, consts_list, params_list
     argnames = ", ".join(argname for (argname, _) in args_list)
     decl_lines = ["global " + varname + ";" for (varname, _) in consts_list]
     for i, (parname, parexpr) in enumerate(params_list):
-        mexpr = octave_code(sympy.simplify(sympy.trigsimp(parexpr)), assign_to=None)
+        mexpr = octave_code(parexpr, assign_to=None)
         mexpr = mexpr.replace("...\n", "")
         mexpr = re.sub(r" {2,}", " ", mexpr)
         mexpr = mexpr.strip()
@@ -257,7 +257,7 @@ def write_octave_scalar_function(name, expr, args_list, consts_list, params_list
         decl_lines.extend(mexpr)
     decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
     decl = "\n".join(decl_lines)
-    mexpr = octave_code(sympy.simplify(sympy.trigsimp(expr)), assign_to=None)
+    mexpr = octave_code(expr, assign_to=None)
     mexpr = mexpr.replace("...\n", "")
     mexpr = re.sub(r" {2,}", " ", mexpr)
     mexpr = mexpr.strip()
@@ -280,7 +280,7 @@ def write_python_scalar_function(name, expr, args_list, params_list):
     argnames = ", ".join(argname for (argname, _) in args_list)
     decl_lines = []
     for i, (parname, parexpr) in enumerate(params_list):
-        pexpr = pycode(sympy.simplify(sympy.trigsimp(parexpr)))
+        pexpr = pycode(parexpr)
         pexpr = pexpr.replace("\n", "")
         pexpr = re.sub(r" {2,}", " ", pexpr)
         pexpr = pexpr.strip()
@@ -288,7 +288,7 @@ def write_python_scalar_function(name, expr, args_list, params_list):
         decl_lines.extend(pexpr)
     decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
     decl = "\n".join(decl_lines)
-    pexpr = pycode(sympy.simplify(sympy.trigsimp(expr)))
+    pexpr = pycode(expr)
     pexpr = pexpr.replace("\n", "")
     pexpr = re.sub(r" {2,}", " ", pexpr)
     pexpr = pexpr.strip()
@@ -316,7 +316,7 @@ def write_cpp_vector_function(name, expr, args_list, params_list):
     argnames += ", double res[{}]".format(len(expr))
     decl_lines = []
     for i, (parname, parexpr) in enumerate(params_list):
-        cexpr = ccode(sympy.simplify(sympy.trigsimp(parexpr)), assign_to=None)
+        cexpr = ccode(parexpr, assign_to=None)
         cexpr = cexpr.replace("\\\n", "")
         cexpr = re.sub(r" {2,}", " ", cexpr)
         cexpr = cexpr.strip()
@@ -326,7 +326,7 @@ def write_cpp_vector_function(name, expr, args_list, params_list):
     decl = "\n".join(decl_lines)
     comp_lines = []
     for i, compexpr in enumerate(expr):
-        cexpr = ccode(sympy.simplify(sympy.trigsimp(compexpr)), assign_to=None)
+        cexpr = ccode(compexpr, assign_to=None)
         cexpr = cexpr.replace("\\\n", "")
         cexpr = re.sub(r" {2,}", " ", cexpr)
         cexpr = cexpr.strip()
@@ -354,7 +354,7 @@ def write_fortran_vector_function(name, expr, args_list, params_list):
     decl_lines.append("real(8), intent(out) :: res({})".format(len(expr)))
     decl_lines.extend([f"real(8) :: {parname}" for (parname, _) in params_list])
     for i, (parname, parexpr) in enumerate(params_list):
-        fexpr = fcode(sympy.simplify(sympy.trigsimp(parexpr)), assign_to=None, source_format="free")
+        fexpr = fcode(parexpr, assign_to=None, source_format="free")
         fexpr = fexpr.replace("&\n", "")
         fexpr = re.sub(r" {2,}", " ", fexpr)
         fexpr = fexpr.strip()
@@ -364,7 +364,7 @@ def write_fortran_vector_function(name, expr, args_list, params_list):
     decl = "\n".join(decl_lines)
     comp_lines = []
     for i, compexpr in enumerate(expr):
-        fexpr = fcode(sympy.simplify(sympy.trigsimp(compexpr)), assign_to=None, source_format="free")
+        fexpr = fcode(compexpr, assign_to=None, source_format="free")
         fexpr = fexpr.replace("&\n", "")
         fexpr = re.sub(r" {2,}", " ", fexpr)
         fexpr = fexpr.strip()
@@ -389,7 +389,7 @@ def write_octave_vector_function(name, expr, args_list, consts_list, params_list
     argnames = ", ".join(argname for (argname, _) in args_list)
     decl_lines = ["global " + varname + ";" for (varname, _) in consts_list]
     for i, (parname, parexpr) in enumerate(params_list):
-        mexpr = octave_code(sympy.simplify(sympy.trigsimp(parexpr)), assign_to=None)
+        mexpr = octave_code(parexpr, assign_to=None)
         mexpr = mexpr.replace("...\n", "")
         mexpr = re.sub(r" {2,}", " ", mexpr)
         mexpr = mexpr.strip()
@@ -399,7 +399,7 @@ def write_octave_vector_function(name, expr, args_list, consts_list, params_list
     decl = "\n".join(decl_lines)
     comp_lines = [f"res = zeros({len(expr)},1);"]
     for i, compexpr in enumerate(expr):
-        mexpr = octave_code(sympy.simplify(sympy.trigsimp(compexpr)), assign_to=None)
+        mexpr = octave_code(compexpr, assign_to=None)
         mexpr = mexpr.replace("...\n", "")
         mexpr = re.sub(r" {2,}", " ", mexpr)
         mexpr = mexpr.strip()
@@ -424,7 +424,7 @@ def write_python_vector_function(name, expr, args_list, params_list):
     argnames = ", ".join(argname for (argname, _) in args_list)
     decl_lines = []
     for i, (parname, parexpr) in enumerate(params_list):
-        pexpr = pycode(sympy.simplify(sympy.trigsimp(parexpr)))
+        pexpr = pycode(parexpr)
         pexpr = pexpr.replace("\n", "")
         pexpr = re.sub(r" {2,}", " ", pexpr)
         pexpr = pexpr.strip()
@@ -434,7 +434,7 @@ def write_python_vector_function(name, expr, args_list, params_list):
     decl = "\n".join(decl_lines)
     comp_lines = [f"res = [0.0]*{len(expr)}"]
     for i, compexpr in enumerate(expr):
-        pexpr = pycode(sympy.simplify(sympy.trigsimp(compexpr)))
+        pexpr = pycode(compexpr)
         pexpr = pexpr.replace("\n", "")
         pexpr = re.sub(r" {2,}", " ", pexpr)
         pexpr = pexpr.strip()

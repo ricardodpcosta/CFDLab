@@ -12,7 +12,7 @@ real(8), parameter :: alphaA = 2.0
 real(8), parameter :: alphaB = 1.0
 real(8), parameter :: wA = 1.0
 real(8), parameter :: wB = -1.0
-real(8), parameter :: n = 4
+real(8), parameter :: n = 4.0
 
 contains
 
@@ -53,8 +53,9 @@ function phiA(x, y) result(res)
     real(8) :: bA
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    aA = alphaB/log(rA**alphaB*rAB**(alphaA - alphaB)*rB**(-alphaA))
-    bA = log(rAB**(alphaA - alphaB)*rB**(-alphaA))/log(rA**alphaB*rAB**(alphaA - alphaB)*rB**(-alphaA))
+    aA = alphaB/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log( rAB))
+    bA = (alphaA*log(rAB) - alphaA*log(rB) - alphaB*log(rAB))/(alphaA*log(rAB) - alphaA*log(rB) &
+        + alphaB*log(rA) - alphaB*log(rAB))
     res = (aA*log(r) + bA)*cos(n*theta)
 end function phiA
 
@@ -69,8 +70,8 @@ function phiB(x, y) result(res)
     real(8) :: bB
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    aB = alphaA/log(rA**alphaB*rAB**(alphaA - alphaB)*rB**(-alphaA))
-    bB = -log(rB**alphaA)/log(rA**alphaB*rAB**(alphaA - alphaB)*rB**(-alphaA))
+    aB = alphaA/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log( rAB))
+    bB = -alphaA*log(rB)/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log(rAB))
     res = (aB*log(r) + bB)*cos(n*theta)
 end function phiB
 
@@ -85,9 +86,10 @@ function fA(x, y) result(res)
     real(8) :: bA
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    aA = alphaB/log(rA**alphaB*rAB**(alphaA - alphaB)*rB**(-alphaA))
-    bA = log(rAB**(alphaA - alphaB)*rB**(-alphaA))/log(rA**alphaB*rAB**(alphaA - alphaB)*rB**(-alphaA))
-    res = n*(aA*log(r) + bA)*(alphaA*n*cos(n*theta) - r**2*wA*sin(n*theta))/r**2
+    aA = alphaB/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log( rAB))
+    bA = (alphaA*log(rAB) - alphaA*log(rB) - alphaB*log(rAB))/(alphaA*log(rAB) - alphaA*log(rB) &
+        + alphaB*log(rA) - alphaB*log(rAB))
+    res = -n*(aA*log(r) + bA)*(-alphaA*n*cos(n*theta) + r**2*wA*sin(n*theta))/r**2
 end function fA
 
 ! Function fB
@@ -101,9 +103,9 @@ function fB(x, y) result(res)
     real(8) :: bB
     r = sqrt(x**2 + y**2)
     theta = atan2(y, x)
-    aB = alphaA/log(rA**alphaB*rAB**(alphaA - alphaB)*rB**(-alphaA))
-    bB = -log(rB**alphaA)/log(rA**alphaB*rAB**(alphaA - alphaB)*rB**(-alphaA))
-    res = n*(aB*log(r) + bB)*(alphaB*n*cos(n*theta) - r**2*wB*sin(n*theta))/r**2
+    aB = alphaA/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log( rAB))
+    bB = -alphaA*log(rB)/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log(rAB))
+    res = -n*(aB*log(r) + bB)*(-alphaB*n*cos(n*theta) + r**2*wB*sin(n*theta))/r**2
 end function fB
 
 end module cht_01

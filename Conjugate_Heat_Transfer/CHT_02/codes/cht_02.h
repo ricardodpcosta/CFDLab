@@ -10,54 +10,66 @@
 double rA = 1.0;
 double rAB = 0.75;
 double rB = 0.5;
+double beta1 = 0.04;
+double beta2 = 8.0;
 double alphaA = 2.0;
 double alphaB = 1.0;
 double wA = 1.0;
 double wB = -1.0;
-double n = 4;
+
+// Function RAB
+inline double RAB(double x, double y) {
+    double r = sqrt(pow(x, 2) + pow(y, 2));
+    double theta = atan2(y, x);
+    double res = rAB*(beta1*cos(beta2*theta) + 1);
+    return res;
+}
+
+// Function nAB
+inline void nAB(double x, double y, double res[2]) {
+    double r = sqrt(pow(x, 2) + pow(y, 2));
+    double theta = atan2(y, x);
+    res[0] = beta1*beta2*rAB*sin(theta)*sin(beta2*theta)/sqrt(pow(beta1, 2)*pow(beta2, 2)*pow(rAB, 2) \
+        *pow(sin(beta2*theta), 2) + pow(rAB, 2)*pow(beta1*cos(beta2*theta) + 1, 2)) - rAB*(beta1 \
+        *cos(beta2*theta) + 1)*cos(theta)/sqrt(pow(beta1, 2)*pow(beta2, 2)*pow(rAB, 2)*pow(sin(beta2 \
+        *theta), 2) + pow(rAB, 2)*pow(beta1*cos(beta2*theta) + 1, 2));
+    res[1] = -beta1*beta2*rAB*sin(beta2*theta)*cos(theta)/sqrt(pow(beta1, 2)*pow(beta2, 2)*pow(rAB, 2) \
+        *pow(sin(beta2*theta), 2) + pow(rAB, 2)*pow(beta1*cos(beta2*theta) + 1, 2)) - rAB*(beta1 \
+        *cos(beta2*theta) + 1)*sin(theta)/sqrt(pow(beta1, 2)*pow(beta2, 2)*pow(rAB, 2)*pow(sin(beta2 \
+        *theta), 2) + pow(rAB, 2)*pow(beta1*cos(beta2*theta) + 1, 2));
+}
 
 // Function uA
 inline void uA(double x, double y, double res[2]) {
     double r = sqrt(pow(x, 2) + pow(y, 2));
     double theta = atan2(y, x);
-    res[0] = r*wA*(-beta1*beta2*rAB*(r - rA)*sin(beta2*theta)*cos(theta) - (beta1*rAB*cos(beta2*theta) \
-        - rA + rAB)*sin(theta))/(beta1*rAB*cos(beta2*theta) - rA + rAB);
-    res[1] = r*wA*(-beta1*beta2*rAB*(r - rA)*sin(theta)*sin(beta2*theta) + (beta1*rAB*cos(beta2*theta) \
-        - rA + rAB)*cos(theta))/(beta1*rAB*cos(beta2*theta) - rA + rAB);
+    res[0] = -beta1*beta2*r*rAB*wA*(r - rA)*sin(beta2*theta)*cos(theta)/(beta1*rAB*cos(beta2*theta) \
+        - rA + rAB) - r*wA*sin(theta);
+    res[1] = -beta1*beta2*r*rAB*wA*(r - rA)*sin(theta)*sin(beta2*theta)/(beta1*rAB*cos(beta2*theta) \
+        - rA + rAB) + r*wA*cos(theta);
 }
 
 // Function uB
 inline void uB(double x, double y, double res[2]) {
     double r = sqrt(pow(x, 2) + pow(y, 2));
     double theta = atan2(y, x);
-    res[0] = r*wB*(-beta1*beta2*rAB*(r - rB)*sin(beta2*theta)*cos(theta) - (beta1*rAB*cos(beta2*theta) \
-        + rAB - rB)*sin(theta))/(beta1*rAB*cos(beta2*theta) + rAB - rB);
-    res[1] = r*wB*(-beta1*beta2*rAB*(r - rB)*sin(theta)*sin(beta2*theta) + (beta1*rAB*cos(beta2*theta) \
-        + rAB - rB)*cos(theta))/(beta1*rAB*cos(beta2*theta) + rAB - rB);
+    res[0] = -beta1*beta2*r*rAB*wB*(r - rB)*sin(beta2*theta)*cos(theta)/(beta1*rAB*cos(beta2*theta) \
+        + rAB - rB) - r*wB*sin(theta);
+    res[1] = -beta1*beta2*r*rAB*wB*(r - rB)*sin(theta)*sin(beta2*theta)/(beta1*rAB*cos(beta2*theta) \
+        + rAB - rB) + r*wB*cos(theta);
 }
 
 // Function phiA
 inline double phiA(double x, double y) {
     double r = sqrt(pow(x, 2) + pow(y, 2));
     double theta = atan2(y, x);
-    double aA = alphaB/(-alphaA*log(gamma1 + gamma2*rB + gamma3*pow(rB, 2)) + alphaA*log(pow(beta1, 2) \
-        *gamma3*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1 \
-        *gamma3*pow(rAB, 2)*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*pow(rAB, 2)) + alphaB \
-        *log(gamma1 + gamma2*rA + gamma3*pow(rA, 2)) - alphaB*log(pow(beta1, 2)*gamma3*pow(rAB, 2) \
-        *pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1*gamma3*pow(rAB, 2) \
-        *cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*pow(rAB, 2)));
-    double bA = (alphaA*log(gamma1 + gamma2*rB + gamma3*pow(rB, 2)) - alphaA*log(pow(beta1, 2)*gamma3 \
-        *pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1*gamma3 \
-        *pow(rAB, 2)*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*pow(rAB, 2)) + alphaB \
-        *log(pow(beta1, 2)*gamma3*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2 \
-        *theta) + 2*beta1*gamma3*pow(rAB, 2)*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3 \
-        *pow(rAB, 2)))/(alphaA*log(gamma1 + gamma2*rB + gamma3*pow(rB, 2)) - alphaA*log(pow(beta1, 2) \
-        *gamma3*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1 \
-        *gamma3*pow(rAB, 2)*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*pow(rAB, 2)) - alphaB \
-        *log(gamma1 + gamma2*rA + gamma3*pow(rA, 2)) + alphaB*log(pow(beta1, 2)*gamma3*pow(rAB, 2) \
-        *pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1*gamma3*pow(rAB, 2) \
-        *cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*pow(rAB, 2)));
-    double res = aA*log(gamma1 + gamma2*r + gamma3*pow(r, 2)) + bA;
+    double aA = alphaB/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log(rAB));
+    double bA = (alphaA*log(rAB) - alphaA*log(rB) - alphaB*log(rAB))/(alphaA*log(rAB) - alphaA*log(rB) \
+        + alphaB*log(rA) - alphaB*log(rAB));
+    double res = aA*log(-(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB \
+        *cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2 \
+        *theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)/((beta1*rAB*cos(beta2*theta) \
+        - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB - rB))) + bA;
     return res;
 }
 
@@ -65,20 +77,12 @@ inline double phiA(double x, double y) {
 inline double phiB(double x, double y) {
     double r = sqrt(pow(x, 2) + pow(y, 2));
     double theta = atan2(y, x);
-    double aB = alphaA/(-alphaA*log(gamma1 + gamma2*rB + gamma3*pow(rB, 2)) + alphaA*log(pow(beta1, 2) \
-        *gamma3*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1 \
-        *gamma3*pow(rAB, 2)*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*pow(rAB, 2)) + alphaB \
-        *log(gamma1 + gamma2*rA + gamma3*pow(rA, 2)) - alphaB*log(pow(beta1, 2)*gamma3*pow(rAB, 2) \
-        *pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1*gamma3*pow(rAB, 2) \
-        *cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*pow(rAB, 2)));
-    double bB = alphaA*log(gamma1 + gamma2*rB + gamma3*pow(rB, 2))/(alphaA*log(gamma1 + gamma2*rB \
-        + gamma3*pow(rB, 2)) - alphaA*log(pow(beta1, 2)*gamma3*pow(rAB, 2)*pow(cos(beta2*theta), 2) \
-        + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1*gamma3*pow(rAB, 2)*cos(beta2*theta) + gamma1 \
-        + gamma2*rAB + gamma3*pow(rAB, 2)) - alphaB*log(gamma1 + gamma2*rA + gamma3*pow(rA, 2)) \
-        + alphaB*log(pow(beta1, 2)*gamma3*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*gamma2*rAB \
-        *cos(beta2*theta) + 2*beta1*gamma3*pow(rAB, 2)*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3 \
-        *pow(rAB, 2)));
-    double res = aB*log(gamma1 + gamma2*r + gamma3*pow(r, 2)) + bB;
+    double aB = alphaA/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log(rAB));
+    double bB = -alphaA*log(rB)/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log(rAB));
+    double res = aB*log(-(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB \
+        *cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2 \
+        *theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)/((beta1*rAB*cos(beta2*theta) \
+        - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB - rB))) + bB;
     return res;
 }
 
@@ -86,28 +90,124 @@ inline double phiB(double x, double y) {
 inline double fA(double x, double y) {
     double r = sqrt(pow(x, 2) + pow(y, 2));
     double theta = atan2(y, x);
-    double aA = alphaB/(-alphaA*log(gamma1 + gamma2*rB + gamma3*pow(rB, 2)) + alphaA*log(pow(beta1, 2) \
-        *gamma3*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1 \
-        *gamma3*pow(rAB, 2)*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*pow(rAB, 2)) + alphaB \
-        *log(gamma1 + gamma2*rA + gamma3*pow(rA, 2)) - alphaB*log(pow(beta1, 2)*gamma3*pow(rAB, 2) \
-        *pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1*gamma3*pow(rAB, 2) \
-        *cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*pow(rAB, 2)));
-    double bA = (alphaA*log(gamma1 + gamma2*rB + gamma3*pow(rB, 2)) - alphaA*log(pow(beta1, 2)*gamma3 \
-        *pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1*gamma3 \
-        *pow(rAB, 2)*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*pow(rAB, 2)) + alphaB \
-        *log(pow(beta1, 2)*gamma3*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2 \
-        *theta) + 2*beta1*gamma3*pow(rAB, 2)*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3 \
-        *pow(rAB, 2)))/(alphaA*log(gamma1 + gamma2*rB + gamma3*pow(rB, 2)) - alphaA*log(pow(beta1, 2) \
-        *gamma3*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1 \
-        *gamma3*pow(rAB, 2)*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*pow(rAB, 2)) - alphaB \
-        *log(gamma1 + gamma2*rA + gamma3*pow(rA, 2)) + alphaB*log(pow(beta1, 2)*gamma3*pow(rAB, 2) \
-        *pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1*gamma3*pow(rAB, 2) \
-        *cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*pow(rAB, 2)));
-    double res = aA*(alphaA*(rA - rAB*(beta1*cos(beta2*theta) + 1))*(r*pow(gamma2 + 2*gamma3*r, 2) \
-        - (gamma2 + 4*gamma3*r)*(gamma1 + gamma2*r + gamma3*pow(r, 2))) + beta1*beta2*pow(r, 2) \
-        *rAB*wA*(gamma2 + 2*gamma3*r)*(r - rA)*(gamma1 + gamma2*r + gamma3*pow(r, 2))*sin(beta2 \
-        *theta))/(r*(rA - rAB*(beta1*cos(beta2*theta) + 1))*pow(gamma1 + gamma2*r + gamma3 \
-        *pow(r, 2), 2));
+    double aA = alphaB/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log(rAB));
+    double bA = (alphaA*log(rAB) - alphaA*log(rB) - alphaB*log(rAB))/(alphaA*log(rAB) - alphaA*log(rB) \
+        + alphaB*log(rA) - alphaB*log(rAB));
+    double res = -aA*beta1*beta2*rAB*wA*(r - rA)*(-pow(beta1, 3)*r*pow(rAB, 3)*pow(cos(beta2 \
+        *theta), 3) + 2*pow(beta1, 2)*pow(r, 2)*pow(rAB, 2)*pow(cos(beta2*theta), 2) - 3 \
+        *pow(beta1, 2)*r*pow(rAB, 3)*pow(cos(beta2*theta), 2) + pow(beta1, 2)*r*pow(rAB, 2)*rB \
+        *pow(cos(beta2*theta), 2) - pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) \
+        + pow(beta1, 2)*pow(rAB, 2)*rB*pow(cos(beta2*theta), 2) + 2*beta1*pow(r, 2)*pow(rAB, 2) \
+        *cos(beta2*theta) - 2*beta1*pow(r, 2)*rAB*rB*cos(beta2*theta) + beta1*r*rA*pow(rAB, 2) \
+        *cos(beta2*theta) - beta1*r*rA*rAB*rB*cos(beta2*theta) - 3*beta1*r*pow(rAB, 3) \
+        *cos(beta2*theta) + 3*beta1*r*pow(rAB, 2)*rB*cos(beta2*theta) + r*rA*pow(rAB, 2) - 2*r \
+        *rA*rAB*rB - r*rA*rAB + r*rA*pow(rB, 2) + r*rA*rB - r*pow(rAB, 3) + 2*r*pow(rAB, 2)*rB \
+        + r*pow(rAB, 2) - r*rAB*pow(rB, 2) - r*rAB*rB + rA*rAB*rB - rA*pow(rB, 2) - pow(rAB, 2) \
+        *rB + rAB*pow(rB, 2))*sin(beta2*theta)/((beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1 \
+        *rAB*cos(beta2*theta) + rAB - rB)*(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2 \
+        *theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2 \
+        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB \
+        *rB)) - alphaA*((2*aA*beta1*r*rAB*cos(beta2*theta)/(-pow(beta1, 2)*r*pow(rAB, 2) \
+        *pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r \
+        *pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB \
+        - r*pow(rAB, 2) + r*rAB*rB) + aA*r*(-pow(beta1, 2)*pow(rAB, 2)*pow(cos(beta2 \
+        *theta), 2) + 2*beta1*r*rAB*cos(beta2*theta) - 2*beta1*pow(rAB, 2)*cos(beta2*theta) \
+        + rA*rAB - rA*rB - pow(rAB, 2) + rAB*rB)*(pow(beta1, 2)*pow(rAB, 2)*pow(cos(beta2 \
+        *theta), 2) - 2*beta1*r*rAB*cos(beta2*theta) + 2*beta1*pow(rAB, 2)*cos(beta2*theta) \
+        - rA*rAB + rA*rB + pow(rAB, 2) - rAB*rB)/pow(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2 \
+        *theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2 \
+        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB \
+        *rB, 2) + aA*(-pow(beta1, 2)*pow(rAB, 2)*pow(cos(beta2*theta), 2) + 2*beta1*r*rAB \
+        *cos(beta2*theta) - 2*beta1*pow(rAB, 2)*cos(beta2*theta) + rA*rAB - rA*rB \
+        - pow(rAB, 2) + rAB*rB)/(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1 \
+        *pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB \
+        *rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB))/r + (aA*beta1 \
+        *beta2*rAB*(beta1*rAB*cos(beta2*theta) - rA + rAB)*(-beta1*beta2*rAB*(-pow(beta1, 2)*r \
+        *pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1 \
+        *r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA \
+        *rB - r*pow(rAB, 2) + r*rAB*rB)*sin(beta2*theta)/((beta1*rAB*cos(beta2*theta) - rA \
+        + rAB)*pow(beta1*rAB*cos(beta2*theta) + rAB - rB, 2)) - beta1*beta2*rAB*(-pow(beta1, 2) \
+        *r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2 \
+        *beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r \
+        *rA*rB - r*pow(rAB, 2) + r*rAB*rB)*sin(beta2*theta)/(pow(beta1*rAB*cos(beta2*theta) \
+        - rA + rAB, 2)*(beta1*rAB*cos(beta2*theta) + rAB - rB)) - (2*pow(beta1, 2)*beta2*r \
+        *pow(rAB, 2)*sin(beta2*theta)*cos(beta2*theta) - beta1*beta2*pow(r, 2)*rAB*sin(beta2 \
+        *theta) + 2*beta1*beta2*r*pow(rAB, 2)*sin(beta2*theta) - beta1*beta2*rA*rAB*rB \
+        *sin(beta2*theta))/((beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2 \
+        *theta) + rAB - rB)))*sin(beta2*theta)/(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2 \
+        *theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2 \
+        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB \
+        *rB) + aA*beta1*beta2*rAB*(beta1*rAB*cos(beta2*theta) + rAB - rB)*(-beta1*beta2*rAB*( \
+        -pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2 \
+        *theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r \
+        *rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)*sin(beta2*theta)/((beta1*rAB*cos(beta2 \
+        *theta) - rA + rAB)*pow(beta1*rAB*cos(beta2*theta) + rAB - rB, 2)) - beta1*beta2*rAB*( \
+        -pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2 \
+        *theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r \
+        *rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)*sin(beta2*theta)/(pow(beta1*rAB*cos(beta2 \
+        *theta) - rA + rAB, 2)*(beta1*rAB*cos(beta2*theta) + rAB - rB)) - (2*pow(beta1, 2) \
+        *beta2*r*pow(rAB, 2)*sin(beta2*theta)*cos(beta2*theta) - beta1*beta2*pow(r, 2)*rAB \
+        *sin(beta2*theta) + 2*beta1*beta2*r*pow(rAB, 2)*sin(beta2*theta) - beta1*beta2*rA*rAB \
+        *rB*sin(beta2*theta))/((beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2 \
+        *theta) + rAB - rB)))*sin(beta2*theta)/(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2 \
+        *theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2 \
+        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB \
+        *rB) - aA*(beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB \
+        - rB)*(-beta1*beta2*rAB*(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1 \
+        *pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB \
+        *rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)*sin(beta2*theta) \
+        /((beta1*rAB*cos(beta2*theta) - rA + rAB)*pow(beta1*rAB*cos(beta2*theta) + rAB \
+        - rB, 2)) - beta1*beta2*rAB*(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) \
+        + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1 \
+        *rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)*sin(beta2 \
+        *theta)/(pow(beta1*rAB*cos(beta2*theta) - rA + rAB, 2)*(beta1*rAB*cos(beta2*theta) \
+        + rAB - rB)) - (2*pow(beta1, 2)*beta2*r*pow(rAB, 2)*sin(beta2*theta)*cos(beta2*theta) \
+        - beta1*beta2*pow(r, 2)*rAB*sin(beta2*theta) + 2*beta1*beta2*r*pow(rAB, 2)*sin(beta2 \
+        *theta) - beta1*beta2*rA*rAB*rB*sin(beta2*theta))/((beta1*rAB*cos(beta2*theta) - rA \
+        + rAB)*(beta1*rAB*cos(beta2*theta) + rAB - rB)))*(-2*pow(beta1, 2)*beta2*r*pow(rAB, 2) \
+        *sin(beta2*theta)*cos(beta2*theta) + beta1*beta2*pow(r, 2)*rAB*sin(beta2*theta) - 2 \
+        *beta1*beta2*r*pow(rAB, 2)*sin(beta2*theta) + beta1*beta2*rA*rAB*rB*sin(beta2*theta)) \
+        /pow(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB \
+        *cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2 \
+        *theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB, 2) - aA*(beta1*rAB*cos(beta2 \
+        *theta) - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB - rB)*(-2*pow(beta1, 2) \
+        *pow(beta2, 2)*pow(rAB, 2)*(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) \
+        + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1 \
+        *rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB) \
+        *pow(sin(beta2*theta), 2)/((beta1*rAB*cos(beta2*theta) - rA + rAB)*pow(beta1*rAB \
+        *cos(beta2*theta) + rAB - rB, 3)) - 2*pow(beta1, 2)*pow(beta2, 2)*pow(rAB, 2)*( \
+        -pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2 \
+        *theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r \
+        *rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)*pow(sin(beta2*theta), 2)/(pow(beta1*rAB \
+        *cos(beta2*theta) - rA + rAB, 2)*pow(beta1*rAB*cos(beta2*theta) + rAB - rB, 2)) - 2 \
+        *pow(beta1, 2)*pow(beta2, 2)*pow(rAB, 2)*(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2 \
+        *theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2 \
+        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB \
+        *rB)*pow(sin(beta2*theta), 2)/(pow(beta1*rAB*cos(beta2*theta) - rA + rAB, 3)*(beta1*rAB \
+        *cos(beta2*theta) + rAB - rB)) - beta1*pow(beta2, 2)*rAB*(-pow(beta1, 2)*r*pow(rAB, 2) \
+        *pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r \
+        *pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB \
+        - r*pow(rAB, 2) + r*rAB*rB)*cos(beta2*theta)/((beta1*rAB*cos(beta2*theta) - rA + rAB) \
+        *pow(beta1*rAB*cos(beta2*theta) + rAB - rB, 2)) - beta1*pow(beta2, 2)*rAB*( \
+        -pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2 \
+        *theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r \
+        *rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)*cos(beta2*theta)/(pow(beta1*rAB*cos(beta2 \
+        *theta) - rA + rAB, 2)*(beta1*rAB*cos(beta2*theta) + rAB - rB)) - 2*beta1*beta2*rAB*(2 \
+        *pow(beta1, 2)*beta2*r*pow(rAB, 2)*sin(beta2*theta)*cos(beta2*theta) - beta1*beta2 \
+        *pow(r, 2)*rAB*sin(beta2*theta) + 2*beta1*beta2*r*pow(rAB, 2)*sin(beta2*theta) - beta1 \
+        *beta2*rA*rAB*rB*sin(beta2*theta))*sin(beta2*theta)/((beta1*rAB*cos(beta2*theta) - rA \
+        + rAB)*pow(beta1*rAB*cos(beta2*theta) + rAB - rB, 2)) - 2*beta1*beta2*rAB*(2 \
+        *pow(beta1, 2)*beta2*r*pow(rAB, 2)*sin(beta2*theta)*cos(beta2*theta) - beta1*beta2 \
+        *pow(r, 2)*rAB*sin(beta2*theta) + 2*beta1*beta2*r*pow(rAB, 2)*sin(beta2*theta) - beta1 \
+        *beta2*rA*rAB*rB*sin(beta2*theta))*sin(beta2*theta)/(pow(beta1*rAB*cos(beta2*theta) \
+        - rA + rAB, 2)*(beta1*rAB*cos(beta2*theta) + rAB - rB)) - (-2*pow(beta1, 2) \
+        *pow(beta2, 2)*r*pow(rAB, 2)*pow(sin(beta2*theta), 2) + 2*pow(beta1, 2)*pow(beta2, 2)*r \
+        *pow(rAB, 2)*pow(cos(beta2*theta), 2) - beta1*pow(beta2, 2)*pow(r, 2)*rAB*cos(beta2 \
+        *theta) + 2*beta1*pow(beta2, 2)*r*pow(rAB, 2)*cos(beta2*theta) - beta1*pow(beta2, 2)*rA \
+        *rAB*rB*cos(beta2*theta))/((beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2 \
+        *theta) + rAB - rB)))/(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1 \
+        *pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB \
+        *rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB))/pow(r, 2));
     return res;
 }
 
@@ -115,24 +215,123 @@ inline double fA(double x, double y) {
 inline double fB(double x, double y) {
     double r = sqrt(pow(x, 2) + pow(y, 2));
     double theta = atan2(y, x);
-    double aB = alphaA/(-alphaA*log(gamma1 + gamma2*rB + gamma3*pow(rB, 2)) + alphaA*log(pow(beta1, 2) \
-        *gamma3*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1 \
-        *gamma3*pow(rAB, 2)*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*pow(rAB, 2)) + alphaB \
-        *log(gamma1 + gamma2*rA + gamma3*pow(rA, 2)) - alphaB*log(pow(beta1, 2)*gamma3*pow(rAB, 2) \
-        *pow(cos(beta2*theta), 2) + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1*gamma3*pow(rAB, 2) \
-        *cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3*pow(rAB, 2)));
-    double bB = alphaA*log(gamma1 + gamma2*rB + gamma3*pow(rB, 2))/(alphaA*log(gamma1 + gamma2*rB \
-        + gamma3*pow(rB, 2)) - alphaA*log(pow(beta1, 2)*gamma3*pow(rAB, 2)*pow(cos(beta2*theta), 2) \
-        + beta1*gamma2*rAB*cos(beta2*theta) + 2*beta1*gamma3*pow(rAB, 2)*cos(beta2*theta) + gamma1 \
-        + gamma2*rAB + gamma3*pow(rAB, 2)) - alphaB*log(gamma1 + gamma2*rA + gamma3*pow(rA, 2)) \
-        + alphaB*log(pow(beta1, 2)*gamma3*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*gamma2*rAB \
-        *cos(beta2*theta) + 2*beta1*gamma3*pow(rAB, 2)*cos(beta2*theta) + gamma1 + gamma2*rAB + gamma3 \
-        *pow(rAB, 2)));
-    double res = aB*(alphaB*(r*pow(gamma2 + 2*gamma3*r, 2) - (gamma2 + 4*gamma3*r)*(gamma1 + gamma2*r \
-        + gamma3*pow(r, 2)))*(beta1*rAB*cos(beta2*theta) + rAB - rB) - beta1*beta2*pow(r, 2) \
-        *rAB*wB*(gamma2 + 2*gamma3*r)*(r - rB)*(gamma1 + gamma2*r + gamma3*pow(r, 2))*sin(beta2 \
-        *theta))/(r*pow(gamma1 + gamma2*r + gamma3*pow(r, 2), 2)*(beta1*rAB*cos(beta2*theta) \
-        + rAB - rB));
+    double aB = alphaA/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log(rAB));
+    double bB = -alphaA*log(rB)/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log(rAB));
+    double res = -aB*beta1*beta2*rAB*wB*(r - rB)*(-pow(beta1, 3)*r*pow(rAB, 3)*pow(cos(beta2 \
+        *theta), 3) + 2*pow(beta1, 2)*pow(r, 2)*pow(rAB, 2)*pow(cos(beta2*theta), 2) \
+        + pow(beta1, 2)*r*rA*pow(rAB, 2)*pow(cos(beta2*theta), 2) - 3*pow(beta1, 2)*r \
+        *pow(rAB, 3)*pow(cos(beta2*theta), 2) - pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2 \
+        *theta), 2) + pow(beta1, 2)*rA*pow(rAB, 2)*pow(cos(beta2*theta), 2) - 2*beta1*pow(r, 2) \
+        *rA*rAB*cos(beta2*theta) + 2*beta1*pow(r, 2)*pow(rAB, 2)*cos(beta2*theta) + 3*beta1*r \
+        *rA*pow(rAB, 2)*cos(beta2*theta) - beta1*r*rA*rAB*rB*cos(beta2*theta) - 3*beta1*r \
+        *pow(rAB, 3)*cos(beta2*theta) + beta1*r*pow(rAB, 2)*rB*cos(beta2*theta) - r*pow(rA, 2) \
+        *rAB + r*pow(rA, 2)*rB + 2*r*rA*pow(rAB, 2) - 2*r*rA*rAB*rB - r*rA*rAB + r*rA*rB - r \
+        *pow(rAB, 3) + r*pow(rAB, 2)*rB + r*pow(rAB, 2) - r*rAB*rB + pow(rA, 2)*rAB \
+        - pow(rA, 2)*rB - rA*pow(rAB, 2) + rA*rAB*rB)*sin(beta2*theta)/((beta1*rAB*cos(beta2 \
+        *theta) - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB - rB)*(-pow(beta1, 2)*r \
+        *pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1 \
+        *r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA \
+        *rB - r*pow(rAB, 2) + r*rAB*rB)) - alphaB*((2*aB*beta1*r*rAB*cos(beta2*theta)/( \
+        -pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2 \
+        *theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r \
+        *rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB) + aB*r*(-pow(beta1, 2)*pow(rAB, 2) \
+        *pow(cos(beta2*theta), 2) + 2*beta1*r*rAB*cos(beta2*theta) - 2*beta1*pow(rAB, 2) \
+        *cos(beta2*theta) + rA*rAB - rA*rB - pow(rAB, 2) + rAB*rB)*(pow(beta1, 2)*pow(rAB, 2) \
+        *pow(cos(beta2*theta), 2) - 2*beta1*r*rAB*cos(beta2*theta) + 2*beta1*pow(rAB, 2) \
+        *cos(beta2*theta) - rA*rAB + rA*rB + pow(rAB, 2) - rAB*rB)/pow(-pow(beta1, 2)*r \
+        *pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1 \
+        *r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA \
+        *rB - r*pow(rAB, 2) + r*rAB*rB, 2) + aB*(-pow(beta1, 2)*pow(rAB, 2)*pow(cos(beta2 \
+        *theta), 2) + 2*beta1*r*rAB*cos(beta2*theta) - 2*beta1*pow(rAB, 2)*cos(beta2*theta) \
+        + rA*rAB - rA*rB - pow(rAB, 2) + rAB*rB)/(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2 \
+        *theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2 \
+        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB \
+        *rB))/r + (aB*beta1*beta2*rAB*(beta1*rAB*cos(beta2*theta) - rA + rAB)*(-beta1*beta2*rAB \
+        *(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2 \
+        *theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r \
+        *rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)*sin(beta2*theta)/((beta1*rAB*cos(beta2 \
+        *theta) - rA + rAB)*pow(beta1*rAB*cos(beta2*theta) + rAB - rB, 2)) - beta1*beta2*rAB*( \
+        -pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2 \
+        *theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r \
+        *rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)*sin(beta2*theta)/(pow(beta1*rAB*cos(beta2 \
+        *theta) - rA + rAB, 2)*(beta1*rAB*cos(beta2*theta) + rAB - rB)) - (2*pow(beta1, 2) \
+        *beta2*r*pow(rAB, 2)*sin(beta2*theta)*cos(beta2*theta) - beta1*beta2*pow(r, 2)*rAB \
+        *sin(beta2*theta) + 2*beta1*beta2*r*pow(rAB, 2)*sin(beta2*theta) - beta1*beta2*rA*rAB \
+        *rB*sin(beta2*theta))/((beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2 \
+        *theta) + rAB - rB)))*sin(beta2*theta)/(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2 \
+        *theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2 \
+        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB \
+        *rB) + aB*beta1*beta2*rAB*(beta1*rAB*cos(beta2*theta) + rAB - rB)*(-beta1*beta2*rAB*( \
+        -pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2 \
+        *theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r \
+        *rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)*sin(beta2*theta)/((beta1*rAB*cos(beta2 \
+        *theta) - rA + rAB)*pow(beta1*rAB*cos(beta2*theta) + rAB - rB, 2)) - beta1*beta2*rAB*( \
+        -pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2 \
+        *theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r \
+        *rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)*sin(beta2*theta)/(pow(beta1*rAB*cos(beta2 \
+        *theta) - rA + rAB, 2)*(beta1*rAB*cos(beta2*theta) + rAB - rB)) - (2*pow(beta1, 2) \
+        *beta2*r*pow(rAB, 2)*sin(beta2*theta)*cos(beta2*theta) - beta1*beta2*pow(r, 2)*rAB \
+        *sin(beta2*theta) + 2*beta1*beta2*r*pow(rAB, 2)*sin(beta2*theta) - beta1*beta2*rA*rAB \
+        *rB*sin(beta2*theta))/((beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2 \
+        *theta) + rAB - rB)))*sin(beta2*theta)/(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2 \
+        *theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2 \
+        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB \
+        *rB) - aB*(beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB \
+        - rB)*(-beta1*beta2*rAB*(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1 \
+        *pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB \
+        *rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)*sin(beta2*theta) \
+        /((beta1*rAB*cos(beta2*theta) - rA + rAB)*pow(beta1*rAB*cos(beta2*theta) + rAB \
+        - rB, 2)) - beta1*beta2*rAB*(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) \
+        + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1 \
+        *rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)*sin(beta2 \
+        *theta)/(pow(beta1*rAB*cos(beta2*theta) - rA + rAB, 2)*(beta1*rAB*cos(beta2*theta) \
+        + rAB - rB)) - (2*pow(beta1, 2)*beta2*r*pow(rAB, 2)*sin(beta2*theta)*cos(beta2*theta) \
+        - beta1*beta2*pow(r, 2)*rAB*sin(beta2*theta) + 2*beta1*beta2*r*pow(rAB, 2)*sin(beta2 \
+        *theta) - beta1*beta2*rA*rAB*rB*sin(beta2*theta))/((beta1*rAB*cos(beta2*theta) - rA \
+        + rAB)*(beta1*rAB*cos(beta2*theta) + rAB - rB)))*(-2*pow(beta1, 2)*beta2*r*pow(rAB, 2) \
+        *sin(beta2*theta)*cos(beta2*theta) + beta1*beta2*pow(r, 2)*rAB*sin(beta2*theta) - 2 \
+        *beta1*beta2*r*pow(rAB, 2)*sin(beta2*theta) + beta1*beta2*rA*rAB*rB*sin(beta2*theta)) \
+        /pow(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB \
+        *cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2 \
+        *theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB, 2) - aB*(beta1*rAB*cos(beta2 \
+        *theta) - rA + rAB)*(beta1*rAB*cos(beta2*theta) + rAB - rB)*(-2*pow(beta1, 2) \
+        *pow(beta2, 2)*pow(rAB, 2)*(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) \
+        + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1 \
+        *rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB) \
+        *pow(sin(beta2*theta), 2)/((beta1*rAB*cos(beta2*theta) - rA + rAB)*pow(beta1*rAB \
+        *cos(beta2*theta) + rAB - rB, 3)) - 2*pow(beta1, 2)*pow(beta2, 2)*pow(rAB, 2)*( \
+        -pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2 \
+        *theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r \
+        *rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)*pow(sin(beta2*theta), 2)/(pow(beta1*rAB \
+        *cos(beta2*theta) - rA + rAB, 2)*pow(beta1*rAB*cos(beta2*theta) + rAB - rB, 2)) - 2 \
+        *pow(beta1, 2)*pow(beta2, 2)*pow(rAB, 2)*(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2 \
+        *theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2 \
+        *theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB \
+        *rB)*pow(sin(beta2*theta), 2)/(pow(beta1*rAB*cos(beta2*theta) - rA + rAB, 3)*(beta1*rAB \
+        *cos(beta2*theta) + rAB - rB)) - beta1*pow(beta2, 2)*rAB*(-pow(beta1, 2)*r*pow(rAB, 2) \
+        *pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r \
+        *pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB \
+        - r*pow(rAB, 2) + r*rAB*rB)*cos(beta2*theta)/((beta1*rAB*cos(beta2*theta) - rA + rAB) \
+        *pow(beta1*rAB*cos(beta2*theta) + rAB - rB, 2)) - beta1*pow(beta2, 2)*rAB*( \
+        -pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1*pow(r, 2)*rAB*cos(beta2 \
+        *theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB*rB*cos(beta2*theta) + r \
+        *rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB)*cos(beta2*theta)/(pow(beta1*rAB*cos(beta2 \
+        *theta) - rA + rAB, 2)*(beta1*rAB*cos(beta2*theta) + rAB - rB)) - 2*beta1*beta2*rAB*(2 \
+        *pow(beta1, 2)*beta2*r*pow(rAB, 2)*sin(beta2*theta)*cos(beta2*theta) - beta1*beta2 \
+        *pow(r, 2)*rAB*sin(beta2*theta) + 2*beta1*beta2*r*pow(rAB, 2)*sin(beta2*theta) - beta1 \
+        *beta2*rA*rAB*rB*sin(beta2*theta))*sin(beta2*theta)/((beta1*rAB*cos(beta2*theta) - rA \
+        + rAB)*pow(beta1*rAB*cos(beta2*theta) + rAB - rB, 2)) - 2*beta1*beta2*rAB*(2 \
+        *pow(beta1, 2)*beta2*r*pow(rAB, 2)*sin(beta2*theta)*cos(beta2*theta) - beta1*beta2 \
+        *pow(r, 2)*rAB*sin(beta2*theta) + 2*beta1*beta2*r*pow(rAB, 2)*sin(beta2*theta) - beta1 \
+        *beta2*rA*rAB*rB*sin(beta2*theta))*sin(beta2*theta)/(pow(beta1*rAB*cos(beta2*theta) \
+        - rA + rAB, 2)*(beta1*rAB*cos(beta2*theta) + rAB - rB)) - (-2*pow(beta1, 2) \
+        *pow(beta2, 2)*r*pow(rAB, 2)*pow(sin(beta2*theta), 2) + 2*pow(beta1, 2)*pow(beta2, 2)*r \
+        *pow(rAB, 2)*pow(cos(beta2*theta), 2) - beta1*pow(beta2, 2)*pow(r, 2)*rAB*cos(beta2 \
+        *theta) + 2*beta1*pow(beta2, 2)*r*pow(rAB, 2)*cos(beta2*theta) - beta1*pow(beta2, 2)*rA \
+        *rAB*rB*cos(beta2*theta))/((beta1*rAB*cos(beta2*theta) - rA + rAB)*(beta1*rAB*cos(beta2 \
+        *theta) + rAB - rB)))/(-pow(beta1, 2)*r*pow(rAB, 2)*pow(cos(beta2*theta), 2) + beta1 \
+        *pow(r, 2)*rAB*cos(beta2*theta) - 2*beta1*r*pow(rAB, 2)*cos(beta2*theta) + beta1*rA*rAB \
+        *rB*cos(beta2*theta) + r*rA*rAB - r*rA*rB - r*pow(rAB, 2) + r*rAB*rB))/pow(r, 2));
     return res;
 }
 
