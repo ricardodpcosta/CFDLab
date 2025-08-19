@@ -163,7 +163,7 @@ $$
 where $H$ is an interfacial heat transfer function, which depends implicitly (through the parameters in the analytical solutions) on a given interfacial heat transfer coefficient, $h$, and reads
 
 $$
-H\left(\theta\right)=-\dfrac{\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)\cdot\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)}{\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)-\phi^{\textrm{B}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)}.
+H\left(\theta\right)=\dfrac{\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)\cdot\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)}{\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)-\phi^{\textrm{B}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)}.
 $$
 
 Due to the complexity of the domain, manufactured solutions, and velocity fields, the analytical expression for the interfacial heat transfer function is intricate and is omitted for conciseness.
