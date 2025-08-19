@@ -67,10 +67,11 @@ def uB(x, y):
 def phiA(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
-    aA = alphaB/(alphaA*math.log(rAB) - alphaA*math.log(rB) + alphaB*math.log(rA) - alphaB \
-        *math.log(rAB))
-    bA = (alphaA*math.log(rAB) - alphaA*math.log(rB) - alphaB*math.log(rAB))/(alphaA*math.log(rAB) \
-        - alphaA*math.log(rB) + alphaB*math.log(rA) - alphaB*math.log(rAB))
+    aA = alphaB*h*rAB/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) + alphaB \
+        *h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
+    bA = (alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) - alphaB*h*rAB \
+        *math.log(rAB))/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) \
+        + alphaB*h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
     res = aA*math.log((betaAB_1**2*r*rAB**2*math.cos(betaAB_2*theta)**2 - betaAB_1*r**2*rAB \
         *math.cos(betaAB_2*theta) + 2*betaAB_1*r*rAB**2*math.cos(betaAB_2*theta) - betaAB_1*rA \
         *rAB*rB*math.cos(betaAB_2*theta) - r*rA*rAB + r*rA*rB + r*rAB**2 - r*rAB*rB)/(betaAB_1* \
@@ -83,10 +84,10 @@ def phiA(x, y):
 def phiB(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
-    aB = alphaA/(alphaA*math.log(rAB) - alphaA*math.log(rB) + alphaB*math.log(rA) - alphaB \
-        *math.log(rAB))
-    bB = -alphaA*math.log(rB)/(alphaA*math.log(rAB) - alphaA*math.log(rB) + alphaB*math.log(rA) \
-        - alphaB*math.log(rAB))
+    aB = alphaA*h*rAB/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) + alphaB \
+        *h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
+    bB = -alphaA*h*rAB*math.log(rB)/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB \
+        *math.log(rB) + alphaB*h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
     res = aB*math.log((betaAB_1**2*r*rAB**2*math.cos(betaAB_2*theta)**2 - betaAB_1*r**2*rAB \
         *math.cos(betaAB_2*theta) + 2*betaAB_1*r*rAB**2*math.cos(betaAB_2*theta) - betaAB_1*rA \
         *rAB*rB*math.cos(betaAB_2*theta) - r*rA*rAB + r*rA*rB + r*rAB**2 - r*rAB*rB)/(betaAB_1* \
@@ -99,10 +100,11 @@ def phiB(x, y):
 def fA(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
-    aA = alphaB/(alphaA*math.log(rAB) - alphaA*math.log(rB) + alphaB*math.log(rA) - alphaB \
-        *math.log(rAB))
-    bA = (alphaA*math.log(rAB) - alphaA*math.log(rB) - alphaB*math.log(rAB))/(alphaA*math.log(rAB) \
-        - alphaA*math.log(rB) + alphaB*math.log(rA) - alphaB*math.log(rAB))
+    aA = alphaB*h*rAB/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) + alphaB \
+        *h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
+    bA = (alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) - alphaB*h*rAB \
+        *math.log(rAB))/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) \
+        + alphaB*h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
     res = -alphaA*((-2*aA*betaAB_1*r*rAB*math.cos(betaAB_2*theta)/(betaAB_1**2*r*rAB**2 \
         *math.cos(betaAB_2*theta)**2 - betaAB_1*r**2*rAB*math.cos(betaAB_2*theta) + 2*betaAB_1 \
         *r*rAB**2*math.cos(betaAB_2*theta) - betaAB_1*rA*rAB*rB*math.cos(betaAB_2*theta) - r*rA \
@@ -279,10 +281,10 @@ def fA(x, y):
 def fB(x, y):
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
-    aB = alphaA/(alphaA*math.log(rAB) - alphaA*math.log(rB) + alphaB*math.log(rA) - alphaB \
-        *math.log(rAB))
-    bB = -alphaA*math.log(rB)/(alphaA*math.log(rAB) - alphaA*math.log(rB) + alphaB*math.log(rA) \
-        - alphaB*math.log(rAB))
+    aB = alphaA*h*rAB/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) + alphaB \
+        *h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
+    bB = -alphaA*h*rAB*math.log(rB)/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB \
+        *math.log(rB) + alphaB*h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
     res = -alphaB*((-2*aB*betaAB_1*r*rAB*math.cos(betaAB_2*theta)/(betaAB_1**2*r*rAB**2 \
         *math.cos(betaAB_2*theta)**2 - betaAB_1*r**2*rAB*math.cos(betaAB_2*theta) + 2*betaAB_1 \
         *r*rAB**2*math.cos(betaAB_2*theta) - betaAB_1*rA*rAB*rB*math.cos(betaAB_2*theta) - r*rA \

@@ -64,14 +64,18 @@ D = d1 + d2*r + d3*r**2
 
 # interface normal vector
 dRAB_dtheta = sympy.diff(RAB, theta)
-nAB = 1/sympy.sqrt(RAB**2 + dRAB_dtheta**2) \
-        *sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
-                        [sympy.sin(theta), sympy.cos(theta)]]) \
-        *sympy.Matrix([-RAB, dRAB_dtheta])
+nAB_norm = sympy.sqrt(RAB**2 + dRAB_dtheta**2)
+nAB_r = -RAB/nAB_norm
+nAB_theta = dRAB_dtheta/nAB_norm
 
 # simplify expressions
-nAB[0] = nAB[0].factor().cancel()
-nAB[1] = nAB[1].factor().cancel()
+nAB_r = nAB_r.factor().cancel()
+nAB_theta = nAB_theta.factor().cancel()
+
+# Cartesian unit basis
+nAB = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
+                    [sympy.sin(theta), sympy.cos(theta)]]) \
+                    *sympy.Matrix([nAB_r, nAB_theta])
 
 #============================================
 # DOMAIN PARAMETERS
@@ -100,7 +104,7 @@ sol1[d3] = sol1[d3].factor().cancel()
 # substitute into domain mapping
 D = D.subs(sol1)
 
-# simplify expression
+# simplify expressions
 D = D.factor().cancel()
 
 #============================================
@@ -111,6 +115,83 @@ D = D.factor().cancel()
 phiA = aA*sympy.log(D) + bA
 phiB = aB*sympy.log(D) + bB
 
+# reference solutions
+phiA_ref = aA*sympy.log(r) + bA
+phiB_ref = aB*sympy.log(r) + bB
+
+#============================================
+# INTERFACIAL HEAT TRANSFER
+#============================================
+
+# temperature jump at interface
+phi_jump_rAB = phiA.subs(r, RAB) - phiB.subs(r, RAB)
+
+print("")
+print("")
+print("")
+sympy.pprint(phi_jump_rAB)
+
+# simplify expressions
+phi_jump_rAB = phi_jump_rAB.factor().cancel()
+
+print("")
+print("")
+print("")
+sympy.pprint(phi_jump_rAB)
+
+# temperature gradient at interface
+gradphiA_r_rAB = (sympy.diff(phiA, r)).subs(r, RAB)
+gradphiA_theta_rAB = (sympy.diff(phiA, theta)/r).subs(r, RAB)
+
+print("")
+print("")
+print("")
+sympy.pprint(gradphiA_r_rAB)
+
+print("")
+print("")
+print("")
+sympy.pprint(gradphiA_theta_rAB)
+
+# simplify expressions
+gradphiA_r_rAB = gradphiA_r_rAB.factor().cancel()
+gradphiA_theta_rAB = gradphiA_theta_rAB.factor().cancel()
+
+print("")
+print("")
+print("")
+sympy.pprint(gradphiA_r_rAB)
+
+print("")
+print("")
+print("")
+sympy.pprint(gradphiA_theta_rAB)
+
+
+# interfacial heat transfer function
+H = alphaA*(gradphiA_r_rAB*nAB_r + gradphiA_theta_rAB*nAB_theta)/(h*phi_jump_rAB)
+
+print("")
+print("")
+print("")
+sympy.pprint(H)
+
+
+# simplify expressions
+H = H.factor().cancel()
+
+print("")
+print("")
+print("")
+sympy.pprint(H)
+
+print("")
+print("")
+print("")
+sympy.pprint(H.simplify())
+
+
+
 #============================================
 # SOLUTION PARAMETERS
 #============================================
@@ -119,26 +200,35 @@ phiB = aB*sympy.log(D) + bB
 # the solution parameters as it is not necessaryto account for the normal
 # vector since the tangential derivative along the interface vanishes
 
-# dirichlet boundary conditions
-eq1 = sympy.Eq(phiA.subs(r, rA).factor().cancel(), 1)
-eq2 = sympy.Eq(phiB.subs(r, rB).factor().cancel(), 0)
+# temperature at boundaries
+phiA_ref_rA = phiA_ref.subs(r, rA)
+phiB_ref_rB = phiB_ref.subs(r, rB)
 
-# solution jump at interface
-dphiA_dr = sympy.diff(phiA, r)
-eq3 = sympy.Eq(alphaA*dphiA_dr.subs(r, RAB).factor().cancel(),
-        h*(phiA.subs(r, RAB)-phiB.subs(r, RAB)).factor().cancel())
+# simplify expressions
+phiA_ref_rA = phiA_ref_rA.factor().cancel()
+phiB_ref_rB = phiB_ref_rB.factor().cancel()
 
-sympy.pprint(dphiA_dr.factor().cancel())
-sympy.pprint(dphiA_dr.simplify())
+# temperature jump at interface
+phi_ref_jump_rAB = phiA_ref.subs(r, rAB)-phiB_ref.subs(r, rAB)
 
-sympy.pprint(eq1)
-sympy.pprint(eq2)
-sympy.pprint(eq3)
-sympy.pprint(eq4)
+# simplify expressions
+phi_ref_jump_rAB = phi_ref_jump_rAB.factor().cancel()
 
-# flux conservation at interface
-dphiB_dr = sympy.diff(phiB, r)
-eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, RAB), -alphaB*dphiB_dr.subs(r, RAB))
+# temperature derivatives at interface
+dphiA_ref_dr_rAB = (sympy.diff(phiA_ref, r)).subs(r, rAB)
+dphiB_ref_dr_rAB = (sympy.diff(phiB_ref, r)).subs(r, rAB)
+
+# simplify expressions
+dphiA_ref_dr_rAB = dphiA_ref_dr_rAB.factor().cancel()
+dphiB_ref_dr_rAB = dphiB_ref_dr_rAB.factor().cancel()
+
+# boundary conditions
+eq1 = sympy.Eq(phiA_ref_rA, 1)
+eq2 = sympy.Eq(phiB_ref_rB, 0)
+
+# interface conditions
+eq3 = sympy.Eq(alphaA*dphiA_ref_dr_rAB, h*phi_jump_rAB)
+eq4 = sympy.Eq(-alphaA*dphiA_ref_dr_rAB, -alphaB*dphiB_ref_dr_rAB)
 
 # solve for parameters
 sol2 = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)
@@ -254,7 +344,8 @@ paramsB_list = [("r", r), ("theta", theta), ("aB", sol2[aB]), ("bB", sol2[bB])]
 funcs_list = [("RAB", RAB, args_list, params_list), ("nAB", nAB, args_list, params_list),
                 ("uA", uA, args_list, params_list), ("uB", uB, args_list, params_list),
                 ("phiA", phiA, args_list, paramsA_list), ("phiB", phiB, args_list, paramsB_list),
-                ("fA", fA, args_list, paramsA_list), ("fB", fB, args_list, paramsB_list)]
+                ("fA", fA, args_list, paramsA_list), ("fB", fB, args_list, paramsB_list),
+                ("H", H, args_list, params_list)]
 
 # generate implementations in C/C++
 contents = ["// Auto-generated by generate_code.py", "#ifndef CHT_04_H",

@@ -60,7 +60,8 @@ inline double fA(double x, double y) {
     double aA = alphaB/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log(rAB));
     double bA = (alphaA*log(rAB) - alphaA*log(rB) - alphaB*log(rAB))/(alphaA*log(rAB) - alphaA*log(rB) \
         + alphaB*log(rA) - alphaB*log(rAB));
-    double res = -n*(aA*log(r) + bA)*(-alphaA*n*cos(n*theta) + pow(r, 2)*wA*sin(n*theta))/pow(r, 2);
+    double res = (aA*alphaA*pow(n, 2)*log(r)*cos(n*theta) - aA*n*pow(r, 2)*wA*log(r)*sin(n*theta) \
+        + alphaA*bA*pow(n, 2)*cos(n*theta) - bA*n*pow(r, 2)*wA*sin(n*theta))/pow(r, 2);
     return res;
 }
 
@@ -70,7 +71,8 @@ inline double fB(double x, double y) {
     double theta = atan2(y, x);
     double aB = alphaA/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log(rAB));
     double bB = -alphaA*log(rB)/(alphaA*log(rAB) - alphaA*log(rB) + alphaB*log(rA) - alphaB*log(rAB));
-    double res = -n*(aB*log(r) + bB)*(-alphaB*n*cos(n*theta) + pow(r, 2)*wB*sin(n*theta))/pow(r, 2);
+    double res = (aB*alphaB*pow(n, 2)*log(r)*cos(n*theta) - aB*n*pow(r, 2)*wB*log(r)*sin(n*theta) \
+        + alphaB*bB*pow(n, 2)*cos(n*theta) - bB*n*pow(r, 2)*wB*sin(n*theta))/pow(r, 2);
     return res;
 }
 

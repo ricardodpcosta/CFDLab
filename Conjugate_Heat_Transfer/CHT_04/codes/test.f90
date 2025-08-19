@@ -3,11 +3,11 @@
 ! Compile with "gfortran -cpp test.f90 -o test"
 ! Run with ".\test"
 
-#include "cht_02.f90"
+#include "cht_04.f90"
 
 program test
 
-    use cht_02
+    use cht_04
 
     ! Insert code
 

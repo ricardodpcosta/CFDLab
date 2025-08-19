@@ -96,7 +96,8 @@ function fA(x, y) result(res)
     bA = (alphaA*alphaB + alphaA*h*rAB*log(rAB) - alphaA*h*rAB*log(rB) - alphaB*h *rAB*log(rAB)) &
         /(alphaA*alphaB + alphaA*h*rAB*log(rAB) - alphaA*h* rAB*log(rB) + alphaB*h*rAB*log(rA) - alphaB &
         *h*rAB*log(rAB))
-    res = -n*(aA*log(r) + bA)*(-alphaA*n*cos(n*theta) + r**2*wA*sin(n*theta))/r**2
+    res = (aA*alphaA*n**2*log(r)*cos(n*theta) - aA*n*r**2*wA*log(r)*sin(n*theta) + alphaA*bA*n**2*cos(n &
+        *theta) - bA*n*r**2*wA*sin(n*theta))/r**2
 end function fA
 
 ! Function fB
@@ -114,7 +115,8 @@ function fB(x, y) result(res)
         *log(rA) - alphaB*h*rAB*log(rAB))
     bB = -alphaA*h*rAB*log(rB)/(alphaA*alphaB + alphaA*h*rAB*log(rAB) - alphaA*h* rAB*log(rB) + alphaB &
         *h*rAB*log(rA) - alphaB*h*rAB*log(rAB))
-    res = -n*(aB*log(r) + bB)*(-alphaB*n*cos(n*theta) + r**2*wB*sin(n*theta))/r**2
+    res = (aB*alphaB*n**2*log(r)*cos(n*theta) - aB*n*r**2*wB*log(r)*sin(n*theta) + alphaB*bB*n**2*cos(n &
+        *theta) - bB*n*r**2*wB*sin(n*theta))/r**2
 end function fB
 
 end module cht_03

@@ -62,17 +62,37 @@ phiB = (aB*sympy.log(r) + bB)*sympy.cos(n*theta)
 # SOLUTION PARAMETERS
 #============================================
 
-# dirichlet boundary conditions
-eq1 = sympy.Eq(phiA.subs(r, rA), sympy.cos(n*theta))
-eq2 = sympy.Eq(phiB.subs(r, rB), 0)
+# temperature at boundaries
+phiA_rA = phiA.subs(r, rA)
+phiB_rB = phiB.subs(r, rB)
+
+# simplify expressions
+phiA_rA = phiA_rA.factor().cancel()
+phiB_rB = phiB_rB.factor().cancel()
+
+# temperature at interface
+phiA_rAB = phiA.subs(r, rAB)
+phiB_rAB = phiB.subs(r, rAB)
+
+# simplify expressions
+phiA_rAB = phiA_rAB.factor().cancel()
+phiB_rAB = phiB_rAB.factor().cancel()
+
+# temperature derivatives at interface
+dphiA_dr_rAB = (sympy.diff(phiA, r)).subs(r, rAB)
+dphiB_dr_rAB = (sympy.diff(phiB, r)).subs(r, rAB)
+
+# simplify expressions
+dphiA_dr_rAB = dphiA_dr_rAB.factor().cancel()
+dphiB_dr_rAB = dphiB_dr_rAB.factor().cancel()
+
+# boundary conditions
+eq1 = sympy.Eq(phiA_rA, sympy.cos(n*theta))
+eq2 = sympy.Eq(phiB_rB, 0)
 
 # solution continuity at interface
-eq3 = sympy.Eq(phiA.subs(r, rAB), phiB.subs(r, rAB))
-
-# flux conservation at interface
-dphiA_dr = sympy.diff(phiA, r)
-dphiB_dr = sympy.diff(phiB, r)
-eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, rAB), -alphaB*dphiB_dr.subs(r, rAB))
+eq3 = sympy.Eq(phiA_rAB, phiB_rAB)
+eq4 = sympy.Eq(-alphaA*dphiA_dr_rAB, -alphaB*dphiB_dr_rAB)
 
 # solve for parameters
 sol = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)

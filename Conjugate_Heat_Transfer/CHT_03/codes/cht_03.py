@@ -63,7 +63,8 @@ def fA(x, y):
     bA = (alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) - alphaB*h*rAB \
         *math.log(rAB))/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB*math.log(rB) \
         + alphaB*h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
-    res = -n*(aA*math.log(r) + bA)*(-alphaA*n*math.cos(n*theta) + r**2*wA*math.sin(n*theta))/r**2
+    res = (aA*alphaA*n**2*math.log(r)*math.cos(n*theta) - aA*n*r**2*wA*math.log(r)*math.sin(n*theta) \
+        + alphaA*bA*n**2*math.cos(n*theta) - bA*n*r**2*wA*math.sin(n*theta))/r**2
     return res
 
 # Function fB
@@ -74,5 +75,6 @@ def fB(x, y):
         *h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
     bB = -alphaA*h*rAB*math.log(rB)/(alphaA*alphaB + alphaA*h*rAB*math.log(rAB) - alphaA*h*rAB \
         *math.log(rB) + alphaB*h*rAB*math.log(rA) - alphaB*h*rAB*math.log(rAB))
-    res = -n*(aB*math.log(r) + bB)*(-alphaB*n*math.cos(n*theta) + r**2*wB*math.sin(n*theta))/r**2
+    res = (aB*alphaB*n**2*math.log(r)*math.cos(n*theta) - aB*n*r**2*wB*math.log(r)*math.sin(n*theta) \
+        + alphaB*bB*n**2*math.cos(n*theta) - bB*n*r**2*wB*math.sin(n*theta))/r**2
     return res
