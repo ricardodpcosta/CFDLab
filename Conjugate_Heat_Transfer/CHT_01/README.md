@@ -63,8 +63,8 @@ where $n$ is a given constant parameter to control the solutions mode number (an
       <td align="center"><img src="images/solution_2.png" width="400px"></td>
     </tr>
     <tr>
-      <td align="center">Manufactured solution in the low-diffusivity ratio case.</td>
-      <td align="center">Manufactured solution in the high-diffusivity ratio case.</td>
+      <td align="center">Manufactured solutions in the low-diffusivity ratio case.</td>
+      <td align="center">Manufactured solutions in the high-diffusivity ratio case.</td>
     </tr>
   </table>
 </div>
@@ -78,6 +78,17 @@ $$
 \end{array}
 $$
 
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="images/velocity.png" width="400px"></td>
+    </tr>
+    <tr>
+      <td align="center">Velocity fields.</td>
+    </tr>
+  </table>
+</div>
+
 where $\omega^{\textrm{A}}$ and $\omega^{\textrm{B}}$ are given constant parameters to control the angular velocity.
 
 The **source-terms** read
@@ -90,6 +101,19 @@ $$
 $$
 
 which are obtained by substituting the manufactured solutions into the governing equations in polar coordinates.
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="images/sourceterm_1.png" width="400px"></td>
+      <td align="center"><img src="images/sourceterm_2.png" width="400px"></td>
+    </tr>
+    <tr>
+      <td align="center">Source-terms in the low-diffusivity ratio case.</td>
+      <td align="center">Source-terms in the high-diffusivity ratio case.</td>
+    </tr>
+  </table>
+</div>
 
 The **boundary conditions** correspond to the **periodic solution** on the outer boundary and the **homogeneous solution** on the inner boundary, that is
 

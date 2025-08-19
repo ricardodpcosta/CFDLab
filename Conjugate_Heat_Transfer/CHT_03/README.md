@@ -63,8 +63,8 @@ where $n$ is a given constant parameter to control the solutions mode number (an
       <td align="center"><img src="images/solution_2.png" width="400px"></td>
     </tr>
     <tr>
-      <td align="center">Manufactured solution in the low-diffusivity ratio case.</td>
-      <td align="center">Manufactured solution in the high-diffusivity ratio case.</td>
+      <td align="center">Manufactured solutions in the low-diffusivity ratio case.</td>
+      <td align="center">Manufactured solutions in the high-diffusivity ratio case.</td>
     </tr>
   </table>
 </div>
@@ -80,6 +80,17 @@ $$
 
 where $\omega^{\textrm{A}}$ and $\omega^{\textrm{B}}$ are given constant parameters to control the angular velocity.
 
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="images/velocity.png" width="400px"></td>
+    </tr>
+    <tr>
+      <td align="center">Velocity fields.</td>
+    </tr>
+  </table>
+</div>
+
 The **source-terms** read
 
 $$
@@ -90,6 +101,19 @@ $$
 $$
 
 which are obtained by substituting the manufactured solutions into the governing equations in polar coordinates.
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="images/sourceterm_1.png" width="400px"></td>
+      <td align="center"><img src="images/sourceterm_2.png" width="400px"></td>
+    </tr>
+    <tr>
+      <td align="center">Source-terms in the low-diffusivity ratio case.</td>
+      <td align="center">Source-terms in the high-diffusivity ratio case.</td>
+    </tr>
+  </table>
+</div>
 
 The **boundary conditions** correspond to the **periodic solution** on the outer boundary and the **homogeneous solution** on the inner boundary, that is
 
@@ -105,9 +129,11 @@ The **interface conditions** correspond to the **solution jump** and the **conse
 $$
 \begin{array}{l}
 &-\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\cdot\boldsymbol{n}^{\textrm{AB}}=h\left(\phi^{\textrm{A}}-\phi^{\textrm{B}}\right),&\quad\textrm{on }\Gamma^{\textrm{AB}},\\
-&-\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\cdot\boldsymbol{n}^{\textrm{AB}}=-\alpha^{\textrm{B}}\nabla\phi^{\textrm{B}}\cdot\boldsymbol{n}^{\textrm{AB}},&\quad\textrm{on }\Gamma^{\textrm{AB}}.
+&-\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\cdot\boldsymbol{n}^{\textrm{AB}}=-\alpha^{\textrm{B}}\nabla\phi^{\textrm{B}}\cdot\boldsymbol{n}^{\textrm{AB}},&\quad\textrm{on }\Gamma^{\textrm{AB}},
 \end{array}
 $$
+
+where $h$ is a given constant interfacial heat transfer coefficient.
 
 Parameters $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ in the analytical solutions are determined such that boundary and interface conditions are simultaneously satisfied, and read
 
@@ -134,7 +160,7 @@ The table below summarises the given constant parameters and the recommended val
 | $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain, $\Omega^{\textrm{B}}$         | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
 | $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$            | 1.0                           | 1.0                            | rad/s              |
 | $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain, $\Omega^{\textrm{B}}$            | -1.0                          | -1.0                           | rad/s              |
-| $h$                       | Thermal diffusivity coefficient on interface, $\Gamma^{\textrm{AB}}$  | 1                             | 1                              | K.m/s              |
+| $h$                       | Interfacial heat transfer coefficient on interface, $\Gamma^{\textrm{AB}}$  | 1                             | 1                              | K.m/s              |
 | $n$                       | Solution mode number                                                  | 4                             | 4                              |                    |
 
 ## 6. Scripts and files

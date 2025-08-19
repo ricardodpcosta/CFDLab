@@ -82,18 +82,18 @@ if not sol:
 sol = sol[0]
 
 # simplify expressions
-sol[aA] = sol[aA].factor()
-sol[bA] = sol[bA].factor()
-sol[aB] = sol[aB].factor()
-sol[bB] = sol[bB].factor()
+sol[aA] = sol[aA].factor().cancel()
+sol[bA] = sol[bA].factor().cancel()
+sol[aB] = sol[aB].factor().cancel()
+sol[bB] = sol[bB].factor().cancel()
 
 # substitute into manufactured solutions
 # phiA = phiA.subs(sol)
 # phiB = phiB.subs(sol)
 
 # simplify expressions
-# phiA = phiA.factor()
-# phiB = phiB.factor()
+# phiA = phiA.factor().cancel()
+# phiB = phiB.factor().cancel()
 
 #============================================
 # VELOCITY FIELDS
@@ -106,10 +106,10 @@ uB_r = 0
 uB_theta = wB*r
 
 # simplify expressions
-# uA_r = uA_r.factor()
-# uA_theta = uA_theta.factor()
-# uB_r = uB_r.factor()
-# uB_theta = uB_theta.factor()
+# uA_r = uA_r.factor().cancel()
+# uA_theta = uA_theta.factor().cancel()
+# uB_r = uB_r.factor().cancel()
+# uB_theta = uB_theta.factor().cancel()
 
 # Cartesian unit basis
 uA = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
@@ -130,24 +130,24 @@ diffB = -alphaB*((1/r)*sympy.diff(r*sympy.diff(phiB, r), r) \
             + (1/r**2)*sympy.diff(sympy.diff(phiB, theta), theta))
 
 # simplify expressions
-diffA = diffA.factor()
-diffB = diffB.factor()
+diffA = diffA.factor().cancel()
+diffB = diffB.factor().cancel()
 
 # convective terms
 convA = uA_r*sympy.diff(phiA, r) + (uA_theta/r)*sympy.diff(phiA, theta)
 convB = uB_r*sympy.diff(phiB, r) + (uB_theta/r)*sympy.diff(phiB, theta)
 
 # simplify expressions
-convA = convA.factor()
-convB = convB.factor()
+convA = convA.factor().cancel()
+convB = convB.factor().cancel()
 
 # source-terms
 fA = sympy.simplify(convA + diffA)
 fB = sympy.simplify(convB + diffB)
 
 # simplify expressions
-fA = fA.factor()
-fB = fB.factor()
+fA = fA.factor().cancel()
+fB = fB.factor().cancel()
 
 #============================================
 # OUTPUT

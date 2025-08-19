@@ -1,4 +1,4 @@
-# [CHT_02] Rose-shape interface with the continuity condition
+# [CHT_02] Rose-shape interface with the jump condition
 
 ## 1. Summary
 
@@ -114,6 +114,8 @@ $$
 \end{array}
 $$
 
+where $\omega^{\textrm{A}}$ and $\omega^{\textrm{B}}$ are given constant parameters to control the angular velocity.
+
 <div align="center">
   <table>
     <tr>
@@ -124,8 +126,6 @@ $$
     </tr>
   </table>
 </div>
-
-where $\omega^{\textrm{A}}$ and $\omega^{\textrm{B}}$ are given constant parameters to control the angular velocity.
 
 The **source-terms** are obtained by substituting the manufactured solutions into the governing equations in polar coordinates. Due to the mapping function in the manufactured solutions, the obtained expressions are complex and are omitted for conciseness.
 
@@ -151,23 +151,31 @@ $$
 \end{array}
 $$
 
-The **interface conditions** correspond to the **solution continuity** and the **conservation of diffusive fluxes** on the interface, that is
+The **interface conditions** correspond to the **solution jump** and the **conservation of diffusive fluxes** on the interface, that is
 
 $$
 \begin{array}{l}
-&\phi^{\textrm{A}}=\phi^{\textrm{B}},&\quad\textrm{on }\Gamma^{\textrm{AB}},\\
-&-\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\cdot\boldsymbol{n}^{\textrm{A}}=-\alpha^{\textrm{B}}\nabla\phi^{\textrm{B}}\cdot\boldsymbol{n}^{\textrm{AB}},&\quad\textrm{on }\Gamma^{\textrm{AB}}.
+&-\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\cdot\boldsymbol{n}^{\textrm{AB}}=h_\left(\phi^{\textrm{A}}-\phi^{\textrm{B}}\right),&\quad\textrm{on }\Gamma^{\textrm{AB}},\\
+&-\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\cdot\boldsymbol{n}^{\textrm{AB}}=-\alpha^{\textrm{B}}\nabla\phi^{\textrm{B}}\cdot\boldsymbol{n}^{\textrm{AB}},&\quad\textrm{on }\Gamma^{\textrm{AB}}.
 \end{array}
+$$
+
+where $H$ is an interfacial heat transfer function, which depends on a given interfacial heat transfer coefficient, $h$, and reads
+
+$$
+H\left(\theta\right)=
 $$
 
 Parameters $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ in the analytical solutions are determined such that boundary and interface conditions are simultaneously satisfied, and read
 
 $$
-a^{\textrm{A}}=c\alpha^{\textrm{B}},\qquad
-a^{\textrm{B}}=c\alpha^{\textrm{A}},\qquad
-b^{\textrm{A}}=c\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)-\alpha^{\textrm{B}}\ln\left(r^{\textrm{AB}}\right)\right),\qquad
-b^{\textrm{B}}=-c\alpha^{\textrm{A}}\ln\left(r^{\textrm{B}}\right),\qquad
-c=\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)+\alpha^{\textrm{B}}\ln\left(\dfrac{r^{\textrm{A}}}{r^{\textrm{AB}}}\right)\right)^{-1}.
+a^{\textrm{A}}=c\alpha^{\textrm{B}}hr^{\textrm{AB}},\qquad
+a^{\textrm{B}}=c\alpha^{\textrm{A}}hr^{\textrm{AB}},\qquad
+b^{\textrm{A}}=c\left(\alpha^{\textrm{A}}\alpha^{\textrm{B}}+\alpha^{\textrm{A}}hr^{\textrm{AB}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)-\alpha^{\textrm{B}}hr^{\textrm{AB}}\ln\left(r^{\textrm{AB}}\right)\right),\qquad
+b^{\textrm{B}}=-c\alpha^{\textrm{A}}hr^{\textrm{AB}}\ln\left(r^{\textrm{B}}\right),
+$$
+$$
+c=\left(\alpha^{\textrm{A}}\alpha^{\textrm{B}}+\alpha^{\textrm{A}}hr^{\textrm{AB}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)+\alpha^{\textrm{B}}hr^{\textrm{AB}}\ln\left(\dfrac{r^{\textrm{A}}}{r^{\textrm{AB}}}\right)\right)^{-1}.
 $$
 
 ## 5. Case parameters

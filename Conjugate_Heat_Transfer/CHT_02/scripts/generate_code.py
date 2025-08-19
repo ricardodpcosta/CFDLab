@@ -63,14 +63,14 @@ D = d1 + d2*r + d3*r**2
 
 # interface normal vector
 dRAB_dtheta = sympy.diff(RAB, theta)
-nAB = 1/sympy.sqrt(dRAB_dtheta**2 + RAB**2) \
+nAB = 1/sympy.sqrt(RAB**2 + dRAB_dtheta**2) \
         *sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
                         [sympy.sin(theta), sympy.cos(theta)]]) \
         *sympy.Matrix([-RAB, dRAB_dtheta])
 
 # simplify expressions
-nAB[0] = nAB[0].factor()
-nAB[1] = nAB[1].factor()
+nAB[0] = nAB[0].factor().cancel()
+nAB[1] = nAB[1].factor().cancel()
 
 #============================================
 # DOMAIN PARAMETERS
@@ -92,15 +92,15 @@ if not sol1:
 sol1 = sol1[0]
 
 # simplify expressions
-sol1[d1] = sol1[d1].factor()
-sol1[d2] = sol1[d2].factor()
-sol1[d3] = sol1[d3].factor()
+sol1[d1] = sol1[d1].factor().cancel()
+sol1[d2] = sol1[d2].factor().cancel()
+sol1[d3] = sol1[d3].factor().cancel()
 
 # substitute into domain mapping
 D = D.subs(sol1)
 
 # simplify expression
-D = D.factor()
+D = D.factor().cancel()
 
 #============================================
 # MANUFACTURED SOLUTIONS
@@ -114,19 +114,23 @@ phiB = aB*sympy.log(D) + bB
 # SOLUTION PARAMETERS
 #============================================
 
+# the reference solution on the circular interface is used to compute
+# the solution parameters as it is not necessaryto account for the normal
+# vector since the tangential derivative along the interface vanishes
+
 # dirichlet boundary conditions
-eq1 = sympy.Eq(phiA.subs(r, rA), 1)
-eq2 = sympy.Eq(phiB.subs(r, rB), 0)
+eq1 = sympy.Eq(phiA.subs(r, rA).factor().cancel(), 1)
+eq2 = sympy.Eq(phiB.subs(r, rB).factor().cancel(), 0)
 
 # solution continuity at interface
-eq3 = sympy.Eq(phiA.subs(r, RAB), phiB.subs(r, RAB))
+eq3 = sympy.Eq(phiA.subs(r, RAB).factor().cancel(),
+        phiB.subs(r, RAB).factor().cancel())
 
 # flux conservation at interface
-# it is not necessary to account for the normal vector
-# since the tangential derivative along the interface vanishes
 dphiA_dr = sympy.diff(phiA, r)
 dphiB_dr = sympy.diff(phiB, r)
-eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, RAB), -alphaB*dphiB_dr.subs(r, RAB))
+eq4 = sympy.Eq(-alphaA*dphiA_dr.subs(r, RAB).factor().cancel(),
+        -alphaB*dphiB_dr.subs(r, RAB).factor().cancel())
 
 # solve for parameters
 sol2 = sympy.solve([eq1, eq2, eq3, eq4], (aA, bA, aB, bB), dict=True)
@@ -135,18 +139,18 @@ if not sol2:
 sol2 = sol2[0]
 
 # simplify expressions
-sol2[aA] = sol2[aA].factor()
-sol2[bA] = sol2[bA].factor()
-sol2[aB] = sol2[aB].factor()
-sol2[bB] = sol2[bB].factor()
+sol2[aA] = sol2[aA].factor().cancel()
+sol2[bA] = sol2[bA].factor().cancel()
+sol2[aB] = sol2[aB].factor().cancel()
+sol2[bB] = sol2[bB].factor().cancel()
 
 # substitute into manufactured solutions
 # phiA = phiA.subs(sol2)
 # phiB = phiB.subs(sol2)
 
 # simplify expressions
-# phiA = phiA.factor()
-# phiB = phiB.factor()
+# phiA = phiA.factor().cancel()
+# phiB = phiB.factor().cancel()
 
 #============================================
 # VELOCITY FIELDS
@@ -159,10 +163,10 @@ uB_r = wB*r*(r-rB)*dRAB_dtheta/(RAB-rB)
 uB_theta = wB*r
 
 # simplify expressions
-uA_r = uA_r.factor()
-uA_theta = uA_theta.factor()
-uB_r = uB_r.factor()
-uB_theta = uB_theta.factor()
+uA_r = uA_r.factor().cancel()
+uA_theta = uA_theta.factor().cancel()
+uB_r = uB_r.factor().cancel()
+uB_theta = uB_theta.factor().cancel()
 
 # Cartesian unit basis
 uA = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
@@ -183,24 +187,24 @@ diffB = -alphaB*((1/r)*sympy.diff(r*sympy.diff(phiB, r), r) \
             + (1/r**2)*sympy.diff(sympy.diff(phiB, theta), theta))
 
 # simplify expressions
-# diffA = diffA.factor()
-# diffB = diffB.factor()
+# diffA = diffA.factor().cancel()
+# diffB = diffB.factor().cancel()
 
 # convective terms
 convA = uA_r*sympy.diff(phiA, r) + (uA_theta/r)*sympy.diff(phiA, theta)
 convB = uB_r*sympy.diff(phiB, r) + (uB_theta/r)*sympy.diff(phiB, theta)
 
 # simplify expressions
-convA = convA.factor()
-convB = convB.factor()
+convA = convA.factor().cancel()
+convB = convB.factor().cancel()
 
 # source-terms
 fA = convA + diffA
 fB = convB + diffB
 
 # simplify expressions
-# fA = fA.factor()
-# fB = fB.factor()
+# fA = fA.factor().cancel()
+# fB = fB.factor().cancel()
 
 #============================================
 # OUTPUT
