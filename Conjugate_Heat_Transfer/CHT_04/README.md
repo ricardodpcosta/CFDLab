@@ -163,7 +163,7 @@ $$
 where $H$ is an interfacial heat transfer function, which depends on a given interfacial heat transfer coefficient, $h$, and reads
 
 $$
-H\left(\theta\right)=h\dfrac{\alpha^{\textrm{A}}\nabla\cdot\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)}{\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)-\phi^{\textrm{B}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)}
+H\left(\theta\right)=-h\dfrac{\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)\cdot\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)}{\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)-\phi^{\textrm{B}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)}.
 $$
 
 Parameters $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ in the analytical solutions are determined such that boundary and interface conditions are simultaneously satisfied, and read
