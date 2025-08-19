@@ -73,7 +73,7 @@ $$
 D\left(r,\theta\right)=d_{1}\left(\theta\right)+d_{2}\left(\theta\right)r+d_{3}\left(\theta\right)r^{2},\quad\textrm{in }\Omega,\\
 $$
 
-where $d_{1}$, $d_{2}$, and $d_{3}$ are constant parameters to enforce that the rose-shaped interface is mapped into a circular interface, while the circular boundaries are preserved, that is, $D\left(r^{\textrm{A}},\theta\right)=r^{\textrm{A}}$, $D\left(r^{\textrm{B}},\theta\right)=r^{\textrm{B}}$, and $D\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)=r^{\textrm{AB}}$, and read
+where $d_{1}$, $d_{2}$, and $d_{3}$ are constant parameters to enforce that the rose-shaped interface is mapped into a circular interface, while the circular boundaries are preserved, that is, $D\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)=r^{\textrm{AB}}$, $D\left(r^{\textrm{A}},\theta\right)=r^{\textrm{A}}$, and $D\left(r^{\textrm{B}},\theta\right)=r^{\textrm{B}}$, respectively, and read
 
 $$
 d_{1}\left(\theta\right)=-cr^{\textrm{A}}r^{\textrm{AB}}r^{\textrm{B}}\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right),\qquad
@@ -84,7 +84,7 @@ $$
 c=\left(r^{\textrm{AB}}\left(1+\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right)\right)-r^{\textrm{A}}\right)^{-1}\left(r^{\textrm{AB}}\left(1+\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right)\right)-r^{\textrm{B}}\right)^{-1}.
 $$
 
-The mapping function enables mapping the manufactured solution from a complex domain to a simpler domain, facilitating solution continuity and conservation of diffusive fluxes on the interface.
+The mapping function enables mapping the manufactured solution from a complex domain to a simpler domain, facilitating to impose the solution continuity and conservation of diffusive fluxes on the interface.
 
 <div align="center">
   <table>
@@ -127,7 +127,7 @@ where $\omega^{\textrm{A}}$ and $\omega^{\textrm{B}}$ are given constant paramet
   </table>
 </div>
 
-The **source-terms** are obtained by substituting the manufactured solutions into the governing equations in polar coordinates. Due to the mapping function in the manufactured solutions, the obtained expressions are complex and are omitted for conciseness.
+The **source terms** are obtained by substituting the manufactured solutions into the governing equations in polar coordinates. Due to the complexity of the domain, manufactured solutions, and velocity fields, the analytical expressions for the source terms are intricate and are omitted for conciseness.
 
 <div align="center">
   <table>
@@ -160,11 +160,13 @@ $$
 \end{array}
 $$
 
-where $H$ is an interfacial heat transfer function, which depends on a given interfacial heat transfer coefficient, $h$, and reads
+where $H$ is an interfacial heat transfer function, which implicitly (through the parameters in the analytical solutions) depends on a given interfacial heat transfer coefficient, $h$, and reads
 
 $$
-H\left(\theta\right)=-h\dfrac{\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)\cdot\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)}{\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)-\phi^{\textrm{B}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)}.
+H\left(\theta\right)=-\dfrac{\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)\cdot\boldsymbol{n}^{\textrm{AB}}\left(\theta\right)}{\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)-\phi^{\textrm{B}}\left(R^{\textrm{AB}}\left(\theta\right),\theta\right)}.
 $$
+
+Due to the complexity of the domain, manufactured solutions, and velocity fields, the analytical expression for the interfacial heat transfer function is intricate and is omitted for conciseness.
 
 Parameters $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ in the analytical solutions are determined such that boundary and interface conditions are simultaneously satisfied, and read
 
