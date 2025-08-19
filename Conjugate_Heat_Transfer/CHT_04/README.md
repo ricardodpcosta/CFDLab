@@ -1,4 +1,4 @@
-# [CHT_02] Rose-shape interface with the jump condition
+# [CHT_04] Rose-shape interface with the jump condition
 
 ## 1. Summary
 
@@ -193,6 +193,7 @@ The table below summarises the given constant parameters and the recommended val
 | $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain, $\Omega^{\textrm{B}}$     | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
 | $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$        | 1.0                           | 1.0                            | rad/s              |
 | $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain, $\Omega^{\textrm{B}}$        | -1.0                          | -1.0                           | rad/s              |
+| $h$                       | Interfacial heat transfer coefficient on interface, $\Gamma^{\textrm{AB}}$  | 1                             | 1                              | K.m/s              |
 
 ## 6. Scripts and files
 
