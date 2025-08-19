@@ -9,18 +9,18 @@ limitation the rights to use, copy, modify, merge, publish, distribute,
 sublicense, and/or sell copies of the Material, and to permit persons to whom
 the Material is furnished to do so, subject to the following conditions:
 
-1. **Credit to the Authors** — You must give appropriate credit to the
-   original author(s), as indicated in the repository and/or the case’s
-   `README.md` file, in any public use of the Material, whether in its
-   original or modified form.
+1. **Authors Creadit** — You must give appropriate credit to the original
+   author(s), as indicated in the repository and/or the case’s `README.md`
+   file, in any public use of the Material, whether in its original or
+   modified form.
 
-2. **Citation Requirement** — If you use the Material in academic work,
+3. **Citation Requirement** — If you use the Material in academic work,
    research publications, or presentations, you must cite the original work
    as referenced in the case’s `README.md` file. Such acknowledgement
    motivates the authors and supports the continued maintenance of this
    resource for the community.
 
-3. **License Notice** — The above copyright notice, this license text,
+4. **License Notice** — The above copyright notice, this license text,
    and the credit/citation requirements must be included in all copies or
    substantial portions of the Material.
 
