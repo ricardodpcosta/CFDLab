@@ -224,7 +224,7 @@ convB = uB_r*sympy.diff(phiB, r) + (uB_theta/r)*sympy.diff(phiB, theta)
 convA = convA.factor().cancel()
 convB = convB.factor().cancel()
 
-# source-terms
+# source terms
 fA = convA + diffA
 fB = convB + diffB
 

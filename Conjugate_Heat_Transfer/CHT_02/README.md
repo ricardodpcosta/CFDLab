@@ -54,7 +54,7 @@ $$
 \end{array}
 $$
 
-where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are given constant thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are given velocity field functions, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are source-term functions in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
+where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are given constant thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are given velocity field functions, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are source term functions in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
 
 ## 4. Manufactured solution
 
@@ -127,7 +127,7 @@ $$
 
 where $\omega^{\textrm{A}}$ and $\omega^{\textrm{B}}$ are given constant parameters to control the angular velocity.
 
-The **source-terms** are obtained by substituting the manufactured solutions into the governing equations in polar coordinates. Due to the mapping function in the manufactured solutions, the obtained expressions are complex and are omitted for conciseness.
+The **source terms** are obtained by substituting the manufactured solutions into the governing equations in polar coordinates. Due to the mapping function in the manufactured solutions, the obtained expressions are complex and are omitted for conciseness.
 
 <div align="center">
   <table>
