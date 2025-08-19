@@ -4,7 +4,7 @@
 
 The **conjugate heat transfer** refers to non-isothermal physical systems that involve thermodynamic processes between **solids and fluids**, consisting of materials with different thermal properties that are **thermally coupled** through non-adiabatic contacts. The problem of conjugate heat transfer consists in determining the temperature distribution in these **multi-material domains**, with specific thermodynamic laws applied to the heat transfer at the contacts.
 
-Many multiphysics problems in fluid mechanics, solid mechanics, and electromagnetics involve multi-material domains and physical quantities that depend on the temperature, such as thermomechanics, thermoelasticity, electrothermomagnetics, and fluid-thermal-structure interaction. Hence, the numerical solution and analysis of conjugate heat transfer problems provide a means of investigating and understanding the intricate thermodynamics in a wide range of complex applications, from nuclear to aerospace engineering.
+Many **multiphysics problems** in fluid mechanics, solid mechanics, and electromagnetics involve multi-material domains and physical quantities that depend on the temperature, such as **thermomechanics**, **thermoelasticity**, **electrothermomagnetics**, and **fluid-thermal-structure interaction**. Hence, the numerical solution and analysis of conjugate heat transfer problems provide a means of investigating and understanding the intricate thermodynamics in a wide range of complex applications, from nuclear to aerospace engineering.
 
 ## 2. List of cases
 
