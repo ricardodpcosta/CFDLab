@@ -155,7 +155,7 @@ The **interface conditions** correspond to the **solution jump** and the **conse
 
 $$
 \begin{array}{l}
-&-\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\cdot\boldsymbol{n}^{\textrm{AB}}=h_\left(\phi^{\textrm{A}}-\phi^{\textrm{B}}\right),&\quad\textrm{on }\Gamma^{\textrm{AB}},\\
+&-\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\cdot\boldsymbol{n}^{\textrm{AB}}=H\left(\phi^{\textrm{A}}-\phi^{\textrm{B}}\right),&\quad\textrm{on }\Gamma^{\textrm{AB}},\\
 &-\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\cdot\boldsymbol{n}^{\textrm{AB}}=-\alpha^{\textrm{B}}\nabla\phi^{\textrm{B}}\cdot\boldsymbol{n}^{\textrm{AB}},&\quad\textrm{on }\Gamma^{\textrm{AB}}.
 \end{array}
 $$
@@ -163,7 +163,7 @@ $$
 where $H$ is an interfacial heat transfer function, which depends on a given interfacial heat transfer coefficient, $h$, and reads
 
 $$
-H\left(\theta\right)=\dfrac{\alpha^{\textrm{A}}\nabla\cdot\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right)\theta\right)}{\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right)\theta\right)-\phi^{\textrm{B}}\left(R^{\textrm{AB}}\left(\theta\right)\theta\right)}
+H\left(\theta\right)=h\dfrac{\alpha^{\textrm{A}}\nabla\cdot\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right)\theta\right)}{\phi^{\textrm{A}}\left(R^{\textrm{AB}}\left(\theta\right)\theta\right)-\phi^{\textrm{B}}\left(R^{\textrm{AB}}\left(\theta\right)\theta\right)}
 $$
 
 Parameters $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ in the analytical solutions are determined such that boundary and interface conditions are simultaneously satisfied, and read
