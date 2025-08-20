@@ -283,21 +283,21 @@ h = 1.0
 args_list = [("x", x), ("y", y)]
 
 # constants list
-consts_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("betaAB_1", betaAB_1), ("betaAB_2", betaAB_2),
+consts_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("betaAB_1", betaAB_1), ("betaAB_2", betaAB_2), \
                 ("alphaA", alphaA), ("alphaB", alphaB), ("wA", wA), ("wB", wB)]
 
 # parameters list
 params_list = [("r", r), ("theta", theta)]
 paramsA_list = [("r", r), ("theta", theta), ("aA", sol2[aA]), ("bA", sol2[bA])]
 paramsB_list = [("r", r), ("theta", theta), ("aB", sol2[aB]), ("bB", sol2[bB])]
-paramsAB_list = [("r", r), ("theta", theta), ("aA", sol2[aA]), ("bA", sol2[bA]),
+paramsAB_list = [("r", r), ("theta", theta), ("aA", sol2[aA]), ("bA", sol2[bA]), \
                     ("aB", sol2[aB]), ("bB", sol2[bB])]
 
 # functions list
-funcs_list = [("RAB", RAB, args_list, params_list), ("nAB", nAB, args_list, params_list),
-                ("uA", uA, args_list, params_list), ("uB", uB, args_list, params_list),
-                ("phiA", phiA, args_list, paramsA_list), ("phiB", phiB, args_list, paramsB_list),
-                ("fA", fA, args_list, paramsA_list), ("fB", fB, args_list, paramsB_list),
+funcs_list = [("RAB", RAB, args_list, params_list), ("nAB", nAB, args_list, params_list), \
+                ("uA", uA, args_list, params_list), ("uB", uB, args_list, params_list), \
+                ("phiA", phiA, args_list, paramsA_list), ("phiB", phiB, args_list, paramsB_list), \
+                ("fA", fA, args_list, paramsA_list), ("fB", fB, args_list, paramsB_list), \
                 ("H", H, args_list, paramsAB_list)]
 
 # generate implementations in C/C++

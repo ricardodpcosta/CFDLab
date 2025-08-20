@@ -194,7 +194,7 @@ n = 4.0
 args_list = [("x", x), ("y", y)]
 
 # constants list
-consts_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("alphaA", alphaA), ("alphaB", alphaB),
+consts_list = [("rA", rA), ("rAB", rAB), ("rB", rB), ("alphaA", alphaA), ("alphaB", alphaB), \
                 ("wA", wA), ("wB", wB), ("n", n)]
 
 # parameters list
@@ -203,8 +203,8 @@ paramsA_list = [("r", r), ("theta", theta), ("aA", sol[aA]), ("bA", sol[bA])]
 paramsB_list = [("r", r), ("theta", theta), ("aB", sol[aB]), ("bB", sol[bB])]
 
 # functions list
-funcs_list = [("uA", uA, args_list, params_list),("uB", uB, args_list, params_list),
-                ("phiA", phiA, args_list, paramsA_list), ("phiB", phiB, args_list, paramsB_list),
+funcs_list = [("uA", uA, args_list, params_list),("uB", uB, args_list, params_list), \
+                ("phiA", phiA, args_list, paramsA_list), ("phiB", phiB, args_list, paramsB_list), \
                 ("fA", fA, args_list, paramsA_list), ("fB", fB, args_list, paramsB_list)]
 
 # generate implementations in C/C++
