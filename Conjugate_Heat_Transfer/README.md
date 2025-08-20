@@ -12,7 +12,7 @@ The table below summarises the test cases provided.
 
 | Designation | Title                                                             | Tags                         |
 |:------------|:------------------------------------------------------------------|:-----------------------------|
-| **CHT_01**  | _Circular interface with the continuity condition_                | Heat transfer equation, velocity fields, constant material properties, Dirichlet boundary conditions, temperature continuity, conservation of diffusive fluxes |
-| **CHT_02**  | _Rose-shape interface with the continuity condition_              | Heat transfer equation, velocity fields, constant material properties, Dirichlet boundary conditions, temperature continuity, conservation of diffusive fluxes |
-| **CHT_03**  | _Circular interface with the jump condition_                      | Heat transfer equation, velocity fields, constant material properties, Dirichlet boundary conditions, temperature jump, conservation of diffusive fluxes |
-| **CHT_04**  | _Rose-shape interface with the jump condition_                    | Heat transfer equation, velocity fields, constant material properties, Dirichlet boundary conditions, temperature jump, conservation of diffusive fluxes |
+| **CHT_01**  | _Circular interface with the continuity condition_                | Heat transfer equation, two-dimensional, steady-state, velocity fields, constant material properties, Dirichlet boundary conditions, temperature continuity, conservation of diffusive fluxes |
+| **CHT_02**  | _Rose-shape interface with the continuity condition_              | Heat transfer equation, two-dimensional, steady-state, velocity fields, constant material properties, Dirichlet boundary conditions, temperature continuity, conservation of diffusive fluxes |
+| **CHT_03**  | _Circular interface with the jump condition_                      | Heat transfer equation, two-dimensional, steady-state, velocity fields, constant material properties, Dirichlet boundary conditions, temperature jump, conservation of diffusive fluxes |
+| **CHT_04**  | _Rose-shape interface with the jump condition_                    | Heat transfer equation, two-dimensional, steady-state, velocity fields, constant material properties, Dirichlet boundary conditions, temperature jump, conservation of diffusive fluxes |
