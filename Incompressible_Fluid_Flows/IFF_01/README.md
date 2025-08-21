@@ -1,17 +1,15 @@
-# [CHT_01] Circular interface with the continuity condition
+# [IFF_01] Taylor-Green flow of decaying vortices
 
 ## 1. Summary
 
-This benchmark represents a **steady-state two-dimensional conjugate heat transfer** problem in a concentric circular domain divided into two regions with different thermal diffusivities. It is particularly suitable for solvers that support **multi-material conduction** with optional rotational convection. The case is based on **manufactured analytical solutions** in polar coordinates, enabling:
-- **Code verification** of numerical schemes for convection-diffusion equations.
-- **Numerical assessment** of interface treatments (solution continuity and flux conservation).
+This benchmark represents an **unsteady two-dimensional isothermal incompressible fluid flow** problem in a square domain with decaying vortices. It is particularly suitable for solvers of the **unsteady Navier-Stokes equations** with solenoidal velocity fields. The case is based on an **exact analytical solution**, enabling:
+- **Code verification** of numerical schemes for the Navier-Stokes equations.
+- **Numerical assessment** of the incompressibility constraint and non-linear terms.
 - **Convergence analysis** on structured and unstructured meshes.
-
-> For conciseness and readability, all functions are expressed in polar coordinates $\left(r,\theta\right)$, and vectors are represented in the unit polar basis $\lbrace\hat{\boldsymbol{r}},\hat{\boldsymbol{\theta}}\rbrace$. However, the codes generated from the symbolic expressions are implemented in Cartesian coordinates, ensuring direct applicability in numerical solvers.
 
 ## 2. Domain and meshes
 
-The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, centred at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively. An interface, $\Gamma^{\textrm{AB}}$, with radius $r^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions. Vector functions $\boldsymbol{n}^{\textrm{A}}$ and $\boldsymbol{n}^{\textrm{B}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, respectively. On the interface, $\Gamma^{\textrm{AB}}$, vector function $\boldsymbol{n}^{\textrm{AB}}$ corresponds to the unit normal vector from subdomain $\Omega^{\textrm{A}}$ to $\Omega^{\textrm{B}}$.
+The flow is periodic with repeating counter-rotating vortices in both directions, such that a square domain $\Omega=\left[0,L\right]^{2}$ of length $L$ is considered and $\Gamma$ stands for its boundary.
 
 <div align="center">
   <table>
@@ -28,20 +26,19 @@ The **domain**, $\Omega$, consists of an outer and inner concentric circular bou
   </table>
 </div>
 
-**Structured quadrilateral** and **unstructured triangular meshes** with matching nodes on the interface are supplied to discretise both subdomains. A smooth variation of the local mesh characteristic size is implemented to accurately resolve the increasing curvature of the boundaries/interface toward the domain centre.
+**Structured quadrilateral** and **unstructured triangular meshes** with uniform mesh characteristic size are supplied to discretise both subdomains.
 
 ## 3. Model problem
 
-The **steady-state two-dimensional conjugate heat transfer** problem is modelled with **convection-diffusion equations** equipped with the appropriate boundary and interface conditions, and reads: seek temperature distribution functions $\phi^{\textrm{A}}$ and $\phi^{\textrm{B}}$ such that
+The **unsteady two-dimensional isothermal incompressible fluid flow** problem is modelled with the **Navier-Stokes equations** equipped with the appropriate boundary conditions, and reads: seek pressure and velocity functions, $p$ and $\boldsymbol{u}$, respectively, such that
 
 $$
 \begin{array}{l}
-&\nabla\cdot\left(\boldsymbol{u}^{\textrm{A}}\phi^{\textrm{A}}\right)-\alpha^{\textrm{A}}\nabla^{2}\phi^{\textrm{A}}=f^{\textrm{A}},&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&\nabla\cdot\left(\boldsymbol{u}^{\textrm{B}}\phi^{\textrm{B}}\right)-\alpha^{\textrm{B}}\nabla^{2}\phi^{\textrm{B}}=f^{\textrm{B}},&\quad\textrm{in }\Omega^{\textrm{B}},\\
-\end{array}
+&\dfrac{\partial\boldsymbol{u}}{\partial t}+\left(\boldsymbol{u}\cdot\nabla)\boldsymbol{u}-\nu\nabla^{2}\boldsymbol{u}+\dfrac{1}{\rho}\nabla p=\boldsymbol{f},&\quad\textrm{in }\Omega,\\
+&\nabla\cdot\boldsymbol{u}=0,&\quad\textrm{in }\Omega,
 $$
 
-where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are given constant thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are given velocity field functions, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are source term functions in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively. Appropriate boundary and interface conditions must be provided to close the system of equations.
+where $\nu$ is a given constant kinetic viscosity, $\rho$ is a given constant density, and $\boldsymbol{f}$ is a source term function in $\Omega$.
 
 ## 4. Manufactured solution
 
@@ -59,12 +56,12 @@ where $n$ is a given constant parameter to control the solutions mode number (an
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="images/temperature_1.png" width="400px"></td>
-      <td align="center"><img src="images/temperature_2.png" width="400px"></td>
+      <td align="center"><img src="images/solution_1.png" width="400px"></td>
+      <td align="center"><img src="images/solution_2.png" width="400px"></td>
     </tr>
     <tr>
-      <td align="center">Temperature distribution in the low-diffusivity ratio case.</td>
-      <td align="center">Temperature distribution in the high-diffusivity ratio case.</td>
+      <td align="center">Manufactured solutions in the low-diffusivity ratio case.</td>
+      <td align="center">Manufactured solutions in the high-diffusivity ratio case.</td>
     </tr>
   </table>
 </div>
@@ -81,7 +78,7 @@ $$
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="images/velocity_field.png" width="400px"></td>
+      <td align="center"><img src="images/velocity.png" width="400px"></td>
     </tr>
     <tr>
       <td align="center">Velocity fields.</td>
@@ -109,8 +106,8 @@ which are obtained by substituting the manufactured solutions into the governing
       <td align="center"><img src="images/sourceterm_2.png" width="400px"></td>
     </tr>
     <tr>
-      <td align="center">Source terms in the low-diffusivity ratio case.</td>
-      <td align="center">Source terms in the high-diffusivity ratio case.</td>
+      <td align="center">Source-terms in the low-diffusivity ratio case.</td>
+      <td align="center">Source-terms in the high-diffusivity ratio case.</td>
     </tr>
   </table>
 </div>

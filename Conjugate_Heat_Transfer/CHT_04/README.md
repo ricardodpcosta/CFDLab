@@ -3,7 +3,7 @@
 ## 1. Summary
 
 This benchmark represents a **steady-state two-dimensional conjugate heat transfer** problem in a concentric circular/rose-shaped domain divided into two regions with different thermal diffusivities. It is particularly suitable for solvers that support **multi-material conduction** with optional rotational convection. The case is based on **manufactured analytical solutions** in polar coordinates, enabling:
-- **Code verification** of diffusion and convection numerical schemes.
+- **Code verification** of numerical schemes for convection-diffusion equations.
 - **Numerical assessment** of interface treatments (solution continuity and flux conservation).
 - **Convergence analysis** on structured and unstructured meshes.
 
@@ -11,7 +11,7 @@ This benchmark represents a **steady-state two-dimensional conjugate heat transf
 
 ## 2. Domain and meshes
 
-The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, centered at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively. An interface, $\Gamma^{\textrm{AB}}$, with variable radius $R^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions. The interface radius corresponds to a periodic perturbation (diffeomorphic transformation) applied to a circumference centred at the origin with radius $r^{\textrm{AB}}$, and reads
+The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{A}}$ and $\Gamma^{\textrm{B}}$, centred at the origin and with radius $r^{\textrm{A}}$ and $r^{\textrm{B}}$, respectively. An interface, $\Gamma^{\textrm{AB}}$, with variable radius $R^{\textrm{AB}}$, divides the domain into two subdomains, $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, corresponding to the outer and inner regions. The interface radius corresponds to a periodic perturbation (diffeomorphic transformation) applied to a circumference centred at the origin with radius $r^{\textrm{AB}}$, and reads
 
 $$
 R^{\textrm{AB}}\left(\theta\right)=r^{\textrm{AB}}\left(1+\beta_{1}^{\textrm{AB}}\cos\left(\beta_{2}^{\textrm{AB}}\theta\right)\right),
@@ -45,7 +45,7 @@ $$
 
 ## 3. Model problem
 
-The **steady-state conjugate heat transfer problem** reads: seek temperature distribution functions $\phi^{\textrm{A}}$ and $\phi^{\textrm{B}}$ such that
+The **steady-state two-dimensional conjugate heat transfer** problem is modelled with **convection-diffusion equations** equipped with the appropriate boundary and interface conditions, and reads: seek temperature distribution functions $\phi^{\textrm{A}}$ and $\phi^{\textrm{B}}$ such that
 
 $$
 \begin{array}{l}
@@ -54,7 +54,7 @@ $$
 \end{array}
 $$
 
-where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are given constant thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are given velocity field functions, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are source-term functions in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively.
+where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are given constant thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are given velocity field functions, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are source term functions in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively. Appropriate boundary and interface conditions must be provided to close the system of equations.
 
 ## 4. Manufactured solution
 
@@ -89,12 +89,12 @@ The mapping function enables mapping the manufactured solution from a complex do
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="images/solution_1.png" width="400px"></td>
-      <td align="center"><img src="images/solution_2.png" width="400px"></td>
+      <td align="center"><img src="images/temperature_1.png" width="400px"></td>
+      <td align="center"><img src="images/temperature_2.png" width="400px"></td>
     </tr>
     <tr>
-      <td align="center">Manufactured solutions in the low-diffusivity ratio case.</td>
-      <td align="center">Manufactured solutions in the high-diffusivity ratio case.</td>
+      <td align="center">Temperature distribution in the low-diffusivity ratio case.</td>
+      <td align="center">Temperature distribution in the high-diffusivity ratio case.</td>
     </tr>
   </table>
 </div>
@@ -119,7 +119,7 @@ where $\omega^{\textrm{A}}$ and $\omega^{\textrm{B}}$ are given constant paramet
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="images/velocity.png" width="400px"></td>
+      <td align="center"><img src="images/velocity_field.png" width="400px"></td>
     </tr>
     <tr>
       <td align="center">Velocity fields.</td>
@@ -136,8 +136,8 @@ The **source terms** are obtained by substituting the manufactured solutions int
       <td align="center"><img src="images/sourceterm_2.png" width="400px"></td>
     </tr>
     <tr>
-      <td align="center">Source-terms in the low-diffusivity ratio case.</td>
-      <td align="center">Source-terms in the high-diffusivity ratio case.</td>
+      <td align="center">Source terms in the low-diffusivity ratio case.</td>
+      <td align="center">Source terms in the high-diffusivity ratio case.</td>
     </tr>
   </table>
 </div>
