@@ -9,7 +9,7 @@ This benchmark represents an **unsteady two-dimensional isothermal incompressibl
 
 ## 2. Domain and meshes
 
-The flow is periodic with repeating counter-rotating vortices in both directions, such that a square domain $\Omega=\left[0,L\right]^{2}$ of length $L$ is considered and $\Gamma$ stands for its boundary.
+The flow exhibits periodicity through repeating counter-rotating vortices in both spatial directions. Accordingly, the computational setup considers a square domain of side length $L$, with the space–time domain defined as $\Omega=\left[0,L\right]^{2}\times\left(0,T\right]$ and boundary $\Gamma$.
 
 <div align="center">
   <table>
@@ -33,60 +33,51 @@ The flow is periodic with repeating counter-rotating vortices in both directions
 The **unsteady two-dimensional isothermal incompressible fluid flow** problem is modelled with the **Navier-Stokes equations** equipped with the appropriate boundary conditions, and reads: seek pressure and velocity functions, $p$ and $\boldsymbol{u}$, respectively, such that
 
 $$
-\begin{array}{l}
-&\dfrac{\partial\boldsymbol{u}}{\partial t}+\left(\boldsymbol{u}\cdot\nabla)\boldsymbol{u}-\nu\nabla^{2}\boldsymbol{u}+\dfrac{1}{\rho}\nabla p=\boldsymbol{f},&\quad\textrm{in }\Omega,\\
+\begin{array}{ll}
+&\dfrac{\partial\boldsymbol{u}}{\partial t}+\left(\boldsymbol{u}\cdot\nabla\right)\boldsymbol{u}-\nu\nabla^{2}\boldsymbol{u}+\dfrac{1}{\rho}\nabla p=\boldsymbol{f},&\quad\textrm{in }\Omega,\\
 &\nabla\cdot\boldsymbol{u}=0,&\quad\textrm{in }\Omega,
+\end{array}
 $$
 
-where $\nu$ is a given constant kinetic viscosity, $\rho$ is a given constant density, and $\boldsymbol{f}$ is a source term function in $\Omega$.
+where $\nu$ is the fluid constant kinetic viscosity, $\rho$ is the fluid constant density, and $\boldsymbol{f}$ is a source term function in $\Omega$.
 
 ## 4. Manufactured solution
 
-The **manufactured solutions** read
+The **exact solutions** for the pressure and velocity read
 
 $$
-\begin{array}{l}
-&\phi^{\textrm{A}}\left(r,\theta\right)=\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right)\cos\left(n\theta\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&\phi^{\textrm{B}}\left(r,\theta\right)=\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right)\cos\left(n\theta\right),&\quad\textrm{in }\Omega^{\textrm{B}},
-\end{array}
+p\left(x,y,t\right)=\frac{\rho u^{2}_{0}}{4}\exp\left(\frac{-16\pi^{2}\alpha^{2}\nu t}{L^{2}}\right)\left(\cos\left(4\pi\alpha\frac{x}{L}\right)+\cos\left(4\pi\alpha\frac{y}{L}\right)\right),\quad\text{in }\Omega,
 $$
-
-where $n$ is a given constant parameter to control the solutions mode number (angular complexity), and $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ are constant parameters to enforce boundary and interface conditions.
-
-<div align="center">
-  <table>
-    <tr>
-      <td align="center"><img src="images/solution_1.png" width="400px"></td>
-      <td align="center"><img src="images/solution_2.png" width="400px"></td>
-    </tr>
-    <tr>
-      <td align="center">Manufactured solutions in the low-diffusivity ratio case.</td>
-      <td align="center">Manufactured solutions in the high-diffusivity ratio case.</td>
-    </tr>
-  </table>
-</div>
-
-The **velocity fields** are purely rotational, such that no mass transfer occurs through the boundaries and interface, and read
 
 $$
 \begin{array}{ll}
-&\boldsymbol{u}^{\textrm{A}}\left(r,\theta\right)=\omega^{\textrm{A}}r\hspace{1pt}\hat{\boldsymbol{\theta}},&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&\boldsymbol{u}^{\textrm{B}}\left(r,\theta\right)=\omega^{\textrm{B}}r\hspace{1pt}\hat{\boldsymbol{\theta}},&\quad\textrm{in }\Omega^{\textrm{B}},
+&u_{x}\left(x,y,t\right)=u_{0}\exp\left(\dfrac{-8\pi^{2}\alpha^{2}\nu t}{L^{2}}\right)\sin\left(2\pi\alpha\dfrac{x}{L}\right)\cos\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\quad\text{in }\Omega,\\
+&u_{y}\left(x,y,t\right)=-u_{0}\exp\left(\dfrac{-8\pi^{2}\alpha^{2}\nu t}{L^{2}}\right)\cos\left(2\pi\alpha\dfrac{x}{L}\right)\sin\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\quad\text{in }\Omega,
 \end{array}
 $$
+
+where $u_{0}$ is the reference velocity and $\alpha$ is the vortices frequency such that $\alpha L$ corresponds to the number of counter-rotating vortices in each direction.
 
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="images/velocity.png" width="400px"></td>
+      <td align="center"><img src="images/pressure.pdf" width="400px"></td>
+      <td align="center"><img src="images/velocity_field.pdf" width="400px"></td>
     </tr>
     <tr>
-      <td align="center">Velocity fields.</td>
+      <td align="center">Pressure.</td>
+      <td align="center">Velocity field.</td>
+    </tr>
+     <tr>
+      <td align="center"><img src="images/velocity_x.pdf" width="400px"></td>
+      <td align="center"><img src="images/velocity_y.pdf" width="400px"></td>
+    </tr>
+    <tr>
+      <td align="center">Horizontal velocity.</td>
+      <td align="center">Vertical velocity.</td>
     </tr>
   </table>
 </div>
-
-where $\omega^{\textrm{A}}$ and $\omega^{\textrm{B}}$ are given constant parameters to control the angular velocity.
 
 The **source terms** read
 
@@ -99,20 +90,8 @@ $$
 
 which are obtained by substituting the manufactured solutions into the governing equations in polar coordinates.
 
-<div align="center">
-  <table>
-    <tr>
-      <td align="center"><img src="images/sourceterm_1.png" width="400px"></td>
-      <td align="center"><img src="images/sourceterm_2.png" width="400px"></td>
-    </tr>
-    <tr>
-      <td align="center">Source-terms in the low-diffusivity ratio case.</td>
-      <td align="center">Source-terms in the high-diffusivity ratio case.</td>
-    </tr>
-  </table>
-</div>
 
-The **boundary conditions** correspond to the **periodic solution** on the outer boundary and the **homogeneous solution** on the inner boundary, that is
+The **boundary conditions** correspond to the **cyclic solution** on the boundaries, 
 
 $$
 \begin{array}{l}
@@ -121,39 +100,23 @@ $$
 \end{array}
 $$
 
-The **interface conditions** correspond to the **solution continuity** and the **conservation of diffusive fluxes** on the interface, that is
 
-$$
-\begin{array}{l}
-&\phi^{\textrm{A}}=\phi^{\textrm{B}},&\quad\textrm{on }\Gamma^{\textrm{AB}},\\
-&-\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\cdot\boldsymbol{n}^{\textrm{A}}=-\alpha^{\textrm{B}}\nabla\phi^{\textrm{B}}\cdot\boldsymbol{n}^{\textrm{AB}},&\quad\textrm{on }\Gamma^{\textrm{AB}}.
-\end{array}
-$$
 
-Parameters $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ in the analytical solutions are determined such that boundary and interface conditions are simultaneously satisfied, and read
-
-$$
-a^{\textrm{A}}=c\alpha^{\textrm{B}},\qquad
-a^{\textrm{B}}=c\alpha^{\textrm{A}},\qquad
-b^{\textrm{A}}=c\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)-\alpha^{\textrm{B}}\ln\left(r^{\textrm{AB}}\right)\right),\qquad
-b^{\textrm{B}}=-c\alpha^{\textrm{A}}\ln\left(r^{\textrm{B}}\right),\qquad
-c=\left(\alpha^{\textrm{A}}\ln\left(\dfrac{r^{\textrm{AB}}}{r^{\textrm{B}}}\right)+\alpha^{\textrm{B}}\ln\left(\dfrac{r^{\textrm{A}}}{r^{\textrm{AB}}}\right)\right)^{-1}.
-$$
 
 ## 5. Case parameters
 
 The table below summarises the given constant parameters and the recommended values for two case configurations: a low-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=2$) and a high-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=100$).
 
-| Symbol                    | Description                                                       | Value (low-diffusivity ratio) | Value (high-diffusivity ratio) | Units              |
+| Symbol                    | Description                                                       | Value (low Reynolds number)   | Value (high Reynolds number)   | Units              |
 |:--------------------------|:------------------------------------------------------------------|------------------------------:|-------------------------------:|:-------------------|
-| $r^{\textrm{A}}$          | Radius of outer boundary, $\Gamma^{\textrm{A}}$                   | 1.0                           | 1.0                            | m                  |
-| $r^{\textrm{AB}}$         | Radius of interface, $\Gamma^{\textrm{AB}}$                       | 0.75                          | 0.75                           | m                  |
-| $r^{\textrm{B}}$          | Radius of inner boundary, $\Gamma^{\textrm{B}}$                   | 0.5                           | 0.5                            | m                  |
-| $\alpha^{\textrm{A}}$     | Thermal diffusivity in outer subdomain, $\Omega^{\textrm{A}}$     | 2.0                           | 100.0                          | m<sup>2</sup>/s    |
-| $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain, $\Omega^{\textrm{B}}$     | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
-| $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$        | 1.0                           | 1.0                            | rad/s              |
-| $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain, $\Omega^{\textrm{B}}$        | -1.0                          | -1.0                           | rad/s              |
-| $n$                       | Solution mode number                                              | 4                             | 4                              |                    |
+| $L$                       | Domain length                                                     | 1.0                           | 1.0                            | m                  |
+| $T$                       | Final time                                                        | 1.0                           | 1.0                            | s                  |
+| $\nu$                     | Fluid kinetic viscosity                                           | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
+| $\rho$                    | Fluid density                                                     | 1.0                           | 1.0                            | kg/m<sup>3</sup>   |
+| $u_{0}$                   | Reference velocity                                                | 1.0                           | 100.0                          | m/s                |
+| $\alpha$                  | Vorticies frequency                                               | 2                             | 2                              |                    |
+
+
 
 ## 6. Scripts and files
 
