@@ -7,7 +7,7 @@ This benchmark represents a **steady-state two-dimensional conjugate heat transf
 - **Numerical assessment** of interface treatments (solution continuity and flux conservation).
 - **Convergence analysis** on structured and unstructured meshes.
 
-> For conciseness and readability, all functions are expressed in polar coordinates $\left(r,\theta\right)$, and vectors are represented in the unit polar basis $\lbrace\hat{\boldsymbol{r}},\hat{\boldsymbol{\theta}}\rbrace$. However, the codes generated from the symbolic expressions are implemented in Cartesian coordinates, ensuring direct applicability in numerical solvers.
+> **NOTE:** For conciseness and readability, all functions are expressed in polar coordinates $\left(r,\theta\right)$, and vectors are represented in the unit polar basis $\lbrace\hat{\boldsymbol{r}},\hat{\boldsymbol{\theta}}\rbrace$. However, the codes generated from the symbolic expressions are implemented in Cartesian coordinates, ensuring direct applicability in numerical solvers.
 
 ## 2. Domain and meshes
 
@@ -35,26 +35,26 @@ The **domain**, $\Omega$, consists of an outer and inner concentric circular bou
 The **steady-state two-dimensional conjugate heat transfer** problem is modelled with **convection-diffusion equations** equipped with the appropriate boundary and interface conditions, and reads: seek temperature distribution functions $\phi^{\textrm{A}}$ and $\phi^{\textrm{B}}$ such that
 
 $$
-\begin{array}{l}
+\begin{array}{ll}
 &\nabla\cdot\left(\boldsymbol{u}^{\textrm{A}}\phi^{\textrm{A}}\right)-\alpha^{\textrm{A}}\nabla^{2}\phi^{\textrm{A}}=f^{\textrm{A}},&\quad\textrm{in }\Omega^{\textrm{A}},\\
 &\nabla\cdot\left(\boldsymbol{u}^{\textrm{B}}\phi^{\textrm{B}}\right)-\alpha^{\textrm{B}}\nabla^{2}\phi^{\textrm{B}}=f^{\textrm{B}},&\quad\textrm{in }\Omega^{\textrm{B}},\\
 \end{array}
 $$
 
-where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are given constant thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are given velocity field functions, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are source term functions in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively. Appropriate boundary and interface conditions must be provided to close the system of equations.
+where $\alpha^{\textrm{A}}$ and $\alpha^{\textrm{B}}$ are constant thermal diffusivities, $\boldsymbol{u}^{\textrm{A}}$ and $\boldsymbol{u}^{\textrm{B}}$ are velocity field functions, and $f^{\textrm{A}}$ and $f^{\textrm{B}}$ are source term functions in subdomains $\Omega^{\textrm{A}}$ and $\Omega^{\textrm{B}}$, respectively. Appropriate boundary and interface conditions must be provided to close the system of partial differential equations.
 
-## 4. Manufactured solution
+## 4. Manufactured solutions
 
-The **manufactured solutions** read
+The **manufactured solutions** for the temperature distribution read
 
 $$
-\begin{array}{l}
+\begin{array}{ll}
 &\phi^{\textrm{A}}\left(r,\theta\right)=\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right)\cos\left(n\theta\right),&\quad\textrm{in }\Omega^{\textrm{A}},\\
 &\phi^{\textrm{B}}\left(r,\theta\right)=\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right)\cos\left(n\theta\right),&\quad\textrm{in }\Omega^{\textrm{B}},
 \end{array}
 $$
 
-where $n$ is a given constant parameter to control the solutions mode number (angular complexity), and $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ are constant parameters to enforce boundary and interface conditions.
+where $n$ is a constant parameter to control the solutions mode number (angular complexity), and $a^{\textrm{A}}$, $a^{\textrm{B}}$, $b^{\textrm{A}}$, and $b^{\textrm{B}}$ are constant parameters to enforce boundary and interface conditions.
 
 <div align="center">
   <table>
@@ -89,9 +89,9 @@ $$
   </table>
 </div>
 
-where $\omega^{\textrm{A}}$ and $\omega^{\textrm{B}}$ are given constant parameters to control the angular velocity.
+where $\omega^{\textrm{A}}$ and $\omega^{\textrm{B}}$ are constant parameters to control the angular velocity.
 
-The **source terms** read
+The **source terms** are obtained from substituting the manufactured solutions into the governing equations in polar coordinates, and read
 
 $$
 \begin{array}{ll}
@@ -99,8 +99,6 @@ $$
 &f^{\textrm{B}}\left(r,\theta\right)=\dfrac{n\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right)\left(\alpha^{\textrm{B}}n\cos\left(n\theta\right)-r^{2}\omega^{\textrm{B}}\sin\left(n\theta\right)\right)}{r^{2}},&\quad\textrm{in }\Omega^{\textrm{B}},\\
 \end{array}
 $$
-
-which are obtained by substituting the manufactured solutions into the governing equations in polar coordinates.
 
 <div align="center">
   <table>
@@ -115,19 +113,19 @@ which are obtained by substituting the manufactured solutions into the governing
   </table>
 </div>
 
-The **boundary conditions** correspond to the **periodic solution** on the outer boundary and the **homogeneous solution** on the inner boundary, that is
+The **boundary conditions** prescribed for the temperature distribution correspond to the **variable Dirichlet boundary condition** on the outer boundary and the **homogeneous Dirichlet boundary condition** on the inner boundary, that is
 
 $$
-\begin{array}{l}
+\begin{array}{ll}
 &\phi^{\textrm{A}}=\cos\left(n\theta\right),&\quad\textrm{on }\Gamma^{\textrm{A}},\\
 &\phi^{\textrm{B}}=0,&\quad\textrm{on }\Gamma^{\textrm{B}}.
 \end{array}
 $$
 
-The **interface conditions** correspond to the **solution continuity** and the **conservation of diffusive fluxes** on the interface, that is
+The **interface conditions** prescribed for the temperature distribution correspond to the **solution continuity** and the **conservation of diffusive fluxes** on the interface, that is
 
 $$
-\begin{array}{l}
+\begin{array}{ll}
 &\phi^{\textrm{A}}=\phi^{\textrm{B}},&\quad\textrm{on }\Gamma^{\textrm{AB}},\\
 &-\alpha^{\textrm{A}}\nabla\phi^{\textrm{A}}\cdot\boldsymbol{n}^{\textrm{A}}=-\alpha^{\textrm{B}}\nabla\phi^{\textrm{B}}\cdot\boldsymbol{n}^{\textrm{AB}},&\quad\textrm{on }\Gamma^{\textrm{AB}}.
 \end{array}
@@ -145,7 +143,7 @@ $$
 
 ## 5. Case parameters
 
-The table below summarises the given constant parameters and the recommended values for two case configurations: a low-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=2$) and a high-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=100$).
+The table below summarises the constant parameters left to define and the recommended values for two case configurations: a low-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=2$) and a high-diffusivity ratio ($\alpha^{\textrm{A}}/\alpha^{\textrm{B}}=100$).
 
 | Symbol                    | Description                                                       | Value (low-diffusivity ratio) | Value (high-diffusivity ratio) | Units              |
 |:--------------------------|:------------------------------------------------------------------|------------------------------:|-------------------------------:|:-------------------|
@@ -171,7 +169,7 @@ The table below summarises the functionality and usage of the supplied scripts. 
 
 ## 7. How to cite
 
-If you have used this test case or supplied material — in its original or modified form — in your research, please acknowledge the original work when publishing your results:
+If you have used this benchmark or the supplied material — in its original or modified form, in part or in whole — in your research, please acknowledge the original work when publishing your results:
 
 > **R. Costa**, J.M. Nóbrega, S. Clain, and G.J. Machado, _Very high-order accurate polygonal mesh finite volume scheme for conjugate heat transfer problems with curved interfaces and imperfect contacts_, **Computer Methods in Applied Mechanics and Engineering**, Vol. 357, 112560, 2019. DOI: [10.1016/j.cma.2019.07.029](https://doi.org/10.1016/j.cma.2019.07.029).
 
