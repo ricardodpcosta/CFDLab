@@ -138,8 +138,16 @@ uB = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
                     *sympy.Matrix([uB_r, uB_theta])
 
 #============================================
-# SOURCE-TERMS
+# SOURCE TERMS
 #============================================
+
+# convective terms
+convA = uA_r*sympy.diff(phiA, r) + (uA_theta/r)*sympy.diff(phiA, theta)
+convB = uB_r*sympy.diff(phiB, r) + (uB_theta/r)*sympy.diff(phiB, theta)
+
+# simplify expressions
+convA = convA.factor().cancel()
+convB = convB.factor().cancel()
 
 # diffusive terms
 diffA = -alphaA*((1/r)*sympy.diff(r*sympy.diff(phiA, r), r) \
@@ -151,17 +159,9 @@ diffB = -alphaB*((1/r)*sympy.diff(r*sympy.diff(phiB, r), r) \
 diffA = diffA.factor().cancel()
 diffB = diffB.factor().cancel()
 
-# convective terms
-convA = uA_r*sympy.diff(phiA, r) + (uA_theta/r)*sympy.diff(phiA, theta)
-convB = uB_r*sympy.diff(phiB, r) + (uB_theta/r)*sympy.diff(phiB, theta)
-
-# simplify expressions
-convA = convA.factor().cancel()
-convB = convB.factor().cancel()
-
 # source terms
-fA = sympy.simplify(convA + diffA)
-fB = sympy.simplify(convB + diffB)
+fA = convA + diffA
+fB = convB + diffB
 
 # simplify expressions
 fA = fA.factor().cancel()
