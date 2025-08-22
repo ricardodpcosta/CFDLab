@@ -79,7 +79,14 @@ where $u_{0}$ is the reference velocity and $\alpha$ is the vortex frequency suc
   </table>
 </div>
 
-The **source term** vanishes for this exact solution. 
+The **source term** vanishes for this exact solution, that is
+
+$$
+\begin{array}{ll}
+&f_{x}\left(x,y\right)=0,&\quad\text{in }\Omega,\\
+&f_{y}\left(x,y\right)=0,&\quad\text{in }\Omega.
+\end{array}
+$$
 
 The **initial condition** for the velocity corresponds to the exact solution at time t=0, that is
 
