@@ -61,16 +61,16 @@ where $u_{0}$ is the reference velocity and $\alpha$ is the vortex frequency suc
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="images/pressure.pdf" width="400px"></td>
-      <td align="center"><img src="images/velocity_field.pdf" width="400px"></td>
+      <td align="center"><img src="images/pressure.png" width="400px"></td>
+      <td align="center"><img src="images/velocity_field.png" width="400px"></td>
     </tr>
     <tr>
       <td align="center">Pressure.</td>
       <td align="center">Velocity field.</td>
     </tr>
      <tr>
-      <td align="center"><img src="images/velocity_x.pdf" width="400px"></td>
-      <td align="center"><img src="images/velocity_y.pdf" width="400px"></td>
+      <td align="center"><img src="images/velocity_x.png" width="400px"></td>
+      <td align="center"><img src="images/velocity_y.png" width="400px"></td>
     </tr>
     <tr>
       <td align="center">Horizontal velocity.</td>
