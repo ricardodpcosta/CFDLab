@@ -1,4 +1,4 @@
-# [IFF_01] Taylor-Green flow of decaying vortices
+# [INSE_01] Taylor-Green flow of decaying vortices
 
 ## 1. Summary
 
@@ -41,12 +41,12 @@ $$
 
 where $\nu$ is the fluid constant kinetic viscosity, $\rho$ is the fluid constant density, and $\boldsymbol{f}$ is a source term function in $\Omega$.
 
-## 4. Manufactured solution
+## 4. Exact solutions
 
 The **exact solutions** for the pressure and velocity read
 
 $$
-p\left(x,y,t\right)=\frac{\rho u^{2}_{0}}{4}\exp\left(\frac{-16\pi^{2}\alpha^{2}\nu t}{L^{2}}\right)\left(\cos\left(4\pi\alpha\frac{x}{L}\right)+\cos\left(4\pi\alpha\frac{y}{L}\right)\right),\quad\text{in }\Omega,
+p\left(x,y,t\right)=\dfrac{\rho u^{2}_{0}}{4}\exp\left(\dfrac{-16\pi^{2}\alpha^{2}\nu t}{L^{2}}\right)\left(\cos\left(4\pi\alpha\dfrac{x}{L}\right)+\cos\left(4\pi\alpha\dfrac{y}{L}\right)\right),\quad\text{in }\Omega,
 $$
 
 $$
@@ -56,7 +56,7 @@ $$
 \end{array}
 $$
 
-where $u_{0}$ is the reference velocity and $\alpha$ is the vortices frequency such that $\alpha L$ corresponds to the number of counter-rotating vortices in each direction.
+where $u_{0}$ is the reference velocity and $\alpha$ is the vortex frequency such that $\alpha L$ corresponds to the number of counter-rotating vortices in each direction.
 
 <div align="center">
   <table>
@@ -79,29 +79,53 @@ where $u_{0}$ is the reference velocity and $\alpha$ is the vortices frequency s
   </table>
 </div>
 
-The **source terms** read
+The **source term** vanishes for this exact solution. 
+
+The **initial condition** for the velocity corresponds to the exact solution at time t=0, that is
 
 $$
 \begin{array}{ll}
-&f^{\textrm{A}}\left(r,\theta\right)=\dfrac{n\left(a^{\textrm{A}}\ln\left(r\right)+b^{\textrm{A}}\right)\left(\alpha^{\textrm{A}}n\cos\left(n\theta\right)-r^{2}\omega^{\textrm{A}}\sin\left(n\theta\right)\right)}{r^{2}},&\quad\textrm{in }\Omega^{\textrm{A}},\\
-&f^{\textrm{B}}\left(r,\theta\right)=\dfrac{n\left(a^{\textrm{B}}\ln\left(r\right)+b^{\textrm{B}}\right)\left(\alpha^{\textrm{B}}n\cos\left(n\theta\right)-r^{2}\omega^{\textrm{B}}\sin\left(n\theta\right)\right)}{r^{2}},&\quad\textrm{in }\Omega^{\textrm{B}},\\
+&u_{x}\left(x,y\right)=u_{0}\sin\left(2\pi\alpha\dfrac{x}{L}\right)\cos\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\quad\text{in }\Omega,\\
+&u_{y}\left(x,y\right)=-u_{0}\cos\left(2\pi\alpha\dfrac{x}{L}\right)\sin\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\quad\text{in }\Omega.
 \end{array}
 $$
 
-which are obtained by substituting the manufactured solutions into the governing equations in polar coordinates.
-
-
-The **boundary conditions** correspond to the **cyclic solution** on the boundaries, 
+The **boundary conditions** prescribed for both the pressure and velocity correspond to the **periodic boundary condition** on the four sides of the domain, considering the repetition of the solution in both directions, that is 
 
 $$
-\begin{array}{l}
-&\phi^{\textrm{A}}=\cos\left(n\theta\right),&\quad\textrm{on }\Gamma^{\textrm{A}},\\
-&\phi^{\textrm{B}}=0,&\quad\textrm{on }\Gamma^{\textrm{B}}.
+\begin{array}{ll}
+&p(0,y,t)=p(L,y,t),&\quad\forall y\in\left[0,L\right],t>0,\\
+&p(x,0,t)=p(x,L,t),&\quad\forall x\in\left[0,L\right],t>0,\\
+&\boldsymbol{u}(0,y,t)=\boldsymbol{u}(L,y,t),&\quad\forall y\in\left[0,L\right],t>0,\\
+&\boldsymbol{u}(x,0,t)=\boldsymbol{u}(x,L,t),&\quad\forall x\in\left[0,L\right],t>0.
 \end{array}
 $$
 
+> **NOTE:** In some simplified variants, the problem is also studied with symmetry boundary conditions imposed on the domain edges (symmetry or antisymmetry depending on the velocity components). However, the canonical and most commonly employed formulation remains the use of periodic boundary conditions in all directions.
 
-
+> **NOTE:** This test case can also be easily converted into a stationary problem with the analytical solution corresponding to the previous solution at a fixed time. Considering $t=0$, the **exact solutions** for the pressure and velocity read
+>
+>$$
+>p\left(x,y\right)=\dfrac{\rho u^{2}_{0}}{4}\left(\cos\left(4\pi\alpha\dfrac{x}{L}\right)+\cos\left(4\pi\alpha\dfrac{y}{L}\right)\right),\quad\text{in }\Omega,
+>$$
+>
+>$$
+>\begin{array}{ll}
+>&u_{x}\left(x,y\right)=u_{0}\sin\left(2\pi\alpha\dfrac{x}{L}\right)\cos\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\quad\text{in }\Omega,\\
+>&u_{y}\left(x,y\right)=-u_{0}\cos\left(2\pi\alpha\dfrac{x}{L}\right)\sin\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\quad\text{in }\Omega.
+>\end{array}
+>$$
+>
+> In that case, the source term does not vanish to prevent the vortices from decaying, and reads
+>
+>$$
+>\begin{array}{ll}
+>&f_{x}\left(x,y\right)=u_{0}\dfrac{8\pi^{2}\alpha^{2}\mu}{\rho L^{2}}\sin\left(2\pi\alpha\dfrac{x}{L}\right)\cos\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\text{in }\Omega,\\
+>&f_{y}\left(x,y\right)=-u_{0}\dfrac{8\pi^{2}\alpha^{2}\mu}{\rho L^{2}}\cos\left(2\pi\alpha\dfrac{x}{L}\right)\sin\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\text{in }\Omega.
+>\end{array}
+>$$
+>
+> The **boundary conditions** prescribed for both the pressure and velocity are the same as in the unsteady case.
 
 ## 5. Case parameters
 
@@ -114,9 +138,7 @@ The table below summarises the given constant parameters and the recommended val
 | $\nu$                     | Fluid kinetic viscosity                                           | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
 | $\rho$                    | Fluid density                                                     | 1.0                           | 1.0                            | kg/m<sup>3</sup>   |
 | $u_{0}$                   | Reference velocity                                                | 1.0                           | 100.0                          | m/s                |
-| $\alpha$                  | Vorticies frequency                                               | 2                             | 2                              |                    |
-
-
+| $\alpha$                  | Vortex frequency                                                  | 2                             | 2                              |                    |
 
 ## 6. Scripts and files
 
@@ -131,20 +153,20 @@ The table below summarises the functionality and usage of the supplied scripts. 
 
 ## 7. How to cite
 
-If you have used this test case or supplied material — in its original or modified form — in your research, please acknowledge the original work when publishing your results:
+If you have used this benchmark or supplied material — in its original or modified form, in part or in whole — in your research, please acknowledge the original work when publishing your results:
 
-> **R. Costa**, J.M. Nóbrega, S. Clain, and G.J. Machado, _Very high-order accurate polygonal mesh finite volume scheme for conjugate heat transfer problems with curved interfaces and imperfect contacts_, **Computer Methods in Applied Mechanics and Engineering**, Vol. 357, 112560, 2019. DOI: [10.1016/j.cma.2019.07.029](https://doi.org/10.1016/j.cma.2019.07.029).
+> **R. Costa**, S. Clain, G.J. Machado, and J.M. Nóbrega, _Very high-order accurate finite volume method for the steady-state incompressible Navier-Stokes equations with polygonal meshes on arbitrary curved boundaries_, **Computer Methods in Applied Mechanics and Engineering**, Vol. 396, 115064, 2022. DOI: [10.1016/j.cma.2022.115064](https://doi.org/10.1016/j.cma.2022.115064).
 
 For your convenience, you may use the following BibTeX entry:
 
 ```bibtex
-@article{Costa2019,
-  title={Very high-order accurate polygonal mesh finite volume scheme for conjugate heat transfer problems with curved interfaces and imperfect contacts},
-  author={Costa, R. and Nóbrega, J. M. and Clain, S. and Machado, G. J.},
+@article{Costa2022,
+  title={Very high-order accurate finite volume method for the steady-state incompressible Navier-Stokes equations with polygonal meshes on arbitrary curved boundaries},
+  author={Costa, R. and Clain, S. and Machado, G. J. and Nóbrega, J. M.},
   journal={Computer Methods in Applied Mechanics and Engineering},
-  volume={357},
-  pages={112560},
-  year={2019},
-  doi={10.1016/j.cma.2019.07.029}
+  volume={396},
+  pages={115064},
+  year={2022},
+  doi={10.1016/j.cma.2022.115064}
 }
 ```
