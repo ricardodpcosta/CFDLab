@@ -84,7 +84,7 @@ $$
       <td align="center"><img src="images/velocity_field.png" width="400px"></td>
     </tr>
     <tr>
-      <td align="center">Velocity fields.</td>
+      <td align="center">Velocity.</td>
     </tr>
   </table>
 </div>
