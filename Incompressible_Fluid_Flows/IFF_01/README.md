@@ -108,9 +108,9 @@ $$
 \end{array}
 $$
 
-> **NOTE:** In some simplified variants, the problem is also studied with symmetry boundary conditions imposed on the domain edges (symmetry or antisymmetry depending on the velocity components). However, the canonical and most commonly employed formulation remains the use of periodic boundary conditions in all directions.
+> **NOTE:** The problem can also be solved with symmetry boundary conditions imposed on the domain edges (symmetry or antisymmetry depending on the velocity components). However, the canonical and most commonly employed formulation remains the use of periodic boundary conditions in all directions.
 
-> **NOTE:** This test case can also be easily converted into a stationary problem with the analytical solution corresponding to the previous solution at a fixed time. Considering $t=0$, the **exact solutions** for the pressure and velocity read
+> **NOTE:** The problem can also be easily converted into a stationary problem with the analytical solution corresponding to the previous solution at a fixed time. Considering $t=0$, the **exact solutions** for the pressure and velocity read
 >
 >$$
 >p\left(x,y\right)=\dfrac{\rho u^{2}_{0}}{4}\left(\cos\left(4\pi\alpha\dfrac{x}{L}\right)+\cos\left(4\pi\alpha\dfrac{y}{L}\right)\right),\quad\text{in }\Omega,
