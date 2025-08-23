@@ -55,16 +55,16 @@ $$
 \end{array}
 $$
 
-where $c=\left.\left(c_{\textrm{E}}-c_{\textrm{I}}\right)\middle/\left(\pi\left(r^{2}_{\textrm{E}}-r^{2}_{\textrm{I}}\right)\right)\right.$ guarantees a null pressure mean-value in $\Omega$, and parameters $a$, $b$, $c_{\textrm{I}}$, and $c_{\textrm{E}}$ are are constant parameters given as
+where $c=\left.\left(c_{\textrm{E}}-c_{\textrm{I}}\right)\middle/\left(\pi\left(r_{\textrm{E}}^{2}-r_{\textrm{I}}^{2}\right)\right)\right.$ guarantees a null pressure mean-value in $\Omega$, and parameters $a$, $b$, $c_{\textrm{I}}$, and $c_{\textrm{E}}$ are are constant parameters given as
 
 $$
 \begin{array}{ll}
-&a=\frac{\omega_{\textrm{E}}r^{2}_{\textrm{E}}-\omega_{\textrm{I}}r^{2}_{\textrm{I}}}{r^{2}_{\textrm{E}}-r^{2}_{\textrm{I}}},
+&a=\frac{\omega_{\textrm{E}}r_{\textrm{E}}^{2}-\omega_{\textrm{I}}r_{\textrm{I}}^{2}}{r_{\textrm{E}}^{2}-r_{\textrm{I}}^{2}},
 \quad
-&&b=\left(\omega_{\textrm{E}}-\omega_{\textrm{I}}\right)\frac{r^{2}_{\textrm{E}}r^{2}_{\textrm{I}}}{r^{2}_{\textrm{E}}-r^{2}_{\textrm{I}}},\\
-&c_{\textrm{I}}=2\pi\left(\frac{a^{2}}{8}r^{4}_{\textrm{I}}+ab\left(\ln\left(r_{\textrm{I}}\right)-\frac{1}{2}\right)r^{2}_{\textrm{I}}-\frac{b^{2}}{2\ln\left(r_{\textrm{I}}\right)}\right),
+&&b=\left(\omega_{\textrm{E}}-\omega_{\textrm{I}}\right)\frac{r_{\textrm{E}}^{2}r_{\textrm{I}}^{2}}{r_{\textrm{E}}^{2}-r_{\textrm{I}}^{2}},\\
+&c_{\textrm{I}}=2\pi\left(\frac{a^{2}}{8}r_{\textrm{I}}^{4}+ab\left(\ln\left(r_{\textrm{I}}\right)-\frac{1}{2}\right)r_{\textrm{I}}^{2}-\frac{b^{2}}{2\ln\left(r_{\textrm{I}}\right)}\right),
 \quad
-&&c_{\textrm{E}}=2\pi\left(\frac{a^{2}}{8}r^{4}_{\textrm{E}}+ab\left(\ln\left(r_{\textrm{E}}\right)-\frac{1}{2}\right)r^{2}_{\textrm{E}}-\frac{b^{2}}{2\ln\left(r_{\textrm{E}}\right)}\right).
+&&c_{\textrm{E}}=2\pi\left(\frac{a^{2}}{8}r_{\textrm{E}}^{4}+ab\left(\ln\left(r_{\textrm{E}}\right)-\frac{1}{2}\right)r_{\textrm{E}}^{2}-\frac{b^{2}}{2\ln\left(r_{\textrm{E}}\right)}\right).
 \end{array}
 $$
 
