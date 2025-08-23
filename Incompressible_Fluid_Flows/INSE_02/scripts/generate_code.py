@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 ===============================================================================
-CFDLab | INSE_01
+CFDLab | INSE_02
 ===============================================================================
 
 Description:
@@ -39,89 +39,101 @@ from helpers import *
 #============================================
 
 # constants
-L, T = sympy.symbols("L T", real=True, positive=True)
+rO, rI = sympy.symbols("rO rI", real=True, positive=True)
 nu, rho = sympy.symbols("nu rho", real=True, positive=True)
-u0, alpha = sympy.symbols("u0 alpha", real=True)
+omegaO, omegaI = sympy.symbols("omegaO omegaI", real=True)
 pi = sympy.symbols("pi", real=True)
 
+# parameters
+a, b, c, cO, cI = sympy.symbols("a b c cO cI", real=True)
+
 # coordinate system
-x, y, t = sympy.symbols("x y t", real=True)
+r, theta = sympy.symbols("r theta", real=True)
+x, y = sympy.symbols("x y", real=True)
 
 #============================================
 # EXACT SOLUTIONS
 #============================================
 
+# solution parameters
+a = (omegaO*rO**2 - omegaI*rI**2)/(rO**2 - rI**2)
+b = (omegaO - omegaI)*rO**2*rI**2/(rO**2 - rI**2)
+c = (cO - cI)/(pi*(rO**2 - rI**2))
+cO = 2*pi*(a**2*rO**4/8 + a*b*(sympy.log(rO) - 1/2)*rO**2 - b**2/(2*sympy.log(rO)))
+cI = 2*pi*(a**2*rI**4/8 + a*b*(sympy.log(rI) - 1/2)*rI**2 - b**2/(2*sympy.log(rI)))
+
 # exact solutions
-p = (rho*u0**2/4)*sympy.exp(-16*pi**2*alpha**2*nu*t/L**2) \
-        *(sympy.cos(4*pi*alpha*x/L) + sympy.cos(4*pi*alpha*y/L))
-u_x = u0*sympy.exp(-8*pi**2*alpha**2*nu*t/L**2) \
-        *sympy.sin(2*pi*alpha*x/L)*sympy.cos(2*pi*alpha*y/L)
-u_y = -u0*sympy.exp(-8*pi**2*alpha**2*nu*t/L**2) \
-        *sympy.cos(2*pi*alpha*x/L)*sympy.sin(2*pi*alpha*y/L)
-u = sympy.Matrix([u_x, u_y])
+p = rho*(a**2*r**2/2 + 2*a*b*sympy.log(r) - b**2/(2*r**2) - c)
+u_r = 0
+u_theta = a*r + b/r
+
+# Cartesian unit basis
+u = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
+                    [sympy.sin(theta), sympy.cos(theta)]]) \
+                    *sympy.Matrix([u_r, u_theta])
 
 #============================================
 # SOURCE TERMS
 #============================================
 
-# rate terms
-rate_x = sympy.diff(u_x, t)
-rate_y = sympy.diff(u_y, t)
-
-# simplify expressions
-rate_x = rate_x.factor().cancel().trigsimp()
-rate_y = rate_y.factor().cancel().trigsimp()
-
 # convective terms
-conv_x = u.dot(sympy.Matrix([sympy.diff(u_x, x), sympy.diff(u_x, y)]))
-conv_y = u.dot(sympy.Matrix([sympy.diff(u_y, x), sympy.diff(u_y, y)]))
+conv_r = u_r*sympy.diff(u_r, r) + u_theta*sympy.diff(u_r, theta)/r - u_theta**2/r
+conv_theta = u_r*sympy.diff(u_theta, r) + u_theta*sympy.diff(u_theta, theta)/r + u_r*u_theta/r
 
 # simplify expressions
-conv_x = conv_x.factor().cancel().trigsimp()
-conv_y = conv_y.factor().cancel().trigsimp()
+conv_r = conv_r.factor().cancel()
+conv_theta = conv_theta.factor().cancel()
 
 # diffusive terms
-diff_x = -nu*(sympy.diff(sympy.diff(u_x, x), x) + sympy.diff(sympy.diff(u_x, y), y))
-diff_y = -nu*(sympy.diff(sympy.diff(u_y, x), x) + sympy.diff(sympy.diff(u_y, y), y))
+diff_r = -nu*(sympy.diff(r*sympy.diff(u_r, r), r)/r \
+            + sympy.diff(sympy.diff(u_r, theta), theta)/r**2 - u_r/r**2 \
+            - 2*sympy.diff(u_theta, theta)/r**2)
+diff_theta = -nu*(sympy.diff(r*sympy.diff(u_theta, r), r)/r \
+            + sympy.diff(sympy.diff(u_theta, theta), theta)/r**2 - u_theta/r**2 \
+            + 2*sympy.diff(u_r, theta)/r**2)
 
 # simplify expressions
-diff_x = diff_x.factor().cancel().trigsimp()
-diff_y = diff_y.factor().cancel().trigsimp()
+diff_r = diff_r.factor().cancel()
+diff_theta = diff_theta.factor().cancel()
 
 # pressure term
-pres_x = sympy.diff(p, x)/rho
-pres_y = sympy.diff(p, y)/rho
+pres_r = sympy.diff(p, r)/rho
+pres_theta = sympy.diff(p, theta)/(rho*r)
 
 # simplify expressions
-pres_x = pres_x.factor().cancel().trigsimp()
-pres_y = pres_y.factor().cancel().trigsimp()
+pres_r = pres_r.factor().cancel()
+pres_theta = pres_theta.factor().cancel()
 
 # source terms
-f_x = rate_x + conv_x + diff_x + pres_x
-f_y = rate_y + conv_y + diff_y + pres_y
+f_r = conv_r + diff_r + pres_r
+f_theta = conv_theta + diff_theta + pres_theta
 
 # simplify expressions
-f_x = f_x.factor().cancel().trigsimp()
-f_y = f_y.factor().cancel().trigsimp()
-f = sympy.Matrix([f_x, f_y])
+f_r = f_r.factor().cancel()
+f_theta = f_theta.factor().cancel()
+
+# Cartesian unit basis
+f = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
+                    [sympy.sin(theta), sympy.cos(theta)]]) \
+                    *sympy.Matrix([f_r, f_theta])
 
 #============================================
 # VELOCITY DIVERGENCE
 #============================================
 
 # divergence terms
-div_x = sympy.diff(u_x, x)
-div_y = sympy.diff(u_y, y)
+div_r = sympy.diff(r*u_r, r)/r
+div_theta = sympy.diff(u_theta, theta)/r
 
 # simplify expressions
-div_x = div_x.factor().cancel().trigsimp()
-div_y = div_y.factor().cancel().trigsimp()
+div_r = div_r.factor().cancel()
+div_theta = div_theta.factor().cancel()
 
 # velocity divergence
-g = div_x + div_y
+g = div_r + div_theta
 
 # simplify expressions
-g = g.factor().cancel().trigsimp()
+g = g.factor().cancel()
 
 #============================================
 # OUTPUT
@@ -132,20 +144,20 @@ outdir = "../codes"
 os.makedirs(outdir, exist_ok=True)
 
 # constant parameters values
-L = 1.0
-T = 1.0
+rO = 1.0
+rI = 0.5
 nu = 1.0
 rho = 1.0
-u0 = 1.0
-alpha = 2
+omegaO = 1.0
+omegaI = -2.0
 pi = math.pi
 
 # arguments list
 args_list = [("x", x), ("y", y)]
 
 # constants list
-consts_list = [("L", L), ("T", T), ("nu", nu), ("rho", rho), ("u0", u0), \
-                ("alpha", alpha), ("pi", pi)]
+consts_list = [("rO", rO), ("rI", rI), ("nu", nu), ("rho", rho), ("omegaO", omegaO), \
+                ("omegaI", omegaI), ("pi", pi)]
 
 # parameters list
 params_list = []

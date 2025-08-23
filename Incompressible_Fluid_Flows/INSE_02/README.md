@@ -49,7 +49,7 @@ The **exact solutions** for the pressure and velocity read
 
 $$
 \begin{array}{ll}
-&p\left(r,\theta\right)=\dfrac{a^{2}}{2}r^{2}+2ab\ln\left(r\right)-\dfrac{b^{2}}{2r^{2}}-c,&\quad\text{in }\Omega,\\
+&p\left(r,\theta\right)=\rho\left(\dfrac{a^{2}}{2}r^{2}+2ab\ln\left(r\right)-\dfrac{b^{2}}{2r^{2}}-c\right),&\quad\text{in }\Omega,\\
 &u_{r}\left(r,\theta\right)=0,&\quad\text{in }\Omega,\\
 &u_{\theta}\left(r,\theta\right)=ar+\dfrac{b}{r},&\quad\text{in }\Omega,
 \end{array}

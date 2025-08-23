@@ -137,7 +137,7 @@ T = 1.0
 nu = 1.0
 rho = 1.0
 u0 = 1.0
-alpha = 2
+alpha = 2.0
 pi = math.pi
 
 # arguments list
