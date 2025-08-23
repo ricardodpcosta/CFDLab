@@ -1,7 +1,7 @@
 // -*- coding: utf-8 -*-
 /*
 ===============================================================================
-CFDLab | INSE_01
+CFDLab | INSE_02
 ===============================================================================
 
 Description:
@@ -21,7 +21,7 @@ Repository:
     https://github.com/ricardodpcosta/CFD-TestSuite
 
 Dependencies:
-    Gmsh (version > =  4.8.4)
+    Gmsh (version >= 4.8.4)
 
 Usage:
     gmsh -setnumber N 1 generate_triamesh.geo
@@ -37,21 +37,19 @@ If (!Exists(N))
     N = 1;
 EndIf
 
-// domain
+// domain center
 cx = 0.0;
 cy = 0.0;
 
-// length
-L = 1.0;
+// outer boundary
+rO = 1.0;
 
-// height
-H = 1.0;
+// inner boundary
+rI = 0.5;
 
 // refinement controls
-lc1 = 0.1/(2.0^(N-1));
-lc2 = 0.1/(2.0^(N-1));
-lc3 = 0.1/(2.0^(N-1));
-lc4 = 0.1/(2.0^(N-1));
+lc1 = (0.16*rO)/(1.38^(N-1));
+lc2 = (0.16*rI)/(1.38^(N-1));
 
 // output controls
 outdir = "../meshes";
@@ -61,67 +59,67 @@ name = "triamesh";
 // POINTS
 //============================================
 
-// boundary
-Point(1) = {cx, cy, 0.0, lc1};
-Point(2) = {cx+L, cy, 0.0, lc2};
-Point(3) = {cx+L, cy+H, 0.0, lc3};
-Point(4) = {cx, cy+H, 0.0, lc4};
+// outer boundary
+Point(1) = {cx-rO, cy, 0.0, lc1};
+Point(2) = {cx, cy+rO, 0.0, lc1};
+Point(3) = {cx+rO, cy, 0.0, lc1};
+Point(4) = {cx, cy-rO, 0.0, lc1};
+Point(5) = {cx, cy, 0.0, lc1};
+
+// inner boundary
+Point(6) = {cx-rI, cy, 0.0, lc2};
+Point(7) = {cx, cy+rI, 0.0, lc2};
+Point(8) = {cx+rI, cy, 0.0, lc2};
+Point(9) = {cx, cy-rI, 0.0, lc2};
+Point(10) = {cx, cy, 0.0, lc2};
 
 //============================================
 // LINES
 //============================================
 
-// boundary
-Line(1) = {1, 2};
-Line(2) = {2, 3};
-Line(3) = {3, 4};
-Line(4) = {4, 1};
+// outer boundary
+Circle(1) = {1, 5, 2};
+Circle(2) = {2, 5, 3};
+Circle(3) = {3, 5, 4};
+Circle(4) = {4, 5, 1};
 
-//============================================
-// REFINEMENT
-//============================================
-
-// boundary
-// Transfinite Curve{1, 2, 3, 4} = 20*N Using Bump 0.5;
-// Mesh.CharacteristicLengthMin = 0.0;
-// Mesh.CharacteristicLengthMax = 1.0;
+// inner boundary
+Circle(5) = {6, 10, 7};
+Circle(6) = {7, 10, 8};
+Circle(7) = {8, 10, 9};
+Circle(8) = {9, 10, 6};
 
 //============================================
 // LINE LOOPS
 //============================================
 
-// boundary
-Line Loop(1) = {1, 2, 3, 4};
+// outer boundary
+Line Loop(1) = {1:4};
+
+// inner boundary
+Line Loop(2) = {5:8};
 
 //============================================
 // SURFACES
 //============================================
 
 // domain
-Plane Surface(1) = {1};
+Plane Surface(1) = {1, 2};
 
 //============================================
 // PHYSICALS
 //============================================
 
-// bottom boundary
-Physical Point(1) = {1};
-Physical Line(1) = {1};
+// outer boundary
+Physical Point(1) = {1:5};
+Physical Line(1) = {1:4};
 
-// top boundary
-Physical Point(2) = {2};
-Physical Line(2) = {2};
-
-// left boundary
-Physical Point(3) = {3};
-Physical Line(3) = {3};
-
-// right boundary
-Physical Point(4) = {4};
-Physical Line(4) = {4};
+// inner boundary
+Physical Point(2) = {6:10};
+Physical Line(2) = {5:8};
 
 // domain
-Physical Surface(100) = {1};
+Physical Surface(100) = {1:4};
 
 //============================================
 // MESH OPTIONS
@@ -141,6 +139,6 @@ Mesh.MshFileVersion = 2.0;
 Mesh 2;
 
 // write mesh
-Save Sprintf(StrCat(outdir, "/", name, "_%g.msh"), N);
+Save Sprintf(StrCat(outdir,"/",name,"_%g.msh"), N);
 
 // end of file

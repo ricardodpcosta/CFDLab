@@ -2,14 +2,16 @@
 
 ## 1. Summary
 
-This benchmark represents an **unsteady two-dimensional isothermal incompressible fluid flow** problem in a square domain with decaying vortices. It is particularly suitable for solvers of the **unsteady Navier-Stokes equations** with solenoidal velocity fields. The case is based on an **exact analytical solution**, enabling:
+This benchmark represents an **stationary two-dimensional isothermal incompressible fluid flow** problem confined between two infinitely long coaxial cylinders rotating at specific constant angular velocities. Since the cylinder lengths are assumed to be infinite, the flow occurs only along the azimuthal axis and, under these conditions, the flow has known analytic solutions for the pressure and velocity. It is particularly suitable for solvers of the **stationary Navier-Stokes equations** with solenoidal velocity fields. The case is based on an **exact analytical solution**, enabling:
 - **Code verification** of numerical schemes for the Navier-Stokes equations.
 - **Numerical assessment** of the incompressibility constraint and non-linear terms.
 - **Convergence analysis** on structured and unstructured meshes.
 
+> **NOTE:** For conciseness and readability, all functions are expressed in polar coordinates $\left(r,\theta\right)$, and vectors are represented in the unit polar basis $\lbrace\hat{\boldsymbol{r}},\hat{\boldsymbol{\theta}}\rbrace$. However, the codes generated from the symbolic expressions are implemented in Cartesian coordinates, ensuring direct applicability in numerical solvers.
+
 ## 2. Domain and meshes
 
-The flow exhibits periodicity through repeating counter-rotating vortices in both spatial directions. Accordingly, the computational setup considers a square domain of side length $L$, with the space–time domain defined as $\Omega=\left[0,L\right]^{2}\times\left(0,T\right]$ and boundary $\Gamma$.
+The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{O}}$ and $\Gamma^{\textrm{I}}$, respectively, centred at the origin and with radius $r^{\textrm{O}}$ and $r^{\textrm{I}}$, respectively.
 
 <div align="center">
   <table>
@@ -30,11 +32,11 @@ The flow exhibits periodicity through repeating counter-rotating vortices in bot
 
 ## 3. Model problem
 
-The **unsteady two-dimensional isothermal incompressible fluid flow** problem is modelled with the **Navier-Stokes equations** equipped with the appropriate boundary conditions, and reads: seek pressure and velocity functions, $p$ and $\boldsymbol{u}$, respectively, such that
+The **stationary two-dimensional isothermal incompressible fluid flow** problem is modelled with the **Navier-Stokes equations** equipped with the appropriate boundary conditions, and reads: seek pressure and velocity functions, $p$ and $\boldsymbol{u}$, respectively, such that
 
 $$
 \begin{array}{ll}
-&\dfrac{\partial\boldsymbol{u}}{\partial t}+\left(\boldsymbol{u}\cdot\nabla\right)\boldsymbol{u}-\nu\nabla^{2}\boldsymbol{u}+\dfrac{1}{\rho}\nabla p=\boldsymbol{f},&\quad\textrm{in }\Omega,\\
+&\left(\boldsymbol{u}\cdot\nabla\right)\boldsymbol{u}-\nu\nabla^{2}\boldsymbol{u}+\dfrac{1}{\rho}\nabla p=\boldsymbol{f},&\quad\textrm{in }\Omega,\\
 &\nabla\cdot\boldsymbol{u}=0,&\quad\textrm{in }\Omega,
 \end{array}
 $$
@@ -46,17 +48,28 @@ where $\nu$ is the fluid constant kinetic viscosity, $\rho$ is the fluid constan
 The **exact solutions** for the pressure and velocity read
 
 $$
-p\left(x,y,t\right)=\dfrac{\rho u^{2}_{0}}{4}\exp\left(\dfrac{-16\pi^{2}\alpha^{2}\nu t}{L^{2}}\right)\left(\cos\left(4\pi\alpha\dfrac{x}{L}\right)+\cos\left(4\pi\alpha\dfrac{y}{L}\right)\right),\quad\text{in }\Omega,
+p\left(r,\theta\right)=\frac{a^{2}}{2}r^{2}+2ab\ln\left(r\right)-\frac{b^{2}}{2r^{2}}-c,\quad\text{in }\Omega,
 $$
 
 $$
 \begin{array}{ll}
-&u_{x}\left(x,y,t\right)=u_{0}\exp\left(\dfrac{-8\pi^{2}\alpha^{2}\nu t}{L^{2}}\right)\sin\left(2\pi\alpha\dfrac{x}{L}\right)\cos\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\quad\text{in }\Omega,\\
-&u_{y}\left(x,y,t\right)=-u_{0}\exp\left(\dfrac{-8\pi^{2}\alpha^{2}\nu t}{L^{2}}\right)\cos\left(2\pi\alpha\dfrac{x}{L}\right)\sin\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\quad\text{in }\Omega,
+&u_{r}\left(r,\theta\right)=0,&\quad\quad\text{in }\Omega,\\
+&u_{y}\left(r,\theta\right)=ar+\frac{b}{r},&\quad\quad\text{in }\Omega,
 \end{array}
 $$
 
-where $u_{0}$ is the reference velocity and $\alpha$ is the vortex frequency such that $\alpha L$ corresponds to the number of counter-rotating vortices in each direction.
+where $c=\left.\left(c_{\textrm{E}}-c_{\textrm{I}}\right)\middle/\left(\pi\left(r^{2}_{\textrm{E}}-r^{2}_{\textrm{I}}\right)\right)\right.$ guarantees a null pressure mean-value in $\Omega$, and parameters $a$, $b$, $c_{\textrm{I}}$, and $c_{\textrm{E}}$ are are constant parameters given as
+
+$$
+\begin{array}{ll}
+&a=\frac{\omega_{\textrm{E}}r^{2}_{\textrm{E}}-\omega_{\textrm{I}}r^{2}_{\textrm{I}}}{r^{2}_{\textrm{E}}-r^{2}_{\textrm{I}}},
+\quad
+&&b=\left(\omega_{\textrm{E}}-\omega_{\textrm{I}}\right)\frac{r^{2}_{\textrm{E}}r^{2}_{\textrm{I}}}{r^{2}_{\textrm{E}}-r^{2}_{\textrm{I}}},\\
+&c_{\textrm{I}}=2\pi\left(\frac{a^{2}}{8}r^{4}_{\textrm{I}}+ab\left(\ln\left(r_{\textrm{I}}\right)-\frac{1}{2}\right)r^{2}_{\textrm{I}}-\frac{b^{2}}{2\ln\left(r_{\textrm{I}}\right)}\right),
+\quad
+&&c_{\textrm{E}}=2\pi\left(\frac{a^{2}}{8}r^{4}_{\textrm{E}}+ab\left(\ln\left(r_{\textrm{E}}\right)-\frac{1}{2}\right)r^{2}_{\textrm{E}}-\frac{b^{2}}{2\ln\left(r_{\textrm{E}}\right)}\right).
+\end{array}
+$$
 
 <div align="center">
   <table>
