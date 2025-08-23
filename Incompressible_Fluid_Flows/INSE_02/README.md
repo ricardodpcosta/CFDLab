@@ -51,7 +51,7 @@ $$
 \begin{array}{ll}
 &p\left(r,\theta\right)=\dfrac{a^{2}}{2}r^{2}+2ab\ln\left(r\right)-\dfrac{b^{2}}{2r^{2}}-c,&\quad\text{in }\Omega,\\
 &u_{r}\left(r,\theta\right)=0,&\quad\text{in }\Omega,\\
-&u_{y}\left(r,\theta\right)=ar+\dfrac{b}{r},&\quad\text{in }\Omega,
+&u_{\theta}\left(r,\theta\right)=ar+\dfrac{b}{r},&\quad\text{in }\Omega,
 \end{array}
 $$
 
@@ -95,56 +95,21 @@ The **source term** vanishes for this exact solution, that is
 
 $$
 \begin{array}{ll}
-&f_{x}\left(x,y\right)=0,&\quad\text{in }\Omega,\\
-&f_{y}\left(x,y\right)=0,&\quad\text{in }\Omega.
+&f_{r}\left(x,y\right)=0,&\quad\text{in }\Omega,\\
+&f_{\theta}\left(x,y\right)=0,&\quad\text{in }\Omega.
 \end{array}
 $$
 
-The **initial condition** for the velocity corresponds to the exact solution at time t=0, that is
+The **boundary conditions** prescribed for both the velocity correspond to the **Dirichlet boundary condition** on the outer and inner boundaries, considering the prescribed angular velocities, that is
 
 $$
 \begin{array}{ll}
-&u_{x}\left(x,y\right)=u_{0}\sin\left(2\pi\alpha\dfrac{x}{L}\right)\cos\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\forall x,y\in\left[0,L\right],\\
-&u_{y}\left(x,y\right)=-u_{0}\cos\left(2\pi\alpha\dfrac{x}{L}\right)\sin\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\forall x,y\in\left[0,L\right].
+&u_{r}\left(r,\theta\right)=0,&\quad\text{on }\Gamma^{\textrm{O}},\\
+&u_{\theta}\left(r,\theta\right)=\omega^{\textrm{O}},&\quad\text{on }\Gamma^{\textrm{O}},\\
+&u_{r}\left(r,\theta\right)=0,&\quad\text{on }\Gamma^{\textrm{I}},\\
+&u_{\theta}\left(r,\theta\right)=\omega^{\textrm{I}},&\quad\text{on }\Gamma^{\textrm{I}}.\\
 \end{array}
 $$
-
-The **boundary conditions** prescribed for both the pressure and velocity correspond to the **periodic boundary condition** on the four sides of the domain, considering the repetition of the solution in both directions, that is
-
-$$
-\begin{array}{ll}
-&p(0,y,t)=p(L,y,t),&\quad\forall y\in\left[0,L\right],t>0,\\
-&p(x,0,t)=p(x,L,t),&\quad\forall x\in\left[0,L\right],t>0,\\
-&\boldsymbol{u}(0,y,t)=\boldsymbol{u}(L,y,t),&\quad\forall y\in\left[0,L\right],t>0,\\
-&\boldsymbol{u}(x,0,t)=\boldsymbol{u}(x,L,t),&\quad\forall x\in\left[0,L\right],t>0.
-\end{array}
-$$
-
-> **NOTE:** The problem can also be solved with symmetry boundary conditions imposed on the domain edges (symmetry or antisymmetry depending on the velocity components). However, the canonical and most commonly employed formulation remains the use of periodic boundary conditions in all directions.
-
-> **NOTE:** The problem can also be easily converted into a stationary problem with the analytical solution corresponding to the previous solution at a fixed time. Considering $t=0$, the **exact solutions** for the pressure and velocity read
->
->$$
->p\left(x,y\right)=\dfrac{\rho u^{2}_{0}}{4}\left(\cos\left(4\pi\alpha\dfrac{x}{L}\right)+\cos\left(4\pi\alpha\dfrac{y}{L}\right)\right),\quad\text{in }\Omega,
->$$
->
->$$
->\begin{array}{ll}
->&u_{x}\left(x,y\right)=u_{0}\sin\left(2\pi\alpha\dfrac{x}{L}\right)\cos\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\quad\text{in }\Omega,\\
->&u_{y}\left(x,y\right)=-u_{0}\cos\left(2\pi\alpha\dfrac{x}{L}\right)\sin\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\quad\text{in }\Omega.
->\end{array}
->$$
->
-> In that case, the source term does not vanish to prevent the vortices from decaying, and reads
->
->$$
->\begin{array}{ll}
->&f_{x}\left(x,y\right)=u_{0}\dfrac{8\pi^{2}\alpha^{2}\mu}{\rho L^{2}}\sin\left(2\pi\alpha\dfrac{x}{L}\right)\cos\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\text{in }\Omega,\\
->&f_{y}\left(x,y\right)=-u_{0}\dfrac{8\pi^{2}\alpha^{2}\mu}{\rho L^{2}}\cos\left(2\pi\alpha\dfrac{x}{L}\right)\sin\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\text{in }\Omega.
->\end{array}
->$$
->
-> The **boundary conditions** prescribed for both the pressure and velocity are the same as in the unsteady case.
 
 ## 5. Case parameters
 
@@ -152,12 +117,12 @@ The table below summarises the given constant parameters and the recommended val
 
 | Symbol                    | Description                                                       | Value (low Reynolds number)   | Value (high Reynolds number)   | Units              |
 |:--------------------------|:------------------------------------------------------------------|------------------------------:|-------------------------------:|:-------------------|
-| $L$                       | Domain length                                                     | 1.0                           | 1.0                            | m                  |
-| $T$                       | Final time                                                        | 1.0                           | 1.0                            | s                  |
+| $r^{\textrm{O}}$          | Radius of outer boundary, $\Gamma^{\textrm{O}}$                   | 1.0                           | 1.0                            | m                  |
+| $r^{\textrm{I}}$          | Radius of inner boundary, $\Gamma^{\textrm{I}}$                   | 0.5                           | 0.5                            | m                  |
 | $\nu$                     | Fluid kinetic viscosity                                           | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
 | $\rho$                    | Fluid density                                                     | 1.0                           | 1.0                            | kg/m<sup>3</sup>   |
-| $u_{0}$                   | Reference velocity                                                | 1.0                           | 100.0                          | m/s                |
-| $\alpha$                  | Vortex frequency                                                  | 2                             | 2                              |                    |
+| $\omega^{\textrm{O}}$     | Angular velocity of outer boundary, $\Gamma^{\textrm{O}}$         | 1.0                           | 100.0                          | rad/s              |
+| $\omega^{\textrm{I}}$     | Angular velocity of inner boundary, $\Gamma^{\textrm{i}}$         | -2.0                          | -200.0                         | rad/s              |
 
 ## 6. Scripts and files
 
