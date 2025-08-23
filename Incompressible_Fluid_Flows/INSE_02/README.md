@@ -48,13 +48,10 @@ where $\nu$ is the fluid constant kinetic viscosity, $\rho$ is the fluid constan
 The **exact solutions** for the pressure and velocity read
 
 $$
-p\left(r,\theta\right)=\frac{a^{2}}{2}r^{2}+2ab\ln\left(r\right)-\frac{b^{2}}{2r^{2}}-c,\quad\text{in }\Omega,
-$$
-
-$$
 \begin{array}{ll}
-&u_{r}\left(r,\theta\right)=0,&\quad\quad\text{in }\Omega,\\
-&u_{y}\left(r,\theta\right)=ar+\frac{b}{r},&\quad\quad\text{in }\Omega,
+&p\left(r,\theta\right)=\frac{a^{2}}{2}r^{2}+2ab\ln\left(r\right)-\frac{b^{2}}{2r^{2}}-c,&\quad\text{in }\Omega,\\
+&u_{r}\left(r,\theta\right)=0,&\quad\text{in }\Omega,\\
+&u_{y}\left(r,\theta\right)=ar+\frac{b}{r},&\quad\text{in }\Omega,
 \end{array}
 $$
 
