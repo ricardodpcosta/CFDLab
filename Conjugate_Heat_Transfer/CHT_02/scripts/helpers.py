@@ -182,22 +182,31 @@ def write_cpp_scalar_function(name, expr, args_list, params_list):
         cexpr = cexpr.strip()
         cexpr = wrap_code_line(f"double {parname} = {cexpr};", width=100, indent=" "*4,continuation=" \\")
         decl_lines.extend(cexpr)
-    decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
-    decl = "\n".join(decl_lines)
+    if len(params_list) > 1:
+        decl_lines[1:] = [" "*12 + line for line in decl_lines[1:]]
+        decl = "\n".join(decl_lines)
     cexpr = ccode(expr, assign_to=None)
     cexpr = cexpr.replace("\\\n", "")
     cexpr = re.sub(r" {2,}", " ", cexpr)
     cexpr = cexpr.strip()
-    cexpr = wrap_code_line(f"double res = {cexpr};", width=100, indent=" "*12,continuation=" \\")
-    cexpr.append(" "*8 + "return res;")
+    cexpr = wrap_code_line(f"double res = {cexpr};", width=100, indent=" "*16,continuation=" \\")
+    cexpr.append(" "*12 + "return res;")
     comp = "\n".join(cexpr)
-    code = textwrap.dedent(f"""
-    // Function {name}
-    inline double {name}({argnames}) {{
-        {decl}
-        {comp}
-    }}
-    """).strip()
+    if len(params_list) > 1:
+        code = textwrap.dedent(f"""
+        // Function {name}
+        inline double {name}({argnames}) {{
+            {decl}
+            {comp}
+        }}
+        """).strip()
+    else:
+        code = textwrap.dedent(f"""
+        // Function {name}
+        inline double {name}({argnames}) {{
+            {comp}
+        }}
+        """).strip()
     return code
 
 # write Fortran scalar function
@@ -216,20 +225,29 @@ def write_fortran_scalar_function(name, expr, args_list, params_list):
         fexpr = fexpr.strip()
         fexpr = wrap_code_line(f"{parname} = {fexpr}", width=100, indent=" "*4,continuation=" &")
         decl_lines.extend(fexpr)
-    decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
-    decl = "\n".join(decl_lines)
+    if len(params_list) > 1:
+        decl_lines[1:] = [" "*12 + line for line in decl_lines[1:]]
+        decl = "\n".join(decl_lines)
     fexpr = fcode(expr, assign_to=None, source_format="free")
     fexpr = fexpr.replace("&\n", "")
     fexpr = re.sub(r" {2,}", " ", fexpr)
     fexpr = fexpr.strip()
-    comp = "\n".join(wrap_code_line(f"res = {fexpr}", width=100, indent=" "*12,continuation=" &"))
-    code = textwrap.dedent(f"""
-    ! Function {name}
-    function {name}({argnames}) result(res)
-        {decl}
-        {comp}
-    end function {name}
-    """).strip()
+    comp = "\n".join(wrap_code_line(f"res = {fexpr}", width=100, indent=" "*16,continuation=" &"))
+    if len(params_list) > 1:
+        code = textwrap.dedent(f"""
+        ! Function {name}
+        function {name}({argnames}) result(res)
+            {decl}
+            {comp}
+        end function {name}
+        """).strip()
+    else:
+        code = textwrap.dedent(f"""
+        ! Function {name}
+        function {name}({argnames}) result(res)
+            {comp}
+        end function {name}
+        """).strip()
     return code
 
 # write Octave/Matlab scalar function
@@ -246,21 +264,30 @@ def write_octave_scalar_function(name, expr, args_list, consts_list, params_list
         mexpr = mexpr.strip()
         mexpr = wrap_code_line(f"{parname} = {mexpr};", width=100, indent=" "*4,continuation=" ...")
         decl_lines.extend(mexpr)
-    decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
-    decl = "\n".join(decl_lines)
+    if len(params_list) > 1:
+        decl_lines[1:] = [" "*12 + line for line in decl_lines[1:]]
+        decl = "\n".join(decl_lines)
     mexpr = octave_code(expr, assign_to=None)
     mexpr = mexpr.replace("...\n", "")
     mexpr = re.sub(r" {2,}", " ", mexpr)
     mexpr = mexpr.strip()
-    mexpr = wrap_code_line(f"res = {mexpr};", width=100, indent=" "*12,continuation=" ...")
+    mexpr = wrap_code_line(f"res = {mexpr};", width=100, indent=" "*16,continuation=" ...")
     comp = "\n".join(mexpr)
-    code = textwrap.dedent(f"""
-    % Function {name}
-    function res = {name}({argnames})
-        {decl}
-        {comp}
-    end
-    """).strip()
+    if len(params_list) > 1:
+        code = textwrap.dedent(f"""
+        % Function {name}
+        function res = {name}({argnames})
+            {decl}
+            {comp}
+        end
+        """).strip()
+    else:
+        code = textwrap.dedent(f"""
+        % Function {name}
+        function res = {name}({argnames})
+            {comp}
+        end
+        """).strip()
     return code
 
 # write Python scalar function
@@ -277,21 +304,29 @@ def write_python_scalar_function(name, expr, args_list, params_list):
         pexpr = pexpr.strip()
         pexpr = wrap_code_line(f"{parname} = {pexpr}", width=100, indent=" "*4,continuation=" \\")
         decl_lines.extend(pexpr)
-    decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
-    decl = "\n".join(decl_lines)
+    if len(params_list) > 1:
+        decl_lines[1:] = [" "*12 + line for line in decl_lines[1:]]
+        decl = "\n".join(decl_lines)
     pexpr = pycode(expr)
     pexpr = pexpr.replace("\n", "")
     pexpr = re.sub(r" {2,}", " ", pexpr)
     pexpr = pexpr.strip()
-    pexpr = wrap_code_line(f"res = {pexpr}", width=100, indent=" "*12,continuation=" \\")
-    pexpr.append(" "*8 + "return res")
+    pexpr = wrap_code_line(f"res = {pexpr}", width=100, indent=" "*16,continuation=" \\")
+    pexpr.append(" "*12 + "return res")
     comp = "\n".join(pexpr)
-    code = textwrap.dedent(f"""
-    # Function {name}
-    def {name}({argnames}):
-        {decl}
-        {comp}
-    """).strip()
+    if len(params_list) > 1:
+        code = textwrap.dedent(f"""
+        # Function {name}
+        def {name}({argnames}):
+            {decl}
+            {comp}
+        """).strip()
+    else:
+        code = textwrap.dedent(f"""
+        # Function {name}
+        def {name}({argnames}):
+            {comp}
+        """).strip()
     return code
 
 #============================================
@@ -313,8 +348,9 @@ def write_cpp_vector_function(name, expr, args_list, params_list):
         cexpr = cexpr.strip()
         cexpr = wrap_code_line(f"double {parname} = {cexpr};", width=100, indent=" "*4,continuation=" \\")
         decl_lines.extend(cexpr)
-    decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
-    decl = "\n".join(decl_lines)
+    if len(params_list) > 1:
+        decl_lines[1:] = [" "*12 + line for line in decl_lines[1:]]
+        decl = "\n".join(decl_lines)
     comp_lines = []
     for i, compexpr in enumerate(expr):
         cexpr = ccode(compexpr, assign_to=None)
@@ -323,15 +359,23 @@ def write_cpp_vector_function(name, expr, args_list, params_list):
         cexpr = cexpr.strip()
         cexpr = wrap_code_line(f"res[{i}] = {cexpr};", width=100, indent=" "*4,continuation=" \\")
         comp_lines.extend(cexpr)
-    comp_lines[1:] = [" "*8 + line for line in comp_lines[1:]]
+    comp_lines[1:] = [" "*12 + line for line in comp_lines[1:]]
     comp = "\n".join(comp_lines)
-    code = textwrap.dedent(f"""
-    // Function {name}
-    inline void {name}({argnames}) {{
-        {decl}
-        {comp}
-    }}
-    """).strip()
+    if len(params_list) > 1:
+        code = textwrap.dedent(f"""
+        // Function {name}
+        inline void {name}({argnames}) {{
+            {decl}
+            {comp}
+        }}
+        """).strip()
+    else:
+        code = textwrap.dedent(f"""
+        // Function {name}
+        inline void {name}({argnames}) {{
+            {comp}
+        }}
+        """).strip()
     return code
 
 # write Fortran vector function
@@ -351,8 +395,9 @@ def write_fortran_vector_function(name, expr, args_list, params_list):
         fexpr = fexpr.strip()
         fexpr = wrap_code_line(f"{parname} = {fexpr}", width=100, indent=" "*4,continuation=" &")
         decl_lines.extend(fexpr)
-    decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
-    decl = "\n".join(decl_lines)
+    if len(params_list) > 1:
+        decl_lines[1:] = [" "*12 + line for line in decl_lines[1:]]
+        decl = "\n".join(decl_lines)
     comp_lines = []
     for i, compexpr in enumerate(expr):
         fexpr = fcode(compexpr, assign_to=None, source_format="free")
@@ -361,15 +406,23 @@ def write_fortran_vector_function(name, expr, args_list, params_list):
         fexpr = fexpr.strip()
         fexpr = wrap_code_line(f"res({i+1}) = {fexpr}", width=100, indent=" "*4,continuation=" &")
         comp_lines.extend(fexpr)
-    comp_lines[1:] = [" "*8 + line for line in comp_lines[1:]]
+    comp_lines[1:] = [" "*12 + line for line in comp_lines[1:]]
     comp = "\n".join(comp_lines)
-    code = textwrap.dedent(f"""
-    ! Subroutine {name}
-    subroutine {name}({argnames})
-        {decl}
-        {comp}
-    end subroutine {name}
-    """).strip()
+    if len(params_list) > 1:
+        code = textwrap.dedent(f"""
+        ! Subroutine {name}
+        subroutine {name}({argnames})
+            {decl}
+            {comp}
+        end subroutine {name}
+        """).strip()
+    else:
+        code = textwrap.dedent(f"""
+        ! Subroutine {name}
+        subroutine {name}({argnames})
+            {comp}
+        end subroutine {name}
+        """).strip()
     return code
 
 # write Octave/Matlab vector function
@@ -386,8 +439,9 @@ def write_octave_vector_function(name, expr, args_list, consts_list, params_list
         mexpr = mexpr.strip()
         mexpr = wrap_code_line(f"{parname} = {mexpr};", width=100, indent=" "*4,continuation=" ...")
         decl_lines.extend(mexpr)
-    decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
-    decl = "\n".join(decl_lines)
+    if len(params_list) > 1:
+        decl_lines[1:] = [" "*12 + line for line in decl_lines[1:]]
+        decl = "\n".join(decl_lines)
     comp_lines = [f"res = zeros({len(expr)},1);"]
     for i, compexpr in enumerate(expr):
         mexpr = octave_code(compexpr, assign_to=None)
@@ -396,15 +450,23 @@ def write_octave_vector_function(name, expr, args_list, consts_list, params_list
         mexpr = mexpr.strip()
         mexpr = wrap_code_line(f"res({i+1}) = {mexpr};", width=100, indent=" "*4,continuation=" ...")
         comp_lines.extend(mexpr)
-    comp_lines[1:] = [" "*8 + line for line in comp_lines[1:]]
+    comp_lines[1:] = [" "*12 + line for line in comp_lines[1:]]
     comp = "\n".join(comp_lines)
-    code = textwrap.dedent(f"""
-    % Function {name}
-    function res = {name}({argnames})
-        {decl}
-        {comp}
-    end
-    """).strip()
+    if len(params_list) > 1:
+        code = textwrap.dedent(f"""
+        % Function {name}
+        function res = {name}({argnames})
+            {decl}
+            {comp}
+        end
+        """).strip()
+    else:
+        code = textwrap.dedent(f"""
+        % Function {name}
+        function res = {name}({argnames})
+            {comp}
+        end
+        """).strip()
     return code
 
 # write Python vector function
@@ -421,7 +483,7 @@ def write_python_vector_function(name, expr, args_list, params_list):
         pexpr = pexpr.strip()
         pexpr = wrap_code_line(f"{parname} = {pexpr}", width=100, indent=" "*4,continuation=" \\")
         decl_lines.extend(pexpr)
-    decl_lines[1:] = [" "*8 + line for line in decl_lines[1:]]
+    decl_lines[1:] = [" "*12 + line for line in decl_lines[1:]]
     decl = "\n".join(decl_lines)
     comp_lines = [f"res = [0.0]*{len(expr)}"]
     for i, compexpr in enumerate(expr):
@@ -432,14 +494,21 @@ def write_python_vector_function(name, expr, args_list, params_list):
         pexpr = wrap_code_line(f"res[{i}] = {pexpr}", width=100, indent=" "*4,continuation=" \\")
         comp_lines.extend(pexpr)
     comp_lines.append("return res")
-    comp_lines[1:] = [" "*8 + line for line in comp_lines[1:]]
+    comp_lines[1:] = [" "*12 + line for line in comp_lines[1:]]
     comp = "\n".join(comp_lines)
-    code = textwrap.dedent(f"""
-    # Function {name}
-    def {name}({argnames}):
-        {decl}
-        {comp}
-    """).strip()
+    if len(params_list) > 1:
+        code = textwrap.dedent(f"""
+        # Function {name}
+        def {name}({argnames}):
+            {decl}
+            {comp}
+        """).strip()
+    else:
+        code = textwrap.dedent(f"""
+        # Function {name}
+        def {name}({argnames}):
+            {comp}
+        """).strip()
     return code
 
 #============================================

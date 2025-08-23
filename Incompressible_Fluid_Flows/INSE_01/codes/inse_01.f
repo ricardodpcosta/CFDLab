@@ -10,43 +10,31 @@ real(8), parameter :: T = 1.0
 real(8), parameter :: nu = 1.0
 real(8), parameter :: rho = 1.0
 real(8), parameter :: u0 = 1.0
-real(8), parameter :: alpha = 2
+real(8), parameter :: alpha = 2.0
 real(8), parameter :: pi = 3.141592653589793
 
 contains
 
 ! Function p
 function p(x, y) result(res)
-    real(8), intent(in) :: x
-    real(8), intent(in) :: y
-    real(8) :: res
     res = (1.0d0/4.0d0)*rho*u0**2*(cos(4.0d0*alpha*pi*x/L) + cos(4.0d0*alpha*pi*y/ L))*exp(-16.0d0 &
         *alpha**2*nu*pi**2*t/L**2)
 end function p
 
 ! Subroutine u
 subroutine u(x, y, res)
-    real(8), intent(in) :: x
-    real(8), intent(in) :: y
-    real(8), intent(out) :: res(2)
     res(1) = u0*exp(-8.0d0*alpha**2*nu*pi**2*t/L**2)*sin(2.0d0*alpha*pi*x/L)*cos( 2.0d0*alpha*pi*y/L)
     res(2) = -u0*exp(-8.0d0*alpha**2*nu*pi**2*t/L**2)*sin(2.0d0*alpha*pi*y/L)*cos( 2.0d0*alpha*pi*x/L)
 end subroutine u
 
 ! Subroutine f
 subroutine f(x, y, res)
-    real(8), intent(in) :: x
-    real(8), intent(in) :: y
-    real(8), intent(out) :: res(2)
     res(1) = 0
     res(2) = 0
 end subroutine f
 
 ! Function g
 function g(x, y) result(res)
-    real(8), intent(in) :: x
-    real(8), intent(in) :: y
-    real(8) :: res
     res = 0
 end function g
 

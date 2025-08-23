@@ -12,12 +12,11 @@ double T = 1.0;
 double nu = 1.0;
 double rho = 1.0;
 double u0 = 1.0;
-double alpha = 2;
+double alpha = 2.0;
 double pi = 3.141592653589793;
 
 // Function p
 inline double p(double x, double y) {
-
     double res = (1.0/4.0)*rho*pow(u0, 2)*(cos(4*alpha*pi*x/L) + cos(4*alpha*pi*y/L))*exp(-16 \
         *pow(alpha, 2)*nu*pow(pi, 2)*t/pow(L, 2));
     return res;
@@ -25,7 +24,6 @@ inline double p(double x, double y) {
 
 // Function u
 inline void u(double x, double y, double res[2]) {
-
     res[0] = u0*exp(-8*pow(alpha, 2)*nu*pow(pi, 2)*t/pow(L, 2))*sin(2*alpha*pi*x/L)*cos(2*alpha*pi*y/L);
     res[1] = -u0*exp(-8*pow(alpha, 2)*nu*pow(pi, 2)*t/pow(L, 2))*sin(2*alpha*pi*y/L)*cos(2*alpha*pi*x \
         /L);
@@ -33,14 +31,12 @@ inline void u(double x, double y, double res[2]) {
 
 // Function f
 inline void f(double x, double y, double res[2]) {
-
     res[0] = 0;
     res[1] = 0;
 }
 
 // Function g
 inline double g(double x, double y) {
-
     double res = 0;
     return res;
 }
