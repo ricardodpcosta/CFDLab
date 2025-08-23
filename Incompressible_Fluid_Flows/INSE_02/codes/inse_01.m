@@ -11,6 +11,13 @@ global pi = 3.141592653589793;
 
 % Function p
 function res = p(x, y)
+    global rO;
+    global rI;
+    global nu;
+    global rho;
+    global omegaO;
+    global omegaI;
+    global pi;
     res = rho.*(r.^2.*(-omegaI.*rI.^2 + omegaO.*rO.^2).^2./(2*(-rI.^2 + rO.^2).^2) + 2*rI.^2.*rO.^2.*( ...
         -omegaI + omegaO).*(-omegaI.*rI.^2 + omegaO.*rO.^2).*log(r)./(-rI.^2 + rO.^2).^2 ...
         - rI.^4.*rO.^4.*(-omegaI + omegaO).^2./(2*r.^2.*(-rI.^2 + rO.^2).^2) - (-cI + cO). ...
@@ -19,6 +26,13 @@ end
 
 % Function u
 function res = u(x, y)
+    global rO;
+    global rI;
+    global nu;
+    global rho;
+    global omegaO;
+    global omegaI;
+    global pi;
     res = zeros(2,1);
     res(1) = -(r.*(-omegaI.*rI.^2 + omegaO.*rO.^2)./(-rI.^2 + rO.^2) + rI.^2.*rO.^2.*(-omegaI ...
         + omegaO)./(r.*(-rI.^2 + rO.^2))).*sin(theta);
@@ -28,6 +42,13 @@ end
 
 % Function f
 function res = f(x, y)
+    global rO;
+    global rI;
+    global nu;
+    global rho;
+    global omegaO;
+    global omegaI;
+    global pi;
     res = zeros(2,1);
     res(1) = 0;
     res(2) = 0;
@@ -35,5 +56,12 @@ end
 
 % Function g
 function res = g(x, y)
+    global rO;
+    global rI;
+    global nu;
+    global rho;
+    global omegaO;
+    global omegaI;
+    global pi;
     res = 0;
 end

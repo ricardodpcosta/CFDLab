@@ -11,12 +11,26 @@ global pi = 3.141592653589793;
 
 % Function p
 function res = p(x, y)
+    global L;
+    global T;
+    global nu;
+    global rho;
+    global u0;
+    global alpha;
+    global pi;
     res = rho.*u0.^2.*(cos(4*alpha.*pi.*x./L) + cos(4*alpha.*pi.*y./L)).*exp(-16*alpha.^2.*nu.*pi.^2. ...
         *t./L.^2)/4;
 end
 
 % Function u
 function res = u(x, y)
+    global L;
+    global T;
+    global nu;
+    global rho;
+    global u0;
+    global alpha;
+    global pi;
     res = zeros(2,1);
     res(1) = u0.*exp(-8*alpha.^2.*nu.*pi.^2.*t./L.^2).*sin(2*alpha.*pi.*x./L).*cos(2*alpha.*pi.*y./L);
     res(2) = -u0.*exp(-8*alpha.^2.*nu.*pi.^2.*t./L.^2).*sin(2*alpha.*pi.*y./L).*cos(2*alpha.*pi.*x./L);
@@ -24,6 +38,13 @@ end
 
 % Function f
 function res = f(x, y)
+    global L;
+    global T;
+    global nu;
+    global rho;
+    global u0;
+    global alpha;
+    global pi;
     res = zeros(2,1);
     res(1) = 0;
     res(2) = 0;
@@ -31,5 +52,12 @@ end
 
 % Function g
 function res = g(x, y)
+    global L;
+    global T;
+    global nu;
+    global rho;
+    global u0;
+    global alpha;
+    global pi;
     res = 0;
 end
