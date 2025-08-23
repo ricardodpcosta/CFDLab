@@ -49,24 +49,26 @@ The **exact solutions** for the pressure and velocity read
 
 $$
 \begin{array}{ll}
-&p\left(r,\theta\right)=\frac{a^{2}}{2}r^{2}+2ab\ln\left(r\right)-\frac{b^{2}}{2r^{2}}-c,&\quad\text{in }\Omega,\\
+&p\left(r,\theta\right)=\dfrac{a^{2}}{2}r^{2}+2ab\ln\left(r\right)-\dfrac{b^{2}}{2r^{2}}-c,&\quad\text{in }\Omega,\\
 &u_{r}\left(r,\theta\right)=0,&\quad\text{in }\Omega,\\
-&u_{y}\left(r,\theta\right)=ar+\frac{b}{r},&\quad\text{in }\Omega,
+&u_{y}\left(r,\theta\right)=ar+\dfrac{b}{r},&\quad\text{in }\Omega,
 \end{array}
 $$
 
-where $c=\left.\left(c_{\textrm{E}}-c_{\textrm{I}}\right)\middle/\left(\pi\left(r_{\textrm{E}}^{2}-r_{\textrm{I}}^{2}\right)\right)\right.$ guarantees a null pressure mean-value in $\Omega$, and parameters $a$, $b$, $c_{\textrm{I}}$, and $c_{\textrm{E}}$ are are constant parameters given as
+where $c=\left.\left(c_{\textrm{O}}-c_{\textrm{I}}\right)\middle/\left(\pi\left(r_{\textrm{O}}^{2}-r_{\textrm{I}}^{2}\right)\right)\right.$ guarantees a null pressure mean-value in $\Omega$, and parameters $a$, $b$, $c_{\textrm{I}}$, and $c_{\textrm{O}}$ are are constant parameters given as
 
 $$
 \begin{array}{ll}
-&a=\frac{\omega_{\textrm{E}}r_{\textrm{E}}^{2}-\omega_{\textrm{I}}r_{\textrm{I}}^{2}}{r_{\textrm{E}}^{2}-r_{\textrm{I}}^{2}},
+&a=\dfrac{\omega_{\textrm{O}}r_{\textrm{O}}^{2}-\omega_{\textrm{I}}r_{\textrm{I}}^{2}}{r_{\textrm{O}}^{2}-r_{\textrm{I}}^{2}},
 \quad
-&&b=\left(\omega_{\textrm{E}}-\omega_{\textrm{I}}\right)\frac{r_{\textrm{E}}^{2}r_{\textrm{I}}^{2}}{r_{\textrm{E}}^{2}-r_{\textrm{I}}^{2}},\\
-&c_{\textrm{I}}=2\pi\left(\frac{a^{2}}{8}r_{\textrm{I}}^{4}+ab\left(\ln\left(r_{\textrm{I}}\right)-\frac{1}{2}\right)r_{\textrm{I}}^{2}-\frac{b^{2}}{2\ln\left(r_{\textrm{I}}\right)}\right),
+&&b=\left(\omega_{\textrm{O}}-\omega_{\textrm{I}}\right)\dfrac{r_{\textrm{O}}^{2}r_{\textrm{I}}^{2}}{r_{\textrm{O}}^{2}-r_{\textrm{I}}^{2}},\\
+&c_{\textrm{I}}=2\pi\left(\dfrac{a^{2}}{8}r_{\textrm{I}}^{4}+ab\left(\ln\left(r_{\textrm{I}}\right)-\dfrac{1}{2}\right)r_{\textrm{I}}^{2}-\dfrac{b^{2}}{2\ln\left(r_{\textrm{I}}\right)}\right),
 \quad
-&&c_{\textrm{E}}=2\pi\left(\frac{a^{2}}{8}r_{\textrm{E}}^{4}+ab\left(\ln\left(r_{\textrm{E}}\right)-\frac{1}{2}\right)r_{\textrm{E}}^{2}-\frac{b^{2}}{2\ln\left(r_{\textrm{E}}\right)}\right).
+&&c_{\textrm{O}}=2\pi\left(\dfrac{a^{2}}{8}r_{\textrm{O}}^{4}+ab\left(\ln\left(r_{\textrm{O}}\right)-\dfrac{1}{2}\right)r_{\textrm{O}}^{2}-\dfrac{b^{2}}{2\ln\left(r_{\textrm{O}}\right)}\right),
 \end{array}
 $$
+
+where $\omega_{\textrm{O}}$ and $\omega_{\textrm{I}}$ are constant parameters to control the angular velocity on the outer and inner boundaries, respectively.
 
 <div align="center">
   <table>
