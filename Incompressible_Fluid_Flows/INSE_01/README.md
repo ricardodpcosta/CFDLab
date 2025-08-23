@@ -97,7 +97,7 @@ $$
 \end{array}
 $$
 
-The **boundary conditions** prescribed for both the pressure and velocity correspond to the **periodic boundary condition** on the four sides of the domain, considering the repetition of the solution in both directions, that is 
+The **boundary conditions** prescribed for both the pressure and velocity correspond to the **periodic boundary condition** on the four boundary sides, considering the repetition of the solution in both directions, that is 
 
 $$
 \begin{array}{ll}
