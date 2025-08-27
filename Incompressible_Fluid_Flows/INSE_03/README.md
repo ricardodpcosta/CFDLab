@@ -49,26 +49,13 @@ The **exact solutions** for the pressure and velocity read
 
 $$
 \begin{array}{ll}
-&p\left(r,\theta\right)=\rho\dfrac{r_{\textrm{I}}{r}\cos\left(\alpha\theta),&\quad\text{in }\Omega,\\
-&u_{r}\left(r,\theta\right)=u_{0}\dfrac{\alpha}{r}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{\beta}\right)\sin\left(\beta\pi\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r}\right)\sin\left(\alpha\theta)&\quad\text{in }\Omega,\\
-&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\beta\pi\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r}\right)\cos\left(\alpha\theta),&\quad\text{in }\Omega,
+&p\left(r,\theta\right)=\rho\dfrac{r_{\textrm{I}}}{r}\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{in }\Omega,\\
+&u_{r}\left(r,\theta\right)=u_{0}\dfrac{\alpha}{\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r}\right)\sin\left(\dfrac{\beta\pi}{2}\left(\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r}\right)\right)\sin\left(\dfrac{\alpha\theta}{2}\right)&\quad\text{in }\Omega,\\
+&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\dfrac{\beta\pi}{2}\left(\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r}\right)\right)\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{in }\Omega,
 \end{array}
 $$
 
-where $c=\left.\left(c_{\textrm{O}}-c_{\textrm{I}}\right)\middle/\left(\pi\left(r_{\textrm{O}}^{2}-r_{\textrm{I}}^{2}\right)\right)\right.$ guarantees a null pressure mean-value in $\Omega$, and parameters $a$, $b$, $c_{\textrm{I}}$, and $c_{\textrm{O}}$ are are constant parameters given as
-
-$$
-\begin{array}{ll}
-&a=\dfrac{\omega_{\textrm{O}}r_{\textrm{O}}^{2}-\omega_{\textrm{I}}r_{\textrm{I}}^{2}}{r_{\textrm{O}}^{2}-r_{\textrm{I}}^{2}},
-\quad
-&&b=\left(\omega_{\textrm{O}}-\omega_{\textrm{I}}\right)\dfrac{r_{\textrm{O}}^{2}r_{\textrm{I}}^{2}}{r_{\textrm{O}}^{2}-r_{\textrm{I}}^{2}},\\
-&c_{\textrm{I}}=2\pi\left(\dfrac{a^{2}}{8}r_{\textrm{I}}^{4}+ab\left(\ln\left(r_{\textrm{I}}\right)-\dfrac{1}{2}\right)r_{\textrm{I}}^{2}-\dfrac{b^{2}}{2\ln\left(r_{\textrm{I}}\right)}\right),
-\quad
-&&c_{\textrm{O}}=2\pi\left(\dfrac{a^{2}}{8}r_{\textrm{O}}^{4}+ab\left(\ln\left(r_{\textrm{O}}\right)-\dfrac{1}{2}\right)r_{\textrm{O}}^{2}-\dfrac{b^{2}}{2\ln\left(r_{\textrm{O}}\right)}\right),
-\end{array}
-$$
-
-where $\omega_{\textrm{O}}$ and $\omega_{\textrm{I}}$ are constant parameters to control the angular velocity on the outer and inner boundaries, respectively.
+where $u_{0}$ is the reference velocity and $\alpha$ and $\beta$ are the number of counter-rotating vorticies in the radial and angular directions.
 
 <div align="center">
   <table>
