@@ -91,9 +91,9 @@ The **boundary conditions** prescribed for both the velocity correspond to the *
 
 $$
 \begin{array}{ll}
-&u_{r}\left(r,\theta\right)=u_{0}\dfrac{\alpha}{2\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r_{\textrm{O}}}\right)\sin\left(\beta\pi\right)\sin\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{O}},\\
-&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\beta\pi\right)\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{O}},\\
-&u_{r}\left(r,\theta\right)=u_{0}\dfrac{\alpha}{2\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r_{\textrm{I}}}\right)\sin\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{I}},\\
+&u_{r}\left(r,\theta\right)=0,&\quad\text{on }\Gamma^{\textrm{O}},\\
+&u_{\theta}\left(r,\theta\right)=-u_{0}\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{O}},\\
+&u_{r}\left(r,\theta\right)=0,&\quad\text{on }\Gamma^{\textrm{I}},\\
 &u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{I}}.\\
 \end{array}
 $$
