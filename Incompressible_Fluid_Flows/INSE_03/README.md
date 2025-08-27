@@ -50,8 +50,8 @@ The **exact solutions** for the pressure and velocity read
 $$
 \begin{array}{ll}
 &p\left(r,\theta\right)=\rho\dfrac{r_{\textrm{I}}}{r}\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{in }\Omega,\\
-&u_{r}\left(r,\theta\right)=u_{0}\dfrac{\alpha}{\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r}\right)\sin\left(\dfrac{\beta\pi}{2}\left(\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r}\right)\right)\sin\left(\dfrac{\alpha\theta}{2}\right)&\quad\text{in }\Omega,\\
-&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\dfrac{\beta\pi}{2}\left(\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r}\right)\right)\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{in }\Omega,
+&u_{r}\left(r,\theta\right)=u_{0}\dfrac{\alpha}{\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r}\right)\sin\left(\dfrac{\beta\pi}{2}\left(\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r_{\textrm{I}}}\right)\right)\sin\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{in }\Omega,\\
+&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\dfrac{\beta\pi}{2}\left(\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r_{\textrm{I}}}\right)\right)\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{in }\Omega,
 \end{array}
 $$
 
@@ -87,14 +87,22 @@ $$
 \end{array}
 $$
 
+
+&u_{r}\left(r,\theta\right)=u_{0}\dfrac{\alpha}{\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r}\right)\sin\left(\dfrac{\beta\pi}{2}\left(\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r_{\textrm{I}}}\right)\right)\sin\left(\dfrac{\alpha\theta}{2}\right)
+
+
+&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\dfrac{\beta\pi}{2}\left(\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r_{\textrm{I}}}\right)\right)\cos\left(\dfrac{\alpha\theta}{2}\right)
+
 The **boundary conditions** prescribed for both the velocity correspond to the **Dirichlet boundary condition** on the outer and inner boundaries, considering the prescribed angular velocities, that is
 
 $$
 \begin{array}{ll}
-&u_{r}\left(r,\theta\right)=0,&\quad\text{on }\Gamma^{\textrm{O}},\\
-&u_{\theta}\left(r,\theta\right)=\omega^{\textrm{O}},&\quad\text{on }\Gamma^{\textrm{O}},\\
-&u_{r}\left(r,\theta\right)=0,&\quad\text{on }\Gamma^{\textrm{I}},\\
-&u_{\theta}\left(r,\theta\right)=\omega^{\textrm{I}},&\quad\text{on }\Gamma^{\textrm{I}}.\\
+&u_{r}\left(r,\theta\right)=
+u_{0}\dfrac{\alpha}{\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r_{\textrm{O}}}\right)\sin\left(\dfrac{\beta\pi}{2}\right)\sin\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{O}},\\
+&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\dfrac{\beta\pi}{2}\right)\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{O}},\\
+&u_{r}\left(r,\theta\right)=
+u_{0}\dfrac{\alpha}{\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r_{\textrm{I}}}\right)\sin\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{I}},\\
+&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{I}}.\\
 \end{array}
 $$
 
