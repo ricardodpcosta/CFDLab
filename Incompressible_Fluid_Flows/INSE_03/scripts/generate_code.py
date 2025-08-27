@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 ===============================================================================
-CFDLab | INSE_02
+CFDLab | INSE_03
 ===============================================================================
 
 Description:
@@ -41,11 +41,8 @@ from helpers import *
 # constants
 rO, rI = sympy.symbols("rO rI", real=True, positive=True)
 nu, rho = sympy.symbols("nu rho", real=True, positive=True)
-omegaO, omegaI = sympy.symbols("omegaO omegaI", real=True)
+u0, alpha, beta = sympy.symbols("u0 alpha beta", real=True)
 pi = sympy.symbols("pi", real=True)
-
-# parameters
-a, b, c, cO, cI = sympy.symbols("a b c cO cI", real=True)
 
 # coordinate system
 r, theta = sympy.symbols("r theta", real=True)
@@ -55,17 +52,10 @@ x, y = sympy.symbols("x y", real=True)
 # EXACT SOLUTIONS
 #============================================
 
-# solution parameters
-a = (omegaO*rO**2 - omegaI*rI**2)/(rO**2 - rI**2)
-b = (omegaO - omegaI)*rO**2*rI**2/(rO**2 - rI**2)
-c = (cO - cI)/(pi*(rO**2 - rI**2))
-cO = 2*pi*(a**2*rO**4/8 + a*b*(sympy.log(rO) - 1/2)*rO**2 - b**2/(2*sympy.log(rO)))
-cI = 2*pi*(a**2*rI**4/8 + a*b*(sympy.log(rI) - 1/2)*rI**2 - b**2/(2*sympy.log(rI)))
-
 # exact solutions
-p = rho*(a**2*r**2/2 + 2*a*b*sympy.log(r) - b**2/(2*r**2) - c)
-u_r = 0
-u_theta = a*r + b/r
+p=rho*rI*sympy.cos(alpha*theta/2)/r
+u_r=u0*alpha*(rO-rI)*sympy.sin(beta*pi*(r-rI)/(rO-rI))*sympy.sin(alpha*theta/2)/(2*beta*pi*r)
+u_theta=u0*sympy.cos(beta*pi*(r-rI)/(rO-rI))*sympy.cos(alpha*theta/2)
 
 # Cartesian unit basis
 u = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \

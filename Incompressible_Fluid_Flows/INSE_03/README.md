@@ -78,14 +78,7 @@ where $u_{0}$ is the reference velocity and $\alpha$ and $\beta$ are the number 
   </table>
 </div>
 
-The **source term** vanishes for this exact solution, that is
-
-$$
-\begin{array}{ll}
-&f_{r}\left(x,y\right)=0,&\quad\text{in }\Omega,\\
-&f_{\theta}\left(x,y\right)=0,&\quad\text{in }\Omega.
-\end{array}
-$$
+The **source terms** are obtained from substituting the manufactured solutions into the governing equations in polar coordinates. Due to the complexity of the manufactured solutions, the resulting analytical functions for the source term are intricate and are omitted for conciseness.
 
 The **boundary conditions** prescribed for both the velocity correspond to the **Dirichlet boundary condition** on the outer and inner boundaries, considering the prescribed angular velocities, that is
 
