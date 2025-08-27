@@ -1,7 +1,7 @@
 # Test file
 
-# Run with "python inse_01.py"
+# Run with "python inse_02.py"
 
-import inse_01
+import inse_02
 
 # Insert code

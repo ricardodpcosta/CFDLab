@@ -3,11 +3,11 @@
 ! Compile with "gfortran -cpp test.f -o test"
 ! Run with ".\test"
 
-#include "inse_01.f"
+#include "inse_03.f"
 
 program test
 
-    use INSE_01
+    use INSE_03
 
     ! Insert code
 

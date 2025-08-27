@@ -1,7 +1,7 @@
 % Test file
 
-% Run with "octave inse_01.m"
+% Run with "octave inse_02.m"
 
-inse_01
+inse_02
 
 % Insert code

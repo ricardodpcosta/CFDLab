@@ -71,8 +71,8 @@ conv_r = u_r*sympy.diff(u_r, r) + u_theta*sympy.diff(u_r, theta)/r - u_theta**2/
 conv_theta = u_r*sympy.diff(u_theta, r) + u_theta*sympy.diff(u_theta, theta)/r + u_r*u_theta/r
 
 # simplify expressions
-conv_r = conv_r.factor().cancel()
-conv_theta = conv_theta.factor().cancel()
+conv_r = conv_r.factor().cancel().trigsimp()
+conv_theta = conv_theta.factor().cancel().trigsimp()
 
 # diffusive terms
 diff_r = -nu*(sympy.diff(r*sympy.diff(u_r, r), r)/r \
@@ -83,24 +83,24 @@ diff_theta = -nu*(sympy.diff(r*sympy.diff(u_theta, r), r)/r \
             + 2*sympy.diff(u_r, theta)/r**2)
 
 # simplify expressions
-diff_r = diff_r.factor().cancel()
-diff_theta = diff_theta.factor().cancel()
+diff_r = diff_r.factor().cancel().trigsimp()
+diff_theta = diff_theta.factor().cancel().trigsimp()
 
 # pressure term
 pres_r = sympy.diff(p, r)/rho
 pres_theta = sympy.diff(p, theta)/(rho*r)
 
 # simplify expressions
-pres_r = pres_r.factor().cancel()
-pres_theta = pres_theta.factor().cancel()
+pres_r = pres_r.factor().cancel().trigsimp()
+pres_theta = pres_theta.factor().cancel().trigsimp()
 
 # source terms
 f_r = conv_r + diff_r + pres_r
 f_theta = conv_theta + diff_theta + pres_theta
 
 # simplify expressions
-f_r = f_r.factor().cancel()
-f_theta = f_theta.factor().cancel()
+f_r = f_r.factor().cancel().trigsimp()
+f_theta = f_theta.factor().cancel().trigsimp()
 
 # Cartesian unit basis
 f = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
@@ -116,14 +116,14 @@ div_r = sympy.diff(r*u_r, r)/r
 div_theta = sympy.diff(u_theta, theta)/r
 
 # simplify expressions
-div_r = div_r.factor().cancel()
-div_theta = div_theta.factor().cancel()
+div_r = div_r.factor().cancel().trigsimp()
+div_theta = div_theta.factor().cancel().trigsimp()
 
 # velocity divergence
 g = div_r + div_theta
 
 # simplify expressions
-g = g.factor().cancel()
+g = g.factor().cancel().trigsimp()
 
 #============================================
 # OUTPUT
@@ -138,16 +138,17 @@ rO = 1.0
 rI = 0.5
 nu = 1.0
 rho = 1.0
-omegaO = 1.0
-omegaI = -2.0
+u0 = 1.0
+alpha = 4.0
+beta = 1.0
 pi = math.pi
 
 # arguments list
 args_list = [("x", x), ("y", y)]
 
 # constants list
-consts_list = [("rO", rO), ("rI", rI), ("nu", nu), ("rho", rho), ("omegaO", omegaO), \
-                ("omegaI", omegaI), ("pi", pi)]
+consts_list = [("rO", rO), ("rI", rI), ("nu", nu), ("rho", rho), ("u0", u0), \
+                ("alpha", alpha), ("beta", beta), ("pi", pi)]
 
 # parameters list
 params_list = []
@@ -158,7 +159,7 @@ funcs_list = [("p", p, args_list, params_list),("u", u, args_list, params_list),
 
 # generate code
 outdir = "../codes"
-name = "inse_01"
+name = "inse_03"
 os.makedirs(outdir, exist_ok=True)
 write_cpp_file(outdir, name, consts_list, funcs_list)
 write_fortran_file(outdir, name, consts_list, funcs_list)

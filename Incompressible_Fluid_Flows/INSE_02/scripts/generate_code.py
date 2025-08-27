@@ -168,7 +168,7 @@ funcs_list = [("p", p, args_list, params_list),("u", u, args_list, params_list),
 
 # generate code
 outdir = "../codes"
-name = "inse_01"
+name = "inse_02"
 os.makedirs(outdir, exist_ok=True)
 write_cpp_file(outdir, name, consts_list, funcs_list)
 write_fortran_file(outdir, name, consts_list, funcs_list)
