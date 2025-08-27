@@ -50,8 +50,8 @@ The **exact solutions** for the pressure and velocity read
 $$
 \begin{array}{ll}
 &p\left(r,\theta\right)=\rho\dfrac{r_{\textrm{I}}}{r}\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{in }\Omega,\\
-&u_{r}\left(r,\theta\right)=u_{0}\dfrac{\alpha}{\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r}\right)\sin\left(\dfrac{\beta\pi}{2}\left(\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r_{\textrm{I}}}\right)\right)\sin\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{in }\Omega,\\
-&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\dfrac{\beta\pi}{2}\left(\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r_{\textrm{I}}}\right)\right)\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{in }\Omega,
+&u_{r}\left(r,\theta\right)=u_{0}\dfrac{\alpha}{2\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r}\right)\sin\left(\beta\pi\left(\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r_{\textrm{I}}}\right)\right)\sin\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{in }\Omega,\\
+&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\beta\pi\left(\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r_{\textrm{I}}}\right)\right)\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{in }\Omega,
 \end{array}
 $$
 
@@ -87,21 +87,13 @@ $$
 \end{array}
 $$
 
-
-&u_{r}\left(r,\theta\right)=u_{0}\dfrac{\alpha}{\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r}\right)\sin\left(\dfrac{\beta\pi}{2}\left(\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r_{\textrm{I}}}\right)\right)\sin\left(\dfrac{\alpha\theta}{2}\right)
-
-
-&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\dfrac{\beta\pi}{2}\left(\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r_{\textrm{I}}}\right)\right)\cos\left(\dfrac{\alpha\theta}{2}\right)
-
 The **boundary conditions** prescribed for both the velocity correspond to the **Dirichlet boundary condition** on the outer and inner boundaries, considering the prescribed angular velocities, that is
 
 $$
 \begin{array}{ll}
-&u_{r}\left(r,\theta\right)=
-u_{0}\dfrac{\alpha}{\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r_{\textrm{O}}}\right)\sin\left(\dfrac{\beta\pi}{2}\right)\sin\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{O}},\\
-&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\dfrac{\beta\pi}{2}\right)\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{O}},\\
-&u_{r}\left(r,\theta\right)=
-u_{0}\dfrac{\alpha}{\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r_{\textrm{I}}}\right)\sin\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{I}},\\
+&u_{r}\left(r,\theta\right)=u_{0}\dfrac{\alpha}{2\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r_{\textrm{O}}}\right)\sin\left(\beta\pi\right)\sin\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{O}},\\
+&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\beta\pi\right)\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{O}},\\
+&u_{r}\left(r,\theta\right)=u_{0}\dfrac{\alpha}{2\beta\pi}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{r_{\textrm{I}}}\right)\sin\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{I}},\\
 &u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{I}}.\\
 \end{array}
 $$
@@ -116,8 +108,9 @@ The table below summarises the given constant parameters and the recommended val
 | $r^{\textrm{I}}$          | Radius of inner boundary, $\Gamma^{\textrm{I}}$                   | 0.5                           | 0.5                            | m                  |
 | $\nu$                     | Fluid kinetic viscosity                                           | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
 | $\rho$                    | Fluid density                                                     | 1.0                           | 1.0                            | kg/m<sup>3</sup>   |
-| $\omega^{\textrm{O}}$     | Angular velocity of outer boundary, $\Gamma^{\textrm{O}}$         | 1.0                           | 100.0                          | rad/s              |
-| $\omega^{\textrm{I}}$     | Angular velocity of inner boundary, $\Gamma^{\textrm{i}}$         | -2.0                          | -200.0                         | rad/s              |
+| $u_{0}$                   | Reference velocity                                                | 1.0                           | 100.0                          | m/s                |
+| $\alpha$                  | Number of voritices in the angular direction                      | 4                             | 4                              |                    |
+| $\beta$                   | Number of voritices in the radial direction                       | 1                             | 1                              |                    |
 
 ## 6. Scripts and files
 
