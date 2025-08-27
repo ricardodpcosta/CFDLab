@@ -1,15 +1,17 @@
-# [INSE_01] Periodic flow with decaying vortices (Taylor-Green flow)
+# [INSE_03] Flow between cylinders with vorticies
 
 ## 1. Summary
 
-This benchmark represents an **unsteady two-dimensional isothermal incompressible fluid flow** problem in a square domain with decaying vortices. It is particularly suitable for solvers of the **unsteady Navier-Stokes equations** with solenoidal velocity fields. The case is based on an **exact analytical solution**, enabling:
+This benchmark represents an **stationary two-dimensional isothermal incompressible fluid flow** problem with vorticies confined between two infinitely long coaxial cylinders. It is particularly suitable for solvers of the **stationary Navier-Stokes equations** with solenoidal velocity fields. The case is based on an **manufactured analytical solution** in polar coordinates, enabling:
 - **Code verification** of numerical schemes for the Navier-Stokes equations.
 - **Numerical assessment** of the incompressibility constraint and non-linear terms.
 - **Convergence analysis** on structured and unstructured meshes.
 
+> **NOTE:** For conciseness and readability, all functions are expressed in polar coordinates $\left(r,\theta\right)$, and vectors are represented in the unit polar basis $\lbrace\hat{\boldsymbol{r}},\hat{\boldsymbol{\theta}}\rbrace$. However, the codes generated from the symbolic expressions are implemented in Cartesian coordinates, ensuring direct applicability in numerical solvers.
+
 ## 2. Domain and meshes
 
-The flow exhibits periodicity through repeating counter-rotating vortices in both spatial directions. Accordingly, the computational setup considers a square domain of side length $L$, with the space–time domain defined as $\Omega=\left[0,L\right]^{2}\times\left(0,T\right]$ and boundary $\Gamma$.
+The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{O}}$ and $\Gamma^{\textrm{I}}$, respectively, centred at the origin and with radius $r^{\textrm{O}}$ and $r^{\textrm{I}}$, respectively.
 
 <div align="center">
   <table>
@@ -30,11 +32,11 @@ The flow exhibits periodicity through repeating counter-rotating vortices in bot
 
 ## 3. Model problem
 
-The **unsteady two-dimensional isothermal incompressible fluid flow** problem is modelled with the **Navier-Stokes equations** equipped with the appropriate boundary conditions, and reads: seek pressure and velocity functions, $p$ and $\boldsymbol{u}$, respectively, such that
+The **stationary two-dimensional isothermal incompressible fluid flow** problem is modelled with the **Navier-Stokes equations** equipped with the appropriate boundary conditions, and reads: seek pressure and velocity functions, $p$ and $\boldsymbol{u}$, respectively, such that
 
 $$
 \begin{array}{ll}
-&\dfrac{\partial\boldsymbol{u}}{\partial t}+\left(\boldsymbol{u}\cdot\nabla\right)\boldsymbol{u}-\nu\nabla^{2}\boldsymbol{u}+\dfrac{1}{\rho}\nabla p=\boldsymbol{f},&\quad\textrm{in }\Omega,\\
+&\left(\boldsymbol{u}\cdot\nabla\right)\boldsymbol{u}-\nu\nabla^{2}\boldsymbol{u}+\dfrac{1}{\rho}\nabla p=\boldsymbol{f},&\quad\textrm{in }\Omega,\\
 &\nabla\cdot\boldsymbol{u}=0,&\quad\textrm{in }\Omega,
 \end{array}
 $$
@@ -46,17 +48,27 @@ where $\nu$ is the fluid constant kinetic viscosity, $\rho$ is the fluid constan
 The **exact solutions** for the pressure and velocity read
 
 $$
-p\left(x,y,t\right)=\dfrac{\rho u^{2}_{0}}{4}\exp\left(\dfrac{-16\pi^{2}\alpha^{2}\nu t}{L^{2}}\right)\left(\cos\left(4\pi\alpha\dfrac{x}{L}\right)+\cos\left(4\pi\alpha\dfrac{y}{L}\right)\right),\quad\text{in }\Omega,
-$$
-
-$$
 \begin{array}{ll}
-&u_{x}\left(x,y,t\right)=u_{0}\exp\left(\dfrac{-8\pi^{2}\alpha^{2}\nu t}{L^{2}}\right)\sin\left(2\pi\alpha\dfrac{x}{L}\right)\cos\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\quad\text{in }\Omega,\\
-&u_{y}\left(x,y,t\right)=-u_{0}\exp\left(\dfrac{-8\pi^{2}\alpha^{2}\nu t}{L^{2}}\right)\cos\left(2\pi\alpha\dfrac{x}{L}\right)\sin\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\quad\text{in }\Omega,
+&p\left(r,\theta\right)=\rho\dfrac{r_{\textrm{I}}{r}\cos\left(\alpha\theta),&\quad\text{in }\Omega,\\
+&u_{r}\left(r,\theta\right)=u_{0}\dfrac{\alpha}{r}\left(\dfrac{r_{\textrm{O}}-r_{\textrm{I}}}{\beta}\right)\sin\left(\beta\pi\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r}\right)\sin\left(\alpha\theta)&\quad\text{in }\Omega,\\
+&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\beta\pi\dfrac{r-r_{\textrm{I}}}{r_{\textrm{O}}-r}\right)\cos\left(\alpha\theta),&\quad\text{in }\Omega,
 \end{array}
 $$
 
-where $u_{0}$ is the reference velocity and $\alpha$ is the vortex frequency such that $\alpha L$ corresponds to the number of counter-rotating vortices in each direction.
+where $c=\left.\left(c_{\textrm{O}}-c_{\textrm{I}}\right)\middle/\left(\pi\left(r_{\textrm{O}}^{2}-r_{\textrm{I}}^{2}\right)\right)\right.$ guarantees a null pressure mean-value in $\Omega$, and parameters $a$, $b$, $c_{\textrm{I}}$, and $c_{\textrm{O}}$ are are constant parameters given as
+
+$$
+\begin{array}{ll}
+&a=\dfrac{\omega_{\textrm{O}}r_{\textrm{O}}^{2}-\omega_{\textrm{I}}r_{\textrm{I}}^{2}}{r_{\textrm{O}}^{2}-r_{\textrm{I}}^{2}},
+\quad
+&&b=\left(\omega_{\textrm{O}}-\omega_{\textrm{I}}\right)\dfrac{r_{\textrm{O}}^{2}r_{\textrm{I}}^{2}}{r_{\textrm{O}}^{2}-r_{\textrm{I}}^{2}},\\
+&c_{\textrm{I}}=2\pi\left(\dfrac{a^{2}}{8}r_{\textrm{I}}^{4}+ab\left(\ln\left(r_{\textrm{I}}\right)-\dfrac{1}{2}\right)r_{\textrm{I}}^{2}-\dfrac{b^{2}}{2\ln\left(r_{\textrm{I}}\right)}\right),
+\quad
+&&c_{\textrm{O}}=2\pi\left(\dfrac{a^{2}}{8}r_{\textrm{O}}^{4}+ab\left(\ln\left(r_{\textrm{O}}\right)-\dfrac{1}{2}\right)r_{\textrm{O}}^{2}-\dfrac{b^{2}}{2\ln\left(r_{\textrm{O}}\right)}\right),
+\end{array}
+$$
+
+where $\omega_{\textrm{O}}$ and $\omega_{\textrm{I}}$ are constant parameters to control the angular velocity on the outer and inner boundaries, respectively.
 
 <div align="center">
   <table>
@@ -83,56 +95,21 @@ The **source term** vanishes for this exact solution, that is
 
 $$
 \begin{array}{ll}
-&f_{x}\left(x,y\right)=0,&\quad\text{in }\Omega,\\
-&f_{y}\left(x,y\right)=0,&\quad\text{in }\Omega.
+&f_{r}\left(x,y\right)=0,&\quad\text{in }\Omega,\\
+&f_{\theta}\left(x,y\right)=0,&\quad\text{in }\Omega.
 \end{array}
 $$
 
-The **initial condition** for the velocity corresponds to the exact solution at time t=0, that is
+The **boundary conditions** prescribed for both the velocity correspond to the **Dirichlet boundary condition** on the outer and inner boundaries, considering the prescribed angular velocities, that is
 
 $$
 \begin{array}{ll}
-&u_{x}\left(x,y\right)=u_{0}\sin\left(2\pi\alpha\dfrac{x}{L}\right)\cos\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\forall x,y\in\left[0,L\right],\\
-&u_{y}\left(x,y\right)=-u_{0}\cos\left(2\pi\alpha\dfrac{x}{L}\right)\sin\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\forall x,y\in\left[0,L\right].
+&u_{r}\left(r,\theta\right)=0,&\quad\text{on }\Gamma^{\textrm{O}},\\
+&u_{\theta}\left(r,\theta\right)=\omega^{\textrm{O}},&\quad\text{on }\Gamma^{\textrm{O}},\\
+&u_{r}\left(r,\theta\right)=0,&\quad\text{on }\Gamma^{\textrm{I}},\\
+&u_{\theta}\left(r,\theta\right)=\omega^{\textrm{I}},&\quad\text{on }\Gamma^{\textrm{I}}.\\
 \end{array}
 $$
-
-The **boundary conditions** prescribed for both the pressure and velocity correspond to the **periodic boundary condition** on the four boundary sides, considering the repetition of the solution in both directions, that is
-
-$$
-\begin{array}{ll}
-&p(0,y,t)=p(L,y,t),&\quad\forall y\in\left[0,L\right],t>0,\\
-&p(x,0,t)=p(x,L,t),&\quad\forall x\in\left[0,L\right],t>0,\\
-&\boldsymbol{u}(0,y,t)=\boldsymbol{u}(L,y,t),&\quad\forall y\in\left[0,L\right],t>0,\\
-&\boldsymbol{u}(x,0,t)=\boldsymbol{u}(x,L,t),&\quad\forall x\in\left[0,L\right],t>0.
-\end{array}
-$$
-
-> **NOTE:** The problem can also be solved with symmetry boundary conditions imposed on the domain edges (symmetry or antisymmetry depending on the velocity components). However, the canonical and most commonly employed formulation remains the use of periodic boundary conditions in all directions.
-
-> **NOTE:** The problem can also be easily converted into a stationary problem with the analytical solution corresponding to the previous solution at a fixed time. Considering $t=0$, the **exact solutions** for the pressure and velocity read
->
->$$
->p\left(x,y\right)=\dfrac{\rho u^{2}_{0}}{4}\left(\cos\left(4\pi\alpha\dfrac{x}{L}\right)+\cos\left(4\pi\alpha\dfrac{y}{L}\right)\right),\quad\text{in }\Omega,
->$$
->
->$$
->\begin{array}{ll}
->&u_{x}\left(x,y\right)=u_{0}\sin\left(2\pi\alpha\dfrac{x}{L}\right)\cos\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\quad\text{in }\Omega,\\
->&u_{y}\left(x,y\right)=-u_{0}\cos\left(2\pi\alpha\dfrac{x}{L}\right)\sin\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\quad\text{in }\Omega.
->\end{array}
->$$
->
-> In that case, the source term does not vanish to prevent the vortices from decaying, and reads
->
->$$
->\begin{array}{ll}
->&f_{x}\left(x,y\right)=u_{0}\dfrac{8\pi^{2}\alpha^{2}\mu}{\rho L^{2}}\sin\left(2\pi\alpha\dfrac{x}{L}\right)\cos\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\text{in }\Omega,\\
->&f_{y}\left(x,y\right)=-u_{0}\dfrac{8\pi^{2}\alpha^{2}\mu}{\rho L^{2}}\cos\left(2\pi\alpha\dfrac{x}{L}\right)\sin\left(2\pi\alpha\dfrac{y}{L}\right),&\quad\text{in }\Omega.
->\end{array}
->$$
->
-> The **boundary conditions** prescribed for both the pressure and velocity are the same as in the unsteady case.
 
 ## 5. Case parameters
 
@@ -140,12 +117,12 @@ The table below summarises the given constant parameters and the recommended val
 
 | Symbol                    | Description                                                       | Value (low Reynolds number)   | Value (high Reynolds number)   | Units              |
 |:--------------------------|:------------------------------------------------------------------|------------------------------:|-------------------------------:|:-------------------|
-| $L$                       | Domain length                                                     | 1.0                           | 1.0                            | m                  |
-| $T$                       | Final time                                                        | 1.0                           | 1.0                            | s                  |
+| $r^{\textrm{O}}$          | Radius of outer boundary, $\Gamma^{\textrm{O}}$                   | 1.0                           | 1.0                            | m                  |
+| $r^{\textrm{I}}$          | Radius of inner boundary, $\Gamma^{\textrm{I}}$                   | 0.5                           | 0.5                            | m                  |
 | $\nu$                     | Fluid kinetic viscosity                                           | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
 | $\rho$                    | Fluid density                                                     | 1.0                           | 1.0                            | kg/m<sup>3</sup>   |
-| $u_{0}$                   | Reference velocity                                                | 1.0                           | 100.0                          | m/s                |
-| $\alpha$                  | Vortex frequency                                                  | 2                             | 2                              |                    |
+| $\omega^{\textrm{O}}$     | Angular velocity of outer boundary, $\Gamma^{\textrm{O}}$         | 1.0                           | 100.0                          | rad/s              |
+| $\omega^{\textrm{I}}$     | Angular velocity of inner boundary, $\Gamma^{\textrm{i}}$         | -2.0                          | -200.0                         | rad/s              |
 
 ## 6. Scripts and files
 
