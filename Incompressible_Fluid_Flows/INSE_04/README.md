@@ -106,10 +106,12 @@ The **boundary conditions** prescribed for both the velocity correspond to the *
 
 $$
 \begin{array}{ll}
-&u_{r}\left(r,\theta\right)=0,&\quad\text{on }\Gamma^{\textrm{O}},\\
-&u_{\theta}\left(r,\theta\right)=-u_{0}\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{O}},\\
+&u_{r}\left(r,\theta\right)=\dfrac{\beta_{1}^{\textrm{O}}\beta_{2}^{\textrm{O}}\sin\left(\beta_{2}^{\textrm{O}}\theta\right)}{\sqrt{\left(\beta_{1}^{\textrm{O}}\right)^{2}\left(\beta_{2}^{\textrm{O}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+\left(\beta_{1}^{\textrm{O}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+2\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)+1}},
+,&\quad\text{on }\Gamma^{\textrm{O}},\\
+&u_{\theta}\left(r,\theta\right)=\dfrac{1+\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)}{\sqrt{\left(\beta_{1}^{\textrm{O}}\right)^{2}\left(\beta_{2}^{\textrm{O}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+\left(\beta_{1}^{\textrm{O}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+2\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)+1}},
+,&\quad\text{on }\Gamma^{\textrm{O}},\\
 &u_{r}\left(r,\theta\right)=0,&\quad\text{on }\Gamma^{\textrm{I}},\\
-&u_{\theta}\left(r,\theta\right)=u_{0}\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{on }\Gamma^{\textrm{I}}.\\
+&u_{\theta}\left(r,\theta\right)=0,&\quad\text{on }\Gamma^{\textrm{I}}.\\
 \end{array}
 $$
 
