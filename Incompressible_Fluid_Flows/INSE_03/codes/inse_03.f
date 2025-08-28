@@ -21,6 +21,10 @@ function p(x, y) result(res)
     real(8), intent(in) :: x
     real(8), intent(in) :: y
     real(8) :: res
+    real(8) :: r
+    real(8) :: theta
+    r = sqrt(x**2 + y**2)
+    theta = atan2(y, x)
     res = rI*rho*cos(0.5d0*alpha*theta)/r
 end function p
 
@@ -29,6 +33,10 @@ subroutine u(x, y, res)
     real(8), intent(in) :: x
     real(8), intent(in) :: y
     real(8), intent(out) :: res(2)
+    real(8) :: r
+    real(8) :: theta
+    r = sqrt(x**2 + y**2)
+    theta = atan2(y, x)
     res(1) = (1.0d0/2.0d0)*alpha*u0*(-rI + rO)*sin(0.5d0*alpha*theta)*sin(beta*pi*(r - rI)/(-rI + rO)) &
         *cos(theta)/(beta*pi*r) - u0*sin(theta)*cos( 0.5d0*alpha*theta)*cos(beta*pi*(r - rI)/(-rI + rO))
     res(2) = (1.0d0/2.0d0)*alpha*u0*(-rI + rO)*sin(theta)*sin(0.5d0*alpha*theta)*sin( beta*pi*(r - rI) &
@@ -41,6 +49,10 @@ subroutine f(x, y, res)
     real(8), intent(in) :: x
     real(8), intent(in) :: y
     real(8), intent(out) :: res(2)
+    real(8) :: r
+    real(8) :: theta
+    r = sqrt(x**2 + y**2)
+    theta = atan2(y, x)
     res(1) = -(4*alpha**2*beta*nu*pi*r*rI**2*u0*cos(0.5d0*alpha*theta)*cos(beta*pi*(r - rI)/(rI - rO)) &
         - 8*alpha**2*beta*nu*pi*r*rI*rO*u0*cos(0.5d0* alpha*theta)*cos(beta*pi*(r - rI)/(rI - rO)) + 4 &
         *alpha**2*beta*nu *pi*r*rO**2*u0*cos(0.5d0*alpha*theta)*cos(beta*pi*(r - rI)/(rI - rO)) - 8 &
@@ -142,6 +154,10 @@ function g(x, y) result(res)
     real(8), intent(in) :: x
     real(8), intent(in) :: y
     real(8) :: res
+    real(8) :: r
+    real(8) :: theta
+    r = sqrt(x**2 + y**2)
+    theta = atan2(y, x)
     res = 0
 end function g
 

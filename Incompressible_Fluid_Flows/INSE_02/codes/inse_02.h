@@ -17,6 +17,8 @@ double pi = 3.141592653589793;
 
 // Function p
 inline double p(double x, double y) {
+    double r = sqrt(pow(x, 2) + pow(y, 2));
+    double theta = atan2(y, x);
     double res = rho*((1.0/2.0)*pow(r, 2)*pow(-omegaI*pow(rI, 2) + omegaO*pow(rO, 2), 2)/pow( \
         -pow(rI, 2) + pow(rO, 2), 2) + 2*pow(rI, 2)*pow(rO, 2)*(-omegaI + omegaO)*(-omegaI \
         *pow(rI, 2) + omegaO*pow(rO, 2))*log(r)/pow(-pow(rI, 2) + pow(rO, 2), 2) - 1.0/2.0 \
@@ -27,6 +29,8 @@ inline double p(double x, double y) {
 
 // Function u
 inline void u(double x, double y, double res[2]) {
+    double r = sqrt(pow(x, 2) + pow(y, 2));
+    double theta = atan2(y, x);
     res[0] = -(r*(-omegaI*pow(rI, 2) + omegaO*pow(rO, 2))/(-pow(rI, 2) + pow(rO, 2)) + pow(rI, 2) \
         *pow(rO, 2)*(-omegaI + omegaO)/(r*(-pow(rI, 2) + pow(rO, 2))))*sin(theta);
     res[1] = (r*(-omegaI*pow(rI, 2) + omegaO*pow(rO, 2))/(-pow(rI, 2) + pow(rO, 2)) + pow(rI, 2) \
@@ -35,12 +39,16 @@ inline void u(double x, double y, double res[2]) {
 
 // Function f
 inline void f(double x, double y, double res[2]) {
+    double r = sqrt(pow(x, 2) + pow(y, 2));
+    double theta = atan2(y, x);
     res[0] = 0;
     res[1] = 0;
 }
 
 // Function g
 inline double g(double x, double y) {
+    double r = sqrt(pow(x, 2) + pow(y, 2));
+    double theta = atan2(y, x);
     double res = 0;
     return res;
 }

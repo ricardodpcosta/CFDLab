@@ -14,11 +14,15 @@ pi = 3.141592653589793
 
 # Function p
 def p(x, y):
+    r = math.sqrt(x**2 + y**2)
+    theta = math.atan2(y, x)
     res = rI*rho*math.cos((1/2)*alpha*theta)/r
     return res
 
 # Function u
 def u(x, y):
+    r = math.sqrt(x**2 + y**2)
+    theta = math.atan2(y, x)
     res = [0.0]*2
     res[0] = (1/2)*alpha*u0*(-rI + rO)*math.sin((1/2)*alpha*theta)*math.sin(beta*pi*(r - rI)/(-rI \
         + rO))*math.cos(theta)/(beta*pi*r) - u0*math.sin(theta)*math.cos((1/2)*alpha*theta) \
@@ -30,6 +34,8 @@ def u(x, y):
 
 # Function f
 def f(x, y):
+    r = math.sqrt(x**2 + y**2)
+    theta = math.atan2(y, x)
     res = [0.0]*2
     res[0] = -(4*alpha**2*beta*nu*pi*r*rI**2*u0*math.cos((1/2)*alpha*theta)*math.cos(beta*pi*(r - rI) \
         /(rI - rO)) - 8*alpha**2*beta*nu*pi*r*rI*rO*u0*math.cos((1/2)*alpha*theta)*math.cos(beta*pi*(r \
@@ -137,5 +143,7 @@ def f(x, y):
 
 # Function g
 def g(x, y):
+    r = math.sqrt(x**2 + y**2)
+    theta = math.atan2(y, x)
     res = 0
     return res

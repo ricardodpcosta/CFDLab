@@ -20,6 +20,8 @@ function res = p(x, y)
     global alpha;
     global beta;
     global pi;
+    r = sqrt(x.^2 + y.^2);
+    theta = atan2(y, x);
     res = rI.*rho.*cos(alpha.*theta/2)./r;
 end
 
@@ -33,6 +35,8 @@ function res = u(x, y)
     global alpha;
     global beta;
     global pi;
+    r = sqrt(x.^2 + y.^2);
+    theta = atan2(y, x);
     res = zeros(2,1);
     res(1) = alpha.*u0.*(-rI + rO).*sin(alpha.*theta/2).*sin(beta.*pi.*(r - rI)./(-rI + rO)). ...
         *cos(theta)./(2*beta.*pi.*r) - u0.*sin(theta).*cos(alpha.*theta/2).*cos(beta.*pi.*(r - rI)./( ...
@@ -52,6 +56,8 @@ function res = f(x, y)
     global alpha;
     global beta;
     global pi;
+    r = sqrt(x.^2 + y.^2);
+    theta = atan2(y, x);
     res = zeros(2,1);
     res(1) = -(4*alpha.^2.*beta.*nu.*pi.*r.*rI.^2.*u0.*cos(alpha.*theta/2).*cos(beta.*pi.*(r - rI). ...
         /(rI - rO)) - 8*alpha.^2.*beta.*nu.*pi.*r.*rI.*rO.*u0.*cos(alpha.*theta/2).*cos(beta.*pi.*(r ...
@@ -165,5 +171,7 @@ function res = g(x, y)
     global alpha;
     global beta;
     global pi;
+    r = sqrt(x.^2 + y.^2);
+    theta = atan2(y, x);
     res = 0;
 end

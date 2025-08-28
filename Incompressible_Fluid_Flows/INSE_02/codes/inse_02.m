@@ -18,6 +18,8 @@ function res = p(x, y)
     global omegaO;
     global omegaI;
     global pi;
+    r = sqrt(x.^2 + y.^2);
+    theta = atan2(y, x);
     res = rho.*(r.^2.*(-omegaI.*rI.^2 + omegaO.*rO.^2).^2./(2*(-rI.^2 + rO.^2).^2) + 2*rI.^2.*rO.^2.*( ...
         -omegaI + omegaO).*(-omegaI.*rI.^2 + omegaO.*rO.^2).*log(r)./(-rI.^2 + rO.^2).^2 ...
         - rI.^4.*rO.^4.*(-omegaI + omegaO).^2./(2*r.^2.*(-rI.^2 + rO.^2).^2) - (-cI + cO). ...
@@ -33,6 +35,8 @@ function res = u(x, y)
     global omegaO;
     global omegaI;
     global pi;
+    r = sqrt(x.^2 + y.^2);
+    theta = atan2(y, x);
     res = zeros(2,1);
     res(1) = -(r.*(-omegaI.*rI.^2 + omegaO.*rO.^2)./(-rI.^2 + rO.^2) + rI.^2.*rO.^2.*(-omegaI ...
         + omegaO)./(r.*(-rI.^2 + rO.^2))).*sin(theta);
@@ -49,6 +53,8 @@ function res = f(x, y)
     global omegaO;
     global omegaI;
     global pi;
+    r = sqrt(x.^2 + y.^2);
+    theta = atan2(y, x);
     res = zeros(2,1);
     res(1) = 0;
     res(2) = 0;
@@ -63,5 +69,7 @@ function res = g(x, y)
     global omegaO;
     global omegaI;
     global pi;
+    r = sqrt(x.^2 + y.^2);
+    theta = atan2(y, x);
     res = 0;
 end

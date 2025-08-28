@@ -20,6 +20,10 @@ function p(x, y) result(res)
     real(8), intent(in) :: x
     real(8), intent(in) :: y
     real(8) :: res
+    real(8) :: r
+    real(8) :: theta
+    r = sqrt(x**2 + y**2)
+    theta = atan2(y, x)
     res = rho*((1.0d0/2.0d0)*r**2*(-omegaI*rI**2 + omegaO*rO**2)**2/(-rI**2 + rO** 2)**2 + 2*rI**2*rO* &
         *2*(-omegaI + omegaO)*(-omegaI*rI**2 + omegaO* rO**2)*log(r)/(-rI**2 + rO**2)**2 &
         - 1.0d0/2.0d0*rI**4*rO**4*( -omegaI + omegaO)**2/(r**2*(-rI**2 + rO**2)**2) - (-cI &
@@ -31,6 +35,10 @@ subroutine u(x, y, res)
     real(8), intent(in) :: x
     real(8), intent(in) :: y
     real(8), intent(out) :: res(2)
+    real(8) :: r
+    real(8) :: theta
+    r = sqrt(x**2 + y**2)
+    theta = atan2(y, x)
     res(1) = -(r*(-omegaI*rI**2 + omegaO*rO**2)/(-rI**2 + rO**2) + rI**2*rO**2*( -omegaI + omegaO)/(r*( &
         -rI**2 + rO**2)))*sin(theta)
     res(2) = (r*(-omegaI*rI**2 + omegaO*rO**2)/(-rI**2 + rO**2) + rI**2*rO**2*( -omegaI + omegaO)/(r*( &
@@ -42,6 +50,10 @@ subroutine f(x, y, res)
     real(8), intent(in) :: x
     real(8), intent(in) :: y
     real(8), intent(out) :: res(2)
+    real(8) :: r
+    real(8) :: theta
+    r = sqrt(x**2 + y**2)
+    theta = atan2(y, x)
     res(1) = 0
     res(2) = 0
 end subroutine f
@@ -51,6 +63,10 @@ function g(x, y) result(res)
     real(8), intent(in) :: x
     real(8), intent(in) :: y
     real(8) :: res
+    real(8) :: r
+    real(8) :: theta
+    r = sqrt(x**2 + y**2)
+    theta = atan2(y, x)
     res = 0
 end function g
 

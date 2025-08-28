@@ -133,6 +133,10 @@ g = g.factor().cancel().trigsimp()
 outdir = "../codes"
 os.makedirs(outdir, exist_ok=True)
 
+# coordinate system conversion
+r = sympy.sqrt(x**2 + y**2)
+theta = sympy.atan2(y,x)
+
 # constant parameters values
 rO = 1.0
 rI = 0.5
@@ -151,7 +155,7 @@ consts_list = [("rO", rO), ("rI", rI), ("nu", nu), ("rho", rho), ("u0", u0), \
                 ("alpha", alpha), ("beta", beta), ("pi", pi)]
 
 # parameters list
-params_list = []
+params_list = [("r", r), ("theta", theta)]
 
 # functions list
 funcs_list = [("p", p, args_list, params_list),("u", u, args_list, params_list), \

@@ -18,12 +18,16 @@ double pi = 3.141592653589793;
 
 // Function p
 inline double p(double x, double y) {
+    double r = sqrt(pow(x, 2) + pow(y, 2));
+    double theta = atan2(y, x);
     double res = rI*rho*cos((1.0/2.0)*alpha*theta)/r;
     return res;
 }
 
 // Function u
 inline void u(double x, double y, double res[2]) {
+    double r = sqrt(pow(x, 2) + pow(y, 2));
+    double theta = atan2(y, x);
     res[0] = (1.0/2.0)*alpha*u0*(-rI + rO)*sin((1.0/2.0)*alpha*theta)*sin(beta*pi*(r - rI)/(-rI + rO)) \
         *cos(theta)/(beta*pi*r) - u0*sin(theta)*cos((1.0/2.0)*alpha*theta)*cos(beta*pi*(r - rI)/(-rI \
         + rO));
@@ -34,6 +38,8 @@ inline void u(double x, double y, double res[2]) {
 
 // Function f
 inline void f(double x, double y, double res[2]) {
+    double r = sqrt(pow(x, 2) + pow(y, 2));
+    double theta = atan2(y, x);
     res[0] = -(4*pow(alpha, 2)*beta*nu*pi*r*pow(rI, 2)*u0*cos((1.0/2.0)*alpha*theta)*cos(beta*pi*(r \
         - rI)/(rI - rO)) - 8*pow(alpha, 2)*beta*nu*pi*r*rI*rO*u0*cos((1.0/2.0)*alpha*theta)*cos(beta*pi \
         *(r - rI)/(rI - rO)) + 4*pow(alpha, 2)*beta*nu*pi*r*pow(rO, 2)*u0*cos((1.0/2.0)*alpha*theta) \
@@ -148,6 +154,8 @@ inline void f(double x, double y, double res[2]) {
 
 // Function g
 inline double g(double x, double y) {
+    double r = sqrt(pow(x, 2) + pow(y, 2));
+    double theta = atan2(y, x);
     double res = 0;
     return res;
 }

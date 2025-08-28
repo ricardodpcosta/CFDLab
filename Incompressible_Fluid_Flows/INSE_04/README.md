@@ -70,19 +70,14 @@ The **manufactured solutions** for the pressure and velocity read
 
 $$
 \begin{array}{ll}
-&p\left(r,\theta\right)=\rho\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{in }\Omega,\\
-&u_{r}\left(r,\theta\right)=u_{0}
-\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)
-\dfrac{\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}}{\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}}}
+&p\left(r,\theta\right)=\rho\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\cos\left(\alpha\theta\right),&\quad\text{in }\Omega,\\
+&u_{r}\left(r,\theta\right)=u_{0}\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\dfrac{\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}}{\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}}}
 ,&\quad\text{in }\Omega,\\
-&u_{\theta}\left(r,\theta\right)=u_{0}
-\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)
-\dfrac{R^{\textrm{O}}\left(\theta\right)}{\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}}}
-,&\quad\text{in }\Omega,
+&u_{\theta}\left(r,\theta\right)=u_{0}\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\dfrac{R^{\textrm{O}}\left(\theta\right)}{\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}}},&\quad\text{in }\Omega,
 \end{array}
 $$
 
-where $u_{0}$ is the reference velocity and $\alpha$ and $\beta$ are the number of counter-rotating vorticies in the radial and angular directions.
+where $u_{0}$ is the reference velocity and $\alpha$ is a constant parameter to control the pressure periodic variation.
 
 <div align="center">
   <table>
@@ -126,11 +121,14 @@ The table below summarises the given constant parameters and the recommended val
 |:--------------------------|:------------------------------------------------------------------|------------------------------:|-------------------------------:|:-------------------|
 | $r^{\textrm{O}}$          | Radius of outer boundary, $\Gamma^{\textrm{O}}$                   | 1.0                           | 1.0                            | m                  |
 | $r^{\textrm{I}}$          | Radius of inner boundary, $\Gamma^{\textrm{I}}$                   | 0.5                           | 0.5                            | m                  |
+| $\beta_{1}^{\textrm{O}}$               | Magnitude of outer boundary perturbation, $\Gamma^{\textrm{O}}$       | 0.1                          | 0.1                           |                    |
+| $\beta_{2}^{\textrm{O}}$               | Periodicity of outer boundary perturbation, $\Gamma^{\textrm{O}}$     | 8.0                           | 8.0                            |                    |
+| $\beta_{1}^{\textrm{I}}$               | Magnitude of inner boundary perturbation, $\Gamma^{\textrm{I}}$       | 0.1                          | 0.1                           |                    |
+| $\beta_{2}^{\textrm{I}}$               | Periodicity of inner boundary perturbation, $\Gamma^{\textrm{I}}$     | 8.0                           | 8.0                            |                    |
 | $\nu$                     | Fluid kinetic viscosity                                           | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
 | $\rho$                    | Fluid density                                                     | 1.0                           | 1.0                            | kg/m<sup>3</sup>   |
 | $u_{0}$                   | Reference velocity                                                | 1.0                           | 100.0                          | m/s                |
-| $\alpha$                  | Number of voritices in the angular direction                      | 4                             | 4                              |                    |
-| $\beta$                   | Number of voritices in the radial direction                       | 1                             | 1                              |                    |
+| $\alpha$                  | Periodicity of pressure variations                      | 4                             | 4                              |                    |
 
 ## 6. Scripts and files
 
