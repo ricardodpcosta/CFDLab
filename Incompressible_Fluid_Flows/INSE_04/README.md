@@ -70,14 +70,14 @@ The **manufactured solutions** for the pressure and velocity read
 
 $$
 \begin{array}{ll}
-&p\left(r,\theta\right)=\rho\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\cos\left(\alpha\theta\right),&\quad\text{in }\Omega,\\
+&p\left(r,\theta\right)=\rho\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\cos\left(n\theta\right),&\quad\text{in }\Omega,\\
 &u_{r}\left(r,\theta\right)=u_{0}\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\dfrac{\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}}{\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}}}
 ,&\quad\text{in }\Omega,\\
 &u_{\theta}\left(r,\theta\right)=u_{0}\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\dfrac{R^{\textrm{O}}\left(\theta\right)}{\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}}},&\quad\text{in }\Omega,
 \end{array}
 $$
 
-where $u_{0}$ is the reference velocity and $\alpha$ is the pressure mode number (angular complexity).
+where $u_{0}$ is the reference velocity and $n$ is the pressure mode number (angular complexity).
 
 <div align="center">
   <table>
@@ -128,7 +128,7 @@ The table below summarises the given constant parameters and the recommended val
 | $\nu$                     | Fluid kinetic viscosity                                           | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
 | $\rho$                    | Fluid density                                                     | 1.0                           | 1.0                            | kg/m<sup>3</sup>   |
 | $u_{0}$                   | Reference velocity                                                | 1.0                           | 100.0                          | m/s                |
-| $\alpha$                  | Pressure mode number                                              | 4                             | 4                              |                    |
+| $n$                       | Pressure mode number                                              | 4                             | 4                              |                    |
 
 ## 6. Scripts and files
 
