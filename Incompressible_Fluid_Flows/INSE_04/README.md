@@ -121,14 +121,14 @@ The table below summarises the given constant parameters and the recommended val
 |:--------------------------|:------------------------------------------------------------------|------------------------------:|-------------------------------:|:-------------------|
 | $r^{\textrm{O}}$          | Radius of outer boundary, $\Gamma^{\textrm{O}}$                   | 1.0                           | 1.0                            | m                  |
 | $r^{\textrm{I}}$          | Radius of inner boundary, $\Gamma^{\textrm{I}}$                   | 0.5                           | 0.5                            | m                  |
-| $\beta_{1}^{\textrm{O}}$               | Magnitude of outer boundary perturbation, $\Gamma^{\textrm{O}}$       | 0.1                          | 0.1                           |                    |
-| $\beta_{2}^{\textrm{O}}$               | Periodicity of outer boundary perturbation, $\Gamma^{\textrm{O}}$     | 8.0                           | 8.0                            |                    |
-| $\beta_{1}^{\textrm{I}}$               | Magnitude of inner boundary perturbation, $\Gamma^{\textrm{I}}$       | 0.1                          | 0.1                           |                    |
-| $\beta_{2}^{\textrm{I}}$               | Periodicity of inner boundary perturbation, $\Gamma^{\textrm{I}}$     | 8.0                           | 8.0                            |                    |
+| $\beta_{1}^{\textrm{O}}$  | Magnitude of outer boundary perturbation, $\Gamma^{\textrm{O}}$   | 0.1                           | 0.1                            |                    |
+| $\beta_{2}^{\textrm{O}}$  | Periodicity of outer boundary perturbation, $\Gamma^{\textrm{O}}$ | 8.0                           | 8.0                            |                    |
+| $\beta_{1}^{\textrm{I}}$  | Magnitude of inner boundary perturbation, $\Gamma^{\textrm{I}}$   | 0.1                           | 0.1                            |                    |
+| $\beta_{2}^{\textrm{I}}$  | Periodicity of inner boundary perturbation, $\Gamma^{\textrm{I}}$ | 8.0                           | 8.0                            |                    |
 | $\nu$                     | Fluid kinetic viscosity                                           | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
 | $\rho$                    | Fluid density                                                     | 1.0                           | 1.0                            | kg/m<sup>3</sup>   |
 | $u_{0}$                   | Reference velocity                                                | 1.0                           | 100.0                          | m/s                |
-| $\alpha$                  | Periodicity of pressure variations                      | 4                             | 4                              |                    |
+| $\alpha$                  | Periodicity of pressure variations                                | 4                             | 4                              |                    |
 
 ## 6. Scripts and files
 
