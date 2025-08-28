@@ -75,7 +75,7 @@ $$
 $$
 \begin{array}{ll}
 u_{r}\left(r,\theta\right)&=u_{0}\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\dfrac{\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}}{\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}}}\\
-&=u_{0}\left(\dfrac{r-r^{\textrm{I}}\left(1+\beta_{1}^{\textrm{I}}\cos\left(\beta_{2}^{\textrm{I}}\theta\right)\right)}{r^{\textrm{O}}\left(1+\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)\right)-r^{\textrm{I}}\left(1+\beta_{1}^{\textrm{I}}\cos\left(\beta_{2}^{\textrm{I}}\theta\right)\right)}\right)
+&=-u_{0}\left(\dfrac{r-r^{\textrm{I}}\left(1+\beta_{1}^{\textrm{I}}\cos\left(\beta_{2}^{\textrm{I}}\theta\right)\right)}{r^{\textrm{O}}\left(1+\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)\right)-r^{\textrm{I}}\left(1+\beta_{1}^{\textrm{I}}\cos\left(\beta_{2}^{\textrm{I}}\theta\right)\right)}\right)
 \dfrac{\beta_{1}^{\textrm{O}}\beta_{2}^{\textrm{O}}\sin\left(\beta_{2}^{\textrm{O}}\theta\right)}{\sqrt{\left(\beta_{1}^{\textrm{O}}\right)^{2}\left(\beta_{2}^{\textrm{O}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+\left(\beta_{1}^{\textrm{O}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+2\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)+1}},&\quad\text{in }\Omega,\\
 \end{array}
 $$
