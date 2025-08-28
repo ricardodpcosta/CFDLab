@@ -25,8 +25,8 @@ where $\beta_{1}^{\textrm{O}}$ and $\beta_{1}^{\textrm{I}}$ are constant paramet
 Vector functions $\boldsymbol{n}^{\textrm{O}}$ and $\boldsymbol{n}^{\textrm{I}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{O}}$ and $\Gamma^{\textrm{I}}$, respectively, and reads
 
 $$
-\boldsymbol{n}^{\textrm{O}}\left(\theta\right)=\dfrac{\-R^{\textrm{O}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{r}}+\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{\theta}}}{\sqrt{\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}+\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}}}\\
-=-\dfrac{\left(1+\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)\right)\hat{\boldsymbol{r}}+\beta_{1}^{\textrm{O}}\beta_{2}^{\textrm{O}}\sin\left(\beta_{2}^{\textrm{O}}\theta\right)\hat{\boldsymbol{\theta}}}{\sqrt{\left(\beta_{1}^{\textrm{O}}\right)^{2}\left(\beta_{2}^{\textrm{O}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+\left(\beta_{1}^{\textrm{O}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+2\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)+1}},
+\boldsymbol{n}^{\textrm{O}}\left(\theta\right)=\dfrac{R^{\textrm{O}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{r}}-\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{\theta}}}{\sqrt{\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}+\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}}}\\
+=\dfrac{\left(1+\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)\right)\hat{\boldsymbol{r}}+\beta_{1}^{\textrm{O}}\beta_{2}^{\textrm{O}}\sin\left(\beta_{2}^{\textrm{O}}\theta\right)\hat{\boldsymbol{\theta}}}{\sqrt{\left(\beta_{1}^{\textrm{O}}\right)^{2}\left(\beta_{2}^{\textrm{O}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+\left(\beta_{1}^{\textrm{O}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+2\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)+1}},
 $$
 
 $$
