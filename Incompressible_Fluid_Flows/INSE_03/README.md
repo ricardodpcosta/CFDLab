@@ -78,7 +78,7 @@ where $u_{0}$ is the reference velocity and $\alpha$ and $\beta$ are the number 
   </table>
 </div>
 
-The **source terms** are obtained from substituting the manufactured solutions into the governing equations in polar coordinates. Due to the complexity of the manufactured solutions, the resulting analytical functions for the source term are intricate and are omitted for conciseness.
+The **source term** is obtained from substituting the manufactured solutions into the governing equations in polar coordinates. Due to the complexity of the manufactured solutions, the resulting analytical function for the source term is intricate and is omitted for conciseness.
 
 The **boundary conditions** prescribed for both the velocity correspond to the **Dirichlet boundary condition** on the outer and inner boundaries, considering the prescribed angular velocities, that is
 
