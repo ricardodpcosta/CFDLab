@@ -2,7 +2,7 @@
 
 ## 1. Summary
 
-This benchmark represents an **stationary two-dimensional isothermal incompressible fluid flow** problem confined between two infinitely long coaxial cylinders rotating at specific constant angular velocities. Since the cylinder lengths are assumed to be infinite, the flow occurs only along the azimuthal axis and, under these conditions, the flow has known analytic solutions for the pressure and velocity. It is particularly suitable for solvers of the **stationary Navier-Stokes equations** with solenoidal velocity fields. The case is based on an **exact analytical solution** in polar coordinates, enabling:
+This benchmark represents a **stationary two-dimensional isothermal incompressible fluid flow** problem confined between two infinitely long coaxial cylinders rotating at specific constant angular velocities. Since the cylinder lengths are assumed to be infinite, the flow occurs only along the azimuthal axis and, under these conditions, the flow has known analytic solutions for the pressure and velocity. It is particularly suitable for solvers of the **stationary Navier-Stokes equations** with solenoidal velocity fields. The case is based on an **exact analytical solution** in polar coordinates, enabling:
 - **Code verification** of numerical schemes for the Navier-Stokes equations.
 - **Numerical assessment** of the incompressibility constraint and non-linear terms.
 - **Convergence analysis** on structured and unstructured meshes.
