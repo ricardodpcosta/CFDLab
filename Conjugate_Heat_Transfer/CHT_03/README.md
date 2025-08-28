@@ -151,14 +151,14 @@ The table below summarises the constant parameters left to define and the recomm
 
 | Symbol                    | Description                                                           | Value (low-diffusivity ratio) | Value (high-diffusivity ratio) | Units              |
 |:--------------------------|:----------------------------------------------------------------------|------------------------------:|-------------------------------:|:-------------------|
-| $r^{\textrm{A}}$          | Radius of outer boundary, $\Gamma^{\textrm{A}}$                       | 1.0                           | 1.0                            | m                  |
-| $r^{\textrm{AB}}$         | Radius of interface, $\Gamma^{\textrm{AB}}$                           | 0.75                          | 0.75                           | m                  |
-| $r^{\textrm{B}}$          | Radius of inner boundary, $\Gamma^{\textrm{B}}$                       | 0.5                           | 0.5                            | m                  |
-| $\alpha^{\textrm{A}}$     | Thermal diffusivity in outer subdomain, $\Omega^{\textrm{A}}$         | 2.0                           | 100.0                          | m<sup>2</sup>/s    |
-| $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain, $\Omega^{\textrm{B}}$         | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
-| $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$            | 1.0                           | 1.0                            | rad/s              |
-| $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain, $\Omega^{\textrm{B}}$            | -1.0                          | -1.0                           | rad/s              |
-| $h$                       | Interfacial heat transfer coefficient, $\Gamma^{\textrm{AB}}$         | 1                             | 1                              | K.m/s              |
+| $r^{\textrm{A}}$          | Radius of outer boundary                                              | 1.0                           | 1.0                            | m                  |
+| $r^{\textrm{AB}}$         | Radius of interface                                                   | 0.75                          | 0.75                           | m                  |
+| $r^{\textrm{B}}$          | Radius of inner boundary                                              | 0.5                           | 0.5                            | m                  |
+| $\alpha^{\textrm{A}}$     | Thermal diffusivity in outer subdomain                                | 2.0                           | 100.0                          | m<sup>2</sup>/s    |
+| $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain                                | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
+| $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain                                   | 1.0                           | 1.0                            | rad/s              |
+| $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain                                   | -1.0                          | -1.0                           | rad/s              |
+| $h$                       | Interfacial heat transfer coefficient                                 | 1                             | 1                              | K.m/s              |
 | $n$                       | Solution mode number                                                  | 4                             | 4                              |                    |
 
 ## 6. Scripts and files

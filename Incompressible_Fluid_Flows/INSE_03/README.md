@@ -97,8 +97,8 @@ The table below summarises the given constant parameters and the recommended val
 
 | Symbol                    | Description                                                       | Value (low Reynolds number)   | Value (high Reynolds number)   | Units              |
 |:--------------------------|:------------------------------------------------------------------|------------------------------:|-------------------------------:|:-------------------|
-| $r^{\textrm{O}}$          | Radius of outer boundary, $\Gamma^{\textrm{O}}$                   | 1.0                           | 1.0                            | m                  |
-| $r^{\textrm{I}}$          | Radius of inner boundary, $\Gamma^{\textrm{I}}$                   | 0.5                           | 0.5                            | m                  |
+| $r^{\textrm{O}}$          | Radius of outer boundary                                          | 1.0                           | 1.0                            | m                  |
+| $r^{\textrm{I}}$          | Radius of inner boundary                                          | 0.5                           | 0.5                            | m                  |
 | $\nu$                     | Fluid kinetic viscosity                                           | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
 | $\rho$                    | Fluid density                                                     | 1.0                           | 1.0                            | kg/m<sup>3</sup>   |
 | $u_{0}$                   | Reference velocity                                                | 1.0                           | 100.0                          | m/s                |

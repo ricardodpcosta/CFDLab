@@ -176,15 +176,15 @@ The table below summarises the constant parameters left to define and the recomm
 
 | Symbol                    | Description                                                       | Value (low-diffusivity ratio) | Value (high-diffusivity ratio) | Units              |
 |:--------------------------|:------------------------------------------------------------------|------------------------------:|-------------------------------:|:-------------------|
-| $r^{\textrm{A}}$          | Radius of outer boundary, $\Gamma^{\textrm{A}}$                   | 1.0                           | 1.0                            | m                  |
-| $r^{\textrm{AB}}$         | Radius of interface, $\Gamma^{\textrm{AB}}$                       | 0.75                          | 0.75                           | m                  |
-| $r^{\textrm{B}}$          | Radius of inner boundary, $\Gamma^{\textrm{B}}$                   | 0.5                           | 0.5                            | m                  |
-| $\beta_{1}^{\textrm{AB}}$               | Magnitude of interface perturbation, $\Gamma^{\textrm{AB}}$       | 0.04                          | 0.04                           |                    |
-| $\beta_{2}^{\textrm{AB}}$               | Periodicity of interface perturbation, $\Gamma^{\textrm{AB}}$     | 8.0                           | 8.0                            |                    |
-| $\alpha^{\textrm{A}}$     | Thermal diffusivity in outer subdomain, $\Omega^{\textrm{A}}$     | 2.0                           | 100.0                          | m<sup>2</sup>/s    |
-| $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain, $\Omega^{\textrm{B}}$     | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
-| $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain, $\Omega^{\textrm{A}}$        | 1.0                           | 1.0                            | rad/s              |
-| $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain, $\Omega^{\textrm{B}}$        | -1.0                          | -1.0                           | rad/s              |
+| $r^{\textrm{A}}$          | Radius of outer boundary                                          | 1.0                           | 1.0                            | m                  |
+| $r^{\textrm{AB}}$         | Radius of interface                                               | 0.75                          | 0.75                           | m                  |
+| $r^{\textrm{B}}$          | Radius of inner boundary                                          | 0.5                           | 0.5                            | m                  |
+| $\beta_{1}^{\textrm{AB}}$ | Magnitude of interface perturbation                               | 0.04                          | 0.04                           |                    |
+| $\beta_{2}^{\textrm{AB}}$ | Periodicity of interface perturbation                             | 8.0                           | 8.0                            |                    |
+| $\alpha^{\textrm{A}}$     | Thermal diffusivity in outer subdomain                            | 2.0                           | 100.0                          | m<sup>2</sup>/s    |
+| $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain                            | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
+| $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain                               | 1.0                           | 1.0                            | rad/s              |
+| $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain                               | -1.0                          | -1.0                            | rad/s              |
 
 ## 6. Scripts and files
 

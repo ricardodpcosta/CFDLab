@@ -117,12 +117,12 @@ The table below summarises the given constant parameters and the recommended val
 
 | Symbol                    | Description                                                       | Value (low Reynolds number)   | Value (high Reynolds number)   | Units              |
 |:--------------------------|:------------------------------------------------------------------|------------------------------:|-------------------------------:|:-------------------|
-| $r^{\textrm{O}}$          | Radius of outer boundary, $\Gamma^{\textrm{O}}$                   | 1.0                           | 1.0                            | m                  |
-| $r^{\textrm{I}}$          | Radius of inner boundary, $\Gamma^{\textrm{I}}$                   | 0.5                           | 0.5                            | m                  |
+| $r^{\textrm{O}}$          | Radius of outer boundary                                          | 1.0                           | 1.0                            | m                  |
+| $r^{\textrm{I}}$          | Radius of inner boundary                                          | 0.5                           | 0.5                            | m                  |
 | $\nu$                     | Fluid kinetic viscosity                                           | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
 | $\rho$                    | Fluid density                                                     | 1.0                           | 1.0                            | kg/m<sup>3</sup>   |
-| $\omega^{\textrm{O}}$     | Angular velocity of outer boundary, $\Gamma^{\textrm{O}}$         | 1.0                           | 100.0                          | rad/s              |
-| $\omega^{\textrm{I}}$     | Angular velocity of inner boundary, $\Gamma^{\textrm{i}}$         | -2.0                          | -200.0                         | rad/s              |
+| $\omega^{\textrm{O}}$     | Angular velocity of outer boundary                                | 1.0                           | 100.0                          | rad/s              |
+| $\omega^{\textrm{I}}$     | Angular velocity of inner boundary                                | -2.0                          | -200.0                          | rad/s              |
 
 ## 6. Scripts and files
 
