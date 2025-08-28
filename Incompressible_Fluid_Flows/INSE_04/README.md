@@ -70,11 +70,15 @@ The **manufactured solutions** for the pressure and velocity read
 
 $$
 \begin{array}{ll}
-&p\left(r,\theta\right)=\rho\dfrac{r-R^{\textrm{I}}}{R^{\textrm{O}}-R^{\textrm{I}}}\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{in }\Omega,\\
+&p\left(r,\theta\right)=\rho\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\cos\left(\dfrac{\alpha\theta}{2}\right),&\quad\text{in }\Omega,\\
 &u_{r}\left(r,\theta\right)=u_{0}
-\dfrac{r-R^{\textrm{I}}}{R^{\textrm{O}}-R^{\textrm{I}}}
-\dfrac{\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\hspace{1pt}\hat{\boldsymbol{r}}+R^{\textrm{O}}\left(\theta\right)\hat{\boldsymbol{\theta}}}{\sqrt{\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}+\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}}}
+\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)
+\dfrac{\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}}{\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}}}
 ,&\quad\text{in }\Omega,\\
+&u_{\theta}\left(r,\theta\right)=u_{0}
+\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)
+\dfrac{R^{\textrm{O}}\left(\theta\right)}{\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}}}
+,&\quad\text{in }\Omega,
 \end{array}
 $$
 
