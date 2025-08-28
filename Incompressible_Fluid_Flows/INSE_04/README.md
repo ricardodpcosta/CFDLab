@@ -58,22 +58,33 @@ The **stationary two-dimensional isothermal incompressible fluid flow** problem 
 $$
 \begin{array}{ll}
 &\left(\boldsymbol{u}\cdot\nabla\right)\boldsymbol{u}-\nu\nabla^{2}\boldsymbol{u}+\dfrac{1}{\rho}\nabla p=\boldsymbol{f},&\quad\textrm{in }\Omega,\\
-&\nabla\cdot\boldsymbol{u}=0,&\quad\textrm{in }\Omega,
+&\nabla\cdot\boldsymbol{u}=g,&\quad\textrm{in }\Omega,
 \end{array}
 $$
 
-where $\nu$ is the fluid constant kinetic viscosity, $\rho$ is the fluid constant density, and $\boldsymbol{f}$ is a source term function in $\Omega$.
+where $\nu$ is the fluid constant kinetic viscosity, $\rho$ is the fluid constant density, and $\boldsymbol{f}$ and $g$ are source term functions in $\Omega$.
 
 ## 4. Manufactured solutions
 
 The **manufactured solutions** for the pressure and velocity read
 
 $$
+p\left(r,\theta\right)=\rho\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\cos\left(n\theta\right)=\rho\left(\dfrac{r-r^{\textrm{I}}\left(1+\beta_{1}^{\textrm{I}}\cos\left(\beta_{2}^{\textrm{I}}\theta\right)\right)}{r^{\textrm{O}}\left(1+\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)\right)-r^{\textrm{I}}\left(1+\beta_{1}^{\textrm{I}}\cos\left(\beta_{2}^{\textrm{I}}\theta\right)\right)}\right)\cos\left(n\theta\right),\quad\text{in }\Omega,
+$$
+
+$$
 \begin{array}{ll}
-&p\left(r,\theta\right)=\rho\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\cos\left(n\theta\right),&\quad\text{in }\Omega,\\
-&u_{r}\left(r,\theta\right)=u_{0}\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\dfrac{\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}}{\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}}}
-,&\quad\text{in }\Omega,\\
-&u_{\theta}\left(r,\theta\right)=u_{0}\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\dfrac{R^{\textrm{O}}\left(\theta\right)}{\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}}},&\quad\text{in }\Omega,
+u_{r}\left(r,\theta\right)&=u_{0}\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\dfrac{\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}}{\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}}}\\
+&=u_{0}\left(\dfrac{r-r^{\textrm{I}}\left(1+\beta_{1}^{\textrm{I}}\cos\left(\beta_{2}^{\textrm{I}}\theta\right)\right)}{r^{\textrm{O}}\left(1+\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)\right)-r^{\textrm{I}}\left(1+\beta_{1}^{\textrm{I}}\cos\left(\beta_{2}^{\textrm{I}}\theta\right)\right)}\right)
+\dfrac{\beta_{1}^{\textrm{O}}\beta_{2}^{\textrm{O}}\sin\left(\beta_{2}^{\textrm{O}}\theta\right)}{\sqrt{\left(\beta_{1}^{\textrm{O}}\right)^{2}\left(\beta_{2}^{\textrm{O}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+\left(\beta_{1}^{\textrm{O}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+2\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)+1}},&\quad\text{in }\Omega,\\
+\end{array}
+$$
+
+$$
+\begin{array}{ll}
+u_{\theta}\left(r,\theta\right)&=u_{0}\left(\dfrac{r-R^{\textrm{I}}\left(\theta\right)}{R^{\textrm{O}}\left(\theta\right)-R^{\textrm{I}}\left(\theta\right)}\right)\dfrac{\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}}{\sqrt{\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}+\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}}}\\
+&=u_{0}\left(\dfrac{r-r^{\textrm{I}}\left(1+\beta_{1}^{\textrm{I}}\cos\left(\beta_{2}^{\textrm{I}}\theta\right)\right)}{r^{\textrm{O}}\left(1+\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)\right)-r^{\textrm{I}}\left(1+\beta_{1}^{\textrm{I}}\cos\left(\beta_{2}^{\textrm{I}}\theta\right)\right)}\right)
+\dfrac{1+\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)}{\sqrt{\left(\beta_{1}^{\textrm{O}}\right)^{2}\left(\beta_{2}^{\textrm{O}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+\left(\beta_{1}^{\textrm{O}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+2\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)+1}},&\quad\text{in }\Omega,\\
 \end{array}
 $$
 
@@ -100,14 +111,14 @@ where $u_{0}$ is the reference velocity and $n$ is the pressure mode number (ang
   </table>
 </div>
 
-The **source terms** are obtained from substituting the manufactured solutions into the governing equations in polar coordinates. Due to the complexity of the manufactured solutions, the resulting analytical functions for the source term are intricate and are omitted for conciseness.
+The **source terms** are obtained from substituting the manufactured solutions into the governing equations in polar coordinates. Due to the complexity of the manufactured solutions, the resulting analytical functions for the source terms are intricate and are omitted for conciseness.
 
 The **boundary conditions** prescribed for both the velocity correspond to the **Dirichlet boundary condition** on the outer and inner boundaries, considering the prescribed angular velocities, that is
 
 $$
 \begin{array}{ll}
-&u_{r}\left(r,\theta\right)=\dfrac{\beta_{1}^{\textrm{O}}\beta_{2}^{\textrm{O}}\sin\left(\beta_{2}^{\textrm{O}}\theta\right)}{\sqrt{\left(\beta_{1}^{\textrm{O}}\right)^{2}\left(\beta_{2}^{\textrm{O}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+\left(\beta_{1}^{\textrm{O}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+2\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)+1}},&\quad\text{on }\Gamma^{\textrm{O}},\\
-&u_{\theta}\left(r,\theta\right)=\dfrac{1+\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)}{\sqrt{\left(\beta_{1}^{\textrm{O}}\right)^{2}\left(\beta_{2}^{\textrm{O}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+\left(\beta_{1}^{\textrm{O}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+2\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)+1}},&\quad\text{on }\Gamma^{\textrm{O}},\\
+&u_{r}\left(r,\theta\right)=u_{0}\dfrac{\beta_{1}^{\textrm{O}}\beta_{2}^{\textrm{O}}\sin\left(\beta_{2}^{\textrm{O}}\theta\right)}{\sqrt{\left(\beta_{1}^{\textrm{O}}\right)^{2}\left(\beta_{2}^{\textrm{O}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+\left(\beta_{1}^{\textrm{O}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+2\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)+1}},&\quad\text{on }\Gamma^{\textrm{O}},\\
+&u_{\theta}\left(r,\theta\right)=u_{0}\dfrac{1+\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)}{\sqrt{\left(\beta_{1}^{\textrm{O}}\right)^{2}\left(\beta_{2}^{\textrm{O}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+\left(\beta_{1}^{\textrm{O}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+2\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)+1}},&\quad\text{on }\Gamma^{\textrm{O}},\\
 &u_{r}\left(r,\theta\right)=0,&\quad\text{on }\Gamma^{\textrm{I}},\\
 &u_{\theta}\left(r,\theta\right)=0,&\quad\text{on }\Gamma^{\textrm{I}}.\\
 \end{array}
