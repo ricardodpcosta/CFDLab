@@ -2,7 +2,7 @@
 
 ## 1. Summary
 
-This benchmark represents an **stationary two-dimensional isothermal incompressible fluid flow** problem with vorticies confined between two rose-shaped boundaries. It is particularly suitable for solvers of the **stationary Navier-Stokes equations** with solenoidal velocity fields. The case is based on an **manufactured analytical solution** in polar coordinates, enabling:
+This benchmark represents a **stationary two-dimensional isothermal incompressible fluid flow** problem with vorticies confined between two rose-shaped boundaries. It is particularly suitable for solvers of the **stationary Navier-Stokes equations** with solenoidal velocity fields. The case is based on a **manufactured analytical solution** in polar coordinates, enabling:
 - **Code verification** of numerical schemes for the Navier-Stokes equations.
 - **Numerical assessment** of the incompressibility constraint and non-linear terms.
 - **Convergence analysis** on structured and unstructured meshes.
@@ -11,7 +11,7 @@ This benchmark represents an **stationary two-dimensional isothermal incompressi
 
 ## 2. Domain and meshes
 
-The **domain**, $\Omega$, consists of an outer and inner concentric boundaries, $\Gamma^{\textrm{O}}$ and $\Gamma^{\textrm{I}}$, respectively, centred at the origin and with variable radius, $R^{\textrm{O}}$ and $R^{\textrm{O}}$, respectively. The outer and inner boundaries correspond to a periodic perturbation (diffeomorphic transformation) applied to a circumference centred at the origin with radius $r^{\textrm{O}}$ and $r^{\textrm{I}}$, respectively, and reads
+The **domain**, $\Omega$, consists of an outer and inner concentric boundaries, $\Gamma^{\textrm{O}}$ and $\Gamma^{\textrm{I}}$, respectively, centred at the origin and with variable radius, $R^{\textrm{O}}$ and $R^{\textrm{O}}$, respectively. The outer and inner boundaries correspond to a periodic perturbation (diffeomorphic transformation) applied to a circumference centred at the origin with radius $r^{\textrm{O}}$ and $r^{\textrm{I}}$, respectively, and read
 
 $$
 \begin{array}{ll}
