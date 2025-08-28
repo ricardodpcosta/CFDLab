@@ -194,7 +194,7 @@ The table below summarises the constant parameters left to define and the recomm
 | $\alpha^{\textrm{A}}$     | Thermal diffusivity in outer subdomain                            | 2.0                           | 100.0                          | m<sup>2</sup>/s    |
 | $\alpha^{\textrm{B}}$     | Thermal diffusivity in inner subdomain                            | 1.0                           | 1.0                            | m<sup>2</sup>/s    |
 | $\omega^{\textrm{A}}$     | Angular velocity in outer subdomain                               | 1.0                           | 1.0                            | rad/s              |
-| $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain                               | -1.0                          | -1.0                            | rad/s              |
+| $\omega^{\textrm{B}}$     | Angular velocity in inner subdomain                               | -1.0                          | -1.0                           | rad/s              |
 | $h$                       | Interfacial heat transfer coefficient                             | 1                             | 1                              | K.m/s              |
 
 ## 6. Scripts and files
