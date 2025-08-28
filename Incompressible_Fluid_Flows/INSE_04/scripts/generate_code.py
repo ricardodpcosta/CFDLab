@@ -42,7 +42,7 @@ from helpers import *
 rO, rI = sympy.symbols("rO rI", real=True, positive=True)
 betaO_1, betaO_2, betaI_1, betaI_2 = sympy.symbols("betaO_1 betaO_2 betaI_1 betaI_2", real=True)
 nu, rho = sympy.symbols("nu rho", real=True, positive=True)
-u0, alpha = sympy.symbols("u0 alpha", real=True)
+u0, n = sympy.symbols("u0 n", real=True)
 pi = sympy.symbols("pi", real=True)
 
 # coordinate system
@@ -66,8 +66,8 @@ nO_r = RO/nO_norm
 nO_theta = -dRO_dtheta/nO_norm
 
 # simplify expressions
-nO_r = nO_r.factor().cancel().trigsimp()
-nO_theta = nO_theta.factor().cancel().trigsimp()
+nO_r = nO_r.factor().cancel()
+nO_theta = nO_theta.factor().cancel()
 
 # inner boundary normal vector
 dRI_dtheta = sympy.diff(RI, theta)
@@ -76,8 +76,8 @@ nI_r = -RI/nI_norm
 nI_theta = dRI_dtheta/nI_norm
 
 # simplify expressions
-nI_r = nI_r.factor().cancel().trigsimp()
-nI_theta = nI_theta.factor().cancel().trigsimp()
+nI_r = nI_r.factor().cancel()
+nI_theta = nI_theta.factor().cancel()
 
 # Cartesian unit basis
 nO = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
@@ -92,7 +92,7 @@ nI = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
 #============================================
 
 # exact solutions
-p=rho*(r-RI/(RO-RI))*sympy.cos(alpha*theta)
+p=rho*(r-RI/(RO-RI))*sympy.cos(n*theta)
 u_r=u0*(r-RI/(RO-RI))*dRO_dtheta/nO_norm
 u_theta=u0*(r-RI/(RO-RI))*RO/nO_norm
 
@@ -110,8 +110,8 @@ conv_r = u_r*sympy.diff(u_r, r) + u_theta*sympy.diff(u_r, theta)/r - u_theta**2/
 conv_theta = u_r*sympy.diff(u_theta, r) + u_theta*sympy.diff(u_theta, theta)/r + u_r*u_theta/r
 
 # simplify expressions
-conv_r = conv_r.factor().cancel().trigsimp()
-conv_theta = conv_theta.factor().cancel().trigsimp()
+conv_r = conv_r.factor().cancel()
+conv_theta = conv_theta.factor().cancel()
 
 # diffusive terms
 diff_r = -nu*(sympy.diff(r*sympy.diff(u_r, r), r)/r \
@@ -122,24 +122,24 @@ diff_theta = -nu*(sympy.diff(r*sympy.diff(u_theta, r), r)/r \
             + 2*sympy.diff(u_r, theta)/r**2)
 
 # simplify expressions
-diff_r = diff_r.factor().cancel().trigsimp()
-diff_theta = diff_theta.factor().cancel().trigsimp()
+diff_r = diff_r.factor().cancel()
+diff_theta = diff_theta.factor().cancel()
 
 # pressure term
 pres_r = sympy.diff(p, r)/rho
 pres_theta = sympy.diff(p, theta)/(rho*r)
 
 # simplify expressions
-pres_r = pres_r.factor().cancel().trigsimp()
-pres_theta = pres_theta.factor().cancel().trigsimp()
+pres_r = pres_r.factor().cancel()
+pres_theta = pres_theta.factor().cancel()
 
 # source terms
 f_r = conv_r + diff_r + pres_r
 f_theta = conv_theta + diff_theta + pres_theta
 
 # simplify expressions
-f_r = f_r.factor().cancel().trigsimp()
-f_theta = f_theta.factor().cancel().trigsimp()
+f_r = f_r.factor().cancel()
+f_theta = f_theta.factor().cancel()
 
 # Cartesian unit basis
 f = sympy.Matrix([[sympy.cos(theta), -sympy.sin(theta)], \
@@ -155,14 +155,14 @@ div_r = sympy.diff(r*u_r, r)/r
 div_theta = sympy.diff(u_theta, theta)/r
 
 # simplify expressions
-div_r = div_r.factor().cancel().trigsimp()
-div_theta = div_theta.factor().cancel().trigsimp()
+div_r = div_r.factor().cancel()
+div_theta = div_theta.factor().cancel()
 
 # velocity divergence
 g = div_r + div_theta
 
 # simplify expressions
-g = g.factor().cancel().trigsimp()
+g = g.factor().cancel()
 
 #============================================
 # OUTPUT
@@ -186,7 +186,7 @@ betaI_2 = 8.0
 nu = 1.0
 rho = 1.0
 u0 = 1.0
-alpha = 4.0
+n = 4.0
 pi = math.pi
 
 # arguments list
@@ -195,7 +195,7 @@ args_list = [("x", x), ("y", y)]
 # constants list
 consts_list = [("rO", rO), ("rI", rI), ("betaO_1", betaO_1), ("betaO_2", betaO_2), \
                 ("betaI_1", betaI_1), ("betaI_2", betaI_2), ("nu", nu), ("rho", rho), \
-                ("u0", u0), ("alpha", alpha), ("beta", beta), ("pi", pi)]
+                ("u0", u0), ("n", n), ("pi", pi)]
 
 # parameters list
 params_list = [("r", r), ("theta", theta)]

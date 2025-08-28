@@ -1,8 +1,8 @@
-# [INSE_03] Flow between cylinders with vorticies
+# [INSE_03] Flow between circular boundaries
 
 ## 1. Summary
 
-This benchmark represents an **stationary two-dimensional isothermal incompressible fluid flow** problem with vorticies confined between two infinitely long coaxial cylinders. It is particularly suitable for solvers of the **stationary Navier-Stokes equations** with solenoidal velocity fields. The case is based on an **manufactured analytical solution** in polar coordinates, enabling:
+This benchmark represents an **stationary two-dimensional isothermal incompressible fluid flow** problem with vorticies confined between two circular boundaries. It is particularly suitable for solvers of the **stationary Navier-Stokes equations** with solenoidal velocity fields. The case is based on an **manufactured analytical solution** in polar coordinates, enabling:
 - **Code verification** of numerical schemes for the Navier-Stokes equations.
 - **Numerical assessment** of the incompressibility constraint and non-linear terms.
 - **Convergence analysis** on structured and unstructured meshes.
