@@ -21,7 +21,7 @@ Repository:
     https://github.com/ricardodpcosta/CFD-TestSuite
 
 Dependencies:
-    Gmsh (version > =  4.8.4)
+    Gmsh (version >= 4.8.4)
 
 Usage:
     gmsh -setnumber N 1 generate_triamesh.geo

@@ -1,11 +1,11 @@
 // -*- coding: utf-8 -*-
 /*
 ===============================================================================
-CFDLab | CHT_02
+CFDLab | INSE_04
 ===============================================================================
 
 Description:
-    Generates triangular unstructured meshes in MSH format.
+    GenerOtes triangular unstructured meshes in MSH format.
     Mesh refinement can be controlled through the command-line option `-setnumber N <value>`
     where `<value>` is a numerical argument specifying the desired refinement level
     (default: `1`).
@@ -42,27 +42,20 @@ cx = 0.0;
 cy = 0.0;
 
 // outer boundary
-rA = 1.0;
-betaA_1 = 0.0;
-betaA_2 = 8.0;
-
-// interface
-rAB = 0.75;
-betaAB_1 = 0.04;
-betaAB_2 = 8.0;
+rO = 1.0;
+betaO_1 = 0.1;
+betaO_2 = 8.0;
 
 // inner boundary
-rB = 0.5;
-betaB_1 = 0.0;
-betaB_2 = 8.0;
+rI = 0.5;
+betaI_1 = 0.1;
+betaI_2 = 8.0;
 
 // refinement controls
-np1 = Round(55*(1.4^(N-1)));
-np2 = Round(70*(1.4^(N-1)));
-np3 = Round(55*(1.4^(N-1)));
+np1 = Round(50*(1.4^(N-1)));
+np2 = Round(60*(1.4^(N-1)));
 lc1 = 1.0;
 lc2 = 1.0;
-lc3 = 1.0;
 
 // output controls
 outdir = "../meshes";
@@ -75,7 +68,7 @@ name = "triamesh";
 // outer boundary
 For i In {0:np1-1}
       t = i*2.0*Pi/np1;
-      r = rA*(1.0+betaA_1*Cos(betaA_2*t));
+      r = rO*(1.0+betaO_1*Cos(betaO_2*t));
       x = r*Cos(t);
       y = r*Sin(t);
       Point(i+1) = {cx+x, cy+y, 0.0, lc1};
@@ -90,31 +83,13 @@ For i In {0:np1-1}
       // EndIf
 EndFor
 
-// interface
+// inner boundary
 For i In {0:np2-1}
       t = i*2.0*Pi/np2;
-      r = rAB*(1.0+betaAB_1*Cos(betaAB_2*t));
+      r = rI*(1.0+betaI_1*Cos(betaI_2*t));
       x = r*Cos(t);
       y = r*Sin(t);
       Point(i+np1+1) = {cx+x, cy+y, 0.0, lc2};
-      // If(i == 0)
-      //       p1x = cx+x;
-      //       p1y = cy+y;
-      // EndIf
-      // If(i == 1)
-      //       p2x = cx+x;
-      //       p2y = cy+y;
-      //       Printf("%23.16f", (p2y-p1y)/(p2x-p1x));
-      // EndIf
-EndFor
-
-// inner boundary
-For i In {0:np3-1}
-      t = i*2.0*Pi/np3;
-      r = rB*(1.0+betaB_1*Cos(betaB_2*t));
-      x = r*Cos(t);
-      y = r*Sin(t);
-      Point(i+np1+np2+1) = {cx+x, cy+y, 0.0, lc3};
       // If(i == 0)
       //       p1x = cx+x;
       //       p1y = cy+y;
@@ -138,21 +113,13 @@ EndFor
 Line(np1) = {np1, 1};
 // Printf("%10g %9g %9g", 2, np1, 1);
 
-// interface
+// inner boundary
 For i In {1:np2-1}
       Line(i+np1) = {i+np1, i+np1+1};
       // Printf("%10g %9g %9g", 2, i+np1, i+np1+1);
 EndFor
 Line(np1+np2) = {np1+np2, np1+1};
 // Printf("%10g %9g %9g", 2, np1+np2, np1+1);
-
-// inner boundary
-For i In {1:np3-1}
-      Line(i+np1+np2) = {i+np1+np2, i+np1+np2+1};
-      // Printf("%10g %9g %9g", 2, i+np1+np2, i+np1+np2+1);
-EndFor
-Line(np1+np2+np3) = {np1+np2+np3, np1+np2+1};
-// Printf("%10g %9g %9g", 2, np1+np2+np3, np1+np2+1);
 
 //============================================
 // LINE LOOPS
@@ -164,15 +131,9 @@ Line Loop(1) = {1:np1};
 //       Printf("%10g", i);
 // EndFor
 
-// interface
+// inner boundary
 Line Loop(2) = {np1+1:np1+np2};
 // For i In {np1+1:np1+np2}
-//       Printf("%10g", i);
-// EndFor
-
-// inner boundary
-Line Loop(3) = {np1+np2+1:np1+np2+np3};
-// For i In {np1+1:np1+np2+np3}
 //       Printf("%10g", i);
 // EndFor
 
@@ -180,11 +141,8 @@ Line Loop(3) = {np1+np2+1:np1+np2+np3};
 // SURFACES
 //============================================
 
-// outer subdomain
+// subdomain
 Plane Surface(1) = {1, 2};
-
-// inner subdomain
-Plane Surface(2) = {2, 3};
 
 //============================================
 // PHYSICALS
@@ -194,19 +152,12 @@ Plane Surface(2) = {2, 3};
 Physical Point(1) = {1:np1};
 Physical Line(1) = {1:np1};
 
-// interface
+// inner boundary
 Physical Point(2) = {1+np1:np1+np2};
 Physical Line(2) = {1+np1:np1+np2};
 
-// inner boundary
-Physical Point(3) = {1+np1+np2:np1+np2+np3};
-Physical Line(3) = {1+np1+np2:np1+np2+np3};
-
-// outer subdomain
+// subdomain
 Physical Surface(100) = {1};
-
-// inner subdomain
-Physical Surface(200) = {2};
 
 //============================================
 // MESH OPTIONS

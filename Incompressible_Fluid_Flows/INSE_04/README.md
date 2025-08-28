@@ -1,4 +1,4 @@
-# [INSE_03] Flow between cylinders with vorticies
+# [INSE_04] Flow between rose-shaped boundaries
 
 ## 1. Summary
 
@@ -11,7 +11,27 @@ This benchmark represents an **stationary two-dimensional isothermal incompressi
 
 ## 2. Domain and meshes
 
-The **domain**, $\Omega$, consists of an outer and inner concentric circular boundaries, $\Gamma^{\textrm{O}}$ and $\Gamma^{\textrm{I}}$, respectively, centred at the origin and with radius $r^{\textrm{O}}$ and $r^{\textrm{I}}$, respectively.
+The **domain**, $\Omega$, consists of an outer and inner concentric boundaries, $\Gamma^{\textrm{O}}$ and $\Gamma^{\textrm{I}}$, respectively, centred at the origin and with variable radius, $R^{\textrm{O}}$ and $R^{\textrm{O}}$, respectively. The outer and inner boundaries correspond to a periodic perturbation (diffeomorphic transformation) applied to a circumference centred at the origin with radius $r^{\textrm{O}}$ and $r^{\textrm{I}}$, respectively, and reads
+
+$$
+\begin{array}{ll}
+&R^{\textrm{O}}\left(\theta\right)=r^{\textrm{O}}\left(1+\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)\right),\\
+&R^{\textrm{I}}\left(\theta\right)=r^{\textrm{I}}\left(1+\beta_{1}^{\textrm{I}}\cos\left(\beta_{2}^{\textrm{I}}\theta\right)\right),
+\end{array}
+$$
+
+where $\beta_{1}^{\textrm{O}}$ and $\beta_{1}^{\textrm{I}}$ are constant parameters to control the perturbation magnitude, while $\beta_{2}^{\textrm{O}}$ and $\beta_{2}^{\textrm{I}}$ are constant parameters to control the periodicity.
+
+Vector functions $\boldsymbol{n}^{\textrm{O}}$ and $\boldsymbol{n}^{\textrm{I}}$ correspond to the outward unit normal vectors on boundaries $\Gamma^{\textrm{O}}$ and $\Gamma^{\textrm{I}}$, respectively, and reads
+
+$$
+\begin{array}{ll}
+&\boldsymbol{n}^{\textrm{O}}\left(\theta\right)=\dfrac{\-R^{\textrm{O}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{r}}+\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{\theta}}}{\sqrt{\left(R^{\textrm{O}}\left(\theta\right)\right)^{2}+\left(\dfrac{\textrm{d}R^{\textrm{O}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}}}\\
+=-\dfrac{\left(1+\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)\right)\hat{\boldsymbol{r}}+\beta_{1}^{\textrm{O}}\beta_{2}^{\textrm{O}}\sin\left(\beta_{2}^{\textrm{O}}\theta\right)\hat{\boldsymbol{\theta}}}{\sqrt{\left(\beta_{1}^{\textrm{O}}\right)^{2}\left(\beta_{2}^{\textrm{O}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+\left(\beta_{1}^{\textrm{O}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{O}}\theta\right)+2\beta_{1}^{\textrm{O}}\cos\left(\beta_{2}^{\textrm{O}}\theta\right)+1}},\\
+&\boldsymbol{n}^{\textrm{I}}\left(\theta\right)=\dfrac{\-R^{\textrm{I}}\left(\theta\right)\hspace{1pt}\hat{\boldsymbol{r}}+\dfrac{\textrm{d}R^{\textrm{I}}\left(\theta\right)}{\textrm{d}\theta}\hat{\boldsymbol{\theta}}}{\sqrt{\left(R^{\textrm{I}}\left(\theta\right)\right)^{2}+\left(\dfrac{\textrm{d}R^{\textrm{I}}\left(\theta\right)}{\textrm{d}\theta}\right)^{2}}}\\
+=-\dfrac{\left(1+\beta_{1}^{\textrm{I}}\cos\left(\beta_{2}^{\textrm{I}}\theta\right)\right)\hat{\boldsymbol{r}}+\beta_{1}^{\textrm{I}}\beta_{2}^{\textrm{I}}\sin\left(\beta_{2}^{\textrm{I}}\theta\right)\hat{\boldsymbol{\theta}}}{\sqrt{\left(\beta_{1}^{\textrm{I}}\right)^{2}\left(\beta_{2}^{\textrm{I}}\right)^{2}\sin^{2}\left(\beta_{2}^{\textrm{I}}\theta\right)+\left(\beta_{1}^{\textrm{I}}\right)^{2}\cos^{2}\left(\beta_{2}^{\textrm{I}}\theta\right)+2\beta_{1}^{\textrm{I}}\cos\left(\beta_{2}^{\textrm{I}}\theta\right)+1}}.
+\end{array}
+$$
 
 <div align="center">
   <table>
