@@ -1,64 +1,63 @@
-# Contributing Guidelines
+# Contributing guidelines
 
-Thank you for your interest in contributing to **CFD-BenchLab**!  
-We welcome all contributions, including new benchmark cases, code improvements, bug fixes, and documentation enhancements.
+Thank you for your interest in contributing to **CFDLab**!
+We welcome all types of contributions, including:
+
+* New benchmark cases.
+* Code improvements.
+* Bug fixes.
+* Documentation enhancements.
+
+To keep it simple, **write us an email with your thoughts**. Alternatively, you can always follow the usual GitHub process described below.
 
 ---
 
-## 📌 How to Contribute
-
-### 1. Reporting Issues
+### 1. Reporting issues
 - Check the **Issues** tab to see if your problem has already been reported.
 - If not, open a new issue with:
   - A clear description of the problem.
   - Steps to reproduce (if applicable).
   - Relevant error messages, screenshots, or logs.
 
-### 2. Adding a New Test Case
-Each new test case should follow the existing folder structure:
+---
 
-**Requirements:**
-- A `README.md` with:
-  - Problem description
-  - Analytical solution (if available)
-  - Governing equations and parameters
-  - Mesh information
-  - Usage instructions
-  - References
-- All relevant meshes, scripts, and codes.
-- If possible, provide a manufactured or exact analytical solution.
+### 2. Adding a new benchmark case
 
-### 3. Improving Existing Cases
-- Submit changes via a pull request (PR).
-- Explain clearly **what** you changed and **why**.
-- Keep documentation clear and consistent with existing cases.
+Each new benchmark case should follow the existing folder structure.
 
-### 4. Style Guidelines
-- Use **Markdown** for documentation.
-- Follow consistent variable naming and directory structure.
-- For code:
-  - Keep it clean and well-commented.
-  - Use descriptive function and variable names.
-  - Maintain compatibility with existing scripts when possible.
+Include a `README.md` with these sections:
+
+* **Summary** – problem description.
+* **Domain and meshes** – description and parameterisation (if applicable).
+* **Model problem** – governing equations and parameters
+* **Analytical/manufactured solution** – source terms, boundary conditions, and analytical parameters.
+* **Case parameters** – user-defined parameters and suggested values.
+* **Scripts and files** – description, usage (if applicable), requirements, and dependencies.
+* **How to cite** – references where the benchmark case was originally published.
+
+Organise your files in these folders:
+
+* `codes/`
+* `images/`
+* `meshes/`
+* `scripts/`
 
 ---
 
-## 🚀 Submitting a Pull Request
-1. **Fork** the repository.
-2. Create a new branch for your contribution:
-   ```bash
-   git checkout -b feature/new-case
+### 3. Improving existing cases
 
+* Submit changes via a **pull request**.
+* Clearly explain **what** you changed and **why**.
+* Keep documentation clear, consistent, and aligned with existing cases.
 
-   📜 License and Acknowledgement
+---
 
-   By contributing, you agree that your work will be licensed under the MIT License.
-   If your contribution is based on published work, please provide a reference in the case’s README file.
+### 4. Style guidelines
 
-   🙌 Acknowledgements
+* Use **Markdown** for documentation.
+* Follow consistent **variable naming** and **directory structure**.
+* For code contributions:
 
-   We greatly appreciate contributions from the community.
-   Your feedback and participation help make CFD-BenchLab a valuable resource for the CFD community.
-
-
-   
+  * Keep code clean and well-commented
+  * Use descriptive function and variable names
+  * Maintain compatibility with existing scripts whenever possible
