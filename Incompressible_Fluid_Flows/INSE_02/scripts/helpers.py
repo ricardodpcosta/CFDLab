@@ -5,27 +5,34 @@
 CFDLab | HELPERS
 ===============================================================================
 
-Description:
-    Utility functions for code generation in multiple programming languages:
-    C/C++, Fortran, Octave/Matlab, and Python.
-    Includes code formatting and line-wrapping helpers to keep generated source
-    code within a configurable indent and line width.
+DESCRIPTION:
+------------
+Utility functions for code generation in multiple programming languages:
+C/C++, Fortran, Octave/Matlab, and Python.
+Includes code formatting and line-wrapping helpers to keep generated source
+code within a configurable indent and line width.
 
-Author:
-    Ricardo Costa (rcosta@dep.uminho.pt)
+AUTHOR:
+-------
+Ricardo Costa (rcosta@dep.uminho.pt)
 
-License:
-    MIT License (see LICENSE file for details)
+LICENSE:
+--------
+MIT License (see LICENSE file for details)
 
-Repository:
-    https://github.com/ricardodpcosta/CFD-TestSuite
+REPOSITORY:
+-----------
+https://github.com/ricardodpcosta/CFDLab
 
-Dependencies:
-    Python (version >= 3.9)
-    SymPy (version >= 1.6)
+DEPENDENCIES:
+-------------
+– Python (version >= 3.9)
+– SymPy (version >= 1.6)
 
-Usage:
-    import helpers
+USAGE:
+------
+import helpers
+
 ===============================================================================
 """
 

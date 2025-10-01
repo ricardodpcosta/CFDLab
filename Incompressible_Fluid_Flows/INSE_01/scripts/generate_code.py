@@ -5,26 +5,33 @@
 CFDLab | INSE_01
 ===============================================================================
 
-Description:
+DESCRIPTION:
+------------
     Generates code for the symbolic expressions of parameters and functions in
     multiple programming languages: C/C++, Fortran, Octave/Matlab, and Python.
     Outputs are saved in `codes/`.
 
-Author:
-    Ricardo Costa (rcosta@dep.uminho.pt)
+AUTHOR:
+-------
+Ricardo Costa (rcosta@dep.uminho.pt)
 
-License:
-    MIT License (see LICENSE file for details)
+LICENSE:
+--------
+MIT License (see LICENSE file for details)
 
-Repository:
-    https://github.com/ricardodpcosta/CFD-TestSuite
+REPOSITORY:
+-----------
+https://github.com/ricardodpcosta/CFDLab
 
-Dependencies:
-    Python (version >= 3.9)
-    SymPy (version >= 1.6)
+DEPENDENCIES:
+-------------
+– Python (version >= 3.9)
+– SymPy (version >= 1.6)
 
-Usage:
-    python symbolic_code.py
+USAGE:
+------
+python generate_code.py
+
 ===============================================================================
 """
 

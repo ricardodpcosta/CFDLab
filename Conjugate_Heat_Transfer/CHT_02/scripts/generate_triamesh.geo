@@ -4,27 +4,34 @@
 CFDLab | CHT_02
 ===============================================================================
 
-Description:
-    Generates triangular unstructured meshes in MSH format.
-    Mesh refinement can be controlled through the command-line option `-setnumber N <value>`
-    where `<value>` is a numerical argument specifying the desired refinement level
-    (default: `1`).
-    Outputs are saved in `meshes/`.
+DESCRIPTION:
+------------
+Generates triangular unstructured meshes in MSH format.
+Mesh refinement can be controlled through the command-line option `-setnumber N <value>`
+where `<value>` is a numerical argument specifying the desired refinement level
+(default: `1`).
+Outputs are saved in `meshes/`.
 
-Author:
-    Ricardo Costa (rcosta@dep.uminho.pt)
+AUTHOR:
+-------
+Ricardo Costa (rcosta@dep.uminho.pt)
 
-License:
-    MIT License (see LICENSE file for details)
+LICENSE:
+--------
+MIT License (see LICENSE file for details)
 
-Repository:
-    https://github.com/ricardodpcosta/CFD-TestSuite
+REPOSITORY:
+-----------
+https://github.com/ricardodpcosta/CFDLab
 
-Dependencies:
-    Gmsh (version >= 4.8.4)
+DEPENDENCIES:
+-------------
+Gmsh (version >= 4.8.4)
 
-Usage:
-    gmsh -setnumber N 1 generate_triamesh.geo
+USAGE:
+------
+gmsh -setnumber N 1 generate_triamesh.geo
+
 ===============================================================================
 */
 
