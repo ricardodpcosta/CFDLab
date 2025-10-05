@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 ===============================================================================
-CFDLab | INSE_03
+CFDTestSuite | INSE_03
 ===============================================================================
 
 DESCRIPTION:
@@ -21,7 +21,7 @@ MIT License (see LICENSE file for details)
 
 REPOSITORY:
 -----------
-https://github.com/ricardodpcosta/CFDLab
+https://github.com/ricardodpcosta/CFDTestSuite
 
 DEPENDENCIES:
 -------------

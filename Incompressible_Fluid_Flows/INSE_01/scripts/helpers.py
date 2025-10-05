@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 ===============================================================================
-CFDLab | HELPERS
+CFDTestSuite | HELPERS
 ===============================================================================
 
 DESCRIPTION:
@@ -22,7 +22,7 @@ MIT License (see LICENSE file for details)
 
 REPOSITORY:
 -----------
-https://github.com/ricardodpcosta/CFDLab
+https://github.com/ricardodpcosta/CFDTestSuite
 
 DEPENDENCIES:
 -------------

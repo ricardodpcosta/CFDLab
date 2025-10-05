@@ -1,6 +1,6 @@
 # Contributing guidelines
 
-Thank you for your interest in contributing to **CFDLab**!
+Thank you for your interest in contributing to **CFDTestSuite**!
 We welcome all types of contributions, including:
 
 * New benchmark cases.
