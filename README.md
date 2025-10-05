@@ -22,7 +22,7 @@ _This open laboratory aims to be a valuable resource for researchers, engineers,
 
 ---
 
-## Repository Structure
+## Structure
 
 ```
 CFD-BenchLab/
@@ -43,7 +43,7 @@ CFD-BenchLab/
 
 ---
 
-## How to Use
+## Workflow
 
 1. Select the test case relevant to your research based on the model category.
 2. Read the provided case description and review the associated documentation.
@@ -62,7 +62,7 @@ Please refer to the CONTRIBUTING.md file for detailed guidelines on how to get i
 
 ## License
 
-This project is licensed under the MIT License with Author Credit and Citation Requirement — see the `LICENSE.md` file for details.
+This project is licensed under the MIT License with Author Credit and Citation Requirement — see [LICENSE](LICENSE) for details.
 
 ---
 
