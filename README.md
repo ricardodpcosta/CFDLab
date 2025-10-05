@@ -1,4 +1,4 @@
-# CFDLab
+# CFDTestSuite
 
 ___A curated collection of benchmarking test cases with analytical solutions for the design, testing, and verification of numerical codes in computational fluid dynamics and thermodynamics.___
 
@@ -6,7 +6,7 @@ ___A curated collection of benchmarking test cases with analytical solutions for
 
 ## Overview
 
-CFDLab is a repository dedicated to providing rigorous, well-documented test cases for verification and benchmarking of numerical schemes in computational fluid dynamics (CFD). Each case includes analytical solutions, source terms, boundary conditions, and meshes. Scripts and tools are also supplied to facilitate the reproducibility and the manipulation of the test cases.
+CFDTestSuite is a repository dedicated to providing rigorous, well-documented test cases for verification and benchmarking of numerical schemes in computational fluid dynamics (CFD). Each case includes analytical solutions, source terms, boundary conditions, and meshes. Scripts and tools are also supplied to facilitate the reproducibility and the manipulation of the test cases.
 
 _This open laboratory aims to be a valuable resource for researchers, engineers, and students developing, testing, and verifying numerical codes for heat transfer and fluid flow simulations._
 
