@@ -53,7 +53,7 @@ CFD-BenchLab/
 
 ---
 
-## Contribution
+## Contributing
 
 Contributions are encouraged in all forms, including the addition of new benchmark cases, refinement of existing scripts, enhancement of documentation, and resolution of issues.
 For detailed guidelines, refer to [CONTRIBUTING.md](CONTRIBUTING.md).
