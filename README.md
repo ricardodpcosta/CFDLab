@@ -62,14 +62,14 @@ For detailed guidelines, refer to [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-This project is licensed under the MIT License with Author Credit and Citation Requirement — see [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
 
 ---
 
 ## Contact
 
 📧 [Ricardo Costa](mailto:rcosta\@dep.uminho.pt)  
-🌐 [https://ricardodpcosta.github.io/](https://ricardodpcosta.github.io/)  
+🌐 [Academic page](https://ricardodpcosta.github.io/)  
 
 ---
 
