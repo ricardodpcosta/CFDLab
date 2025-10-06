@@ -1,4 +1,4 @@
-# Contributing guidelines
+# Contributing
 
 Thank you for your interest in contributing to the repository. All types of contributions are welcome, including:
 
