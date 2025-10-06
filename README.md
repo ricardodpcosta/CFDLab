@@ -35,10 +35,9 @@ CFD-BenchLab/
 │ │ └── README.md       # Case description
 │ └── ...
 │
-├── LICENSE.md
-├── CONTRIBUTING.md
-└── README.md
-
+├── README.md           # Project overview and workflow
+├── CONTRIBUTING.md     # Contributing guidelines
+└── LICENSE             # License clauses
 ```
 
 ---
