@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to the repository. All types of contributions are welcome, including:
 
-* Adding benchmark cases.
+* Addition of benchmark cases.
 * Refinement of scripts.
 * Enhancement of documentation.
 * Resolution of issues.
@@ -11,7 +11,7 @@ The simplest route is to check the contact details in the `README.md` file and *
 
 ---
 
-### 1. Adding benchmark cases
+### 1. Addition of benchmark cases
 
 Each benchmark case should follow the existing folder structure.
 
