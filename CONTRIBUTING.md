@@ -1,29 +1,19 @@
 # Contributing guidelines
 
-Thank you for your interest in contributing to **CFDTestSuite**!
-We welcome all types of contributions, including:
+Thank you for your interest in contributing to the repository. All types of contributions are welcome, including:
 
-* New benchmark cases.
-* Code improvements.
-* Bug fixes.
-* Documentation enhancements.
+* Adding a benchmark case.
+* Refinement of scripts.
+* Enhancement of documentation.
+* Resolution of issues.
 
-To keep it simple, **write us an email with your thoughts**. Alternatively, you can always follow the usual GitHub process described below.
-
----
-
-### 1. Reporting issues
-- Check the **Issues** tab to see if your problem has already been reported.
-- If not, open a new issue with:
-  - A clear description of the problem.
-  - Steps to reproduce (if applicable).
-  - Relevant error messages, screenshots, or logs.
+The simplest route is to check the contact details in the `README.md` file and **send an email with your suggestions and proposals**. Alternatively, you can always follow the usual GitHub route described below.
 
 ---
 
-### 2. Adding a new benchmark case
+### 1. Adding a benchmark case
 
-Each new benchmark case should follow the existing folder structure.
+Each benchmark case should follow the existing folder structure.
 
 Include a `README.md` with these sections:
 
@@ -42,9 +32,16 @@ Organise your files in these folders:
 * `meshes/`
 * `scripts/`
 
+Follow these style guidelines:
+
+* Use **Markdown** for documentation.
+* Use descriptive and consistent **variable and function naming**.
+* Keep code clean, organised, and well-commented.
+* Maintain compatibility with existing scripts whenever possible.
+
 ---
 
-### 3. Improving existing cases
+### 2. Refinement of scripts/enhancement of documentation
 
 * Submit changes via a **pull request**.
 * Clearly explain **what** you changed and **why**.
@@ -52,12 +49,10 @@ Organise your files in these folders:
 
 ---
 
-### 4. Style guidelines
+### 3. Resolution of issues
 
-* Use **Markdown** for documentation.
-* Follow consistent **variable naming** and **directory structure**.
-* For code contributions:
-
-  * Keep code clean and well-commented
-  * Use descriptive function and variable names
-  * Maintain compatibility with existing scripts whenever possible
+- Check the **Issues** tab to see if your problem has already been reported.
+- If not, open a new issue with:
+  - A clear description of the problem.
+  - Steps to reproduce (if applicable).
+  - Relevant error messages, screenshots, or logs.
