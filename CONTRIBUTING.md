@@ -7,7 +7,7 @@ Thank you for your interest in contributing to the repository. All types of cont
 * Enhancement of documentation.
 * Resolution of issues.
 
-The simplest route is to check the contact details in the `README.md` file and **send an email with your suggestions and proposals**. Alternatively, you can always follow the usual GitHub route described below.
+The simplest route is to check the contact details in the `README.md` file and **send an email with your ideas and suggestions**. Alternatively, you can always follow the usual GitHub route described below.
 
 ---
 
