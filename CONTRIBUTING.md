@@ -43,9 +43,9 @@ Follow these style guidelines:
 
 ### 2. Refinement of scripts/enhancement of documentation
 
-* Submit changes via a **pull request**.
-* Clearly explain **what** you changed and **why**.
-* Keep documentation clear, consistent, and aligned with existing cases.
+* Submit changes via a **pull request** in GitHub.
+* Explain **what** you changed and **why**.
+* Keep it clear and consistent with the repository.
 
 ---
 
