@@ -1,17 +1,26 @@
 # Contributing
 
-Thank you for your interest in contributing to the repository. All types of contributions are welcome, including:
+Thank you for your interest in contributing to the repository. This document provides guidelines to ensure that contributions are consistent, maintainable, and aligned with the project's goals. All types of contributions are welcome, including:
 
-* Addition of benchmark cases.
-* Refinement of scripts.
-* Enhancement of documentation.
-* Resolution of issues.
+* **Addition of benchmarks**: Propose and implement benchmark cases aligned with the project scope.
+* **Refinement of code**: Refactor or optimise existing code while preserving functionality.
+* **Enhancement of documentation**: Enhance or correct project documentation, including README, docstrings, and examples.
+* **Resolution of issues**: Identify, report, and resolve issues in existing modules and scripts.
 
-The simplest route is to check the contact details in the `README.md` file and **send an email with your ideas and suggestions**. Alternatively, you can always follow the usual GitHub route described below.
+The simplest route is to check the contact details in the `README.md` file and **reaching out via email with your ideas or suggestions**. Alternatively, you may follow the standard GitHub contribution procedure outlined below.
+
+1. **Fork the repository** and create a new branch for your feature or fix.
+   ```bash
+   git checkout -b feature/new-tool
+   ```
+2. **Implement your changes** following the contributing guidelines.
+3. **Test your code** to ensure it runs correctly and does not break existing functionality.
+4. **Commit and push** your branch to your forked repository.
+5. **Submit a pull request (PR)** to the `main` branch of the repository.
 
 ---
 
-### 1. Addition of benchmark cases
+### Addition of benchmarks
 
 Each benchmark case should follow the existing folder structure.
 
@@ -32,27 +41,30 @@ Organise your files in these folders:
 * `meshes/`
 * `scripts/`
 
-Follow these style guidelines:
+---
 
-* Use **Markdown** for documentation.
-* Use descriptive and consistent **variable and function naming**.
-* Keep code clean, organised, and well-commented.
-* Maintain compatibility with existing scripts whenever possible.
+## Refinement of code/enhancement of documentation
+
+Follow these coding style guidelines:
+
+* Use **Markdown** syntax for all documentation files.
+* Write **clean, readable, and consistent** Python code.
+* Follow the **snake_case** convention for variable and function names.
+* Include clear and concise **docstrings** in all scripts, classes, and functions.
+* Keep the codebase **well-structured, organised, and thoroughly commented**.
+* Adhere to the official **Python style guidelines** defined in [PEP 8](https://peps.python.org/pep-0008/).
+* Ensure **backward compatibility** with existing modules whenever feasible.
+* Introduce **external dependencies** only when strictly necessary.
 
 ---
 
-### 2. Refinement of scripts/enhancement of documentation
+### Resolution of issues
 
-* Submit changes via a **pull request** in GitHub.
-* Explain **what** you changed and **why**.
-* Keep it clear and consistent with the repository.
-
----
-
-### 3. Resolution of issues
+If you encounter an issue or wish to request a feature:
 
 - Check the **Issues** tab to see if your problem has already been reported.
-- If not, open a new issue with:
-  - A clear description of the problem.
-  - Steps to reproduce (if applicable).
-  - Relevant error messages, screenshots, or logs.
+- If not, open a new issue and provide:
+  - A clear title and description of the problem.
+  - Steps to reproduce the issue, if applicable.
+  - Relevant error messages, screenshots, and logs.
+  - Suggest possible solutions or improvements.
