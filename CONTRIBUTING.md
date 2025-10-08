@@ -11,7 +11,7 @@ The simplest route is to check the contact details in the `README.md` file and *
 
 1. **Fork the repository** and create a new branch for your feature or fix.
    ```bash
-   git checkout -b feature/new-tool
+   git checkout -b my_branch
    ```
 2. **Implement your changes** following the contributing guidelines.
 3. **Test your code** to ensure it runs correctly and does not break existing functionality.
@@ -22,7 +22,12 @@ The simplest route is to check the contact details in the `README.md` file and *
 
 ### Addition of benchmarks
 
-Each benchmark case should follow the existing folder structure.
+Each benchmark case should follow the existing folder structure, where you should organise your files:
+
+* `codes/` – Generated code in multiple programming languages.
+* `meshes/` – Pre-generated meshes for the benchmark case.
+* `scripts/` – Utilities for code generation, mesh generation, etc.
+* `images/` – Images illustrating the benchmark.
 
 Include a `README.md` with these sections:
 
@@ -34,12 +39,6 @@ Include a `README.md` with these sections:
 * **Scripts and files** – description, usage (if applicable), requirements, and dependencies.
 * **How to cite** – references where the benchmark case was originally published.
 
-Organise your files in these folders:
-
-* `codes/`
-* `images/`
-* `meshes/`
-* `scripts/`
 
 ---
 
