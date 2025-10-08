@@ -20,7 +20,7 @@ The simplest route is to check the contact details in the `README.md` file and *
 
 ---
 
-### Addition of benchmarks
+## Addition of benchmarks
 
 Each benchmark case should follow the existing folder structure, where you should organise your files:
 
@@ -57,7 +57,7 @@ Follow these coding style guidelines:
 
 ---
 
-### Resolution of issues
+## Resolution of issues
 
 If you encounter an issue or wish to request a feature:
 
